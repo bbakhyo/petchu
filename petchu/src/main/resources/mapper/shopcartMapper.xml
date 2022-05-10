@@ -6,6 +6,7 @@
 		select c.uid, c.pno, p.pimage, p.pname, p.pprice, c.amount, cno, c.amount * pprice sum, chk
 		from shopproduct p, shopcart c
 		where c.uid=#{uid} and c.pno = p.pno
+		order by cno desc
 	</select>
 	<insert id="cart_insert">
 		insert into shopcart(pno, uid, amount)
@@ -35,7 +36,7 @@
 		where uid=#{uid} and chk=1;
 	</delete>
 	<select id="order_list" resultType="com.example.domain.shopcartVO">
-		select bno, pimage, p.pno, pname, pprice, o.amount, orno, odate from 
+		select orno, pimage, p.pno, pname, pprice, o.amount, odate from 
 		orderlist o, shopproduct p 
 		where o.pno=p.pno and uid=#{uid}
 		order by odate desc;
@@ -43,16 +44,15 @@
 	<select id="order_read" resultType="com.example.domain.shopcartVO">
 		select o.*, p.pimage, p.pname, p.pprice 
 		from orderlist o, shopproduct p
-		where bno = #{bno} and o.pno=p.pno;
+		where orno = #{orno} and o.pno=p.pno;
 	</select>
 	<select id="cart_check" resultType="com.example.domain.shopcartVO">
 		select * from shopcart
 		where uid = #{uid} and pno = #{pno}
 	</select>
-		<select id="order_read_else" resultType="com.example.domain.shopcartVO">
-		select o.*, p.pimage, p.pname, p.pprice 
-		from orderlist o, shopproduct p
-		where bno != #{bno} and orno=#{orno} and o.pno=p.pno;
+		<select id="order_read_user" resultType="com.example.domain.shopcartVO">
+		select * from orderlist 
+		where orno = #{orno} group by orno;
 	</select>
 	<update id="sell_update">
 		update shopproduct set sellcount = sellcount+#{amount} where pno=#{pno};
@@ -70,6 +70,9 @@
 		from shopproduct p
 		order by p.sellcount desc
 		limit 10;
+	</select>
+	<select id="user_point" resultType="com.example.domain.shopcartVO">
+		select point, id uid from user where id = #{uid};
 	</select>
 
 </mapper>

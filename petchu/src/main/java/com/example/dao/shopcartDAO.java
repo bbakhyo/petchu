@@ -15,10 +15,11 @@ public interface shopcartDAO {
 	public void order_insert(shopcartVO vo);
 	public void chk_delete(shopcartVO vo);
 	public List<shopcartVO> order_list(String uid);
-	public shopcartVO order_read(int bno);
+	public List<shopcartVO> order_read(String orno);
 	public shopcartVO cart_check(shopcartVO vo);
-	public List<shopcartVO> order_read_else(int bno, String orno);
+	public shopcartVO order_read_user(String orno);
 	public void sell_update(int amount, int pno);
 	public List<shopcartVO> today_best_items();
 	public List<shopcartVO> best_items();
+	public shopcartVO user_point(String uid);
 }

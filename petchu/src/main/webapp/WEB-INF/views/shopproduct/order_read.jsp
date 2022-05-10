@@ -34,22 +34,9 @@
 	<div style="text-align: center; overflow:hidden;">
 		<div class="order_info">
 			<div><h5>주문상세</h5></div>
-			<div><b class="odate">${vo.odate}</b>&nbsp;&nbsp;&nbsp;&nbsp;<span class="orno">주문번호:  ${vo.orno}</span></div>
+			<div><b class="odate"></b>&nbsp;&nbsp;&nbsp;&nbsp;<span class="orno">주문번호: ${orno} </span></div>
 		</div>
 <!-- 		 d -->
-		<table>
-			<tbody class="vbody">
-				<tr>
-					<td rowspan="3">
-						<img class="image" class="image" pno="${vo.pno}" src="${vo.pimage}" width=100>
-					</td>
-					<td class="pname" width=600>${vo.pname}</td>
-					<td class="pprice" pprice="${vo.pprice}" amount="${vo.amount}"><span class="final_price" width=89></span>원
-					</td>
-					<td class="amount td_center" width=60>${vo.amount}개</td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
 	<table id="tbl"></table>
 			<table class="receiver_info">
@@ -58,22 +45,20 @@
 				</tr>
 				<tr class="receiver">
 					<th class="title">받는 사람</th>
-					<td>${vo.receiver}</td>
+					<td>${uvo.receiver}</td>
 				</tr>
 				<tr class="tel">
 					<th class="title">연락처</th>
-					<td class="tel_number">${vo.tel}</td>
+					<td class="tel_number">${uvo.tel}</td>
 				</tr>
 				<tr class="address">
 					<th class="title">주소</th>
-					<td>(${vo.zipcode}) ${vo.address1} (${vo.address2})</td>
+					<td>(${uvo.zipcode}) ${uvo.address1} (${uvo.address2})</td>
 				</tr>
 			</table>
 	<script id="temp" type="text/x-handlebars-template">
-
-		<h5 class="bought_together"><br>같이 구매한 상품</h5>
 		{{#each .}}
-		<tbody class="tbody" bno="{{bno}}" orno="{{orno}}">
+		<tbody class="tbody" orno="{{orno}}">
 			<tr>
 				<td rowspan="3"><img class="image" pno="{{pno}}" src="{{pimage}}" width=100></td>
 				<td>{{pname}}</td>
@@ -89,24 +74,22 @@
 
 getList();
 function getList(){
-	var orno = "${vo.orno}";
-	var bno = "${vo.bno}";
-// 	alert(bno+"\n"+orno);
+	var orno = "${orno}";
 	$.ajax({
 		type : "get",
 		dataType : "json",
-		data : {bno:bno, orno:orno},
+		data : {orno:orno},
 		url : "/shopproduct/order_read.json",
 		success : function(data) {
 			var template = Handlebars.compile($("#temp").html());
 			$("#tbl").html(template(data));
 			
 			//vo.final_price 계산
-			var vo_pprice = $(".pprice").attr("pprice");
-			var vo_amount = $(".pprice").attr("amount");
-			var vo_final_price = Number(vo_pprice) * Number(vo_amount);  
-			//alert(vo_final_price);
-			$(".final_price").html(vo_final_price);
+// 			var vo_pprice = $(".pprice").attr("pprice");
+// 			var vo_amount = $(".pprice").attr("amount");
+// 			var vo_final_price = Number(vo_pprice) * Number(vo_amount);  
+// 			//alert(vo_final_price);
+// 			$(".final_price").html(vo_final_price);
 			
 			//each final_price 계산
 			$(".price").each(function(){
@@ -117,23 +100,17 @@ function getList(){
 			});
 			
 			//주문날짜 substring
-			var odate = $(".odate").html();
-			odate = odate.substring(0, 9); 
-			$(".odate").html(odate+" 주문");
+// 			var odate = $(".odate").html();
+// 			odate = odate.substring(0, 9); 
+// 			$(".odate").html(odate+" 주문");
 			
-			//같이 구매한 상품이 없을 경우
-			var i = 0;
-			$(".tbody").each(function(){
-				i=i+1;
-			});
-			if(i==0){
-				$(".bought_together").attr("class", "bought_together none");
-			}
 			//구매상품 가격포맷
-			var fprice = $(".final_price").html();
-			fprice=fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-			$(".final_price").html(fprice);
+// 			var fprice = $(".final_price").html();
+// 			fprice=fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+// 			alert(fprice);
+// 			$(".final_price").html(fprice);
 			//같이 구매한 상품 가격포맷
+			
 			getFormatPrice();
 		}
 	});
