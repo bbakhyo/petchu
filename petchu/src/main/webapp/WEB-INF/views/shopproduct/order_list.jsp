@@ -52,7 +52,7 @@
 		{{#each .}}	
 		<tbody class="tbody" orno="{{orno}}" pno="{{pno}}">
 		<tr class="date_tr" style="text-align:right;">
-			<td colspan="3"><span class="date_td">{{odate}}</span> 
+			<td colspan="3"><span class="date_td" style="margin-right:78%;">{{odate}}</span>
 				<span class="order_read date_td" orno="{{orno}}" >주문 상세보기</span>
 			</td>
 			

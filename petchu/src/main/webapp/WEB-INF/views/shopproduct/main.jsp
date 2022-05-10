@@ -122,6 +122,7 @@ cursor:inherit;
 .item_img {
 	width: 180px;
 	height: 180px;
+	cursor: pointer;
 }
 /* 슬라이더 컨탠츠 규격(횬재 없음) */
 .pcontent {
@@ -220,6 +221,8 @@ ul.sub_menu_cat>li {
   left: 0;
   width: 300px;
   height: 300px;
+  cursor:pointer;
+  
 /*   border: 1px solid black; */
 }
 /* 상품 사진 위에 고정된 Best 1.. 설정 */
@@ -227,6 +230,8 @@ ul.sub_menu_cat>li {
   position: relative;
   top: 0;
   left: 0;
+  width:300px;
+  height:300px;
 }
 /* 상품 사진 위에 고정된 Best 1.. 이미지 고정 설정 */
 img.best_icon{
@@ -259,6 +264,8 @@ height: 200px;
 width: 960px;
 display: flex;
 }
+
+
 </style>
 
 <body>
@@ -484,81 +491,42 @@ display: flex;
 				</section>
 			</div>
 		</div>
-
 		<div class="best_container">
 			  <h2>BEST 상품</h2>
 			    <div class="best_container_top">
+			     <c:forEach items="${blist}" var="bvo">
 			      <div class="best_item_box">      
-			        <div class="best_item_img"><img src="https://via.placeholder.com/300x300.png/cddcf4" alt='best' class="img_best"><img src="/resources/icon_menu/best_1.png" class="best_icon"></div>
+			        <div class="best_item_img" pno = "${bvo.pno}" onclick='locationPno(this)'><img src="${bvo.pimage}" alt='best' class="img_best"><img src="/resources/icon_menu/best_1.png" class="best_icon"></div>
 			        <div class="best_item_content">
 			          <div class="best_item_title">
-			          Product Name Product Name Product Name Product Name Product Name
+			          	${bvo.pname}
 			          </div>
-			          <div class="best_item_price">150,000</div>
+			           <div class="best_item_price"><span class="price">${bvo.pprice}</span><span>원</span></div>
 			        </div>
 			      </div>
-			
-			       <div class="best_item_box">      
-			        <div class="best_item_img"><img src="https://via.placeholder.com/300x300.png/cddcf4" alt='best' class="img_best"><img src="/resources/icon_menu/best_3.png" class="best_icon"></div>
-			        <div class="best_item_content">
-			          <div class="best_item_title">
-			          Product Name Product Name Product Name Product Name Product Name
-			          </div>
-			          <div class="best_item_price">150,000</div>
-			        </div>
-			      </div>
-			
-			       <div class="best_item_box">      
-			        <div class="best_item_img"><img src="https://via.placeholder.com/300x300.png/cddcf4" alt='best' class="img_best"><img src="/resources/icon_menu/best_3.png" class="best_icon"></div>
-			        <div class="best_item_content">
-			          <div class="best_item_title">
-			          Product Name Product Name Product Name Product Name Product Name
-			          </div>
-			          <div class="best_item_price">150,000</div>
-			        </div>
-			      </div>
+			       </c:forEach>
 			</div>
 			    <div class="best_container_bottom">
-			
-			    			      <div class="best_item_box">      
-			        <div class="best_item_img"><img src="https://via.placeholder.com/300x300.png/cddcf4" alt='best' class="img_best"><img src="/resources/icon_menu/best_4.png" class="best_icon"></div>
+				 <c:forEach items="${blist2}" var="b2vo">
+   			      <div class="best_item_box">      
+			        <div class="best_item_img" pno = "${b2vo.pno}" onclick='locationPno(this)'><img src="${b2vo.pimage}" alt='best' class="img_best"><img src="/resources/icon_menu/best_4.png" class="best_icon"></div>
 			        <div class="best_item_content">
 			          <div class="best_item_title">
-			          Product Name Product Name Product Name Product Name Product Name
+			         	${b2vo.pname}
 			          </div>
-			          <div class="best_item_price">150,000</div>
+			          <div class="best_item_price"><span class="price">${b2vo.pprice}</span><span>원</span></div>
 			        </div>
 			      </div>
-			
-			       <div class="best_item_box">      
-			        <div class="best_item_img"><img src="https://via.placeholder.com/300x300.png/cddcf4" alt='best' class="img_best"><img src="/resources/icon_menu/best_5.png" class="best_icon"></div>
-			        <div class="best_item_content">
-			          <div class="best_item_title">
-			          Product Name Product Name Product Name Product Name Product Name
-			          </div>
-			          <div class="best_item_price">150,000</div>
-			        </div>
-			      </div>
-			
-			       <div class="best_item_box">      
-			        <div class="best_item_img"><img src="https://via.placeholder.com/300x300.png/cddcf4" alt='best' class="img_best"><img src="/resources/icon_menu/best_6.png" class="best_icon"></div>
-			        <div class="best_item_content">
-			          <div class="best_item_title">
-			          Product Name Product Name Product Name Product Name Product Name
-			          </div>
-			          <div class="best_item_price">150,000</div>
-			        </div>
-			      </div>
+				</c:forEach>
 			</div><!-- best container bottom  -->
 		</div><!-- best container(top and bottom)  -->
 
 		
 		<!--출력 내용 필요함. 현제 중복 내용 출력  -->
-		
 		<!--특가 상품  -->
 		<div class="slider_component">
 			<div style="text-align:center;">
-				<h1>best 상품</h1>
+				<h1>주간 상품</h1>
 			</div>
 			<div
 				style="padding: 50px 0px; width: 1000x; height: 270px; background-color: white;">
@@ -632,7 +600,8 @@ display: flex;
 				destroyToday();
 				var template = Handlebars.compile($("#temp2").html());
 				$(".slick-slider-today").html(template(data));
-				applyToday()
+				applyToday();
+				getNumberFormat();
 			}
 		})
 	}
@@ -648,6 +617,7 @@ display: flex;
 				var template = Handlebars.compile($("#temp").html());
 				$(".slick-slider-best").html(template(data));
 				applyBest()
+				getNumberFormat()
 			}
 		})
 	}
@@ -801,4 +771,20 @@ display: flex;
 		var pno = $(e).attr("pno");
 		location.href="/shopproduct/read?pno="+pno;
 	}
+	
+	//가격포맷
+	function getNumberFormat(){
+		$(".price").each(function(){
+			var price = $(this).html();
+			price=price.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			$(this).html(price);
+		});
+	}
+		
+	//아이콘 숫자 지정
+	var i = 0;
+	$(".best_icon").each(function(){
+		i++;
+		$(this).attr("src", "/resources/icon_menu/best_"+i+".png")
+	});
 </script>

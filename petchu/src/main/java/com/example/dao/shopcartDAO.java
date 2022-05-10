@@ -22,4 +22,13 @@ public interface shopcartDAO {
 	public List<shopcartVO> today_best_items();
 	public List<shopcartVO> best_items();
 	public shopcartVO user_point(String uid);
+	public void user_order_insert(shopcartVO vo);
+	public void user_point_minus(shopcartVO vo);
+	public void user_point_history(shopcartVO vo);
+	public void user_point_plus(int pricePoint, String uid);
+	public void user_point_history_plus(String uid, int pricePoint);
+	public List<shopcartVO> record_best_items();
+	public List<shopcartVO> record_best_items2();
+	
+	
 }

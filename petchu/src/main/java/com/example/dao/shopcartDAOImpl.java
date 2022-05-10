@@ -104,4 +104,45 @@ public class shopcartDAOImpl implements shopcartDAO{
 	public shopcartVO user_point(String uid) {
 		return session.selectOne(namespace+".user_point", uid);
 	}
+
+	@Override
+	public void user_order_insert(shopcartVO vo) {
+		session.insert(namespace+".user_order_insert", vo);
+	}
+
+	@Override
+	public void user_point_minus(shopcartVO vo) {
+		session.update(namespace+".user_point_minus", vo);
+	}
+
+	@Override
+	public void user_point_history(shopcartVO vo) {
+		session.insert(namespace+".user_point_history", vo);
+	}
+
+	@Override
+	public void user_point_plus(int pricePoint, String uid) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("pricePoint", pricePoint);
+		map.put("uid", uid);
+		session.update(namespace+".user_point_plus", map);
+	}
+
+	@Override
+	public void user_point_history_plus(String uid, int pricePoint) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("uid", uid);
+		map.put("pricePoint", pricePoint);
+		session.insert(namespace+".user_point_history_plus", map);
+	}
+
+	@Override
+	public List<shopcartVO> record_best_items() {
+		return session.selectList(namespace+".record_best_items");
+	}
+	
+	@Override
+	public List<shopcartVO> record_best_items2() {
+		return session.selectList(namespace+".record_best_items2");
+	}
 }

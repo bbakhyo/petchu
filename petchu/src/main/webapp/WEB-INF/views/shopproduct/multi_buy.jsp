@@ -3,8 +3,7 @@
 <head>
 <style>
 	.cart_item_img img {width:90px; height:90px;}
-	.checkout_delivery_address{text-align:left;}
-	.terms_inside_wrapper{text-align:left;}
+	.checkout_delivery_address, .terms_wrapper{text-align:left;}
 	.none{display:none;}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -104,7 +103,7 @@
 <!--             <input type="text" name="my_point" id="my_point" size=20 readonly> -->
 <!--           </div> -->
             <div class="point_paragraphs"><br>
-              <p class="points_header">보유 포인트: <a class="my_point">${uvo.point}</a></p>
+              <p class="points_header">보유 포인트: <a class="my_point" point="${uvo.point}">${uvo.point}</a></p>
             </div>
           <div class="coupon_line3">
             <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
@@ -131,7 +130,7 @@
 
               <div class="checkout_total_card_line2">
                 <div class="card_cart_deliveryfee_row_left">배송비</div>
-                <div class="card_cart_deliveryfee_row_right">+3,000원</div>
+                <div class="card_cart_deliveryfee_row_right">+ 3,000원</div>
               </div><span class="none"><br></span>
               <div class="checkout_total_card_line2 checkout_point_line" style="display:none;">
               	<div class="card_cart_point_left">포인트 사용</div>
@@ -263,11 +262,15 @@ Handlebars.registerHelper("display", function(sum){
 				fmprice=fmprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 				$(".card_cart_grandtotal_row_right").html(fmprice+"원");
 				
+				var pointP = $(".my_point").html();
+				pointP=pointP.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+				$(".my_point").html(pointP);
+				
 				//아이템 수량
 				var item_type_amount = $("#tbl .cartitem_info_right").length;
 				$(".item_type_amount").html("("+item_type_amount+"개)");
 				
-				//로딩시 주문정보 동일 자동체크 & 사용저 배송정보 자동 출력
+				//로딩시 주문정보 동일 자동체크 & 사용처 배송정보 자동 출력
 				$("#checkout_same_address").attr("checked", "checked");	
 				getAccountInfo();
 			}
@@ -411,7 +414,6 @@ Handlebars.registerHelper("display", function(sum){
 					alert("포인트가 부족합니다.");
 					return;
 				}
-// 				alert(final_price);
 			}
 			
 			var IMP = window.IMP; // 생략가능
@@ -445,40 +447,33 @@ Handlebars.registerHelper("display", function(sum){
 					
 					//결제 성공시 주문목록에 등록
 					var orno = Date.now() + uid;
-					
 					$(".cartitem_info_right").each(function(){
 						var pno = $(this).attr("pno");
 						var amount = $(this).attr("amount");
-//			 			alert(pno);
-//			 			alert(amount);
 							$.ajax({
 								type: "post",
 								url: "/shopproduct/order_insert",	
 								data: {uid:uid, pno:pno, amount:amount, orno:orno, zipcode:zipcode, address1:address1, address2:address2, receiver:receiver, tel:tel},
 								success: function(){
-									location.href="/shopproduct/order_list?uid="+uid;
 								}
 							});
 					});			
 					
-					//만약 btnPoint가 1일 경우user db에서 차감 (1)
-					//point history 사용내역 등록(2)
-					//user_order 등록(3)
-					//user db pint 적립 (4)
-					//point history 적립내역 등록(5)
+
+// 					 orno, uid, point, sum
+					if(usePoint==null){
+						usePoint=0;
+					}
 					
-// 					alert("포인트 적립and포인트 등록")
 					$.ajax({
 						type: "post",
-						url: "/shopproduct/point_insert",	
-						data: {uid:uid, pno:pno, amount:amount, orno:orno, zipcode:zipcode, address1:address1, address2:address2, receiver:receiver, tel:tel},
+						url: "/shopproduct/user_order_insert",	
+						data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint},
 						success: function(){
-							location.href="/shopproduct/order_list?uid="+uid;
+							location.href="/shopproduct/order_list";
 						}
 					});
 					
-					
-					//포인트 사용을 안했더라도 구매만 했으면 포인트 적립
 					
 					
 				} else {
@@ -541,7 +536,7 @@ Handlebars.registerHelper("display", function(sum){
     //포인트가 변경될 때
     $(".point_apply").on("click", function(){
     	var point = $(this).parent().parent().find(".point").val();
-    	var myPoint = $(".my_point").html();
+    	var myPoint = $(".my_point").attr("point");
     	//숫자가 아니거나 0일 경우, 혹은 0보다 작을 경우 작동 안되게 해야함
     	if(isNaN(point)==true){
     		alert("숫자를 입력하십시오.");
@@ -563,7 +558,7 @@ Handlebars.registerHelper("display", function(sum){
     	}
     	$(".none").attr("class", "show");
     	$(".checkout_point_line").attr("style", "");
-    	$(".card_cart_point_right").html("-"+point + " 원");
+    	$(".card_cart_point_right").html(point);
     	$(".card_cart_point_right").attr("point", point);
     	
     	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
@@ -579,6 +574,10 @@ Handlebars.registerHelper("display", function(sum){
     	$(".point").attr("readonly", "readonly")
 		alert("포인트 적용 완료");
     	btnPoint = 1;
+    	
+    	var pointP = $(".card_cart_point_right").html();
+		pointP=pointP.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		$(".card_cart_point_right").html("- "+pointP+"원");
     	return;
     });
 	
@@ -597,7 +596,7 @@ Handlebars.registerHelper("display", function(sum){
     	$(".point_apply").attr("style", "");
     	alert("취소완료");
     	$(".point").val("");
-    	$(".point").attr("readonly", "")
+    	$(".point").attr("readonly", false);
     	btnPoint = 0;
     	return;
     })
@@ -607,7 +606,7 @@ Handlebars.registerHelper("display", function(sum){
     	if(e.key === "Enter"){
     		$(".point_apply").click();
     	}
-    })
+    });
  
 	
 </script>

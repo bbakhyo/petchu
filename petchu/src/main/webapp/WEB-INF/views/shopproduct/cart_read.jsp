@@ -16,9 +16,6 @@
 	.col1_title_row2_img_and_content img{
 		cursor:pointer;
 	}
-	.page_footer_col3_subtotal{
-		margin-left: 150px;
-	}
    </style>
 </head>
 <body>
@@ -88,7 +85,7 @@
                      <div><button class="cart_paynow">주문하기</button></div>
                   </div>
                   <div class="content_col4_deliveryFee_container">
-                     <div class="content_col3_subtotal_label">포인트 적립예정금</div>
+                     <div class="content_col3_subtotal_label">적립예정금</div>
                      <div class="content_col4_deliveryFee_amount"><span class="reserves"></span>원</div>
                      <div class="content_col4_deliveryFee_message">(최대 10% 적립)</div>
                   </div>
@@ -133,6 +130,7 @@
 	var uid = "${id}";
 	var checked=0;
 	var chk_all=0;
+	var chked_all=0;
 	getList();
 	
 	//chkall 체크되었을 경우
@@ -358,6 +356,10 @@
 	/* buy click function의 존재의의가 없다. 구매시 이동하기만 해도 될 것 같다. 정보를 list에 담아서 이동하는 코드 필요 */
 	//구매 버튼을 클릭한 경우
 	$("#tbl").on("click", ".payment_submit_now", function(){
+		if(chked_all==0){
+			alert("주문할 상품을 선택해주세요!");
+			return;
+		}
 		location.href="/shopproduct/multi_buy?uid=${id}";
 	});
 	
@@ -447,7 +449,7 @@
 	
 	function chkCount(){
 	// 	총 몇 건 주문하기 length 세는 법
-		var chked_all = $('input[class=bigCheckbox_item]:checked').length;
+		chked_all = $('input[class=bigCheckbox_item]:checked').length;
 		$(".payment_submit_now").html("총 "+chked_all+" 건 주문하기");
 	}
 	
