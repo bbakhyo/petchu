@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<link href="/resources/css/star.css" rel="stylesheet"/>
 
 
 <style>
@@ -92,7 +92,31 @@
    #checkinDate,#checkoutDate{
    		color: gray;
    }
-
+   #btnReviewArea{
+   	text-align: right;
+   	box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 0px 0px 5px 5px;
+   }
+	.review{
+		width: 100%;
+		box-sizing: border-box;
+	    border: solid 1.5px #D3D3D3;
+	    border-radius: 5px;
+	    text-align: left;
+	    margin-top: 10px;
+	    padding: 20px;
+	}
+	.reviewDate{
+		float: right;
+		font-size: 12px;
+	}
+	.reviewId{
+		font-size: 12px;
+	}
+	.text-bold{
+		font-size: 40px;
+	}
 </style>
 
 <div id="page">
@@ -149,7 +173,49 @@
       </div>
       
    </form>
+   <form class="mb-3" name="myform" id="myform" method="post" action="rateInsert">
+	   	<input type="hidden" name="id" value="${id }">
+	   	<input type="hidden" name="scno" value="${vo.scno }">
+		<fieldset>
+			<span class="text-bold"></span>
+			<input type="radio" name="rate" value="5" id="rate1"><label
+				for="rate1">★</label>
+			<input type="radio" name="rate" value="4" id="rate2"><label
+				for="rate2">★</label>
+			<input type="radio" name="rate" value="3" id="rate3"><label
+				for="rate3">★</label>
+			<input type="radio" name="rate" value="2" id="rate4"><label
+				for="rate4">★</label>
+			<input type="radio" name="rate" value="1" id="rate5"><label
+				for="rate5">★</label>
+		</fieldset>
+		<div>
+			<textarea class="col-auto form-control" type="text" id="reviewContents" name="comments"
+					  placeholder="유치원이나 호텔을 이용하시고 후기를 남겨주시면 큰 도움이 됩니다! 감사합니다!"></textarea>
+			<div id="btnReviewArea">
+				<button id = "btnReview">저장</button>
+			</div>
+		</div>
+	</form>
+		<div id="reviewArea" style="text-align: right;"></div>
+			<script id="temp" type="text/x-handlebars-template">
+				{{#each list}}
+					<div class="review">
+						<span class="reviewId">{{id}}</span>
+						<span class="reviewDate">{{revDate}}</span>
+						<span class="rate{{rate}}">{{rate}}</span>
+						<p class="reviewComments">{{comments }}</p>
+					</div>
+				{{/each}}
+			</script>
+		<div id="btnPage">
+			<button id="prev">이전</button>
+			<span id="curpage"></span>
+			<button id="next">다음</button>
+		</div>
+	
 </div>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	5c9e09df993f534bf4a2916f4cf43cdd&libraries=services"></script>
 <div id="map" style="width:100%;height:350px;"></div>
 
@@ -192,7 +258,88 @@
 	</div>
 
 <script>
+	var page=1;
+	var perPageNum=5;
+	
+	$("#prev").on("click", function(){
+		page--;
+		getReview();
 
+	});
+	
+	$("#next").on("click", function(){
+		page++;
+		getReview();
+
+	});
+	
+	var scno = $(myform.scno).val();
+	getReview();
+	
+	function getReview(){
+		var start = ((page-1)*5);
+		$.ajax({
+			type: "get",
+			url: "/hoschool/reviewList",
+			data:{scno:scno, start:start, perPageNum:perPageNum},
+			success: function(data){
+				var template = Handlebars.compile($("#temp").html());
+				$("#reviewArea").html(template(data));
+				
+				var total = data.count;
+				var lastPage=Math.ceil(total/perPageNum);
+				$("#curpage").html(page+"/"+lastPage);
+				if(page==1){
+		               $("#prev").attr("disabled",true);
+		            }else{
+		               $("#prev").attr("disabled",false);
+		            }
+		            if(page==lastPage){
+		               $("#next").attr("disabled",true);
+		            }else{
+		               $("#next").attr("disabled",false);
+		            }
+		            //별점 부여
+		            $(".rate1").html("⭐");
+		            $(".rate2").html("⭐⭐");
+		            $(".rate3").html("⭐⭐⭐");
+		            $(".rate4").html("⭐⭐⭐⭐");
+		            $(".rate5").html("⭐⭐⭐⭐⭐"); 
+
+
+
+
+			}
+		});
+	}
+	//별점이 변경된 경우
+	$("input[name='rate']:radio").change(function () {
+	    //라디오 값 가져와서 옆에 span에 출력
+	    if(this.value==5){
+	   		$(".text-bold").html("😍");
+	    }else if(this.value==4){
+	    	$(".text-bold").html("😎");
+	    }else if(this.value==3){
+	    	$(".text-bold").html("😄");
+	    }else if(this.value==2){
+	    	$(".text-bold").html("😥");
+	    }else if(this.value==1){
+	    	$(".text-bold").html("😭");	
+	    }
+	});
+
+	//리뷰 저장버튼을 클릭한 경우
+	$("#btnReview").on("click", function(e){
+		e.preventDefault();
+		
+		var target = $(myform.comments).val();
+		
+		if(target.length > 500){
+			alert("500자 이내로 작성 가능합니다.")
+		}
+		if(!confirm("댓글을 등록하실래요?")) return;
+		myform.submit();
+	});
 	//PG사 결제API
 	function payAPI(){
 		IMP.init('imp61649606');

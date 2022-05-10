@@ -19,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.dao.HoschoolDAO;
+import com.example.dao.RateDAO;
 import com.example.dao.UserDAO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
+import com.example.domain.RateVO;
 import com.example.domain.ReserveVO;
 import com.example.domain.ServiceVO;
 
@@ -34,6 +36,9 @@ public class HoschoolController {
 	
 	@Autowired
 	UserDAO udao;
+	
+	@Autowired
+	RateDAO rdao;
 	
 	
 	@Resource(name="uploadPath")
@@ -53,6 +58,19 @@ public class HoschoolController {
 		model.addAttribute("uvo",udao.read(id));
 		model.addAttribute("pageName", "hoschool/hosread.jsp");
 		return "/home";
+	}
+	@RequestMapping("/reviewList")
+	@ResponseBody
+	public HashMap<String, Object> reviewList(int scno, int start, int perPageNum){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("list", rdao.reviewList(scno, start, perPageNum));
+		map.put("count", rdao.reviewCount(scno));
+		return map;
+	}
+	@RequestMapping(value="/rateInsert", method=RequestMethod.POST)
+	public String rateInsert(RateVO vo) {
+		rdao.rateInsert(vo);
+		return "redirect:/hoschool/read?scno="+vo.getScno()+"&id=" + vo.getId();
 	}
 
 	@RequestMapping("/myList")
