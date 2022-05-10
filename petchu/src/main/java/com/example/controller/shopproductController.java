@@ -74,6 +74,8 @@ public class shopproductController {
 	public String multi_buy(Model model, String uid){
 		//user 정보 불러오기
 		model.addAttribute("vo", userdao.read(uid));
+		//여기에 point 출력
+		model.addAttribute("uvo", cartdao.user_point(uid));
 		model.addAttribute("pageName", "shopproduct/multi_buy.jsp");
 		return "/home";
 	}
@@ -221,25 +223,20 @@ public class shopproductController {
 	//order_read.json
 	@RequestMapping("/order_read.json")
 	@ResponseBody
-	public List<shopcartVO> order_read(int bno, String orno){
+	public List<shopcartVO> order_read(String orno){
 		//shopcartVO vo=cartdao.order_read(pno, orno);
-		List<shopcartVO> elselist=cartdao.order_read_else(bno, orno);
-		return elselist;
+		List<shopcartVO> list=cartdao.order_read(orno);
+		return list;
 	}
 	
 	//주문목록 - read페이지
 	@RequestMapping("/order_read")
-	public String order_read(Model model, int bno){
-		model.addAttribute("vo", cartdao.order_read(bno));
+	public String order_read(Model model, String orno){
+		model.addAttribute("orno", orno);
+		model.addAttribute("uvo", cartdao.order_read_user(orno));
 		model.addAttribute(	"pageName", "shopproduct/order_read.jsp");
 		return "/home";
 	}
-	
-	@RequestMapping("/phone_number")
-	public String phone_format(String number) { 
-		String regEx = "(\\d{3})(\\d{3,4})(\\d{4})"; 
-		return number.replaceAll(regEx, "$1-$2-$3"); 
-		}
 
 	//상품 단일 구매
 	@RequestMapping(value="/order_single_insert", method=RequestMethod.POST)
@@ -249,5 +246,27 @@ public class shopproductController {
 		cartdao.order_insert(vo);
 		//shopproduct 구매수량 추가
 		cartdao.sell_update(vo.getAmount(), vo.getPno());
+	}
+	
+	//상품 구매시 point 이동
+	@RequestMapping(value="/point_insert", method=RequestMethod.POST)
+	@ResponseBody
+	public void point_insert(shopcartVO vo, int btnPoint){
+		//만약 btnPoint가 1일 경우user db에서 차감 (1)
+		//point history 사용내역 등록(2)
+		if(btnPoint==1){
+			
+		}
+		//user_order 등록(3) ==> 이걸 1번으로 하고 point 등록할 때 if point가 1일 경우에 userDB차감/사용내역 등록
+		
+		//user db pint 적립 (4)
+		//point history 적립내역 등록(5)
+		//총 필요한 것 => orno, uid, point, sum
+		
+//		cartdao.order_insert(vo);
+//		//장바구니chk 목록 삭제
+//		cartdao.chk_delete(vo);
+//		//shopproduct 구매수량 추가
+//		cartdao.sell_update(vo.getAmount(), vo.getPno());
 	}
 }

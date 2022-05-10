@@ -16,6 +16,9 @@
 	.col1_title_row2_img_and_content img{
 		cursor:pointer;
 	}
+	.page_footer_col3_subtotal{
+		margin-left: 150px;
+	}
    </style>
 </head>
 <body>
@@ -85,9 +88,9 @@
                      <div><button class="cart_paynow">주문하기</button></div>
                   </div>
                   <div class="content_col4_deliveryFee_container">
-                     <div class="content_col3_subtotal_label">적립예정금</div>
+                     <div class="content_col3_subtotal_label">포인트 적립예정금</div>
                      <div class="content_col4_deliveryFee_amount"><span class="reserves"></span>원</div>
-                     <div class="content_col4_deliveryFee_message">(8만원 이상 구매 시 배송비 무료)</div>
+                     <div class="content_col4_deliveryFee_message">(최대 10% 적립)</div>
                   </div>
                </div>
             </div>
@@ -109,13 +112,6 @@
                   <div class="cart_item_footer_col2_deliveryfee">
                      <div class="page_footer_col_label">총 배송비</div>
                      <div class="page_footer_col_label_deliveryfee">3,000원</div>
-                  </div>
-                  <span class="material-symbols-outlined math">
-                  remove
-                  </span>
-                  <div class="page_footer_col3_discount_amount">
-                     <div class="page_footer_col_label">할인예상금액</div>
-                     <div class="page_footer_col_label_discount">8,000원</div>
                   </div>
                   <div class="page_footer_col3_subtotal">
                      <span class="page_footer_col3_label"> 총 주문금액</span>

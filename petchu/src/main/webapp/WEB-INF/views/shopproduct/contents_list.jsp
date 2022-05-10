@@ -41,6 +41,9 @@
   margin-bottom:20px;
 }
 
+.content_item_box_container {
+	cursor:pointer;
+}
 .content_item_box_container:hover{
 	border:solid 1px blue;
 }
@@ -97,11 +100,11 @@ height:180px;
 	      <script id="temp" type="text/x-handlebars-template">
 
 	{{#each .}}
-      <div class="content_item_box_container" pno="{{pno}}">
+      <div class="content_item_box_container" pno="{{pno}}" onclick='getLocation(this)'>
         <img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
         	<div class="content_item_title" pno="{{pno}}">{{pname}}</div>
         	<div class="content_item_price">
-          		<div class="price_item1">{{comma pprice}}</div> 
+          		<div class="price_item1">{{comma pprice}}원</div> 
        		</div>
         	<div class="content_item_title_row">
 				<div class="content_item_title">{{replace pbrand}}</div>   
@@ -136,11 +139,11 @@ height:180px;
 	var selectCate2="${cate2}";
 	getContentsList();
 	
-	$(".content_container").on("click", function(){
-		var row = $(this).find(".content_item_box_container");
-		var pno =row.attr("pno");
+	//상품 클릭시 리드페이지로 이동
+	function getLocation(e){
+		var pno = $(e).attr("pno");
 		location.href="read?pno="+pno+"&selectCate="+selectCate+"&selectCate2="+selectCate2; 
-	});
+	}
 	
 	
 	function getContentsList(){

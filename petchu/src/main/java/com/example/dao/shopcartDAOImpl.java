@@ -68,8 +68,8 @@ public class shopcartDAOImpl implements shopcartDAO{
 	}
 
 	@Override
-	public shopcartVO order_read(int bno) {
-		return session.selectOne(namespace+".order_read", bno);
+	public List<shopcartVO> order_read(String orno) {
+		return session.selectList(namespace+".order_read", orno);
 	}
 	@Override
 	public shopcartVO cart_check(shopcartVO vo) {
@@ -77,11 +77,8 @@ public class shopcartDAOImpl implements shopcartDAO{
 	}
 
 	@Override
-	public List<shopcartVO> order_read_else(int bno, String orno) {
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("bno", bno);
-		map.put("orno", orno);
-		return session.selectList(namespace+".order_read_else", map);
+	public shopcartVO order_read_user(String orno) {
+		return session.selectOne(namespace+".order_read_user",orno);
 	}
 
 	@Override
@@ -101,5 +98,10 @@ public class shopcartDAOImpl implements shopcartDAO{
 	@Override
 	public List<shopcartVO> best_items() {
 		return session.selectList(namespace+".best_items");
+	}
+
+	@Override
+	public shopcartVO user_point(String uid) {
+		return session.selectOne(namespace+".user_point", uid);
 	}
 }
