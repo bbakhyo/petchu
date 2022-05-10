@@ -96,10 +96,7 @@
 			dataType: "json",
 			data : {pno:pno},
 			url: "/pet/readpet",
-			success:function(data){
-
-
-				
+			success:function(data){				
  				$.ajax({
  					type: "get",
 					dataType:"json",
@@ -136,7 +133,7 @@
 		url: "/pet/petlist",
 		success:function(data){
 			var template = Handlebars.compile($("#temp").html());
-			$("#selectPet").html(template(data));
+			$("#selectPet").html(data);
 			if(data==""){
 				$("#nopet").html("반려동물을 등록하세요");
 			}
@@ -168,15 +165,17 @@
 		$(frm.pno).val(pno);
 
 		var d_etc = $(frm.d_etc).val();
-		if(d_etc==""){
-			$("#alert").html("증상에 대한 설명을 작성해주세요");
-			return;
-		}
+		
 		if(pno==0){
-			$("#alert").html("반려동물을 선택해주세요");
+			swal("반려동물을 선택해주세요");
 			return;
 		}
 		
+		if(d_etc==""){
+			swal("증상에 대한 설명을 작성해주세요");
+			return;
+		}
+	
 		if(!confirm("견적서를 보내시겠습니까?")) 
 			return;
 		

@@ -38,6 +38,14 @@
 					<a href="/request/result">받은 견적서</a>
 					<a href="/shopproduct/cart_read">장바구니</a> <!-- 아이콘으로 -->
 					<a href="#" id="chat">채팅</a>
+						<span>
+							<span id="bell">
+								<small id="count">0</small>
+								<script id="temp" type="text/x-handlebars-template">
+									{{data}}
+								</script>
+							</span>
+						</span>
 					<span><a href="/user/mypage?id=${id}">${nick}님</a></span>
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
@@ -90,5 +98,19 @@
 				window.open("/chat/main", "chat",
 						"width=450, height=700, top=200, left=900");
 			});
+	getNC();
+	function getNC(){
+		$.ajax({
+			type: "get",
+			url: "/chat/notreadall",
+			success:function(data){
+				if(data==0){
+					$("#bell").hide();
+				}
+				var template = Handlebars.compile($("#temp").html());
+				$("#count").html(data);
+			}
+		})
+	}
 </script>
 </html>

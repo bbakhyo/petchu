@@ -1,8 +1,12 @@
 package com.example.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.example.domain.ChatRoomVO;
 
 @Repository
 public class ChatRoomDAOImpl implements ChatRoomDAO{
@@ -12,8 +16,17 @@ public class ChatRoomDAOImpl implements ChatRoomDAO{
 	String namespace="com.example.mapper.ChatRoomMapper";
 	
 	@Override
-	public void create() {
-		session.insert(namespace + ".create");		
+	public void create(String doctorid, String userid) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("doctorid", doctorid);
+		map.put("userid", userid);
+		session.insert(namespace + ".create", map);		
+	}
+
+
+	@Override
+	public ChatRoomVO roominfo(int crno) {
+		return session.selectOne(namespace+ ".roominfo", crno);
 	}
 	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.dao.ChatMessageDAO;
+import com.example.dao.ChatRoomDAO;
 import com.example.dao.ChatRoomJoinDAO;
 import com.example.dao.UserDAO;
 import com.example.domain.ChatMessageVO;
@@ -27,6 +28,9 @@ public class ChatController {
 	@Autowired
 	ChatMessageDAO mdao;
 	
+	@Autowired
+	ChatRoomDAO rdao;
+	
 	@RequestMapping("/main")
 	public void main(Model model,HttpSession session){
 		model.addAttribute("type", udao.typechk(session.getAttribute("id").toString()));
@@ -37,8 +41,8 @@ public class ChatController {
 	@RequestMapping("/room")
 	public void main(Model model, int crno, HttpSession session){
 		model.addAttribute("type", udao.typechk(session.getAttribute("id").toString()));
-		model.addAttribute("dname", mdao.recedname(crno));
-		model.addAttribute("nick", mdao.recenick(crno));
+		model.addAttribute("receinfo", mdao.receinfo(crno));
+		model.addAttribute("roominfo", rdao.roominfo(crno));
 		model.addAttribute("crno", crno);
 		model.addAttribute("message", mdao.print(crno));
 		model.addAttribute("pageName", "chat/room.jsp");
@@ -55,12 +59,19 @@ public class ChatController {
 	public int notread(int crno, HttpSession session){
 		return mdao.notread(crno, session.getAttribute("id").toString());
 	}
-	
-	@RequestMapping(value="update", method=RequestMethod.POST)
+	@ResponseBody
+	@RequestMapping("/notreadall")
+	public int notreadall(HttpSession session){
+		return mdao.notreadall(session.getAttribute("id").toString());
+	}
+	@ResponseBody
+	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public void update(int crno, HttpSession session){
 		mdao.readdate(crno, session.getAttribute("id").toString());
 	}
-	@RequestMapping(value="send", method=RequestMethod.POST)
+	
+	@ResponseBody
+	@RequestMapping(value="/send", method=RequestMethod.POST)
 	public void send(ChatMessageVO vo){
 		mdao.send(vo);
 	}

@@ -5,11 +5,8 @@
     <select id="print" resultType="com.example.domain.ChatMessageVO">
         select * from chatMessage where crno=#{crno} order by regdate
     </select>
-    <select id="recedname" resultType="String">
-    	select dname from view_chat where crno=#{crno} limit 0,1
-    </select>
-    <select id="recenick" resultType="String">
-    	select nick from view_chat where crno=#{crno} limit 0,1
+    <select id="receinfo" resultType="com.example.domain.ChatMessageVO">
+    	select dname, nick, dno from view_chat where crno=#{crno}
     </select>
     <insert id="send">
     	insert chatMessage(message, id, receiver, dno, crno, send) values(#{message}, #{id}, #{receiver},#{dno}, #{crno}, #{send})
