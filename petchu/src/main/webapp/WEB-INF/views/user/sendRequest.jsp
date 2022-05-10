@@ -8,7 +8,7 @@
 	<input type="hidden" value="${vo.id}" id="id">
 
 	<div id="selectPet"></div>
-	<script id="temp" type="text/x-handlebars-template">
+	<script id="sel" type="text/x-handlebars-template">
 		{{#each .}}
 			<div class="row">
 				<span class="pno" style="display:none">{{pno}}</span>
@@ -132,7 +132,7 @@
 		data : {id:id},
 		url: "/pet/petlist",
 		success:function(data){
-			var template = Handlebars.compile($("#temp").html());
+			var template = Handlebars.compile($("#sel").html());
 			$("#selectPet").html(data);
 			if(data==""){
 				$("#nopet").html("반려동물을 등록하세요");
@@ -178,9 +178,6 @@
 	
 		if(!confirm("견적서를 보내시겠습니까?")) 
 			return;
-		
-
-
 		
 		frm.submit();
 	})

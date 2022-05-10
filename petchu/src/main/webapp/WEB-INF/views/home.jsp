@@ -41,7 +41,7 @@
 						<span>
 							<span id="bell">
 								<small id="count">0</small>
-								<script id="temp" type="text/x-handlebars-template">
+								<script id="countdata" type="text/x-handlebars-template">
 									{{data}}
 								</script>
 							</span>
@@ -107,7 +107,7 @@
 				if(data==0){
 					$("#bell").hide();
 				}
-				var template = Handlebars.compile($("#temp").html());
+				var template = Handlebars.compile($("#countdata").html());
 				$("#count").html(data);
 			}
 		})
