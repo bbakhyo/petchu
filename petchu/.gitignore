@@ -1,1 +1,11 @@
 /target/
+.settings/
+.project
+.classpath
+site
+/bin/
+db
+pom.xml
+.DS_Store
+log/
+
