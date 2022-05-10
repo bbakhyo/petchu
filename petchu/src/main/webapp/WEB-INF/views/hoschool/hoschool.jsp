@@ -1,162 +1,135 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<style>
-	@font-face {
-    font-family: 'SDSamliphopangche_Basic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-	}
-	.bigPrame{
-		margin: 0px auto;
-		width: 500px;
-		float: right;
-	}
-	#sideMenu{
-		float: left;
-		width: 150px;
-		margin: 10px;
-	}
-	.prame{
-/* 		사용자가 올린 백그라운드 이미지 */
-		text-align: left;
-		background-size: 500px 200px; 
-		width: 600px;
-		height: 160px;
-		padding: 20px;
-		margin: 10px;
-		float: right;
-		box-shadow: 5px 5px 5px 1px gray;
-	}
-	.scname{
-		font-family: 'SDSamliphopangche_Basic';
-		font-size: 30px;
-		color: white;
-		
-	}
-	.sctel{
-		float: right;
-		font-size: 17px;
+	<link href="/resources/css/hoschool.css" rel="stylesheet" />
+	<link href="https://www.cssscript.com/demo/segmented-control-toggle-radio/toggle-radios.css" rel="stylesheet" />
 
 
-	}
-	.sconeline {
-		font-size: 15px;
-	}
-	.scprice{
-		float: right;
-		font-size: 20px;
-		margin-bottom: 10px;
-	}
-	#checkin, #checkout{
-		width: 200px;
-		height: 30px;
-		
-	}
-	#tag {
-		width: 200px;
-	}
-	.tag{
-		margin-right: 3px;
-		cursor: pointer;
-		font-size: 15px;
-	}
-	.tag:hover{
-		font-weight: bold;
-		color: #A7CA37;
-		
-	}
-
-	#keyword{
-		width: 300px;
-		height: 50px;
-		margin-top: 50px;
-		border-radius: 20px;
-	}
+<div class="page_hoschool">
 	
-	#search{
-		width: 100px;
-		height: 50px;
-		background: #A7CA37;
-		color: white;
-		border: none;
-		border-radius: 20px;
-		font-size: 17px;
-	}
-</style>
-<div id="page">
-	<form name="frm" style="text-align: center;">
-		<input type="text" id="keyword" name="keyword" >
-		<button id="search" name="search" type="submit" >검색</button>
-	</form>
-	<div id="sort">
-		<input type="radio" name="sort"  class="sort" value="rate">별점높은순
-		<input type="radio" name="sort"  class="sort" value="rowPrice">낮은가격순
-		<input type="radio" name="sort"  class="sort" value="higPrice">높은가격순
-	</div>
-	<div id="sideMenu">
+  	<div class="ho_page_header">
+      <form name="frm" style="text-align: center;">
+        <input type="text" id="keyword" name="keyword" >
+        <button id="search" name="search" type="submit" >검색</button>
+      </form>
+    
+    <div id="sort" class="toggle-radio" data-style="rounded">
+  <input type="radio" name="sort" id="default_Option1" class="sort" value="rate">
+  <label for="default_Option1">별점높은순</label>
+  <input type="radio" name="sort" id="default_Option2" class="sort" value="rowPrice">
+  <label for="default_Option2">낮은가격순</label>
+  <input type="radio" name="sort" id="default_Option3" class="sort" value="higPrice">
+  <label for="default_Option3">높은가격순</label>
+</div>
 
-			<div id="tag"> 
-				<p style="font-size: 25px;">날짜</p>
-				<p>체크인</p>
-				<span id="checkinArea"><input id="checkin" type="date"></span>
-				<p>체크아웃</p>
-				<span id="checkoutArea"><input id="checkout" type="date"></span>
-			
-				
-				<p style="font-size: 25px;">태그</p>
-				<span class="tag" tag="산책">#산책</span>
-				<span class="tag" tag="놀이터">#야외놀이터</span>
-				<span class="tag" tag="수영장">#펫수영장</span>
-				<span class="tag" tag="종일반">#종일반</span>
-				<span class="tag" tag="1박">#1박2일</span>
-				<span class="tag" tag="2박">#2박3일</span>
-				<span class="tag" tag="3박">#3박4일</span>
-				<span class="tag" tag="4박">#4박5일</span>
-				<span class="tag" tag="장박">#장박</span>
-				<span class="tag" tag="단독실">#단독실</span>
-				<span class="tag" tag="대형">#대형</span>
-				<span class="tag" tag="중형">#중형</span>
-				<span class="tag" tag="소형">#소형</span>
-				<span class="tag" tag="수의사">#수의사</span>
-				<span class="tag" tag="cctv">#cctv</span>
-				<span class="tag" tag="애견훈련">#애견훈련</span>
-				<span class="tag" tag="애견카페">#애견카페</span>
-				<span class="tag" tag="픽업">#픽업</span>
-				<span class="tag" tag="당일 입실">#당일 입실</span>
-				<span class="tag" tag="위생관리">#위생관리</span>
-				<span class="tag" tag="목욕">#목욕</span>
-				<span class="tag" tag="서울특별시">#서울특별시</span>
-				<span class="tag" tag="인천광역시">#인천광역시</span>
-				<span class="tag" tag="경기도">#경기도</span>
-			</div>
+<!--     <div id="sort">
+      <input type="radio" name="sort"  class="sort" value="rate">별점높은순
+      <input type="radio" name="sort"  class="sort" value="rowPrice">낮은가격순
+      <input type="radio" name="sort"  class="sort" value="higPrice">높은가격순
+	</div> -->
+  </div>
+  
+  	<div class="ho_body">
+	<!-- 좌측 색션(매뉴)	 -->
+    <div class="ho_left_section">
+    
+			<div class="sideMenu_container"> 
+	<!-- 	날짜 박스			 -->
+			<div class="sideMenu_content_wrapper">
+        <div class="date_box">
+        	<div class="img_wrapper"><img src="	https://cdn-icons-png.flaticon.com/128/42/42446.png" alt='calendar_icon' id="icon_calendar"></div>
+				<div class="datebox_heading">체크인</div>
+				<span id="checkinArea"><input id="checkin" type="date" class="input_dates"></span>
+				<div class="datebox_heading">체크아웃</div>
+				<span id="checkoutArea"><input id="checkout" type="date" class='input_dates'></span>
+        </div>
+	<!--     태그 박스 부모     -->
+				<div class="ho_tag_container">
+          <div class="img_wrapper"><img src="	https://dylansmith.gallerycdn.vsassets.io/extensions/dylansmith/hash-and-cache/1.0.35/1631823901554/Microsoft.VisualStudio.Services.Icons.Default" id="hashtag" alt='hashtag'></div>
+	<!--   태그 # 박스 자식       -->
+	<div class="ho_tag_container_inner">
+          <span class="tag" tag="산책">#산책</span>
+          <span class="tag" tag="놀이터">#야외놀이터</span>
+          <span class="tag" tag="수영장">#펫수영장</span>
+          <span class="tag" tag="종일반">#종일반</span>
+          <span class="tag" tag="1박">#1박2일</span>
+          <span class="tag" tag="2박">#2박3일</span>
+          <span class="tag" tag="3박">#3박4일</span>
+          <span class="tag" tag="4박">#4박5일</span>
+          <span class="tag" tag="장박">#장박</span>
+          <span class="tag" tag="단독실">#단독실</span>
+          <span class="tag" tag="대형">#대형</span>
+          <span class="tag" tag="중형">#중형</span>
+          <span class="tag" tag="소형">#소형</span>
+          <span class="tag" tag="수의사">#수의사</span>
+          <span class="tag" tag="cctv">#cctv</span>
+          <span class="tag" tag="애견훈련">#애견훈련</span>
+          <span class="tag" tag="애견카페">#애견카페</span>
+          <span class="tag" tag="픽업">#픽업</span>
+          <span class="tag" tag="당일 입실">#당일 입실</span>
+          <span class="tag" tag="위생관리">#위생관리</span>
+          <span class="tag" tag="목욕">#목욕</span>
+          <span class="tag" tag="서울특별시">#서울특별시</span>
+          <span class="tag" tag="인천광역시">#인천광역시</span>
+          <span class="tag" tag="경기도">#경기도</span>
+        </div>
+        </div>
+    </div>
+   </div> 
+	
+  </div>
+<!--   우측 색션     -->
+    <div class="ho_section_right">
+        <div class="ho_content_list">
+          	<div id="bigPrame"></div>
+	        <script id="temp" type="text/x-handlebars-template">
+			{{#each list}}
+         	 <div class="prame" scno="{{scno}}">
+            <div class="prame_content">
+			  <!--  1열(상단) :  업체명/전화번호  -->
+              <div class="prame_row1">
+                <div class="prame_name scname" placeholder="어바웃펫">{{scname}}</div>
+                <div class="prame_contact sctel">☎ {{sctel}}</div>
+              </div>
+              <!--  2열(중간)) :  업체명 상세정보  -->
+                <div class="prame_row2">
+                  <div class="prame_description  sconeline">{{sconeline}}</div>
+                </div>
+              <!--  3열(하단)) :  별점 / isDelete / 금액  -->
+              <div class="prame_row3">
+				<!--   별크기는 .rating (css)에서 font-size로 조절   -->
+                 <div class="rating rating2"><!--
+					--><a href="#5" title="Give 5 stars">★</a><!--
+					--><a href="#4" title="Give 4 stars">★</a><!--
+					--><a href="#3" title="Give 3 stars">★</a><!--
+					--><a href="#2" title="Give 2 stars">★</a><!--
+					--><a href="#1" title="Give 1 star">★</a>
+				</div>
+                <div><input class="isDelete" type="hidden" value={{isDelete}}></div>
+               <div class="prame_price scprice">{{display scprice}}원</div>
+              </div>
+            </div>         
+          </div>
+          {{/each}}
 
-	</div>
-	<div id="bigPrame"></div>
-	<script id="temp" type="text/x-handlebars-template">
-		{{#each list}}
-		<div class= "prame" scno="{{scno}}"> 
-			<span class="scname">{{scname}}</span>
-			<span class="sctel">{{sctel}}</span>
-			<p><div class="sconeline">{{sconeline}}</div></p>
-			<p><div class="rate">별점</div></p>
-			<p><div class="scprice">{{display scprice}}원</div></p>
-			<P><input class="isDelete" type="hidden" value={{isDelete}}></p>
-		</div>
-		{{/each}}
+         </script>
+        </div>
+    </div>
 
-	</script>
-	<script>
+    
+    
+    </div>
+  
+  	<script>
 	Handlebars.registerHelper("display", function(scprice){
 		return scprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	});
 	</script>
-</div>
+  </div>
 <script>
-	var date = new Date().toISOString().slice(0, 10);
-	var keyword = $(frm.keyword).val();
-	var sort = "";
-	var checkin = "";
-	var checkout = "";
+	var date=new Date().toISOString().slice(0, 10);
+	var keyword=$(frm.keyword).val();
+	var sort="";
+	var checkin="";
+	var checkout="";
 
 	//체크인 체크아웃 오늘날짜로 설정
 	document.getElementById('checkin').value = new Date().toISOString().substring(0, 10);
@@ -217,7 +190,6 @@
 			data:{keyword:keyword, sort:sort, checkin:checkin, checkout:checkout},
 			success: function(data){
 				console.log(data);
-				
 				var template = Handlebars.compile($("#temp").html());
 				$("#bigPrame").html(template(data));
 				
@@ -261,10 +233,6 @@
 						    	$(this).find(".sctel").html(formatNum);
 						    	
 				});
-				
-				
-					
-				
 			}
 		});
 	}
@@ -295,3 +263,4 @@
 		 
 	  });
 </script>
+

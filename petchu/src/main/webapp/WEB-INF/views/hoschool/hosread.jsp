@@ -3,6 +3,7 @@
 <link href="/resources/css/star.css" rel="stylesheet"/>
 
 
+
 <style>
 	
 	#popup01{
@@ -203,7 +204,7 @@
 					<div class="review">
 						<span class="reviewId">{{id}}</span>
 						<span class="reviewDate">{{revDate}}</span>
-						<span class="rate{{rate}}">{{rate}}</span>
+						<p class="rate{{rate}}">{{rate}}</p>
 						<p class="reviewComments">{{comments }}</p>
 					</div>
 				{{/each}}

@@ -8,4 +8,5 @@ public interface RateDAO {
 	public void rateInsert(RateVO vo);
 	public List<RateVO> reviewList(int scno, int start, int perPageNum);
 	public int reviewCount(int scno);
+
 }

@@ -109,6 +109,7 @@ public class HoschoolController {
 	public List<ServiceVO> mylist(String id) {
 		return dao.myList(id);
 	}
+
 	
 	
 	@RequestMapping(value="/servicedelete", method=RequestMethod.POST)

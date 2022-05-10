@@ -18,6 +18,7 @@
 	<!-- PG사 결제API -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
 </head>
 <body> 
 	<header id="header">
