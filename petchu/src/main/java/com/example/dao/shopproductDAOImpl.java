@@ -1,0 +1,50 @@
+package com.example.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.example.domain.shopcartVO;
+import com.example.domain.shopproductVO;
+@Repository
+public class shopproductDAOImpl implements shopproductDAO{
+
+	@Autowired
+	SqlSession session;
+	
+	String namespace="com.example.mapper.shopproductMapper";
+
+	//상품 정보 (추후 수정 필요)
+	public List<shopproductVO> list() {
+		return session.selectList(namespace+".list");
+	}
+
+	//상품 정보 페이지
+	@Override
+	public shopproductVO read(int pno) {
+		return session.selectOne(namespace+".read", pno);
+	}
+
+	//카테고리 설정 후 필터링된 상품목록 페이지
+	@Override
+	public List<shopproductVO> contents_list(String selectCate, String selectCate2, String selectCate3) {
+		HashMap<String, Object> map = new HashMap<>();
+		//카테고리 정보를 가지고 이동
+		map.put("selectCate", selectCate);
+		map.put("selectCate2", selectCate2);
+		map.put("selectCate3", selectCate3);
+		return session.selectList(namespace+".contents_list", map);
+	}
+
+	//주문목록
+		@Override
+		public shopcartVO cart_read(String uid) {
+			return session.selectOne(namespace+".cart_read", uid);
+		}
+	
+	
+
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.shopcartMapper">
+	<select id="cart_read" resultType="com.example.domain.shopcartVO">
+		select c.uid, c.pno, p.pimage, p.pname, p.pprice, c.amount, cno, c.amount * pprice sum, chk
+		from shopproduct p, shopcart c
+		where c.uid=#{uid} and c.pno = p.pno
+	</select>
+	<insert id="cart_insert">
+		insert into shopcart(pno, uid, amount)
+		values(#{pno}, #{uid}, #{amount})
+	</insert>
+	<delete id="cart_delete">
+		delete from shopcart
+		where cno=#{cno}
+	</delete>
+	<update id="cart_update">
+		 update shopcart set amount=#{amount} where cno=#{cno};
+	</update>
+	<update id="cart_chk_update">
+		 update shopcart set chk=#{chk} where cno=#{cno};
+	</update>
+	<select id="cart_buy" resultType="com.example.domain.shopcartVO">
+		select c.uid, c.pno, p.pimage, p.pname, p.pprice, c.amount, cno, c.amount * pprice sum, chk
+		from shopproduct p, shopcart c
+		where c.uid=#{uid} and c.pno = p.pno and chk=1
+	</select>
+	<insert id="order_insert">
+		insert into orderlist(uid, pno, amount, orno, zipcode, address1, address2, receiver, tel)
+		values(#{uid}, #{pno}, #{amount}, #{orno}, #{zipcode}, #{address1}, #{address2}, #{receiver}, #{tel})
+	</insert>
+	<delete id="chk_delete">
+		delete from shopcart
+		where uid=#{uid} and chk=1;
+	</delete>
+	<select id="order_list" resultType="com.example.domain.shopcartVO">
+		select bno, pimage, p.pno, pname, pprice, o.amount, orno, odate from 
+		orderlist o, shopproduct p 
+		where o.pno=p.pno and uid=#{uid}
+		order by odate desc;
+	</select>
+	<select id="order_read" resultType="com.example.domain.shopcartVO">
+		select o.*, p.pimage, p.pname, p.pprice 
+		from orderlist o, shopproduct p
+		where bno = #{bno} and o.pno=p.pno;
+	</select>
+	<select id="cart_check" resultType="com.example.domain.shopcartVO">
+		select * from shopcart
+		where uid = #{uid} and pno = #{pno}
+	</select>
+		<select id="order_read_else" resultType="com.example.domain.shopcartVO">
+		select o.*, p.pimage, p.pname, p.pprice 
+		from orderlist o, shopproduct p
+		where bno != #{bno} and orno=#{orno} and o.pno=p.pno;
+	</select>
+	<update id="sell_update">
+		update shopproduct set sellcount = sellcount+#{amount} where pno=#{pno};
+	</update>
+	<select id="today_best_items" resultType="com.example.domain.shopcartVO">
+		select p.*
+		from orderlist o, shopproduct p
+		where (odate>(select DATE_ADD(now(), interval -1 day))) and o.pno=p.pno
+        group by pno
+		order by p.sellcount desc
+		limit 10;
+	</select>
+	<select id="best_items" resultType="com.example.domain.shopcartVO">
+		select p.*
+		from shopproduct p
+		order by p.sellcount desc
+		limit 10;
+	</select>
+
+</mapper>
