@@ -73,4 +73,15 @@
 		from serviceco 
 		where scno=#{scno}
     </select>
+    <insert id="rateInsert">
+    	insert into rate (id, scno, rate, comments) 
+    	values (#{id}, #{scno}, #{rate}, #{comments})
+    </insert>
+    <select id="reviewList" resultType="com.example.domain.RateVO">
+    	select * from rate where scno=#{scno}
+	    order by rno desc limit #{start},#{perPageNum}
+    </select>
+    <select id="reviewCount" resultType="int">
+    	select count(*) from rate where scno=#{scno}
+    </select>
 </mapper>
