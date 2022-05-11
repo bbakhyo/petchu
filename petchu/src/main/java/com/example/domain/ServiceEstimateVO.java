@@ -14,6 +14,19 @@ public class ServiceEstimateVO extends EstimateDTO{
 	@JsonFormat(pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	public Date sedate; 
 	public int price;
+	public String fprice;
+	public String getFprice() {
+		return fprice;
+	}
+	public void setFprice(String fprice) {
+		this.fprice = fprice;
+	}
+	public String getHouse_size() {
+		return house_size;
+	}
+	public void setHouse_size(String house_size) {
+		this.house_size = house_size;
+	}
 	public String description;
 	public String scname;
 	public String building_classification;

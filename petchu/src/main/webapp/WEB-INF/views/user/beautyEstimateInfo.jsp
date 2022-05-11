@@ -3,6 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="/resources/css/request.css" rel="stylesheet">
+<style>
+	textarea {
+	margin-left : 0px;
+	}
+</style>
 <div id="sendrequpage">
 	<div id="request">
 		<p class="title">
@@ -15,12 +20,11 @@
 			</tr>
 			<tr>
 				<td class="title">예상청구금액</td>
-				<td>${bvo.price}원</td>
+				<td>${bvo.fprice}원</td>
 			</tr>
 		</table>
 		<div id="btn">
 			<button id="bigbtn" onClick="location.href='result'">목록이동</button>
-			<button id="bigbtn">예약하기</button>
 		</div>
 	</div>
 	<div id="hosinfo">
@@ -29,10 +33,12 @@
 				<td class="title" style="text-align:center; font-size: 25px"  colspan=4><b>${bvo.scname} 정보</b></td>
 			</tr>
 			<tr>
-				<td width=100><b>오픈시간</b></td>
-				<td>${bvo.opentime}</td>
-				<td width=100><b>마감시간</b></td>
-				<td>${bvo.closetime}</td>
+				<td width=70><b>오픈시간</b></td>
+				<td colspan=2>${bvo.opentime}</td>
+			</tr>
+			<tr>
+				<td width=70><b>마감시간</b></td>
+				<td colspan=3>${bvo.closetime}</td>
 			</tr>
 			<tr>
 				<td><b>점심시간</b></td>
@@ -43,8 +49,12 @@
 				<td colspan=3>${bvo.sctel}</td>
 			</tr>
 			<tr>
+				<td><b>한줄소개</b></td>
+				<td colspan=3>${bvo.sconeline}</td>
+			</tr>
+			<tr>
 				<td><b>병원소개</b></td>
-				<td colspan=3>${bvo.scdetail_description}</td>
+				<td><textarea rows=3 cols=70>${bvo.scdetail_description}</textarea></td>
 			</tr>
 			<tr>
 				<td><b>주소</b></td>
@@ -58,25 +68,12 @@
 	</div>
 </div>
 <script>
-/*
-var dno = "${vo.dno}";
 
-	getList();
-	function getList(){
-		$.ajax({
-			type: "get",
-			dataType: "json",
-			url: "/request/doctorinfo",
-			data:{dno:dno},
-			success:function(data){
-				var template = Handlebars.compile($("#temp").html());
-				$("#hospital").html(template(data));
-			}
-		})
-	})*/
+
 </script>
 <script>
-
+ 
+ 
 var address="${bvo.scaddress1}";
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {

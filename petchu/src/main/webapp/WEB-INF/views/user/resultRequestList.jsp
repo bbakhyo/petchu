@@ -63,6 +63,7 @@
 
 .contentss>div {
 	padding: 30px;
+	padding-left : 72.5px;
 	line-height: 1.5;
 	font-size: 17px;
 }
@@ -152,7 +153,6 @@ a:visited {
 	var crno="${cvo.crno}";
 	var lrno="${lvo.lrno}";
 	
-	alert(brno + "\n" + crno + "\n" + lrno);
 	var target1 = document.getElementById("text1");
 	var target2 = document.getElementById("text2");
 	var target3 = document.getElementById("text3");
@@ -234,7 +234,14 @@ a:visited {
 		var scno = $(this).attr('scno');
 		location.href = "/request/beread?brno=" + brno +"&scno=" + scno;
 	});
-	//
+	$("#content-dis2").on("click", ".menu_box2", function(){
+		var scno = $(this).attr('scno');
+		location.href = "/request/ceread?crno=" + crno +"&scno=" + scno;
+	});
+	$("#content-dis3").on("click", ".menu_box3", function(){
+		var scno = $(this).attr('scno');
+		location.href = "/request/leread?lrno=" + lrno +"&scno=" + scno;
+	});
 	
 </script>
     

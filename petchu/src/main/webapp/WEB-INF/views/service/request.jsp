@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/resources/chart.js"></script>
 
 <body>
-	<p class="title">견적서를 제출할 서비스 종류를 선택하세요</p>
+	<p class="title">요청서를 제출할 서비스 종류를 선택하세요</p>
 	<div id="regi">
 		<input type="radio" class="radio1" name="service" id="modal_btn1"> <label for="modal_btn1">미용</label> &nbsp;
 		<input type="radio" class="radio1"name="service" id="modal_btn2">	<label for="modal_btn2">홈클리닝</label> &nbsp;

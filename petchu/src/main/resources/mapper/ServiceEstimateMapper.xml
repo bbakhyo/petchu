@@ -17,15 +17,15 @@
     </select>
     
      <select id="beautyEstimateRead" resultType="com.example.domain.ServiceEstimateVO">
-    	select * from servicecoEstimate where brno=#{brno} and scno =#{scno}
+    	select *, format(price, 0) fprice from servicecoEstimate where brno=#{brno} and scno =#{scno}
     </select>
     
     <select id="cleanEstimateRead" resultType="com.example.domain.ServiceEstimateVO">
-    	select * from servicecoEstimate where crno=#{brno} and scno =#{scno}
+    	select *, format(price, 0) fprice from servicecoEstimate where crno=#{crno} and scno =#{scno}
     </select>
     
     <select id="lessonEstimateRead" resultType="com.example.domain.ServiceEstimateVO">
-    	select * from servicecoEstimate where lrno=#{brno} and scno =#{scno}
+    	select *, format(price, 0) fprice from servicecoEstimate where lrno=#{lrno} and scno =#{scno}
     </select>
     
     

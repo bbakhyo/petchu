@@ -3,89 +3,69 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="/resources/css/request.css" rel="stylesheet">
+<style>
+	textarea {
+	margin-left : 0px;
+	}
+</style>
 <div id="sendrequpage">
 	<div id="request">
 		<p class="title">
-			<b>${vo.dname}</b> 에서 답변한 견적서
+			<b>${cvo.scname}</b> 에서 답변한 견적서
 		</p>
 		<table id="petinfo">
 			<tr>
-				<td width=100 class="title">이름</td>
-				<td>${vo.pname}</td>
-			</tr>
-			<tr>
-				<td class="title">진단명</td>
-				<td>${vo.drdisease}</td>
-			</tr>
-			<tr>
-				<td class="title">설명</td>
-				<td>${vo.drcontent}</td>
+				<td class="title" width=100>설명</td>
+				<td>${cvo.description}</td>
 			</tr>
 			<tr>
 				<td class="title">예상청구금액</td>
-				<td>${vo.drprice}</td>
+				<td>${cvo.fprice}원</td>
 			</tr>
 		</table>
 		<div id="btn">
 			<button id="bigbtn" onClick="location.href='result'">목록이동</button>
-			<button id="bigbtn">예약하기</button>
 		</div>
 	</div>
 	<div id="hosinfo">
-		<table id="hospital"></table>
-		<script id="temp" type="text/x-handlebars-template">
+		<table id="hospital">
 			<tr>
-				<td class="title" style="text-align:center; font-size: 25px"  colspan=4><b>{{dname}} 정보</b></td>
+				<td class="title" style="text-align:center; font-size: 25px"  colspan=4><b>${cvo.scname} 정보</b></td>
 			</tr>
 			<tr>
-				<td width=100><b>오픈시간</b></td>
-				<td>{{open}}</td>
-				<td width=100><b>마감시간</b></td>
-				<td>{{close}}</td>
+				<td width=70><b>오픈시간</b></td>
+				<td colspan=2>${cvo.opentime}</td>
+			</tr>
+			<tr>
+				<td width=70><b>마감시간</b></td>
+				<td colspan=3>${cvo.closetime}</td>
 			</tr>
 			<tr>
 				<td><b>점심시간</b></td>
-				<td colspan=3>{{o_break}} - {{c_break}}</td>
+				<td colspan=3>${cvo.breaktime}</td>
 			</tr>
 			<tr>
 				<td><b>전화번호</b></td>
-				<td colspan=3>{{dtel}}</td>
+				<td colspan=3>${cvo.sctel}</td>
 			</tr>
 			<tr>
 				<td><b>병원소개</b></td>
-				<td colspan=3>{{dinfo}}</td>
+				<td><textarea rows=3 cols=70>${cvo.scdetail_description}</textarea></td>
 			</tr>
 			<tr>
 				<td><b>주소</b></td>
-				<td colspan=3>{{daddress1}} {{daddress2}}</td>
+				<td colspan=3>${cvo.scaddress1} ${cvo.scaddress2}</td>
 			</tr>
-		</script>
-		
+		</table>
 		<div id="map"></div>
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c9e09df993f534bf4a2916f4cf43cdd&libraries=services"></script>
 	</div>
 </div>
 <script>
-var dno = "${vo.dno}";
-
-	getList();
-	function getList(){
-		$.ajax({
-			type: "get",
-			dataType: "json",
-			url: "/request/doctorinfo",
-			data:{dno:dno},
-			success:function(data){
-				var template = Handlebars.compile($("#temp").html());
-				$("#hospital").html(template(data));
-			}
-		})
-	}
-</script>
-<script>
-
-var address="${vo.daddress1}";
+ 
+ 
+var address="${cvo.scaddress1}";
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표

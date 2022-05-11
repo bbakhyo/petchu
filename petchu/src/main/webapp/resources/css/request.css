@@ -301,7 +301,48 @@ body{
 	border-radius: 5px;
 	transition: 0.2s;
 }
-
+.menu_box1 .dname{
+	font-weight: 900;
+	text-align: center;
+}
+.menu_box1 .drprice{
+	text-align: right;
+	font-weight: 900;
+	color: #9f1f11;
+}
+.menu_box1:hover{
+	border: 2px solid #A7CA37;
+	border-radius: 5px;
+	transition: 0.2s;
+}
+.menu_box2 .dname{
+	font-weight: 900;
+	text-align: center;
+}
+.menu_box2 .drprice{
+	text-align: right;
+	font-weight: 900;
+	color: #9f1f11;
+}
+.menu_box2:hover{
+	border: 2px solid #A7CA37;
+	border-radius: 5px;
+	transition: 0.2s;
+}
+.menu_box3 .dname{
+	font-weight: 900;
+	text-align: center;
+}
+.menu_box3 .drprice{
+	text-align: right;
+	font-weight: 900;
+	color: #9f1f11;
+}
+.menu_box3:hover{
+	border: 2px solid #A7CA37;
+	border-radius: 5px;
+	transition: 0.2s;
+}
 /*-----------receRequestList.jsp------------*/
 #recepage{
 	width: 900px;
