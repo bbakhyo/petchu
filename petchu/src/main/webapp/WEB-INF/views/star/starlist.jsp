@@ -208,55 +208,6 @@
 							}
 							
 					});
-					var userScore = $('#makeStar');
-					userScore.change(function(){
-						var userScoreNum = $(this).val();
-						switch(userScoreNum){
-						case "1":
-							$("#evaluation").html("별로에요");
-							break;
-						case "2":
-							$("#evaluation").html("조금 별로에요");
-							break;
-						case "3":
-							$("#evaluation").html("보통이에요");
-							break;
-						case "4":
-							$("#evaluation").html("좋아요");
-							break;
-						case "5":
-							$("#evaluation").html("아주 좋아요");
-							break;
-					}
-						$('.make_star .fa-solid').css({color:'#D3D3D3'})
-						$('.make_star .fa-solid:nth-child(-n+' + userScoreNum + ')').css({color:'#F08d28'});
-					});
-					
-					$('.make_star .fa-solid').click(function(){
-						var targetNum = $(this).index()+1;
-						$('#makeStar').val(targetNum);
-						switch(targetNum){
-						case 1:
-							$("#evaluation").html("별로에요");
-							break;
-						case 2:
-							$("#evaluation").html("조금 별로에요");
-							break;
-						case 3:
-							$("#evaluation").html("보통이에요");
-							break;
-						case 4:
-							$("#evaluation").html("좋아요");
-							break;
-						case 5:
-							$("#evaluation").html("아주 좋아요");
-							break;
-					}
-						
-						$('.make_star .fa-solid').css({color:'#D3D3D3'})
-						$('.make_star .fa-solid:nth-child(-n+' + targetNum + ')').css({color:'#F08d28'});
-						
-					});
 			}
 		});
 	}
