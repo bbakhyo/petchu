@@ -12,19 +12,18 @@
 	
 	.icon-score{
 		display: left;
+		color: 
 	}
 	.price{
 		position: absolute;
 	}
 
 	.icon-score .rating2{
-	width: 100%;
 		z-index : 1;
 		position: relative;
 
 	}
 	.icon-score .rating3{
-width: 100%;
 		z-index : 0;
 		position: relative;
 
@@ -32,6 +31,7 @@ width: 100%;
 
 	.rating2 .star {
 		width: 100;
+		
 		overflow: hidden;
 	}
 	
@@ -100,7 +100,6 @@ width: 100%;
       width: 420px;
       margin: 10px;
       float: right;
-      text-align: center;
       margin-right: 50px;
    }
    h2 {
@@ -209,14 +208,14 @@ width: 100%;
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		         </div>
-		         <div class="rating3" data-rate="5">
+		         <div class="rating3">
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		         </div>
-			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;">${avgRate}</span>
+			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;" avgRate="${avgRate}">${avgRate}</span>
 	    	</div>
             <p>
                <c:if test="${vo.sconeline != ''}">
@@ -343,8 +342,9 @@ width: 100%;
 	
 	$(".rating2").each(function(){
 		
-		var targetscore = $(this).parent().find("#rating").html();;
-		$('#rating').html(targetscore);
+		var targetscore = $(this).parent().find("#rating").html();
+		//var targetscore = $(this).parent().find("#rating").attr("avgRate");
+		//$('#rating').html(targetscore);
 		console.log(targetscore);
 		var firstDigit = targetscore.split('.');	
 			console.log(firstDigit);
