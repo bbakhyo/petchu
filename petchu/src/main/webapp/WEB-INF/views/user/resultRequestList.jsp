@@ -3,73 +3,6 @@
 <link href="/resources/css/request.css" rel="stylesheet">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-.main input[type=radio] {
-	display: none;
-}
-
-#tab-1:checked ~ .contentss .content-dis:nth-child(1), 
-#tab-2:checked ~ .contentss .content-dis:nth-child(2),
-#tab-3:checked ~ .contentss .content-dis:nth-child(3),
-#tab-4:checked ~ .contentss .content-dis:nth-child(4)
-	{
-	display: block;
-}
-
-#tab-1:checked ~ .tab label:nth-child(1), 
-#tab-2:checked ~ .tab label:nth-child(2),
-#tab-3:checked ~ .tab label:nth-child(3),
-#tab-4:checked ~ .tab label:nth-child(4)
-	{
-	background-color: rgba(0, 0, 0, 0.2);
-	box-shadow: none;
-}
-
-.contentss > div {
-	display: none;
-}
-
-
-
-.main {
-	margin: 0 auto;
-	main-width: 1380px;
-}
-
-.tab {
-	overflow : hidden;
-}
-
-.tab label {
-	font-size: 18px;
-	cursor: pointer;
-	float: left;
-	width: 25%;
-	text-align: center;
-	padding: 15px 0;
-	text-transform: uppercase;
-	font-weight: bold;
-	letter-spacing: 2px;
-	user-select: none;
-	-webkit-user-select: none;
-	margin-right : 0px;
-	top : 0;
-}
-
-.contentss {
-	background-color: rgba(0, 0, 0, 0.2);
-	min-height: 600px;
-	overflow : hidden;
-}
-
-.contentss>div {
-	padding: 30px;
-	line-height: 1.5;
-	font-size: 17px;
-}
-
-a:visited {
-	color: white;
-}
 
 </style>
 
@@ -152,7 +85,7 @@ a:visited {
 	var crno="${cvo.crno}";
 	var lrno="${lvo.lrno}";
 	
-	alert(brno + "\n" + crno + "\n" + lrno);
+	/* alert(brno + "\n" + crno + "\n" + lrno); */
 	var target1 = document.getElementById("text1");
 	var target2 = document.getElementById("text2");
 	var target3 = document.getElementById("text3");

@@ -13,10 +13,10 @@ table, td, tr{
 
 input[type="text"],input[type="number"],input[type="date"]{
 	width: 250px;
-	border-radius: 5px;
+	border-radius: 15px;
 	border: #BFC1B9 1px solid;
 	outline-color: #A7CA37;
-	padding: 20px 10px 20px 10px;
+	padding: 13px 10px 13px 10px;
 	margin-bottom: 10px;
 }
 

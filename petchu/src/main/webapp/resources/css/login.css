@@ -14,10 +14,10 @@
 }
 #loginfrm input[type="text"], input[type="password"]{
 	width: 250px;
-	border-radius: 5px;
+	border-radius: 15px;
 	border: #BFC1B9 1px solid;
 	outline-color: #A7CA37;
-	padding: 20px 10px 20px 10px;
+	padding: 13px 10px 13px 10px;
 	margin-bottom: 10px;
 }
 #loginfrm input[type="submit"]{
@@ -103,17 +103,17 @@
 }
 #regi input[type="text"], input[type="password"]{
 	width: 250px;
-	border-radius: 5px;
+	border-radius: 15px;
 	border: #BFC1B9 1px solid;
 	outline-color: #A7CA37;
-	padding: 20px 10px 20px 10px;
+	padding: 13px 10px 13px 10px;
 	margin-bottom: 10px;
 }
 #regi input[type="number"], input[type="date"]{
-	border-radius: 5px;
+	border-radius: 15px;
 	border: #BFC1B9 1px solid;
 	outline-color: #A7CA37;
-	padding: 20px 10px 20px 10px;
+	padding: 13px 10px 13px 10px;
 	margin-bottom: 10px;
 }
 

@@ -115,7 +115,8 @@ input[name='keyword'] {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	color: black;
+	color: white;
+	margin-left:10px;
 	/* border: 1px solid black; */
 }
 
@@ -126,6 +127,8 @@ input[name='keyword'] {
 	/* 	border: 1px solid black; */
 	width: 600px;
 	justify-content: flex-end;
+    margin-bottom: 42px;
+    margin-right: 10px;
 }
 
 .bigPrame {
@@ -254,12 +257,15 @@ span.tag {
 	color: white;
 	text-align: left;
 	margin-top: 50px;
+	margin-left: 10px;
+	letter-spacing: 3px;
 }
 
 .sctel {
 	float: right;
 	font-size: 17px;
-	margin-top: 20px;
+	margin-top: 30px;
+    margin-right: -12px;
 }
 
 .sconeline {
@@ -424,6 +430,7 @@ span.tag {
 	font-size: 25px;
 	overflow: hidden;
 	/* 	border: 1px solid black; */
+	color: white;
 }
 
 .rating input {
