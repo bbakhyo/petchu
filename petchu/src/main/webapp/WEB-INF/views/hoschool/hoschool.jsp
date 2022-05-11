@@ -3,8 +3,6 @@
 	<link href="/resources/css/hoschool.css" rel="stylesheet" />
 	<link href="https://www.cssscript.com/demo/segmented-control-toggle-radio/toggle-radios.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
-
-
 <div class="page_hoschool">
 	
   	<div class="ho_page_header">
@@ -21,7 +19,6 @@
 	  <input type="radio" name="sort" id="default_Option3" class="sort" value="higPrice">
 	  <label for="default_Option3">높은가격순</label>
 	</div>
-
 <!--     <div id="sort">
       <input type="radio" name="sort"  class="sort" value="rate">별점높은순
       <input type="radio" name="sort"  class="sort" value="rowPrice">낮은가격순
@@ -108,7 +105,6 @@
             	</div>         
           </div>
           {{/each}}
-
          </script>
          <c:forEach items="${rlist}" var="rvo">
          	<div class="rvo" scno="${rvo.scno}" avg="${rvo.avgrate }" style="display:none;">
@@ -117,7 +113,6 @@
          	</div>
          </c:forEach>
     </div>
-
     
     
     </div>
@@ -134,7 +129,6 @@
 	var sort="";
 	var checkin="";
 	var checkout="";
-
 	//체크인 체크아웃 오늘날짜로 설정
 	document.getElementById('checkin').value = new Date().toISOString().substring(0, 10);
 	document.getElementById('checkout').value = new Date().toISOString().substring(0, 10);
@@ -171,11 +165,9 @@
 		getList();
 		
 	});
-
 	//데이트 클릭할때 달력표시하고싶은데 ...........
 	$("#checkinArea").on("click", function(){
 		$(this).find("#checkin");
-
 	});
 		
 	//소트를 체크한 경우
@@ -184,7 +176,6 @@
 		
 		getList();
 	});
-
 	function getList(){
 		console.log('겟리스트가 받은 데이타'+"\n"+'키워드:'+keyword+"\n"+'소트:'+sort+"\n"+'체크인:'+checkin+"\n"+'체크아웃:'+checkout)
 		$.ajax({
@@ -207,7 +198,6 @@
 						 if(scno==conScno){
 							$(this).find(".prame_content .prame_row3 .icon-score .rating").html(avg);
 							var rate=$(this).find(".prame_content .prame_row3 .icon-score .rating").html();
-
 							if(rate >= 4.5){
 								$(this).find(".prame_content .icon-score .rate").html("⭐⭐⭐⭐⭐");
 							}else if (rate >= 3.5){
@@ -246,12 +236,12 @@
 				var i = 0;
 				$(".prame").each(function(){
 					var bg=$(".image").html();
-
 					//백그라운드 이미지 수만큼 반복하여 Prame마다 다른이미지 적용
 					if(i==0){
 						//$(this).style.backgroundimage="url('/resources/TBN/TBN01.jpg')";
 						$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); 
 						$(this).css({"background-size":"700px 200px"}); 
+						
 						i++;
 					}else if(i==1){
 						$(this).css({"background":"url(/resources/TBN/TBN04.png"});
@@ -292,7 +282,6 @@
 	  $(frm).on("submit",function(e){
 		  e.preventDefault();
 		  keyword=$(frm.keyword).val();
-
 		  getList();
 	  });
 		
@@ -314,6 +303,4 @@
 		 
 	  });
 	  
-
 </script>
-
