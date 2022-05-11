@@ -35,6 +35,14 @@ public class RateDAOImpl implements RateDAO{
 		return session.selectOne(namespace + ".reviewCount", scno);
 	}
 
+	@Override
+	public List<RateVO> avgRate(){
+		return session.selectList(namespace + ".avgRate");
+	}
 
+	@Override
+	public double avgRateRead(int scno) {
+		return session.selectOne(namespace + ".avgRateRead", scno);
+	}
 
 }

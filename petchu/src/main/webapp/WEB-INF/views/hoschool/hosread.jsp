@@ -1,10 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="/resources/css/star.css" rel="stylesheet"/>
-
-
+<script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
 
 <style>
+
+	* {
+	box-sizing: border-box;
+
+	}
+	
+	.icon-score{
+		display: left;
+	}
+	.price{
+		position: absolute;
+	}
+
+	.icon-score .rating2{
+	width: 100%;
+		z-index : 1;
+		position: relative;
+
+	}
+	.icon-score .rating3{
+width: 100%;
+		z-index : 0;
+		position: relative;
+
+	}
+
+	.rating2 .star {
+		width: 100;
+		overflow: hidden;
+	}
+	
+	.rating2 .star-wrap {
+		width: 36px;
+		display: inline-block;
+		color : #D3D3D3;
+	}
+	
+	.rating3 .star-wrap{
+		width: 36px;
+		display: inline-block;
+	}
+	
+	.rating3 .fa-solid{
+		color : #D3D3D3;
+	}
 	
 	#popup01{
 	    display: none;
@@ -120,7 +164,25 @@
 	}
 </style>
 
+
 <div id="page">
+<div class="icon-score">
+		        <div class="rating2">
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		         </div>
+		         <div class="rating3" data-rate="5">
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		         </div>
+			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;">${avgRate}</span>
+	    	</div>
    <h1>호텔/유치원 상세보기</h1>
    <form name="frm">
       <!-- 백그라운드 이미지 -->
@@ -138,7 +200,24 @@
             <p>전화: <span class="tel">${vo.sctel}</span></p>
             <p>위치: ${vo.scaddress1}</p>
             <p>최저가격: <span class = "price">${vo.scprice }</span></p>
-            <p>별점: ★★★★☆</p>
+            <p>별점:<span id="avgRate">★${avgRate}</span></p>
+            <div class="icon-score">
+		        <div class="rating2">
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		         </div>
+		         <div class="rating3" data-rate="5">
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+		         </div>
+			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;">${avgRate}</span>
+	    	</div>
             <p>
                <c:if test="${vo.sconeline != ''}">
                   <div class="oneLine">
@@ -261,6 +340,26 @@
 <script>
 	var page=1;
 	var perPageNum=5;
+	
+	$(".rating2").each(function(){
+		
+		var targetscore = $(this).parent().find("#rating").html();;
+		$('#rating').html(targetscore);
+		console.log(targetscore);
+		var firstDigit = targetscore.split('.');	
+			console.log(firstDigit);
+			if(firstDigit.length > 1) {
+				for(var i=0; i<firstDigit[0]; i++){
+					$(this).find('.star').eq(i).css({width:'100%', color: '#F08d28'}); //인덱스 번호에 해당하는 요소 찾기
+				}
+				$(this).find('.star').eq(firstDigit[0]).css({width:firstDigit[1] + '0%', color : '#F08d28'});
+			}else {
+				for(var i=0; i<targetscore; i++){
+					$(this).find('.star').eq(i).css({width:'100%', color: '#F08d28'}); //인덱스 번호에 해당하는 요소 찾기
+				}
+			}
+			
+	});
 	
 	$("#prev").on("click", function(){
 		page--;

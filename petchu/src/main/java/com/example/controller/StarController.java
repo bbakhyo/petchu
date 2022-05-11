@@ -41,7 +41,7 @@ public class StarController { //리뷰 컨트롤러
 	
 	@RequestMapping("/list")
 	public String list(Locale locale, Model model) {
-		return "star/list";
+		return "star/starlist";
 	}
 	
 	@RequestMapping("/list.json")

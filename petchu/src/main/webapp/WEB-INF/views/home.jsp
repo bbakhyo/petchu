@@ -18,9 +18,10 @@
 	<!-- PG사 결제API -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
+
 </head>
-<body> 
+<body>
+	<div id="home_body">
 	<header id="header">
 		<a href="/"> <img id="logotxt" src="/resources/logo.png"> <img
 			id="logoimg" src="/resources/logo_img.png">
@@ -90,6 +91,7 @@
 			</div>
 		</div>
 	</div>
+	</div> 
 </body>
 <script>
 	$("#chat").on(

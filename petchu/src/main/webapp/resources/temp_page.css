@@ -311,7 +311,7 @@ h3.total_amt {
 }
 
 #page {
-	display: flex;
+	/* display: flex; */
 	flex-direction: column;
 	gap: 10px;
 	align-items: center;
