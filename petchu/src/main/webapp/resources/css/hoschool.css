@@ -44,7 +44,7 @@ input[name='keyword'] {
 .prame {
 	/* 		사용자가 올린 백그라운드 이미지 */
 	background-image:
-		url("https://img.freepik.com/free-photo/a-scottish-straight-cat-on-a-white-background-looking-up-top-view-copy-space-banner_76158-766.jpg?size=626&ext=jpg");
+	url("https://img.freepik.com/free-photo/a-scottish-straight-cat-on-a-white-background-looking-up-top-view-copy-space-banner_76158-766.jpg?size=626&ext=jpg");
 	background-size: 500px 200px;
 	width: 600px;
 	height: 160px;
@@ -253,6 +253,7 @@ span.tag {
 	font-family: 'SDSamliphopangche_Basic';
 	font-size: 30px;
 	color: white;
+	text-align: left;
 }
 
 .sctel {

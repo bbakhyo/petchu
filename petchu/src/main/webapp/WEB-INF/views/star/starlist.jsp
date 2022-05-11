@@ -15,6 +15,7 @@
 <style>
 * {
 	box-sizing: border-box;
+	
 }
 
 .icon-score{

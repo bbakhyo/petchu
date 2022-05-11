@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.awt.Window;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,6 +48,9 @@ public class HoschoolController {
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
+		List<RateVO> rvo = rdao.avgRate();
+		System.out.println("test.s.fd..d.d...."+rvo);
+		model.addAttribute("rlist", rvo);
 		model.addAttribute("pageName", "hoschool/hoschool.jsp");
 		return "/home";
 	}
@@ -60,6 +64,11 @@ public class HoschoolController {
 		model.addAttribute("pageName", "hoschool/hosread.jsp");
 		System.out.println("............................avgRate: " + rdao.avgRate());
 		return "/home";
+	}
+	@RequestMapping(value="/avgRate", method=RequestMethod.POST)
+	@ResponseBody
+	public double avgRate(int scno){
+		return rdao.avgRateRead(scno);
 	}
 	@RequestMapping("/reviewList")
 	@ResponseBody
