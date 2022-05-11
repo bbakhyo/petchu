@@ -1,22 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link href="/resources/css/shopproduct_read.css" rel="stylesheet">
+<script data-require="jquery@3.1.1" data-semver="3.1.1"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<%-- <head>
 <meta charset="UTF-8">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="/resources/css/shopproduct_read.css" rel="stylesheet">
 <script data-require="jquery@3.1.1" data-semver="3.1.1"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-</head>
+</head> --%>
 <body id="shopproduct_read_body">
 	<div id="shopproduct_read_page">
 		<div class="shopproduct_read_container_wrapper">
 			
 			<div class="shopproduct_img_container">
-				<img id="image" src="${vo.pimage}" width=440
-					alt="https://via.placeholder.com/440x440/81d5b5">
+				<img id="image" src="${vo.pimage}" width=445
+					alt="product_img">
 			</div>
 			
 			<div class="shopproduct_info_container">
@@ -32,7 +35,7 @@
 				<!-- 상품금액(RED font) -->
 				<div class="info_price_container">
 					<div class="price_container_price_value">
-						<span id="product_price"> 상품가격: </span><fmt:formatNumber value="${vo.pprice}" pattern="#,###원" />
+						<span id="product_price" data-pprice="${vo.pprice}"> 상품가격: </span><fmt:formatNumber value="${vo.pprice}" pattern="#,###원" />
 					</div>
 				</div>
 				
@@ -50,23 +53,22 @@
 					
 						<!-- 금액 -->
 						<div class="info_container_row1">
-							최종가격: &nbsp;<span class="final_price"><fmt:formatNumber value="${vo.pprice}" pattern="#,###원" /></span>
+							최종가격: &nbsp;<span class="final_price">${vo.pprice}</span>원
 						</div>
-						
 						<!-- 결제 버턴 -->
 						<div class="info_payment_container3">
 							<div class="info_payment_container_row1">
 								<div class="quantity buttons_added">
-									<input type="button" value="-" class="minus"> <span
+									<input type="button" value="-" class="minus"> <span id="qnt-value"
 										title="Qty" class="input-text qty text">1</span> <input
 										type="button" value="+" class="plus">
 								</div>
 								<div class="payment_buttons">
 									<div>
-										<a href="#" class="cart_add">장바구니 담기</a>
+										<a href="#" class="cart_add" onclick=cartadd() data-pno="${vo.pno}">장바구니 담기</a>
 									</div>
 									<div>
-										<a href="#" class="buy_now">바로구매 〉</a>
+										<a href="#" class="buy_now" onclick=buynow() data-pno="${vo.pno}">바로구매 〉</a>
 									</div>
 								</div>
 							</div>
@@ -83,7 +85,10 @@
 		<button class="tablink"
 			onclick="openPage('Questions', this, '#535562')">Q&A</button>
 		<button class="tablink" onclick="openPage('Returns', this, '#535562')">반품/교환</button>
+		
 		<div id="Info" class="tabcontent">
+			
+			<!--세세정보 TAB  -->
 			<div class="info_tab">
 				<div id="itemBrief" class="product-essential-info">
 					<div class="product-item__table">
@@ -139,11 +144,14 @@
 				</div>
 			</div>
 		</div>
-		</div>
+		
+		<!--Review TAB  -->
 		<div id="Review" class="tabcontent">
 			<h3>리뷰</h3>
 			<p>Content</p>
 		</div>
+		
+		<!-- Questions TAB  -->
 		<div id="Questions" class="tabcontent">
 			<div id="prod-inquiry-list" class="prod-tab">
 				<div class="prod-inquiry-list">
@@ -178,6 +186,7 @@
 				</div>
 			</div>
 		</div>
+		<!--반품교환 TAB  -->
 		<div id="Returns" class="tabcontent">
 			<h5 class="prod-delivery-return-policy-title">교환/반품 안내</h5>
 			<ul class="prod-delivery-return-policy-legal-notice">
@@ -213,7 +222,7 @@
 				</tbody>
 			</table>
 			<h5 class="prod-delivery-return-policy-title">교환/반품 제한사항</h5>
-			<ul class="prod-delivery-return-policy__limit-list">
+			<ul class="prod-delivery-return-policy">
 				<li>ㆍ주문/제작 상품의 경우, 상품의 제작이 이미 진행된 경우</li>
 				<li>ㆍ상품 포장을 개봉하여 사용 또는 설치 완료되어 상품의 가치가 훼손된 경우 (단, 내용 확인을 위한 포장
 					개봉의 경우는 예외)</li>
@@ -292,13 +301,22 @@
 					본인 또는 법정대리인이 취소할 수 있습니다.</div>
 			</div>
 		</div>
-	</div>
+		</div>
+		
+	
+	</div><!-- shopproduct read page -->
+	
 </body>
 
+
 <script>
+var price = document.querySelector("#product_price");
+pprice = price.dataset.pprice;
+console.log(pprice);
 	var cate1 = "${cate}";
 	var cate2 = "${cate2}";
 	var cate3 = "${cate3}";
+	
 	$(".backcontents").on(
 			"click",
 			function() {
@@ -308,10 +326,12 @@
 			});
 	//장바구니 버튼을 클릭한 경우 session에 저장된 id를 읽어서 장바구니DB에 등록
 	$(".cart_add").on("click", function() {
-		var pno = $
+	/* 	var pno = $
 		{
 			vo.pno
-		}
+		} */
+		var buynow = document.querySelector(".buy_now");
+		var pno = buynow.getAttribute('data-pno');
 		; // 상품번호
 		var uid = "${id}";
 		var amount = $(".input-text").html(); //구매자가 정한 수량
@@ -342,10 +362,13 @@
 	$(".buy_now").on(
 			"click",
 			function() {
-				var pno = $
+				/* var pno = $
 				{
 					vo.pno
-				}
+				} */
+				
+				var buynow = document.querySelector(".buy_now");
+				var pno = buynow.getAttribute('data-pno');
 				; // 상품번호
 				var amount = $(".input-text").html(); //구매자가 정한 수량
 				location.href = "/shopproduct/buy?pno=" + pno + "&amount="
@@ -359,12 +382,14 @@
 		fcount--;
 		$(".input-text").val(fcount);
 		$(".input-text").html(fcount);
-		var fprice = $
+/* 		var fprice = $
 		{
 			vo.pprice
 		}
-		;
-		$(".final_price").html(fcount * fprice);
+		; */
+		$(".final_price").html(fcount * pprice);
+		
+		
 		numberFormat();
 	});
 	//증가버튼 누를 경우 구매수량 증가
@@ -373,12 +398,13 @@
 		fcount++;
 		$(".input-text").val(fcount);
 		$(".input-text").html(fcount);
-		var fprice = $
+		
+	/* 	var fprice = $
 		{
 			vo.pprice
-		}
+		} */
 		;
-		$(".final_price").html(fcount * fprice);
+		$(".final_price").html(fcount * pprice);
 		numberFormat();
 	});
 </script>
@@ -406,17 +432,28 @@
 
 	//페이지 입장 후 최종가격 출력
 	var fcount = $(".input-text").html();
-	var fprice = $
-	{
-		vo.pprice
-	};
+	var fprice = "${vo.pprice}";
 	$(".final_price").html(fcount * fprice);
-
+	
 	numberFormat();
 	function numberFormat() {
 		var fprice = $(".final_price").html();
 		fprice = fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		$(".final_price").html(fprice);
 	}
+</script>
+
+<script>
+
+/* function buynow(){
+	
+	var buynow = document.querySelector(".buy_now");
+	var pno = buynow.getAttribute('data-pno');
+	var amount = $('.input-text').val();
+	location.href = "/shopproduct/buy?pno=" + pno + "&amount="
+	+ amount + "&uid=${id}";
+	
+}  */
+
 </script>
 </html>

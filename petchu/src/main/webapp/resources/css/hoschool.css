@@ -3,12 +3,9 @@
 .page_hoschool {
 	display: flex;
 	flex-direction: column;
-	
 	height: auto;
-	
 	/*  background-color: pink; */
 	font-family: "nanum gothic";
-	
 }
 
 .ho_page_header {
@@ -26,14 +23,12 @@
 	/* background-color: orange; */
 }
 
-#hashtag {
-	width: 40px;
-	margin: 0px 0px 10px 0px;
-	/* border: 1px solid black; */
-}
-.img_wrapper{
+
+
+.img_wrapper {
 	width: 200px;
 }
+
 input[name='sort'] {
 	margin-top: 30px;
 }
@@ -46,22 +41,26 @@ input[name='keyword'] {
 	font-size: 25px;
 }
 
-
-
-.prame:not(i) {
+.prame {
 	/* 		사용자가 올린 백그라운드 이미지 */
 	background-image:
-		url("https://img.freepik.com/free-photo/a-scottish-straight-cat-on-a-white-background-looking-up-top-view-copy-space-banner_76158-766.jpg?size=626&ext=jpg");
+	url("https://img.freepik.com/free-photo/a-scottish-straight-cat-on-a-white-background-looking-up-top-view-copy-space-banner_76158-766.jpg?size=626&ext=jpg");
 	background-size: 500px 200px;
 	width: 600px;
 	height: 160px;
 	padding: 10px;
 	margin: 20px;
-	box-shadow: 5px 5px 5px 1px gray;
+	box-shadow: 2px 2px 5px rgb(200, 200, 200);
 	display: flex;
 	align-items: center;
-	border-radius: 10px;
+	border-radius: 5px;
+	text-align: left;
+	opacity: 90%;
+	cursor: pointer;
+}
 
+.prame:hover {
+	opacity: 100%;
 }
 
 .prame_row1 {
@@ -75,9 +74,9 @@ input[name='keyword'] {
 .prame_row2 {
 	height: 80px;
 	text-align: left;
-	}
+}
+
 .prame_row3 {
-	
 	display: flex;
 	justify-content: space-between;
 	/* border: 1px solid black; */
@@ -90,14 +89,17 @@ input[name='keyword'] {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	letter-spacing: 2px;
 }
 
 .prame_contact {
-	width: 150px;
+	width: 164px;
 	/* border: 1px solid black; */
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	color: black;
+	font-weight: 600;
 }
 
 .ellipsis {
@@ -108,13 +110,13 @@ input[name='keyword'] {
 
 .prame_description {
 	width: 600px;
-	height: 90px;
+	height: 38px;
 	display: flex;
-
 	align-items: center;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	color: black;
 	/* border: 1px solid black; */
 }
 
@@ -122,10 +124,9 @@ input[name='keyword'] {
 	display: flex;
 	align-items: flex-end;
 	height: 40px;
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 	width: 600px;
 	justify-content: flex-end;
-	
 }
 
 .bigPrame {
@@ -144,26 +145,36 @@ input[name='keyword'] {
 
 #icon_calendar {
 	width: 40px;
-	margin: 20px 0px 0px 0px;
+	margin: 10px 0px 15px 15px; 
 }
-#icon_calendar{
-	float: left;
-	margin: 20px;
+input[type="date"]{
+	border-radius: 5px;
+	border: #BFC1B9 1px solid;
+	outline-color: #A7CA37;
+	padding: 20px 10px 20px 10px;
+	margin-bottom: 10px;
 }
-#hashtag{
-	float: left;
-	margin: 20px 0px 20px 20px;
+input[type="text"]{
+	width: 250px;
+	border-radius: 5px;
+	border: #BFC1B9 1px solid;
+	outline-color: #A7CA37;
+	padding: 20px 10px 20px 10px;
+	margin-bottom: 10px;
 }
+#hashtag {
+	    width: 40px;
+    margin: 30px 0px 20px 10px;
+}
+
 .ho_left_section {
 	display: flex;
 	margin-right: 50px;
-	
 	align-items: initial;
-	height:800px;
+	height: 800px;
 	width: 240px;
 	margin: 5px;
-	
-	
+
 	/* background-color: green;  */
 }
 
@@ -173,7 +184,7 @@ input[name='keyword'] {
 }
 
 .sideMenu_container {
- 	/* background-color: skyblue;  */
+	/* background-color: skyblue;  */
 	height: auto;
 	width: 210px;
 	padding: 10px 10px 20px 10px;
@@ -196,11 +207,10 @@ span.tag {
 	line-height: 20px;
 	white-space: nowrap;
 	margin: 0px 5px 5px 0px;
-	
 }
 
-.datebox_heading{
-/* 	width: block;
+.datebox_heading {
+	/* 	width: block;
 	width: fit-content; */
 	margin: 10px auto;
 	text-align: center;
@@ -210,6 +220,7 @@ span.tag {
 	font-size: 20px;
 	font-weight: 700;
 }
+
 .ho_section_right {
 	display: flex;
 	flex-direction: column;
@@ -221,41 +232,48 @@ span.tag {
 }
 
 .ho_content_list {
-	 /* border: 1px solid blue;  */
+	/* border: 1px solid blue;  */
 	display: flex;
 	height: auto;
 	flex-direction: column;
 	align-items: center;
 	gap: 5px;
 }
+
 @font-face {
-    font-family: 'SDSamliphopangche_Basic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-	}
-.scname{
-	
+	font-family: 'SDSamliphopangche_Basic';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.scname {
 	font-family: 'SDSamliphopangche_Basic';
 	font-size: 30px;
 	color: white;
 	text-align: left;
-	
 }
-.sctel{
+
+.sctel {
 	float: right;
 	font-size: 17px;
-
-
 }
+
 .sconeline {
 	font-size: 15px;
 }
-.scprice{
-	float: right;
-	font-size: 20px;
-	margin-bottom: 10px;
+
+.scprice {
+    /* float: right; */
+    font-size: 25px;
+    /* margin-bottom: 10px; */
+    color: white;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
+
 .prame_price {
 	/* border: 1px solid blue; */
 	width: block;
@@ -263,7 +281,7 @@ span.tag {
 	height: fit-content;
 }
 
- #checkin, #checkout {
+#checkin, #checkout {
 	width: 200px;
 	height: 30px;
 	margin-bottom: 20px;
@@ -278,25 +296,26 @@ span.tag {
 	cursor: pointer;
 	font-size: 15px;
 }
-.ho_tag_container_inner{
+
+.ho_tag_container_inner {
 	width: 210px;
 	height: 300px;
 	/*   white-space: initial; */
 	display: flex-inline;
-	
-	
+
 	/* border: 1px solid black; */
-	
-	
 }
+
 .tag:hover {
 	font-weight: bold;
 	color: #a4c931;
 }
-.tag{
+
+.tag {
 	float: left;
-	margin-bottom:20px;
+	margin-bottom: 20px;
 }
+
 #keyword {
 	width: 300px;
 	height: 50px;
@@ -323,7 +342,7 @@ span.tag {
 	background: #add8e6
 }
 
-.toggle-radio>input+label:not(:last-of-type) {
+.toggle-radio>input+label:not (:last-of-type ) {
 	border-right: 1px solid #ccc
 }
 
@@ -343,13 +362,11 @@ span.tag {
 	opacity: .5
 }
 
-
-
 .toggle-radio>input+label {
 	display: inline-block;
 	margin-bottom: 0;
 	padding: 5px 10px;
-/* 	float: left; */
+	/* 	float: left; */
 	cursor: pointer
 }
 
@@ -405,7 +422,7 @@ span.tag {
 	/* 			margin: 0 auto 1em; */
 	font-size: 25px;
 	overflow: hidden;
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 }
 
 .rating input {
@@ -423,8 +440,6 @@ span.tag {
 	-o-transition: color .4s;
 	transition: color .4s;
 }
-
-
 
 .rating2 {
 	direction: rtl;

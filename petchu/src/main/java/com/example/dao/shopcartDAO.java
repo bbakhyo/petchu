@@ -29,6 +29,6 @@ public interface shopcartDAO {
 	public void user_point_history_plus(String uid, int pricePoint);
 	public List<shopcartVO> record_best_items();
 	public List<shopcartVO> record_best_items2();
-	
+	public shopcartVO read_user_order(String orno);
 	
 }
