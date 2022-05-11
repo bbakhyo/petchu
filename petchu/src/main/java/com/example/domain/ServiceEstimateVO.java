@@ -2,6 +2,8 @@ package com.example.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ServiceEstimateVO extends EstimateDTO{
 	public int seno;
 	public int scno;
@@ -9,6 +11,7 @@ public class ServiceEstimateVO extends EstimateDTO{
     public int crno;
     public int lrno; 
 	public String uid;
+	@JsonFormat(pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	public Date sedate; 
 	public int price;
 	public String description;

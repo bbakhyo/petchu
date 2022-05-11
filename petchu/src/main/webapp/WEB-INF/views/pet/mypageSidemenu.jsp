@@ -20,8 +20,8 @@
 		<p><a href="#">병원관리</a></p>
 	</c:if>
 	<c:if test="${type=='업체'}">
-		<p id="companyMenu"><a href="#">업체관리</a></p>
-		<div id="serside" style="display: none;">
+		<p class="companyMenu"><a href="#">업체관리</a></p>
+		<div class="serside" style="display: none;">
 		<p><a href="/hoschool/insert?id=${id }"> · 내 업체 등록</a></p>
 		<p><a href="/hoschool/myList?id=${id }"> · 내 업체 목록</a></p>
 		</div>
@@ -38,7 +38,7 @@
 		<p id="requestMenu"><a href="#">서비스 요청서 관리</a></p>
 		<div id="requestside" style="display: none;">
 			<p><a href="/user/myRequest"> · 내가 작성한 요청서</a></p>
-			<p><a href="#"> · 마감처리한 요청서</a></p>
+			<p><a href="/user/myDeadlineList"> · 마감처리한 요청서</a></p>
 		</div>
 	</c:if>
 	<p><a href="#">구매내역</a></p>

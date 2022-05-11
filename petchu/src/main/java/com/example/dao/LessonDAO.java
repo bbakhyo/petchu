@@ -9,6 +9,8 @@ public interface LessonDAO {
 	public List<LessonRequestVO> lessonList();
 	public LessonRequestVO lessonRead(int lrno);
 	public LessonRequestVO myLessonRead(String uid);
+	public List<LessonRequestVO> lessonDeadlineList(String uid);
 	public int lessonCount(String uid);
 	public void lisDeleteUpdate(int lrno);
+	public int lrno(String uid);
 }

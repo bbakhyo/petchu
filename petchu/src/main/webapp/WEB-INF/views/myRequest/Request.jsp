@@ -160,8 +160,6 @@
 	var crno="${cvo.crno}";
 	var lrno="${lvo.lrno}";
 	
-	alert(brno + "\n" + crno + "\n" + lrno);
-	
 	var deadlines = document.getElementsByClassName("deadline");
 	
 	for(i=0; i < deadlines.length; i++){
