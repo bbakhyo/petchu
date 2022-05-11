@@ -6,6 +6,14 @@
 	.checkout_delivery_address, .terms_wrapper{text-align:left;}
 	.none{display:none;}
 	.left{text-align:left;}
+	#delivery_message{
+		padding: 5px;
+ 		text-align: center;
+ 		margin: 0px;
+ 		width:400px;
+ 		line-height:50px;
+ 		font-size:15px;
+	}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="/resources/checkout_page.css" rel="stylesheet">
@@ -81,19 +89,25 @@
 
             <div>
               <div><input type="text" name="delivery_address2" placeholder="주소2" id="delivery_addy2" size=55></div>
-            </div><br>
+            </div>
+            <br>
+            
+            <div>
+              <div><input type="text" name="delivery_message" placeholder="배송시 요청사항" id="delivery_message" size=55></div>
+            </div>
+            
           </div>
         </div>
 
         <!--  포인트 정보       -->
         
-        <div class="coupon_points_card">
+        <div class="coupon_points_card" style="height:90px;">
             <div class="point_paragraphs"><br>
               <p class="points_header">보유 포인트: <a class="my_point">${uvo.point}</a></p>
             </div>
           <div class="coupon_line3">
             <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
-            <span><button class="point_apply">적용</button></span><br><br>
+            <span><button class="point_apply">적용</button></span>
             <span><button class="point_disapply" style="display:none;">사용취소</button></span><br><br>
 			</div>
           
@@ -409,11 +423,12 @@
 						if(usePoint==null){
 							usePoint=0;
 						}
-// 						console.log(uid+"\n"+usePoint+"\n"+final_price+"\n"+btnPoint);
+						
+						var omessage = $("#delivery_message").val();
 						$.ajax({
 							type: "post",
 							url: "/shopproduct/user_order_insert",	
-							data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint},
+							data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint, omessage:omessage},
 							success: function(){
 								location.href="/shopproduct/order_list";
 							}
@@ -430,25 +445,25 @@
 	});
 
 	
-	//전체동의 버튼	
-	$("#terms_agree_all").on("change", function(){
-		//체크 되었을 경우
-		if($("#terms_agree_all").is(":checked")) {
-			$("#terms_agreement").attr("checked", "checked");
-		}else{
-			$("#terms_agreement").attr("checked", false);
-		}
-	});
+// 	//전체동의 버튼	
+// 	$("#terms_agree_all").on("change", function(){
+// 		//체크 되었을 경우
+// 		if($("#terms_agree_all").is(":checked")) {
+// 			$("#terms_agreement").attr("checked", "checked");
+// 		}else{
+// 			$("#terms_agreement").attr("checked", false);
+// 		}
+// 	});
 	
-	//일반동의 버튼
-	$("#terms_agreement").on("change", function(){
-		//체크 되었을 경우
-		if($("#terms_agreement").is(":checked")) {
-			$("#terms_agree_all").attr("checked", "checked");
-		}else{
-			$("#terms_agree_all").attr("checked", false);
-		}
-	});
+// 	//일반동의 버튼
+// 	$("#terms_agreement").on("change", function(){
+// 		//체크 되었을 경우
+// 		if($("#terms_agreement").is(":checked")) {
+// 			$("#terms_agree_all").attr("checked", "checked");
+// 		}else{
+// 			$("#terms_agree_all").attr("checked", false);
+// 		}
+// 	});
 	
 	
 	//가격 포맷
@@ -507,7 +522,7 @@
 	    		$(".point").focus();
 	    		return;
 	    	}
-	    	if(Number(point)<0){
+	    	if(Number(point)<=0){
 	    		alert("정확한 숫자를 입력하십시오.");
 	    		$(".point").val("");
 	    		$(".point").focus();
@@ -558,11 +573,17 @@
 	    	return;
 	    })
 		
-	    //포인트 엔터시 적용버튼 클릭
-	    $(".point").on("keypress", function(e){
-	    	if(e.key === "Enter"){
-	    		$(".point_apply").click();
-	    	}
-	    })
+    //포인트 엔터시 적용버튼 클릭
+    $(".point").on("keypress", function(e){
+    	if(e.key === "Enter"){
+    		if($(".point_apply").attr("style")=="display:none;"){
+    			$(".point_disapply").click();
+    			return;
+    		}
+    		$(".point_apply").click();
+    	}
+    });
 	 
+	
+
 </script>
