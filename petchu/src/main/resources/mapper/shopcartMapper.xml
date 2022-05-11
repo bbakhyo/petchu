@@ -77,8 +77,8 @@
 		select point, id uid from user where id = #{uid}
 	</select>
 	<insert id="user_order_insert">
-		insert into user_order(uid, orno, point, sum) 
-		values(#{uid},#{orno}, #{point} , #{sum})
+		insert into user_order(uid, orno, point, sum, omessage) 
+		values(#{uid},#{orno}, #{point} , #{sum}, #{omessage})
 	</insert>
 	<update id="user_point_minus">
 		update user set point=point-#{point} where id=#{uid}
