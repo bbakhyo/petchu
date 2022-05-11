@@ -35,4 +35,6 @@ public class RateDAOImpl implements RateDAO{
 		return session.selectOne(namespace + ".reviewCount", scno);
 	}
 
+
+
 }
