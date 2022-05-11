@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
+	*{
+	text-align: left;
+	}
 	.serside, #esside, #requestside{
 		font-size: 12px; margin-left: 5px;
 	}
@@ -45,14 +48,14 @@
 	<c:if test="${type=='일반'}">
 		<p class="companyMenu"><a href="#">예약내역</a></p>
 		<div class="serside" style="display: none;">
-		<p><a href="/hoschool/insert?id=${id }"> · 내 예약리스트</a></p>
+		<p><a href="/reserve/myreserveList?id=${id}"> · 내 예약리스트</a></p>
 		</div>
 	</c:if>
 	<c:if test="${type=='업체'}">
 		<p class="companyMenu"><a href="#">예약내역</a></p>
 		<div class="serside" style="display: none;">
-		<p><a href="/hoschool/insert?id=${id }"> · 내 예약리스트</a></p>
-		<p><a href="/hoschool/myList?id=${id }"> · 우리업체 예약리스트</a></p>
+		<p><a href="/reserve/myreserveList?id=${id}"> · 내 예약리스트</a></p>
+		<p><a href="reserve/comReserveList?id=${id}"> · 우리업체 예약리스트</a></p>
 		</div>
 	</c:if>
 	<p><a href="#">후기관리</a></p>

@@ -252,7 +252,6 @@
 						//$(this).style.backgroundimage="url('/resources/TBN/TBN01.jpg')";
 						$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); 
 						$(this).css({"background-size":"700px 200px"}); 
-						
 						i++;
 					}else if(i==1){
 						$(this).css({"background":"url(/resources/TBN/TBN04.png"});
