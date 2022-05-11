@@ -291,43 +291,43 @@
 				$(".prame").each(function(){
 					var bg=$(".image").html();
 
-						//백그라운드 이미지 수만큼 반복하여 Prame마다 다른이미지 적용
-							if(i==0){
-								//$(this).style.backgroundimage="url('/resources/TBN/TBN01.jpg')";
-								$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); 
-								$(this).css({"background-size":"700px 200px"}); 
-								
-								i++;
-							}else if(i==1){
-								$(this).css({"background":"url(/resources/TBN/TBN04.png"});
-								$(this).css({"background-size":"700px 200px"}); 
-								i++;
-							}else if(i==2){
-								$(this).css({"background":"url(/resources/TBN/TBN05.png"});
-								$(this).css({"background-size":"700px 200px"}); 
-								i++;
-							}else if(i==3){
-								$(this).css({"background":"url(/resources/TBN/TBN06.png"});
-								$(this).css({"background-size":"700px 200px"}); 
-								i=0;
-							}
-							
-							//전화번호 포멧 적용
-							var num = $(this).find(".sctel").html();
-							var formatNum = '';
-							
-						    if(num.length==11){
-						        formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-						    }else if(num.length==8){
-						        formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
-						    }else if(num.indexOf('02')==0){
-						        formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
-						    }else if(num.length==12){
-						        formatNum = num.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
-						    }else{
-						        formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
-						    }
-						    	$(this).find(".sctel").html(formatNum);
+					//백그라운드 이미지 수만큼 반복하여 Prame마다 다른이미지 적용
+					if(i==0){
+						//$(this).style.backgroundimage="url('/resources/TBN/TBN01.jpg')";
+						$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); 
+						$(this).css({"background-size":"700px 200px"}); 
+						
+						i++;
+					}else if(i==1){
+						$(this).css({"background":"url(/resources/TBN/TBN04.png"});
+						$(this).css({"background-size":"700px 200px"}); 
+						i++;
+					}else if(i==2){
+						$(this).css({"background":"url(/resources/TBN/TBN05.png"});
+						$(this).css({"background-size":"700px 200px"}); 
+						i++;
+					}else if(i==3){
+						$(this).css({"background":"url(/resources/TBN/TBN06.png"});
+						$(this).css({"background-size":"700px 200px"}); 
+						i=0;
+					}
+					
+					//전화번호 포멧 적용
+					var num = $(this).find(".sctel").html();
+					var formatNum = '';
+					
+				    if(num.length==11){
+				        formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+				    }else if(num.length==8){
+				        formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+				    }else if(num.indexOf('02')==0){
+				        formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+				    }else if(num.length==12){
+				        formatNum = num.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
+				    }else{
+				        formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+				    }
+				    	$(this).find(".sctel").html(formatNum);
 				});
 			}
 		});

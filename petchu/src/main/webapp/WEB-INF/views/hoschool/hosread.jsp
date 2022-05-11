@@ -23,7 +23,7 @@
 	.icon-score .rating3{
 		z-index : 0;
 		position: relative;
-		margin-top: -35px;
+		margin-top: -37px;
 	}
 
 	.rating2 .star {
