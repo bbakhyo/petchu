@@ -1,148 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<link rel='stylesheet' href="/resources/home.css">
-	<link rel="short icon" href="#">
-	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-	<script src="/resources/pagination.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script type="text/javascript" src="/resources/chart.js"></script>
-	<title>Insert title here</title>
-</head>
-<style>
-.modal_wrap {
-	display: none;
-	width: 400px;
-	height: 500px;
-	position: absolute;
-	top: 45%;
-	left: 50%;
-	margin: -250px 0 0 -250px;
-	background: #FFFFFF;
-	z-index: 2;
-	border-radius: 30px;
-}
 
-.black_bg {
-	display: none;
-	position: absolute;
-	content: "";
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	top: 0;
-	left: 0;
-	z-index: 1;
-}
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link href="/resources/css/serequest.css" rel="stylesheet">
+<link rel="short icon" href="#">
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="/resources/pagination.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/resources/chart.js"></script>
 
-.modal_close {
-	width: 26px;
-	height: 26px;
-	position: absolute;
-	top: -30px;
-	right: 0;
-}
-
-.modal_close>a {
-	display: block;
-	width: 100%;
-	height: 100%;
-	background: url(https://img.icons8.com/metro/26/000000/close-window.png);
-	text-indent: -9999px;
-}
-
-.buttonc {
-	position : relative;
-	top:3%;
-	left:65%;
-	
-}
-
-.buttonb {
-	position : relative;
-	top: -2%;
-	left: 77%;
-	display : none;
-}
-
-#regi [type="radio"]{
-   display:none;
-}
-#regi [type="radio"]+label{
-   display: inline-block;
-   cursor: pointer;
-   padding: 10px 0px 10px 0px;
-    width: 80px;
-    border: 1px solid #A7CA37;
-    line-height: 24px;
-    text-align: center;
-    font-weight:bold;
-    font-size:13px;
-    border-radius: 10px;
-}
-#regi [type="radio"]+label{
-   background-color: white;
-    color: #A7CA37;
-}
-#regi [type="radio"]:checked+label{
-    background-color: #A7CA37;
-    color: white;
-}
-.page1, .page2, .page3{
-	display:none;
-	height : 350px;
-}
-.show {
-	display:;
-}
-
-.rad {
-	margin-left : 45px;
-}
-
-h2{
-	margin-left : 40px;
-	margin-top : 80px;
-}
-input[type=radio] {
-	vertical-align :3px;
-}
-
-.texta {
-	margin: 0px auto;
-	margin-top : 40px;
-	text-align : center;
-	resize : none;
-}
-
-.city {
-	margin-top : 50px;
-	margin-left : 45px;
-}
-
-.page3 input[type="checkbox"] {
-    width: 0.8rem;
-    height: 0.8rem;
-    border-radius: 50%;
-    border: 2px solid #999;
-    appearance: none;
-    transition: background 0.2s;
-    margin-bottom : 15px;
- }
-
-.page3 input[type="checkbox"]:checked {
-    background: #2AA1C0;
-    border: none;
- }
-  
-  
-</style>
 <body>
-	<h2>원하는 서비스를 선택해주세요!</h2>
+	<p>견적서를 제출할 서비스 종류를 선택하세요</p>
 	<div id="regi">
 		<input type="radio" class="radio1" name="service" id="modal_btn1"> <label for="modal_btn1">미용</label> &nbsp;
 		<input type="radio" class="radio1"name="service" id="modal_btn2">	<label for="modal_btn2">홈클리닝</label> &nbsp;
@@ -155,64 +24,98 @@ input[type=radio] {
 		<input type="text" name="nick" value="${nick}" style="display:none;">
 		<div class="modal_wrap" id="modal_wrap1"> <!-- 창 본체 -->
 			<div class="modal_close" id="modal_close1"><a href="javascript:void(0);">close</a></div>
-	    		<div class="page1" id="page1" style="display : block">
-	    			<h2 class="title">[1/9] 어떤 반려동물인가요?</h2>
-	    		    <input type="radio" class="rad" name="pcate" value="강아지"> 강아지 <br/><br/>
-	    		    <input type="radio" class="rad" name="pcate" value="고양이"> 고양이 <br/>
-	   		 	</div>
-	   		 	<div class="page1">
-	   		 		<h2 class="title"> [2/9] 어떤 서비스를 원하시나요?</h2>
-	    		    <input type="radio" class="rad" name="beauty_classification" value="목욕"> 목욕 <br/><br/>
-	    		    <input type="radio" class="rad" name="beauty_classification" value="전체미용"> 전체미용 <br/><br/>
-	    		    <input type="radio" class="rad" name="beauty_classification" value="부분미용"> 부분미용 <br/><br/>
-	    		    <input type="radio" class="rad" name="beauty_classification" value="위생미용"> 위생미용 <br/><br/>
-	   		 	</div>
-	   		 	<div class="page1">
-	   		 		<h2 class="title">[3/9] 반려동물 체중을 선택해주세요</h2>
-	    		    <input type="radio" class="rad" name="weight" value="4kg미만"> 4kg미만 <br/><br/>
-	    		    <input type="radio" class="rad" name="weight" value="4~7kg"> 4~7kg <br/><br/>
-	    		    <input type="radio" class="rad" name="weight" value="7~10kg"> 7~10kg <br/><br/>
-	    		    <input type="radio" class="rad" name="weight" value="10~14kg"> 10~14kg <br/><br/>
-	   		 	</div>
-	   		 	<div class="page1">
-	   		 		<h2 class="title">[4/9] 반려동물 나이를 선택해주세요</h2>
-	    		    <input type="radio" class="rad" name="age" value="1살미만"> 1살미만<br/><br/>
-	    		    <input type="radio" class="rad" name="age" value="1~9살">  1~9살<br/><br/>	
-	    		    <input type="radio" class="rad" name="age" value="10살이상"> 10살이상 <br/><br/>
-	   		 	</div>
-	   		 	<div class="page1">
-	   		 		<h2 class="title"> [5/9] 마지막 미용시기는 선택해주세요</h2>
-	    		    <input type="radio" class="rad" name="last_beautydate" value="첫미용"> 첫미용 <br/><br/>
-	    		    <input type="radio" class="rad" name="last_beautydate" value="1달 내외"> 1달 내외 <br/><br/>
-	    		    <input type="radio" class="rad" name="last_beautydate" value="2달 내외"> 2달 내외 <br/><br/>
-	    		    <input type="radio" class="rad" name="last_beautydate" value="3달 내외"> 3달 내외 <br/><br/>
-	    		    <input type="radio" class="rad" name="last_beautydate" value="unknown"> 잘 모르겠다 <br/><br/>
-	   		 	</div>
-	   		 	<div class="page1">
-	   		 		<h2 class="title"> [6/9] 어떻게 진행하기를 원하시나요?</h2>
-	    		    <input type="radio" class="rad" name="service_place" value="집(출장 서비스)"> 집(줄장 서비스) <br/><br/>
-	    		    <input type="radio" class="rad" name="service_place" value="개인 미용실"> 개인 미용시설 <br/><br/>
-	    		    <input type="radio" class="rad" name="service_place" value="무관"> 무관 <br/><br/>
-	   		 	</div>
-	   		 	<div class="page1">
-	   		 		<h2 class="title"> [7/9] 희망서비스일을 선택해주세요</h2>
-	    		    <input type="radio" class="rad" name="wish_date" value="협의"> 협의 가능 <br/><br/>
-	    		    <input type="radio" class="rad" name="wish_date" value="가능한 빨리 진행">  가능한 빨리 진행<br/><br/>
-	    		    <input type="radio" class="rad" name="wish_date" value="일주 이내">  일주일 이내 진행<br/><br/>
-	    		    <input type="radio" class="rad" name="wish_date" value="상관 없음"> 상관 없음  <br/><br/>
-	   		 	</div>
-	   		 	<div class="page1">
-	   		 		<h2 class="title"> [8/9] 서비스 희망 지역을 남겨주세요</h2>
-	    		    <div class="city"><span class="sido">시/도 &nbsp; &nbsp; : </span><input type="text" style="margin-left:2px; margin-bottom:10px;" placeholder="ex. 경기도" name="wish_local1"> <br/>
-	    		   <span class="gungu"> 시/군/구 : </span><input type="text" placeholder="ex. 부천시" name="wish_local2"></div>
-	   		 	</div>
-	   		 	<div class="page1">
-	   		 		<h2 class="title"> [9/9] 서비스 관련 문의 및 세부사항을 남겨주세요</h2>
-	    		    <div class="texta"><textarea style="width" rows="6" cols="50" name="detailed_matters" placeholder="반려동물의 품종, 병력, 성격 등을 알려주시면 좋아요!"></textarea></div>
-	   		 	</div>
-	   		 <button type="button" class="buttonc" id="prev1" disabled>이전</button> &nbsp; <input type="button" class="buttonc" id="next1" value="다음">
-	   		 <input type="submit" class="buttonb" value="요청보내기">
-   		</div> 
+    		<div class="page1" id="page1" style="display : block">
+    			<p class="title">[1/9] 어떤 반려동물인가요?</p>
+    		    <input type="radio" class="rad" name="pcate" value="강아지" id="pcatedog">
+    		    <label for="pcatedog">강아지</label><br/><br/>
+    		    <input type="radio" class="rad" name="pcate" value="고양이" id="pcatecat">
+				<label for="pcatecat">고양이</label><br/>
+   		 	</div>
+   		 	<div class="page1">
+   		 		<p class="title"> [2/9] 어떤 서비스를 원하시나요?</p>
+    		    <input type="radio" class="rad" name="beauty_classification" value="목욕" id="beauty_classfication1">
+    		    <label for="beauty_classfication1">목욕</label><br/><br/>
+    		    <input type="radio" class="rad" name="beauty_classification" value="전체미용" id="beauty_classfication2">
+    		    <label for="beauty_classfication2">전체미용</label><br/><br/>
+    		    <input type="radio" class="rad" name="beauty_classification" value="부분미용" id="beauty_classfication3">
+    		    <label for="beauty_classfication3">부분미용</label><br/><br/>
+    		    <input type="radio" class="rad" name="beauty_classification" value="위생미용" id="beauty_classfication4">
+    		    <label for="beauty_classfication4">위생미용</label><br/><br/>
+   		 	</div>
+   		 	<div class="page1">
+   		 		<p class="title">[3/9] 반려동물 체중을 선택해주세요</p>
+    		    <input type="radio" class="rad" name="weight" value="4kg미만" id="weight1">
+				<label for="weight1">4kg미만</label><br/><br/>
+    		    <input type="radio" class="rad" name="weight" value="4~7kg" id="weight2"> 
+				<label for="weight2">4~7kg</label><br/><br/>
+    		    <input type="radio" class="rad" name="weight" value="7~10kg" id="weight3">
+				<label for="weight3">7~10kg</label><br/><br/>
+    		    <input type="radio" class="rad" name="weight" value="10~14kg" id="weight4">
+				<label for="weight4">10~14kg</label><br/><br/>
+   		 	</div>
+   		 	<div class="page1">
+   		 		<p class="title">[4/9] 반려동물 나이를 선택해주세요</p>
+    		    <input type="radio" class="rad" name="age" value="1살미만" id="age1">
+				<label for="age1">1살미만</label><br/><br/>
+    		    <input type="radio" class="rad" name="age" value="1~9살" id="age2">
+				<label for="age2">1~9살</label><br/><br/>
+    		    <input type="radio" class="rad" name="age" value="10살이상" id="age3">
+				<label for="age3">10살이상</label><br/><br/>
+   		 	</div>
+   		 	<div class="page1">
+   		 		<p class="title"> [5/9] 마지막 미용시기는 선택해주세요</p>
+    		    <input type="radio" class="rad" name="last_beautydate" value="첫미용" id="last_beautydate1">
+				<label for="last_beautydate1">첫미용</label><br/><br/>
+    		    <input type="radio" class="rad" name="last_beautydate" value="1달 내외" id="last_beautydate2">
+				<label for="last_beautydate2">1달 내외</label><br/><br/>
+    		    <input type="radio" class="rad" name="last_beautydate" value="2달 내외" id="last_beautydate3">
+				<label for="last_beautydate3">2달 내외</label><br/><br/>
+    		    <input type="radio" class="rad" name="last_beautydate" value="3달 내외" id="last_beautydate4">
+				<label for="last_beautydate4">3달 내외</label><br/><br/>
+    		    <input type="radio" class="rad" name="last_beautydate" value="unknown" id="last_beautydate5">
+				<label for="last_beautydate5">잘 모르겠다</label><br/><br/>
+   		 	</div>
+   		 	<div class="page1">
+   		 		<p class="title"> [6/9] 어떻게 진행하기를 원하시나요?</p>
+    		    <input type="radio" class="rad" name="service_place" value="집(출장 서비스)" id="service_place1">
+				<label for="service_place1">집(출장 서비스)</label><br/><br/>
+    		    <input type="radio" class="rad" name="service_place" value="개인 미용실" id="service_place2">
+				<label for="service_place2">개인 미용실</label><br/><br/>
+    		    <input type="radio" class="rad" name="service_place" value="무관" id="service_place3"> 
+				<label for="service_place3">무관</label><br/><br/>
+			</div>
+   		 	<div class="page1">
+   		 		<p class="title"> [7/9] 희망서비스일을 선택해주세요</p>
+    		    <input type="radio" class="rad" name="wish_date" value="협의" id="wish_date1"> 
+				<label for="wish_date1">협의 가능</label><br/><br/>
+    		    <input type="radio" class="rad" name="wish_date" value="가능한 빨리 진행" id="wish_date2">
+				<label for="wish_date2">가능한 빨리 진행</label><br/><br/>
+    		    <input type="radio" class="rad" name="wish_date" value="일주 이내" id="wish_date3"> 
+				<label for="wish_date3">일주일 이내</label><br/><br/>
+    		    <input type="radio" class="rad" name="wish_date" value="상관 없음"  id="wish_date4">
+				<label for="wish_date4">상관 없음</label><br/><br/>
+   		 	</div>
+   		 	<div class="page1">
+   		 		<p class="title"> [8/9] 서비스 희망 지역을 남겨주세요</p>
+   		         <table class="city">
+    		     	<tr>
+    		     		<td>시/도</td>
+    		     		<td class="sido"><input type="text" style="margin-left:2px; margin-bottom:10px;" placeholder="ex. 경기도" name="wish_local1"></td>
+    		     	</tr>
+    		     	<tr>
+    		     		<td>시/군/구</td>
+    		     		<td class="gungu"><input type="text" placeholder="ex. 부천시" name="wish_local2"></td>
+    		     	</tr>
+    		     </table>
+   		 	</div>
+   		 	<div class="page1">
+   		 		<p class="title"> [9/9] 서비스 관련 문의 및 세부사항을 남겨주세요</p>
+    		    <div class="texta"><textarea style="width" rows="6" cols="50" name="detailed_matters" placeholder="반려동물의 품종, 병력, 성격 등을 알려주시면 좋아요!"></textarea></div>
+   		 	</div>
+   			<button type="button" class="buttonc" id="prev1" disabled>이전</button> &nbsp;
+   			<input type="button" class="buttonc" id="next1" value="다음">
+	   		<input type="submit" class="buttonb" value="요청보내기">
+   		</div>
    	</form>
    	
    	<form name="frm2"  action="cinsert" method="post" enctype="multipart/form-data">
@@ -221,14 +124,14 @@ input[type=radio] {
  		<div class="modal_wrap" id="modal_wrap2"> <!-- 창 본체 -->
 			<div class="modal_close" id="modal_close2"><a href="javascript:void(0);">close</a></div>
 	   		 	<div class="page2" id="page2" style="display : block;">
-	    		    <h2 class="title">[1/5] 건물유형을 선택해주세요</h2>
+	    		    <p class="title">[1/5] 건물유형을 선택해주세요</p>
 	    		    <input type="radio" class="rad" name="building_classification" value="아파트"> 아파트 <br/><br/>
 	    		    <input type="radio" class="rad" name="building_classification" value="빌라"> 빌라 <br/><br/>
 	    		    <input type="radio" class="rad" name="building_classification" value="주택"> 주택 <br/><br/>
 	    		    <input type="radio" class="rad" name="building_classification" value="오피스텔"> 오피스텔 <br/><br/>
 	   		 	</div>
 	   		 	<div class="page2">
-	    		     <h2 class="title">[2/5] 집 면적을 선택해주세요</h2>
+	    		     <p class="title">[2/5] 집 면적을 선택해주세요</p>
 	    		      <input type="radio" class="rad" name="house_size" value="10평 미만"> 10평 미만 <br/><br/>
 	    		    <input type="radio" class="rad" name="house_size" value="10평대"> 10평대<br/><br/>
 	    		    <input type="radio" class="rad" name="house_size" value="20평대"> 20평대<br/><br/>
@@ -237,7 +140,7 @@ input[type=radio] {
 	    		    
 	   		 	</div>
 	   		 	<div class="page2">
-	    		     <h2 class="title">[3/5] 클리닝 원하는 날을 선택해주세요</h2>
+	    		     <p class="title">[3/5] 클리닝 원하는 날을 선택해주세요</p>
 	    		      <input type="radio" class="rad" name="wish_date" value="협의"> 협의 가능 <br/><br/>
 	    		    <input type="radio" class="rad" name="wish_date" value="가능한 빨리"> 가능한 빨리 <br/><br/>
 	    		    <input type="radio" class="rad" name="wish_date" value="일주 이내"> 일주 이내<br/><br/>
@@ -245,12 +148,20 @@ input[type=radio] {
 	    		    
 	   		 	</div>
 	   		 	<div class="page2">
-	    		     <h2 class="title"> [4/5] 원하는 지역을 선택해주세요</h2>
-	    		      <div class="city"><span class="sido">시/도 &nbsp; &nbsp; : </span><input type="text" style="margin-left:2px; margin-bottom:10px;" placeholder="ex. 경기도" name="wish_local1"> <br/>
-	    		   <span class="gungu"> 시/군/구 : </span><input type="text" placeholder="ex. 부천시" name="wish_local2"></div>
+	    		     <p class="title"> [4/5] 원하는 지역을 선택해주세요</p>
+	    		     <table class="city">
+	    		     	<tr>
+	    		     		<td>시/도</td>
+	    		     		<td class="sido"><input type="text" style="margin-left:2px; margin-bottom:10px;" placeholder="ex. 경기도" name="wish_local1"></td>
+	    		     	</tr>
+	    		     	<tr>
+	    		     		<td>시/군/구</td>
+	    		     		<td class="gungu"><input type="text" placeholder="ex. 부천시" name="wish_local2"></td>
+	    		     	</tr>
+	    		     </table>
 	   		 	</div>
 	   		 	<div class="page2">
-	    		     <h2 class="title"> [5/5] 클리닝 관련 희망사항을 남겨주세요</h2>
+	    		     <p class="title"> [5/5] 클리닝 관련 희망사항을 남겨주세요</p>
 	    		     <div class="texta"><textarea style="width" rows="6" cols="50" name="hope_matters" placeholder="ex. 냄새 제거 및 살균소독 원해요"></textarea></div>
 	   		 	</div>
    		 	 <button type="button" class="buttonc" id="prev2" disabled>이전</button> &nbsp; <input type="button" class="buttonc" id="next2" value="다음">
@@ -264,28 +175,28 @@ input[type=radio] {
    		<div class="modal_wrap" id="modal_wrap3"> <!-- 창 본체 -->
 			<div class="modal_close" id="modal_close3"><a href="javascript:void(0);">close</a></div>
 	   		 	<div class="page3" id="page3" style="display : block;">
-	    		   <h2 class="title">[1/11] 어떤 레슨을 원하시나요?</h2>
+	    		   <p class="title">[1/11] 어떤 레슨을 원하시나요?</p>
 	    		    <input type="radio" class="rad" name="lesson_classification" value="펫 훈련 레슨"> 훈련 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_classification" value="펫 미용 레슨"> 미용 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_classification" value="펫 용품 제작 레슨"> 펫용품 제작 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_classification" value=> 기타 <input type="text" id="lesson_text" disabled>
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[2/11] 레슨 받는 목적이 무엇인가요?</h2>
+	    		    <p class="title">[2/11] 레슨 받는 목적이 무엇인가요?</p>
 	    		    <input type="radio" class="rad" name="lesson_goal" value="홈케어"> 홈 케어 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_goal" value="자격증 취득"> 자격증 취득 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_goal" value="취업 준비"> 취업 준비 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_goal" value="창업 준비"> 창업 준비 <br/><br/>
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[3/11] 어떤 레슨 형태를 원하시나요?</h2>
+	    		    <p class="title">[3/11] 어떤 레슨 형태를 원하시나요?</p>
 	    		    <input type="radio" class="rad" name="lesson_method" value="개인 레슨"> 개인 레슨<br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_method" value="그룹 레슨"> 그룹 레슨 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_method" value="온라인 레슨"> 온라인 레슨 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_method" value="학원"> 학원 <br/><br/>
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[4/11] 연령대를 선택해주세요</h2>
+	    		    <p class="title">[4/11] 연령대를 선택해주세요</p>
 	    		    <input type="radio" class="rad" name="age" value="10대 미만"> 10대 미만<br/><br/>
 	    		    <input type="radio" class="rad" name="age" value="10대"> 10대 <br/><br/>
 	    		    <input type="radio" class="rad" name="age" value="20대"> 20대 <br/><br/>
@@ -293,18 +204,18 @@ input[type=radio] {
 	    		    <input type="radio" class="rad" name="age" value="40대"> 40대 이상 
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[5/11] 성별이 어떻게 되시나요?</h2>
+	    		    <p class="title">[5/11] 성별이 어떻게 되시나요?</p>
 	    		    <input type="radio" class="rad" name="gender" value="남자"> 남자 <br/><br/>
 	    		    <input type="radio" class="rad" name="gender" value="여자"> 여자 <br/><br/>
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[6/11] 선호하는 강사의 성별이 있으신가요?</h2>
+	    		    <p class="title">[6/11] 선호하는 강사의 성별이 있으신가요?</p>
 	    		    <input type="radio" class="rad" name="wish_gender" value="남자"> 남자 <br/><br/>
 	    		    <input type="radio" class="rad" name="wish_gender" value="여자"> 여자 <br/><br/>
 	    		    <input type="radio" class="rad" name="wish_gender" value="무관"> 무관 <br/><br/>
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[7/11] 레슨 받기 좋은 날짜를 기입해주세요</h2>
+	    		    <p class="title">[7/11] 레슨 받기 좋은 날짜를 기입해주세요</p>
 	    		    <label><input type="checkbox" class="rad" name="wish_date" value="월"> 월 </label> <br/>
 	    		     <label><input type="checkbox" class="rad" name="wish_date" value="화"> 화</label>  <br/>
 	    		     <label><input type="checkbox" class="rad" name="wish_date" value="수"> 수</label>  <br/>
@@ -314,7 +225,7 @@ input[type=radio] {
 	    		     <label><input type="checkbox" class="rad" name="wish_date" value="상담 후"></label> 상담 후
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[8/11] 희망하는 레슨 시간대를 선택해주세요</h2>
+	    		    <p class="title">[8/11] 희망하는 레슨 시간대를 선택해주세요</p>
 	    		    <input type="radio" class="rad" name="wish_time" value="이른 오전(9시 이전)"> 이른 오전(9시 이전) <br/>
 	    		    <input type="radio" class="rad" name="wish_time" value="오전(9~12시)"> 오전(9~12시) <br/>
 	    		    <input type="radio" class="rad" name="wish_time" value="오후(12~3시)"> 오후(12~3시) <br/>
@@ -323,19 +234,19 @@ input[type=radio] {
 	    		    <input type="radio" class="rad" name="wish_time" value="늦은 저녁(9시 이후)"> 늦은 저녁(9시 이후) <br/>
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[9/11] 어떻게 진행하기 원하시나요?</h2>
+	    		    <p class="title">[9/11] 어떻게 진행하기 원하시나요?</p>
 	    		    <input type="radio" class="rad" name="lesson_place" value="교육생 장소로"> 제가 있는 곳으로 와주세요 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_place" value="레슨실"> 레슨실 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_place" value="무관"> 무관 <br/><br/>
 	    		    <input type="radio" class="rad" name="lesson_place" value=> 기타 <input type="text" id="place_text" disabled>
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[10/11] 원하는 지역을 선택해주세요</h2>
+	    		    <p class="title">[10/11] 원하는 지역을 선택해주세요</p>
 	    		    <div class="city"><span class="sido">시/도 &nbsp; &nbsp; : </span><input type="text" style="margin-left:2px; margin-bottom:10px;" placeholder="ex)경기도" name="wish_local1"> <br/>
 	    		   <span class="gungu"> 시/군/구 : </span><input type="text" placeholder="ex)부천시" name="wish_local2"></div>
 	   		 	</div>
 	   		 	<div class="page3">
-	    		    <h2 class="title">[11/11] 레슨 관련 문의 사항을 남겨주세요</h2>
+	    		    <p class="title">[11/11] 레슨 관련 문의 사항을 남겨주세요</p>
 	    		    <div class="texta"><textarea style="width" rows="6" cols="50" name="detailed_matters" placeholder="ex. 펫 미용 자격증을 따고 싶어요"></textarea></div>
 	   		 	</div>
    		 	 <button type="button" class="buttonc" id="prev3" disabled>이전</button> &nbsp; <input type="button" class="buttonc" id="next3" value="다음">
@@ -696,4 +607,3 @@ window.onload = function() {
     document.querySelector('#modal_close3').addEventListener('click', offClick2);
 };
 </script>
-</html>

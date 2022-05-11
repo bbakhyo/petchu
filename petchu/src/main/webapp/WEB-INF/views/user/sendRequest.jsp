@@ -8,7 +8,7 @@
 	<input type="hidden" value="${vo.id}" id="id">
 
 	<div id="selectPet"></div>
-	<script id="sel" type="text/x-handlebars-template">
+	<script id="temp" type="text/x-handlebars-template">
 		{{#each .}}
 			<div class="row">
 				<span class="pno" style="display:none">{{pno}}</span>
@@ -25,10 +25,10 @@
 			<td id="pname"></td>
 		</tr>
 		<tr>
-			<td class="title" width=70>대 분 류</td>
-			<td id="pcate" width=60></td>
-			<td class="title" width=70>etc</td>
-			<td id="pcate_1" width=120></td>
+			<td class="title" width=80>대 분 류</td>
+			<td id="pcate" width=80></td>
+			<td class="title" width=60>etc</td>
+			<td id="pcate_1" width=110></td>
 		</tr>
 		<tr>
 			<td class="title">품  종</td>
@@ -96,7 +96,10 @@
 			dataType: "json",
 			data : {pno:pno},
 			url: "/pet/readpet",
-			success:function(data){				
+			success:function(data){
+
+
+				
  				$.ajax({
  					type: "get",
 					dataType:"json",
@@ -132,8 +135,8 @@
 		data : {id:id},
 		url: "/pet/petlist",
 		success:function(data){
-			var template = Handlebars.compile($("#sel").html());
-			$("#selectPet").html(data);
+			var template = Handlebars.compile($("#temp").html());
+			$("#selectPet").html(template(data));
 			if(data==""){
 				$("#nopet").html("반려동물을 등록하세요");
 			}
@@ -165,19 +168,20 @@
 		$(frm.pno).val(pno);
 
 		var d_etc = $(frm.d_etc).val();
-		
-		if(pno==0){
-			swal("반려동물을 선택해주세요");
-			return;
-		}
-		
 		if(d_etc==""){
-			swal("증상에 대한 설명을 작성해주세요");
+			$("#alert").html("증상에 대한 설명을 작성해주세요");
 			return;
 		}
-	
+		if(pno==0){
+			$("#alert").html("반려동물을 선택해주세요");
+			return;
+		}
+		
 		if(!confirm("견적서를 보내시겠습니까?")) 
 			return;
+		
+
+
 		
 		frm.submit();
 	})
@@ -274,6 +278,4 @@
       });//arr.forEach
     }
   });
-</script>
-
 </script>
