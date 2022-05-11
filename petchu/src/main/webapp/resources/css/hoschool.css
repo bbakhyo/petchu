@@ -54,7 +54,6 @@ input[name='keyword'] {
 	display: flex;
 	align-items: center;
 	border-radius: 5px;
-	text-align: left;
 	opacity: 90%;
 	cursor: pointer;
 }
@@ -254,11 +253,13 @@ span.tag {
 	font-size: 30px;
 	color: white;
 	text-align: left;
+	margin-top: 50px;
 }
 
 .sctel {
 	float: right;
 	font-size: 17px;
+	margin-top: 20px;
 }
 
 .sconeline {

@@ -4,51 +4,7 @@
 	<link href="https://www.cssscript.com/demo/segmented-control-toggle-radio/toggle-radios.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
 
-<style>
 
-	* {
-	box-sizing: border-box;
-	}
-	
-	.icon-score{
-		display: left;
-	}
-	
-	.icon-score .rating2{
-		z-index : 1;
- 		position: absolute; 
- 		margin-left: 32px; 
-
- 		
-	}
-	.icon-score .rating3{
-		z-index : 0;
- 		position: relative; 
-
-	}
-
-	.rating2 .star {
-		width: 100;
- 		color: #D3D3D3; 
-		overflow: hidden;
-
-	}
-	
-	.rating2 .star-wrap {
-		width: 36px;
-		display: inline-block;
-		color : #D3D3D3;
-	}
-	
-	.rating3 .star-wrap{
-		width: 36px;
-		display: inline-block;
-	}
-	
-	.rating3 .fa-solid{
-		color : #D3D3D3;
-	}
-</style>
 <div class="page_hoschool">
 	
   	<div class="ho_page_header">
@@ -58,13 +14,13 @@
       </form>
     
     <div id="sort" class="toggle-radio" data-style="rounded">
-  <input type="radio" name="sort" id="default_Option1" class="sort" value="rate">
-  <label for="default_Option1">별점높은순</label>
-  <input type="radio" name="sort" id="default_Option2" class="sort" value="rowPrice">
-  <label for="default_Option2">낮은가격순</label>
-  <input type="radio" name="sort" id="default_Option3" class="sort" value="higPrice">
-  <label for="default_Option3">높은가격순</label>
-</div>
+	  <input type="radio" name="sort" id="default_Option1" class="sort" value="rate">
+	  <label for="default_Option1">별점높은순</label>
+	  <input type="radio" name="sort" id="default_Option2" class="sort" value="rowPrice">
+	  <label for="default_Option2">낮은가격순</label>
+	  <input type="radio" name="sort" id="default_Option3" class="sort" value="higPrice">
+	  <label for="default_Option3">높은가격순</label>
+	</div>
 
 <!--     <div id="sort">
       <input type="radio" name="sort"  class="sort" value="rate">별점높은순
@@ -126,43 +82,30 @@
     <div class="ho_section_right">
         <div class="ho_content_list">
           	<div id="bigPrame"></div>
-	        <script id="temp" type="text/x-handlebars-template">
+			<script id="temp" type="text/x-handlebars-template">
 			{{#each list}}
          	 <div class="prame" scno="{{scno}}">
-            <div class="prame_content">
-			  <!--  1열(상단) :  업체명/전화번호  -->
-              <div class="prame_row1">
-                <div class="prame_name scname" placeholder="어바웃펫">{{scname}}</div>
-                <div class="prame_contact sctel">☎ {{sctel}}</div>
-              </div>
-              <!--  2열(중간)) :  업체명 상세정보  -->
-                <div class="prame_row2">
-                  <div class="prame_description  sconeline">{{sconeline}}</div>
-                </div>
-              <!--  3열(하단)) :  별점 / isDelete / 금액  -->
-              <div class="prame_row3">
-				<!--   별크기는 .rating (css)에서 font-size로 조절   -->
-                 <div class="icon-score">
-			        <div class="rating2">
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			         </div>
-			         <div class="rating3">
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-			         </div>
-			 		<span class="rating" style="position: relative; left : 170px; bottom : 30px; font-size : 20px;"></span>
-	    		</div>
-                <div><input class="isDelete" type="hidden" value={{isDelete}}></div>
-               <div class="prame_price scprice">{{display scprice}}원</div>
-              </div>
-            </div>         
+           		 <div class="prame_content">
+			  		 <!--  1열(상단) :  업체명/전화번호  -->
+	           		 <div class="prame_row1">
+		                 <div class="prame_name scname" placeholder="어바웃펫">{{scname}}</div>
+		                 <div class="prame_contact sctel">{{sctel}}</div>
+	              	 </div>
+              		 <!--  2열(중간)) :  업체명 상세정보  -->
+	                 <div class="prame_row2">
+	                   	 <div class="prame_description  sconeline">{{sconeline}}</div>
+	                 </div>
+              		 <!--  3열(하단)) :  별점 / isDelete / 금액  -->
+						<div class="prame_row3">
+		              		<div class="icon-score">
+						       <div class="rate" style="position: relative; left : 0px; bottom : 0px; font-size : 30px;">★</div>
+							 	<span class="rating" style="position: relative; left : 120px; bottom : 40px; font-size : 30px;" avgRate="${avgRate}">${avgRate}</span>
+					    	</div>
+	                		<div><input class="isDelete" type="hidden" value={{isDelete}}></div>
+	               			<div class="prame_price scprice">{{display scprice}}원</div>
+               			</div>
+              		</div>
+            	</div>         
           </div>
           {{/each}}
 
@@ -178,7 +121,7 @@
     
     
     </div>
-  
+  </div>
   	<script>
 	Handlebars.registerHelper("display", function(scprice){
 		return scprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -263,13 +206,26 @@
 						 var conScno = $(this).attr("scno");
 						 if(scno==conScno){
 							$(this).find(".prame_content .prame_row3 .icon-score .rating").html(avg);
+							var rate=$(this).find(".prame_content .prame_row3 .icon-score .rating").html();
+
+							if(rate >= 4.5){
+								$(this).find(".prame_content .icon-score .rate").html("⭐⭐⭐⭐⭐");
+							}else if (rate >= 3.5){
+								$(this).find(".prame_content .icon-score .rate").html("⭐⭐⭐⭐");
+							}else if (rate >= 2.5){
+								$(this).find(".prame_content .icon-score .rate").html("⭐⭐⭐");
+							}else if (rate >= 1.5){
+								$(this).find(".prame_content .icon-score .rate").html("⭐⭐");
+							}else{
+								$(this).find(".prame_content .icon-score .rate").html("⭐");
+							}
 						 }
 					  })
 				  })
-				
+				//별점에 색깔입히기
 				$(".rating2").each(function(){
 					var targetscore = $(this).parent().find(".rating").html();
-					//var targetscore = $(this).parent().find("#rating").attr("avgRate");
+					//var targetscore = $(this).parent().find("#rating").attr("avg");
 					//$('#rating').html(targetscore);
 					console.log(targetscore);
 					var firstDigit = targetscore.split('.');	
