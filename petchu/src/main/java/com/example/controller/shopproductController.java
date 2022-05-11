@@ -106,10 +106,14 @@ public class shopproductController {
 	
 	@RequestMapping("/main")
 	public String main(Model model){
-		List<shopcartVO> tvo=cartdao.today_best_items();
-		List<shopcartVO> bvo=cartdao.best_items();
-		model.addAttribute("tlist", tvo);
+//		List<shopcartVO> tvo=cartdao.today_best_items();
+//		List<shopcartVO> bvo=cartdao.best_items();
+		List<shopcartVO> bvo=cartdao.record_best_items();
+		List<shopcartVO> b2vo=cartdao.record_best_items2();
+//		model.addAttribute("tlist", tvo);
+//		model.addAttribute("blist", bvo);
 		model.addAttribute("blist", bvo);
+		model.addAttribute("blist2", b2vo);
 		model.addAttribute("pageName", "shopproduct/main.jsp");
 		return "/home";
 	}
@@ -249,24 +253,23 @@ public class shopproductController {
 	}
 	
 	//상품 구매시 point 이동
-	@RequestMapping(value="/point_insert", method=RequestMethod.POST)
+	@RequestMapping(value="user_order_insert", method=RequestMethod.POST)
 	@ResponseBody
-	public void point_insert(shopcartVO vo, int btnPoint){
-		//만약 btnPoint가 1일 경우user db에서 차감 (1)
-		//point history 사용내역 등록(2)
+	public void order_insert(shopcartVO vo, int btnPoint){
+//		System.out.println(".................."+vo.getOrno()+"\n"+vo.getUid()+"\n"+vo.getPoint()+"\n"+vo.getSum()+"\n"+btnPoint);
 		if(btnPoint==1){
-			
+			//포인트 사용자라면 user 테이블에서 포인트 감소
+			cartdao.user_point_minus(vo);
+			//감소한 내역 history에 기록
+			cartdao.user_point_history(vo);
 		}
-		//user_order 등록(3) ==> 이걸 1번으로 하고 point 등록할 때 if point가 1일 경우에 userDB차감/사용내역 등록
-		
-		//user db pint 적립 (4)
-		//point history 적립내역 등록(5)
-		//총 필요한 것 => orno, uid, point, sum
-		
-//		cartdao.order_insert(vo);
-//		//장바구니chk 목록 삭제
-//		cartdao.chk_delete(vo);
-//		//shopproduct 구매수량 추가
-//		cartdao.sell_update(vo.getAmount(), vo.getPno());
+		//구매내역 입력
+		cartdao.user_order_insert(vo);
+		//포인트 적립
+		int price = vo.getSum();
+		int pricePoint = price/10;
+		cartdao.user_point_plus(pricePoint, vo.getUid());
+		//적립내역 history에 기록
+		cartdao.user_point_history_plus(vo.getUid(), pricePoint);
 	}
 }
