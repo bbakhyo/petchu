@@ -8,7 +8,7 @@
 	font-family: 'Noto Sans KR', sans-serif;
 	color: 3B402B;
 }
-#home_body{
+#home_body:not(.ho_body){
 	display: table; 
 	margin-left: auto;
 	margin-right: auto;

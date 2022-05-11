@@ -321,8 +321,8 @@
 	var page=1;
 	var perPageNum=5;
 	
+	//별점 색칠하기
 	$(".rating2").each(function(){
-		
 		var targetscore = $(this).parent().find("#rating").html();
 		//var targetscore = $(this).parent().find("#rating").attr("avgRate");
 		//$('#rating').html(targetscore);
@@ -342,19 +342,19 @@
 			}
 			
 	});
-	
+	//페이지 이전버튼
 	$("#prev").on("click", function(){
 		page--;
 		getReview();
 
 	});
-	
+	//페이지 다음버튼
 	$("#next").on("click", function(){
 		page++;
 		getReview();
 
 	});
-	
+	//scno값 불러오기
 	var scno = $(myform.scno).val();
 	getReview();
 	
