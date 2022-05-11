@@ -33,8 +33,8 @@ public class ChatMessageDAOImpl implements ChatMessageDAO{
 	}
 
 	@Override
-	public String recedname(int crno) {
-		return session.selectOne(namespace + ".recedname", crno);
+	public ChatMessageVO receinfo(int crno) {
+		return session.selectOne(namespace + ".receinfo", crno);
 	}
 
 	@Override
@@ -58,9 +58,5 @@ public class ChatMessageDAOImpl implements ChatMessageDAO{
 		return session.selectOne(namespace+ ".notreadall", id);
 	}
 
-	@Override
-	public String recenick(int crno) {
-		return session.selectOne(namespace + ".recenick", crno);
-	}
 
 }

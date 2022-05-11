@@ -14,6 +14,7 @@
 		padding: 10px;
 		margin: 10px;
 		text-align: center;
+		margin:0px auto;
 	}
 	tr, td{
 		border:none;
@@ -22,22 +23,26 @@
 		margin: 20px;
 	}
 	.border{
-		border-top:15px solid white;
-		border-left: 2px solid #d8d8d8;
-		border-right: 2px solid #d8d8d8;
-		background: #d8d8d8;
+		border-top:50px solid white;
+		border-left: 2px solid #ededed;
+		border-right: 2px solid #ededed;
+		background: #ededed;
 	}
 	.image{
 		cursor:pointer;
 	}
 	.gray_line {
-		border-top: 2px solid #d8d8d8;
- 		border-left: 2px solid #d8d8d8; 
- 		border-right: 2px solid #d8d8d8; 
-		background: #d8d8d8;
+		border-top: 2px solid white;
+ 		border-left: 2px solid #ededed; 
+ 		border-right: 2px solid #ededed; 
+		background: #ededed;
 	}
 	.date_td {
 		height:5px;
+	}
+	.order_read{
+		color:blue;
+		
 	}
 </style>
 <div id="page">
@@ -45,20 +50,18 @@
 	<table id="tbl"></table>
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each .}}	
-		<tbody class="tbody" bno="{{bno}}" orno="{{orno}}" pno="{{pno}}">
-		<tr class="date_tr">
-			<td colspan="3" style="text-align:right;" class="date_td">{{odate}}</td>
-		</tr>
-		<tr>
-			<td rowspan="3"><img class="image" src="{{pimage}}" width=100></td>
-			<td>{{pname}}</td>
-			<td rowspan="3"><span class="order_read" bno={{bno}}>주문 상세보기</span></td>
-		</tr>
-		<tr>
-			<td class="price" pprice="{{pprice}}" amount="{{amount}}">가격*수량 값
-			
+		<tbody class="tbody" orno="{{orno}}" pno="{{pno}}">
+		<tr class="date_tr" style="text-align:right;">
+			<td colspan="3"><span class="date_td" style="margin-right:78%;">{{odate}}</span>
+				<span class="order_read date_td" orno="{{orno}}" >주문 상세보기</span>
 			</td>
-			</tr>
+			
+		</tr>
+		<tr>
+			<td rowspan="2"><img class="image" src="{{pimage}}" width=100></td>
+			<td>{{pname}}</td>
+			<td class="price" pprice="{{pprice}}" amount="{{amount}}">가격*수량 값</td>
+		</tr>
 		</tbody>
 		{{/each}}
 	</script>
@@ -75,8 +78,8 @@ var uid = "${id}";
 
 //상세보기 클릭시 이동
 $("#tbl").on("click", ".order_read", function(){
-	var bno = $(this).attr("bno");
-	location.href="/shopproduct/order_read?bno="+bno;
+	var orno = $(this).attr("orno");
+	location.href="/shopproduct/order_read?orno="+orno;
 });
 
 //order list 불러오기
@@ -121,6 +124,8 @@ function getList() {
 			$(".date_td").each(function(){
 				if(!$(this).attr("date_only")){
 					$(this).html("");
+				}else{
+					$(this).parent().attr("style", "background:#A7CA37;");
 				}
 			});
 			
@@ -128,11 +133,9 @@ function getList() {
 			$(".price").each(function(){
 				var fprice = $(this).html();
 				fprice=fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-				$(this).html(fprice);
+				$(this).html(fprice + "원");
 			});
-			
-			
-			getTest();//이름 변경해야함
+			getGrayLine();//구분선 긋기
 			
 			//날짜포맷
 			$(".date_td").each(function(){
@@ -141,7 +144,7 @@ function getList() {
 				var strDate = str.substring(0, 10);
 				strDate = strDate.replace("-", ".");
 				strDate = strDate.replace("-", ".");
-				$(this).html("<h4>" + strDate + " 주문" + "</h4>");
+				$(this).html(strDate);
 			});
 			
 			
@@ -162,7 +165,7 @@ $("#tbl").on("click", "img", function(){
 
 //만약 class명이 "tbody"라면
 
-function getTest(){
+function getGrayLine(){
 	$(".tbody").each(function(){
 		if($(this).attr("class")=="tbody"){
 			$(this).attr("class", "tbody gray_line");

@@ -13,7 +13,7 @@
 			<c:if test="${type=='ÀÏ¹Ý'}">${vo.dname}</c:if>
 		</p>
 		<small id="bell">
-			<small id="count">0</small>
+			<small id="count">¾å</small>
 			<script id="temp" type="text/x-handlebars-template">
 				{{data}}
 			</script>

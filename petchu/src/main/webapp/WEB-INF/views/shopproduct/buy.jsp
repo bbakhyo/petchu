@@ -4,7 +4,8 @@
 <style>
 	.cart_item_img img {width:90px; height:90px;}
 	.checkout_delivery_address, .terms_wrapper{text-align:left;}
-	
+	.none{display:none;}
+	.left{text-align:left;}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="/resources/checkout_page.css" rel="stylesheet">
@@ -30,7 +31,7 @@
                   <img src="${vo.pimage}">
                 </div>
               </div>
-              <div class="cartitem_info_right" pno="${pno}" amount="${amount}">
+              <div class="cartitem_info_right left" pno="${pno}" amount="${amount}">
                 <div class="cartitem_title">${vo.pname}</div>
                 <div class="cartitem_price">
                 	<span class="amount_price format_number" price="${vo.pprice}" amount="${amount}">${vo.pprice}</span>원   (${amount}개)
@@ -87,32 +88,14 @@
         <!--  포인트 정보       -->
         
         <div class="coupon_points_card">
-          <div class="card_heading"><span>쿠폰/포인트</span></div>
-
-          <p class="points_header">쿠폰</p>
-          <div class="coupon_line1">
-            <input type="text" name="apply_coupons" placeholder="보유쿠폰 0장" id="apply_coupons" size=43 readonly>
-          <span><button>쿠폰적용</button></span>
-          </div>
-
-
-          
-            <p class="points_header">쿠폰번호</p>
-          <div class="coupon_line2">
-            <input type="text" name="my_coupon_id" placeholder="쿠폰 번호 입력" id="coupon_id" size=43>
-            <span><button>코드확인</button></span>
-          </div>
-
-          <p class="points_header">포인트</p>
-          <div class="coupon_line3">
-            <input type="text" name="my_coupon_points" id="#my_coupon_points" placeholder="0" size=43>
-            <span><button>전액사용</button></span>
-</div>
             <div class="point_paragraphs"><br>
-              <p class="points_header">보유 포인트 1,0000</p>
-              <p>1,0000 포인트 이상 보류 시 10,000원 이상 구매시</p>
-              <p>주문장 최대 30000원 포인트까지 사용 가능</p>
+              <p class="points_header">보유 포인트: <a class="my_point">${uvo.point}</a></p>
             </div>
+          <div class="coupon_line3">
+            <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
+            <span><button class="point_apply">적용</button></span><br><br>
+            <span><button class="point_disapply" style="display:none;">사용취소</button></span><br><br>
+			</div>
           
         </div>
       </div>
@@ -132,9 +115,12 @@
               </div><br>
 
               <div class="checkout_total_card_line2">
-
                 <div class="card_cart_deliveryfee_row_left">배송비</div>
                 <div class="card_cart_deliveryfee_row_right">+3,000원</div>
+              </div><span class="none"><br></span>
+              <div class="checkout_total_card_line2 checkout_point_line" style="display:none;">
+              	<div class="card_cart_point_left">포인트 사용</div>
+                <div class="card_cart_point_right">22</div>
               </div>
               <hr class="transition">
 
@@ -207,6 +193,7 @@
 
 <script>
 	var uid = "${id}";
+	var btnPoint = 0;
 	
 	//체크했을 떄 불러오기만 하면 나중에 합산가능
 	var i = 0;
@@ -359,6 +346,20 @@
 			var final_price = $(".card_cart_grandtotal_row_right").attr("final_price");
 // 			alert(final_price);
 			
+			//포인트를 사용했을 경우
+			if(btnPoint==1){
+				var usePoint = $(".card_cart_point_right").attr("point");
+				var serverPoint = "${uvo.point}";
+				//사용할 포인트가 서버에서 불러온 데이터보다 작다면 (정상적이라면)
+				if(Number(usePoint)<Number(serverPoint)){
+					final_price = final_price - Number(usePoint);
+					alert("데이터 테스트 통과");
+				}else{//아니라면 (비정상적인 접근이라면)
+					alert("포인트가 부족합니다.");
+					return;
+				}
+			}
+			
 			var IMP = window.IMP; // 생략가능
 			IMP.init('imp71996590'); 
 			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
@@ -395,14 +396,29 @@
 						var amount = $(".cartitem_info_right").attr("amount");
 						var tel = card1.find("#delivery_contact").attr("tel");
 						
-							$.ajax({
-								type: "post",
-								url: "/shopproduct/order_single_insert",	
-								data: {uid:uid, pno:pno, amount:amount, orno:orno, zipcode:zipcode, address1:address1, address2:address2, receiver:receiver, tel:tel},
-								success: function(){
-									location.href="/shopproduct/order_list?uid="+uid;
-								}
-							});
+						$.ajax({
+							type: "post",
+							url: "/shopproduct/order_single_insert",	
+							data: {uid:uid, pno:pno, amount:amount, orno:orno, zipcode:zipcode, address1:address1, address2:address2, receiver:receiver, tel:tel},
+							success: function(){
+// 								location.href="/shopproduct/order_list?uid="+uid;
+							}
+						});
+							
+						//user_order
+						if(usePoint==null){
+							usePoint=0;
+						}
+// 						console.log(uid+"\n"+usePoint+"\n"+final_price+"\n"+btnPoint);
+						$.ajax({
+							type: "post",
+							url: "/shopproduct/user_order_insert",	
+							data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint},
+							success: function(){
+								location.href="/shopproduct/order_list";
+							}
+						});
+							
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
@@ -451,6 +467,10 @@
 		semifinalPrice=semifinalPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		$(".items_price").html(semifinalPrice);
 		
+		var pointP = $(".my_point").html();
+		pointP=pointP.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		$(".my_point").html(pointP);
+		
 	}
 	
 	//전화번호 포멧//////////////여기부터 시작!!!!!!!!!!!!!!!!!! 멀티바이도 수정해야함
@@ -470,8 +490,79 @@
 	 $("#delivery_contact").attr("tel", num);
 	    
 	
-	
-	//
-	//동의버튼 번갈아 사용시 작동 안하니 생각 좀 해보기 
-	//
+	 //포인트가 변경될 때
+	    $(".point_apply").on("click", function(){
+	    	var point = $(this).parent().parent().find(".point").val();
+	    	var myPoint = $(".my_point").html();
+	    	//숫자가 아니거나 0일 경우, 혹은 0보다 작을 경우 작동 안되게 해야함
+	    	if(isNaN(point)==true){
+	    		alert("숫자를 입력하십시오.");
+	    		$(".point").val("");
+	    		$(".point").focus();
+	    		return;
+	    	}
+	    	if(Number(point)>Number(myPoint)){
+	    		alert("포인트가 부족합니다.");
+	    		$(".point").val("");
+	    		$(".point").focus();
+	    		return;
+	    	}
+	    	if(Number(point)<0){
+	    		alert("정확한 숫자를 입력하십시오.");
+	    		$(".point").val("");
+	    		$(".point").focus();
+	    		return;
+	    	}
+	    	$(".none").attr("class", "show");
+	    	$(".checkout_point_line").attr("style", "");
+	    	$(".card_cart_point_right").html(point);
+	    	$(".card_cart_point_right").attr("point", point);
+	    	
+	    	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
+	    	fprice = Number(fprice) - Number(point);
+	    	$(".card_cart_grandtotal_row_right").html(fprice);
+	    	
+	    	var fmprice = $(".card_cart_grandtotal_row_right").html();
+			fmprice=fmprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			$(".card_cart_grandtotal_row_right").html(fmprice+"원");
+			
+			$(this).attr("style", "display:none;");
+	    	$(".point_disapply").attr("style", "");
+	    	$(".point").attr("readonly", "readonly")
+			alert("포인트 적용 완료");
+	    	btnPoint = 1;
+	    	
+	    	var pointP = $(".card_cart_point_right").html();
+			pointP=pointP.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			$(".card_cart_point_right").html("- "+pointP+"원");
+	    	return;
+	    });
+		
+		//포인트 적용취소 눌렀을 때
+	    $(".point_disapply").on("click", function(){
+	    	$(".show").attr("class", "none");
+	    	
+	    	$(".card_cart_grandtotal_row_right").html($(".card_cart_grandtotal_row_right").attr("final_price"));
+	    	var fmprice = $(".card_cart_grandtotal_row_right").html();
+			fmprice=fmprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			$(".card_cart_grandtotal_row_right").html(fmprice+"원");
+	    	$(".card_cart_point_right").html("");
+	    	$(".card_cart_point_right").attr("point", "");
+	    	$(".checkout_point_line").attr("style", "display:none;");
+	    	$(this).attr("style", "display:none;");
+	    	$(".point_apply").attr("style", "");
+	    	alert("취소완료");
+	    	$(".point").val("");
+	    	$(".point").attr("readonly", false);
+	    	btnPoint = 0;
+	    	return;
+	    })
+		
+	    //포인트 엔터시 적용버튼 클릭
+	    $(".point").on("keypress", function(e){
+	    	if(e.key === "Enter"){
+	    		$(".point_apply").click();
+	    	}
+	    })
+	 
 </script>

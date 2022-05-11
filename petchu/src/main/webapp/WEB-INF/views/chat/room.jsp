@@ -11,10 +11,14 @@
 		<td width=80><a href="/chat/main">뒤로가기</a></td>
 		<td>
 			<c:if test="${type=='의사'}">
-			<span id="hosname">${nick}</span>
+			<span id="hosname">${receinfo.nick}</span>
+			<input type="text" value=0 id="send" style="display:none">
+			<input type="text" value="${roominfo.userid}" id="receiver" style="display:none">
 			</c:if>
 			<c:if test="${type=='일반'}">
-			<span id="hosname">${dname}</span>
+			<span id="hosname">${receinfo.dname}</span>
+			<input type="text" value=1 id="send" style="display:none">
+			<input type="text" value="${roominfo.doctorid}" id="receiver" style="display:none">
 			</c:if>
 		</td>
 	</tr>
@@ -58,7 +62,6 @@
 </script>
 <script>
 	var crno = "${crno}";
-
 	getList();
 	
 	function getList(){
@@ -69,11 +72,12 @@
 			success:function(data){
 				var temp = Handlebars.compile($("#temp").html());
 				$("#message").html(temp(data));
-				window.scrollTo(0, $("#chat").prop("scrollHeight"));
+				window.scrollTo(0, $("#message").prop("scrollHeight"));
 				
 				$.ajax({
 					type: "post",
-					url: "/chat/update?crno=" + crno,
+					url: "/chat/update",
+					data: {crno:crno},
 					success:function(){
 						sock.send("updateReadDate");
 					}
@@ -111,10 +115,11 @@
 				return;
 			}
 			var id = "${id}";
-			var receiver = "user01";
-			dno = 5;
-			crno = "${crno}";
-			send = 0;
+			var receiver = $("#receiver").val();
+			dno = "${receinfo.dno}";
+			var crno = "${crno}";
+			var send = $("#send").val();
+			/* alert("id : " + id + "\nreceiver : " + receiver + "\ndno : " + dno + "\ncrno : " + crno + "\nsend : " + send); */
 			$.ajax({
 				type: "post",
 				url: "/chat/send",
@@ -124,7 +129,7 @@
 					//sock.send(uid + "|" + message);
 					$("#txtMessage").val("");
 				}
-			})
+			}) 
 			
 		}
 	})

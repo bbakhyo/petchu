@@ -2,7 +2,8 @@ package com.example.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,8 @@ public class PetController {
 	PetDAO dao;
 	
 	@RequestMapping("/petlist")
-	public List<PetVO> petlist(String id){
-		return dao.readPetList(id);
+	public List<PetVO> petlist(HttpSession session){
+		return dao.readPetList(session.getAttribute("id").toString());
 	}
 	@RequestMapping("/readpet")
 	public PetVO readpet(int pno){

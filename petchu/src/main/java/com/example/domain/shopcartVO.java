@@ -26,9 +26,16 @@ public class shopcartVO {
 	private String tel;
 	//
 	private int sellcount;
+	//
+	private int point;
 	
 	
-	
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
 	public int getSellcount() {
 		return sellcount;
 	}

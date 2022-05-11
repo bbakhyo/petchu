@@ -3,6 +3,9 @@
 
 <mapper namespace="com.example.mapper.ChatRoomMapper">
     <insert id="create">
-    	insert chatRoom values();
+    	insert chatRoom(doctorid, userid) values(#{doctorid}, #{userid})
     </insert>
+    <select id="roominfo" resultType="com.example.domain.ChatRoomVO">
+    	select * from chatRoom where crno=#{crno}
+    </select>
 </mapper>

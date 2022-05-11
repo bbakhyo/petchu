@@ -25,10 +25,10 @@
 			<td id="pname"></td>
 		</tr>
 		<tr>
-			<td class="title" width=70>대 분 류</td>
-			<td id="pcate" width=60></td>
-			<td class="title" width=70>etc</td>
-			<td id="pcate_1" width=120></td>
+			<td class="title" width=80>대 분 류</td>
+			<td id="pcate" width=80></td>
+			<td class="title" width=60>etc</td>
+			<td id="pcate_1" width=110></td>
 		</tr>
 		<tr>
 			<td class="title">품  종</td>
@@ -278,6 +278,4 @@
       });//arr.forEach
     }
   });
-</script>
-
 </script>

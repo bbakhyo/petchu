@@ -8,7 +8,21 @@ public class ChatMessageVO extends DoctorVO{
 	private String id;
 	private String receiver;
 	private int send;
+	private String nick;
+	private int dno;
 	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	public int getDno() {
+		return dno;
+	}
+	public void setDno(int dno) {
+		this.dno = dno;
+	}
 	private int crno;
 	public String getReceiver() {
 		return receiver;

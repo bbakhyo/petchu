@@ -87,7 +87,7 @@
                   <div class="content_col4_deliveryFee_container">
                      <div class="content_col3_subtotal_label">적립예정금</div>
                      <div class="content_col4_deliveryFee_amount"><span class="reserves"></span>원</div>
-                     <div class="content_col4_deliveryFee_message">(8만원 이상 구매 시 배송비 무료)</div>
+                     <div class="content_col4_deliveryFee_message">(최대 10% 적립)</div>
                   </div>
                </div>
             </div>
@@ -110,13 +110,6 @@
                      <div class="page_footer_col_label">총 배송비</div>
                      <div class="page_footer_col_label_deliveryfee">3,000원</div>
                   </div>
-                  <span class="material-symbols-outlined math">
-                  remove
-                  </span>
-                  <div class="page_footer_col3_discount_amount">
-                     <div class="page_footer_col_label">할인예상금액</div>
-                     <div class="page_footer_col_label_discount">8,000원</div>
-                  </div>
                   <div class="page_footer_col3_subtotal">
                      <span class="page_footer_col3_label"> 총 주문금액</span>
                      <span class="page_footer_col3_label_subtotal">35,000000원</span>          
@@ -137,6 +130,7 @@
 	var uid = "${id}";
 	var checked=0;
 	var chk_all=0;
+	var chked_all=0;
 	getList();
 	
 	//chkall 체크되었을 경우
@@ -362,6 +356,10 @@
 	/* buy click function의 존재의의가 없다. 구매시 이동하기만 해도 될 것 같다. 정보를 list에 담아서 이동하는 코드 필요 */
 	//구매 버튼을 클릭한 경우
 	$("#tbl").on("click", ".payment_submit_now", function(){
+		if(chked_all==0){
+			alert("주문할 상품을 선택해주세요!");
+			return;
+		}
 		location.href="/shopproduct/multi_buy?uid=${id}";
 	});
 	
@@ -451,7 +449,7 @@
 	
 	function chkCount(){
 	// 	총 몇 건 주문하기 length 세는 법
-		var chked_all = $('input[class=bigCheckbox_item]:checked').length;
+		chked_all = $('input[class=bigCheckbox_item]:checked').length;
 		$(".payment_submit_now").html("총 "+chked_all+" 건 주문하기");
 	}
 	
@@ -481,9 +479,14 @@
 		$(".page_footer_col_amount").html(fprice+"원");
 		
 		var aprice = $(".page_footer_col_amount").attr("final_price");
-		aprice = Number(aprice)+3000;
-		
-		//추가로 할인예정금액 계산해야함 
+		if(chked_all==0){
+			aprice = Number(aprice);
+			$(".page_footer_col_label_deliveryfee").html("0원");
+		}else{
+			aprice = Number(aprice)+3000;
+			$(".page_footer_col_label_deliveryfee").html("3,000원");
+		}
+		//만약 chk된 것이 없다면 배송비 0으로 변경	
 		
 		$(".page_footer_col3_label_subtotal").attr("price", aprice);
 		
