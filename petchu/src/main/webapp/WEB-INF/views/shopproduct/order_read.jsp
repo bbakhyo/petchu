@@ -29,6 +29,19 @@
 	.none{
 		display:none;
 	}
+	#tbl{
+		border-radius: 10px;
+		background: #eeeeee;
+	}
+	
+	td {
+		padding: 10px;
+		border: none;
+		border-bottom: solid 5px white;
+		margin-bottom: 50px;
+	}
+	
+	
 </style>
 <div id="page">
 	<div style="text-align: center; overflow:hidden;">

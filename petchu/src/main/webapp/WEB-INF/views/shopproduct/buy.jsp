@@ -5,6 +5,7 @@
 	.cart_item_img img {width:90px; height:90px;}
 	.checkout_delivery_address, .terms_wrapper{text-align:left;}
 	.none{display:none;}
+	.left{text-align:left;}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="/resources/checkout_page.css" rel="stylesheet">
@@ -30,7 +31,7 @@
                   <img src="${vo.pimage}">
                 </div>
               </div>
-              <div class="cartitem_info_right" pno="${pno}" amount="${amount}">
+              <div class="cartitem_info_right left" pno="${pno}" amount="${amount}">
                 <div class="cartitem_title">${vo.pname}</div>
                 <div class="cartitem_price">
                 	<span class="amount_price format_number" price="${vo.pprice}" amount="${amount}">${vo.pprice}</span>원   (${amount}개)

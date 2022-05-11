@@ -479,9 +479,14 @@
 		$(".page_footer_col_amount").html(fprice+"원");
 		
 		var aprice = $(".page_footer_col_amount").attr("final_price");
-		aprice = Number(aprice)+3000;
-		
-		//추가로 할인예정금액 계산해야함 
+		if(chked_all==0){
+			aprice = Number(aprice);
+			$(".page_footer_col_label_deliveryfee").html("0원");
+		}else{
+			aprice = Number(aprice)+3000;
+			$(".page_footer_col_label_deliveryfee").html("3,000원");
+		}
+		//만약 chk된 것이 없다면 배송비 0으로 변경	
 		
 		$(".page_footer_col3_label_subtotal").attr("price", aprice);
 		
