@@ -265,14 +265,24 @@ width: 960px;
 display: flex;
 }
 
+//맨위 강아지 두 마리 사진 - 추후 다른 거로 대체하면 배너 style과 배너 img 스타일 변경
+.banner{
+	width:700px;
+	height:300px;
+	overflow: hidden;
+	margin-left: 20px;
+}
+.banner img{
+	max-width: initial;
+	max-height: initial;
+}
 
 </style>
 
 <body>
-	<h1>카테고리 테스트</h1>
 	<div class="page">
-		<div class="banner" style="display: flex; justify-content:center;">
-			<img src="https://via.placeholder.com/960x200/d3d3d3">
+		<div class="banner" style="display: flex; justify-content:center; width:700px; height:300px; overflow: hidden; margin-left: 143px;">
+			<img src="/resources/petchu_dog_banner.png">
 		</div>
 
 			<!-- 주 카타고리 -->
