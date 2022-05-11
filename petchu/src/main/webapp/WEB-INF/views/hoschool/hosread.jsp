@@ -7,12 +7,10 @@
 
 	* {
 	box-sizing: border-box;
-
 	}
 	
 	.icon-score{
 		display: left;
-		color: 
 	}
 	.price{
 		position: absolute;
@@ -21,17 +19,16 @@
 	.icon-score .rating2{
 		z-index : 1;
 		position: relative;
-
 	}
 	.icon-score .rating3{
 		z-index : 0;
 		position: relative;
-
+		margin-top: -35px;
 	}
 
 	.rating2 .star {
 		width: 100;
-		
+		color: #D3D3D3;
 		overflow: hidden;
 	}
 	
@@ -101,6 +98,7 @@
       margin: 10px;
       float: right;
       margin-right: 50px;
+      text-align: left; 
    }
    h2 {
       margin-bottom: 20px;
@@ -165,24 +163,7 @@
 
 
 <div id="page">
-<div class="icon-score">
-		        <div class="rating2">
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		         </div>
-		         <div class="rating3" data-rate="5">
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		         </div>
-			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;">${avgRate}</span>
-	    	</div>
-   <h1>호텔/유치원 상세보기</h1>
+
    <form name="frm">
       <!-- 백그라운드 이미지 -->
       <div id="topArea">
@@ -199,7 +180,7 @@
             <p>전화: <span class="tel">${vo.sctel}</span></p>
             <p>위치: ${vo.scaddress1}</p>
             <p>최저가격: <span class = "price">${vo.scprice }</span></p>
-            <p>별점:<span id="avgRate">★${avgRate}</span></p>
+
             <div class="icon-score">
 		        <div class="rating2">
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>

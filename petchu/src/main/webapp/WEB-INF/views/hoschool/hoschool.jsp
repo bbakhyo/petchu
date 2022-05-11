@@ -1,8 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<link href="/resources/css/hoschool.css" rel="stylesheet" />
 	<link href="https://www.cssscript.com/demo/segmented-control-toggle-radio/toggle-radios.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
 
+<style>
 
+	* {
+	box-sizing: border-box;
+	}
+	
+	.icon-score{
+		display: left;
+	}
+	
+	.icon-score .rating2{
+		z-index : 1;
+ 		position: absolute; 
+ 		margin-left: 32px; 
+
+ 		
+	}
+	.icon-score .rating3{
+		z-index : 0;
+ 		position: relative; 
+
+	}
+
+	.rating2 .star {
+		width: 100;
+ 		color: #D3D3D3; 
+		overflow: hidden;
+
+	}
+	
+	.rating2 .star-wrap {
+		width: 36px;
+		display: inline-block;
+		color : #D3D3D3;
+	}
+	
+	.rating3 .star-wrap{
+		width: 36px;
+		display: inline-block;
+	}
+	
+	.rating3 .fa-solid{
+		color : #D3D3D3;
+	}
+</style>
 <div class="page_hoschool">
 	
   	<div class="ho_page_header">
@@ -96,13 +142,23 @@
               <!--  3열(하단)) :  별점 / isDelete / 금액  -->
               <div class="prame_row3">
 				<!--   별크기는 .rating (css)에서 font-size로 조절   -->
-                 <div class="rating rating2"><!--
-					--><a href="#5" title="Give 5 stars">★</a><!--
-					--><a href="#4" title="Give 4 stars">★</a><!--
-					--><a href="#3" title="Give 3 stars">★</a><!--
-					--><a href="#2" title="Give 2 stars">★</a><!--
-					--><a href="#1" title="Give 1 star">★</a>
-				</div>
+                 <div class="icon-score">
+			        <div class="rating2">
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			         </div>
+			         <div class="rating3">
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
+			         </div>
+			 		<span class="rating" style="position: relative; left : 170px; bottom : 30px; font-size : 20px;"></span>
+	    		</div>
                 <div><input class="isDelete" type="hidden" value={{isDelete}}></div>
                <div class="prame_price scprice">{{display scprice}}원</div>
               </div>
@@ -111,7 +167,12 @@
           {{/each}}
 
          </script>
-        </div>
+         <c:forEach items="${rlist}" var="rvo">
+         	<div class="rvo" scno="${rvo.scno}" avg="${rvo.avgrate }" style="display:none;">
+         		<span class="rvo_scno"></span>
+         		<span class="rvo_avg">${rvo.avgrate }</span>
+         	</div>
+         </c:forEach>
     </div>
 
     
@@ -193,14 +254,49 @@
 				var template = Handlebars.compile($("#temp").html());
 				$("#bigPrame").html(template(data));
 				
+				
+				  //scno에 맞춰서 별점 출력
+				  $(".rvo").each(function(){
+					  var scno = $(this).attr("scno");
+					  var avg = $(this).attr("avg");
+					  $(".prame").each(function(){
+						 var conScno = $(this).attr("scno");
+						 if(scno==conScno){
+							$(this).find(".prame_content .prame_row3 .icon-score .rating").html(avg);
+						 }
+					  })
+				  })
+				
+				$(".rating2").each(function(){
+					var targetscore = $(this).parent().find(".rating").html();
+					//var targetscore = $(this).parent().find("#rating").attr("avgRate");
+					//$('#rating').html(targetscore);
+					console.log(targetscore);
+					var firstDigit = targetscore.split('.');	
+						console.log(firstDigit);
+						if(firstDigit.length > 1) {
+							for(var i=0; i<firstDigit[0]; i++){
+								$(this).find('.star').eq(i).css({width:'100%', color: '#F08d28'}); //인덱스 번호에 해당하는 요소 찾기
+							}
+							$(this).find('.star').eq(firstDigit[0]).css({width:firstDigit[1] + '0%', color : '#F08d28'});
+						}else {
+							for(var i=0; i<targetscore; i++){
+								$(this).find('.star').eq(i).css({width:'100%', color: '#F08d28'}); //인덱스 번호에 해당하는 요소 찾기
+							}
+						}
+				});
+				
+				
 				var i = 0;
 				$(".prame").each(function(){
 					var bg=$(".image").html();
-						//백그라운드 이미지 수만큼 반복
+
+						//백그라운드 이미지 수만큼 반복하여 Prame마다 다른이미지 적용
 							if(i==0){
 								//$(this).style.backgroundimage="url('/resources/TBN/TBN01.jpg')";
 								$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); 
 								$(this).css({"background-size":"700px 200px"}); 
+								
 								i++;
 							}else if(i==1){
 								$(this).css({"background":"url(/resources/TBN/TBN04.png"});
@@ -215,7 +311,8 @@
 								$(this).css({"background-size":"700px 200px"}); 
 								i=0;
 							}
-						
+							
+							//전화번호 포멧 적용
 							var num = $(this).find(".sctel").html();
 							var formatNum = '';
 							
@@ -231,7 +328,6 @@
 						        formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
 						    }
 						    	$(this).find(".sctel").html(formatNum);
-						    	
 				});
 			}
 		});
@@ -262,5 +358,7 @@
 		 	location.href="/hoschool/read?scno=" + scno + "&id=" + id + "&checkin=" + checkin + "&checkout=" + checkout;
 		 
 	  });
+	  
+
 </script>
 
