@@ -52,11 +52,13 @@ public class HoschoolController {
 	}
 	@RequestMapping("/read")
 	public String read(Model model,int scno,String id, String checkout, String checkin, HttpSession session) {
+		model.addAttribute("avgRate", rdao.avgRateRead(scno));
 		session.setAttribute("checkin", checkin);
 		session.setAttribute("checkout", checkout);
 		model.addAttribute("vo",dao.read(scno));
 		model.addAttribute("uvo",udao.read(id));
 		model.addAttribute("pageName", "hoschool/hosread.jsp");
+		System.out.println("............................avgRate: " + rdao.avgRate());
 		return "/home";
 	}
 	@RequestMapping("/reviewList")
@@ -109,7 +111,7 @@ public class HoschoolController {
 	public List<ServiceVO> mylist(String id) {
 		return dao.myList(id);
 	}
-
+	
 	
 	
 	@RequestMapping(value="/servicedelete", method=RequestMethod.POST)

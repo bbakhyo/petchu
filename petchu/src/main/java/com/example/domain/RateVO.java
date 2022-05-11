@@ -9,14 +9,14 @@ public class RateVO {
 	private String revDate;
 	private int start;
 	private int perPageNum;
-	private int avgrate;
+	private double avgrate;
 	
 	
 	
 	public double getAvgrate() {
 		return avgrate;
 	}
-	public void setAvgrate(int avgrate) {
+	public void setAvgrate(double avgrate) {
 		this.avgrate = avgrate;
 	}
 	public int getStart() {

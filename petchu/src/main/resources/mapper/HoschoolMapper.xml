@@ -84,5 +84,10 @@
     <select id="reviewCount" resultType="int">
     	select count(*) from rate where scno=#{scno}
     </select>
-
+	<select id="avgRate" resultType="com.example.domain.RateVO">
+		select scno, format(avg(rate),1) avgrate from rate group by scno
+	</select>
+	<select id="avgRateRead" resultType="double">
+		select format(avg(rate),1) avgrate from rate where scno=#{scno}
+	</select>
 </mapper>
