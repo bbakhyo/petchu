@@ -188,7 +188,9 @@ table, tr, td{
 #sendrequest:hover, #bigbtn:hover{
 	background-color: 7F9730;
 }
-
+body{
+	color: inherit;
+}
 #reset{
 	width: 200px;
 	height: 50px;
