@@ -220,10 +220,11 @@ table, tr, td{
 }
 /*-----------------resultRequestList-------------*/
 #listbody{
-	padding: 0px 20px 20px 20px;
+	/*  padding: 0px 20px 20px 20px;*/
 }
 .menu_box{
 	float:left;
+	background-color : white;
 	margin: 10px;
 	flex-direction: column;
 	box-shadow:1px 6px 6px #dfe8ca;
@@ -236,11 +237,59 @@ table, tr, td{
 	overflow:hidden;
 	text-overflow:ellipsis;
 }
-.menu_box #dname{
+
+.menu_box1{
+	float:left;
+	background-color : white;
+	margin: 10px;
+	flex-direction: column;
+	box-shadow:1px 6px 6px #dfe8ca;
+	border: 2px solid #dfe8ca;
+	width: 150px;
+	min-height: 220px;
+	cursor: pointer;
+	padding: 20px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.menu_box2{
+	float:left;
+	background-color : white;
+	margin: 10px;
+	flex-direction: column;
+	box-shadow:1px 6px 6px #dfe8ca;
+	border: 2px solid #dfe8ca;
+	width: 150px;
+	min-height: 220px;
+	cursor: pointer;
+	padding: 20px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.menu_box3{
+	float:left;
+	background-color : white;
+	margin: 10px;
+	flex-direction: column;
+	box-shadow:1px 6px 6px #dfe8ca;
+	border: 2px solid #dfe8ca;
+	width: 150px;
+	min-height: 220px;
+	cursor: pointer;
+	padding: 20px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.menu_box .dname{
 	font-weight: 900;
 	text-align: center;
 }
-.menu_box #drprice{
+.menu_box .drprice{
 	text-align: right;
 	font-weight: 900;
 	color: #9f1f11;

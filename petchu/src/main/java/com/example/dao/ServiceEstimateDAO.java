@@ -17,12 +17,24 @@ public interface ServiceEstimateDAO {
 	
 	public List<ServiceEstimateVO> blist(int scno);
 	
+	public List<ServiceEstimateVO> brnolist(int brno);
+	
+	public ServiceEstimateVO beautyEstimateRead(int brno, int scno);
+	
 	//홈 클리닝
 	public void cinsert(ServiceEstimateVO vo);
+	
+	public List<ServiceEstimateVO> crnolist(int crno);
+	
+	public ServiceEstimateVO cleanEstimateRead(int crno, int scno);
 	
 	
 	//레슨
 	public void linsert(ServiceEstimateVO vo);
+	
+	public List<ServiceEstimateVO> lrnolist(int lrno);
+	
+	public ServiceEstimateVO lessonEstimateRead(int lrno, int scno);
 	
 	//내가 쓴 견적서 보기
 	

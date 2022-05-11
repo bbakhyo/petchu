@@ -48,4 +48,14 @@ public class CleaningDAOImpl implements CleaningDAO{
 		
 	}
 
+	@Override
+	public List<CleaningRequestVO> cleanDeadlineList(String uid) {
+		return session.selectList(namespace + ".cleanDeadlineList", uid);
+	}
+
+	@Override
+	public int crno(String uid) {
+		return session.selectOne(namespace + ".crno", uid);
+	}
+
 }

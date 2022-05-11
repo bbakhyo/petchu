@@ -343,6 +343,8 @@ public class UserController {
 	}
 	
 	//서비스 요청서 관리
+	
+	//내가 작성한 요청서
 	@RequestMapping(value="/myRequest")
 	public String myRequest(Model model, HttpSession session){
 		model.addAttribute("bvo", bdao.myBeautyRead(session.getAttribute("id").toString()));
@@ -352,6 +354,17 @@ public class UserController {
 		model.addAttribute("pageName", "myRequest/Request.jsp");
 		return "/home";
 	}
+	//마감처리한 요청서
+	@RequestMapping(value="/myDeadlineList")
+	public String myDeadlineList(Model model, HttpSession session){
+		model.addAttribute("bvo", bdao.beautyDeadlineList(session.getAttribute("id").toString()));
+		model.addAttribute("cvo", cdao.cleanDeadlineList(session.getAttribute("id").toString()));
+		model.addAttribute("lvo", ldao.lessonDeadlineList(session.getAttribute("id").toString()));
+		model.addAttribute("sideMenu", "mypageSidemenu.jsp");
+		model.addAttribute("pageName", "myRequest/deadlineRequest.jsp");
+		return "/home";
+	}
+	
 	
 	//미용 마감
 	@ResponseBody
@@ -373,4 +386,26 @@ public class UserController {
 	public void lisDeleteUpdate(HttpSession session, Model model, int lrno){
 		ldao.lisDeleteUpdate(lrno);
 	}
+	
+
+	@RequestMapping("/bread")
+		public String beautyRead(Model model, int brno){
+			model.addAttribute("bvo", bdao.beautyRead(brno));
+			model.addAttribute("pageName", "myRequest/beautyread.jsp");
+			return "/home";
+		}
+	
+	@RequestMapping("/cread")
+		public String cleanRead(Model model, int crno){
+			model.addAttribute("cvo", cdao.cleanRead(crno));
+			model.addAttribute("pageName", "myRequest/cleaningread.jsp");
+			return "/home";
+		}
+	
+	@RequestMapping("/lread")
+		public String lessonRead(Model model, int lrno){
+			model.addAttribute("lvo", ldao.lessonRead(lrno));
+			model.addAttribute("pageName", "myRequest/lessonread.jsp");
+			return "/home";
+		}
 }

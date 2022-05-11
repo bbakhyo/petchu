@@ -53,4 +53,16 @@ public class LessonDAOImpl implements LessonDAO {
 		session.update(namespace + ".lisDeleteUpdate", lrno);
 		
 	}
+
+
+	@Override
+	public List<LessonRequestVO> lessonDeadlineList(String uid) {
+		return session.selectList(namespace + ".lessonDeadlineList", uid);
+	}
+
+
+	@Override
+	public int lrno(String uid) {
+		return session.selectOne(namespace + ".lrno", uid);
+	}
 }
