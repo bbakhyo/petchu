@@ -7,7 +7,7 @@
 <style>
 	
 #page{
-  display:flex;
+/*   display:flex; */
   flex-direction:column;
   font-family:NanumGothic;
 }

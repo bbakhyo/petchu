@@ -145,4 +145,9 @@ public class shopcartDAOImpl implements shopcartDAO{
 	public List<shopcartVO> record_best_items2() {
 		return session.selectList(namespace+".record_best_items2");
 	}
+
+	@Override
+	public shopcartVO read_user_order(String orno) {
+		return session.selectOne(namespace+".read_user_order", orno);
+	}
 }
