@@ -1,8 +1,5 @@
-<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<head>
-   <title>Cart</title>
    <link href="/resources/temp_page.css" rel="stylesheet">
    <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    <style>
@@ -17,8 +14,7 @@
 		cursor:pointer;
 	}
    </style>
-</head>
-<body>
+
 <div id="page">
 <table id="tbl"></table>
 <script id="temp" type="text/x-handlebars-template">
@@ -124,7 +120,6 @@
    </div>
 </script>
 </div>
-</body>
 
 <script>
 	var uid = "${id}";
