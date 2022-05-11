@@ -329,6 +329,7 @@
 		console.log(targetscore);
 		var firstDigit = targetscore.split('.');	
 			console.log(firstDigit);
+			console.log("테스트   "+firstDigit.length);
 			if(firstDigit.length > 1) {
 				for(var i=0; i<firstDigit[0]; i++){
 					$(this).find('.star').eq(i).css({width:'100%', color: '#F08d28'}); //인덱스 번호에 해당하는 요소 찾기
