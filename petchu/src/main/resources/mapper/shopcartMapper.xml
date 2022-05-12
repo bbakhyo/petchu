@@ -77,22 +77,22 @@
 		select point, id uid from user where id = #{uid}
 	</select>
 	<insert id="user_order_insert">
-		insert into user_order(uid, orno, point, sum) 
-		values(#{uid},#{orno}, #{point} , #{sum})
+		insert into user_order(uid, orno, point, sum, omessage) 
+		values(#{uid},#{orno}, #{point} , #{sum}, #{omessage})
 	</insert>
 	<update id="user_point_minus">
-		update user set point=point-#{point} where id=#{uid};
+		update user set point=point-#{point} where id=#{uid}
 	</update>
 	<insert id="user_point_history">
 		insert into pointhistory(id, amount, content)
-		values(#{uid}, -#{point}, '쇼핑몰 구매 포인트 사용');
+		values(#{uid}, -#{point}, '쇼핑몰 구매 포인트 사용')
 	</insert>
 	<update id="user_point_plus">
-		update user set point=point+#{pricePoint} where id=#{uid};
+		update user set point=point+#{pricePoint} where id=#{uid}
 	</update>
 	<insert id="user_point_history_plus">
 		insert into pointhistory(id, amount, content)
-		values(#{uid}, #{pricePoint}, '쇼핑몰 구매 포인트 적립');
+		values(#{uid}, #{pricePoint}, '쇼핑몰 구매 포인트 적립')
 	</insert>
 	<select id="record_best_items" resultType="com.example.domain.shopcartVO">
 	 	select p.*
@@ -101,11 +101,15 @@
 		order by p.sellcount desc
 		limit 0, 3
 	</select>
-		<select id="record_best_items2" resultType="com.example.domain.shopcartVO">
+	<select id="record_best_items2" resultType="com.example.domain.shopcartVO">
 	 	select p.*
 		from orderlist o, shopproduct p
         group by pno
 		order by p.sellcount desc
 		limit 3, 3
+	</select>
+	<select id="read_user_order" resultType="com.example.domain.shopcartVO">
+	 	select * from user_order 
+	 	where orno = #{orno}
 	</select>
 </mapper>

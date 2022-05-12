@@ -47,5 +47,16 @@ public class BeautyDAOImpl implements BeautyDAO{
 		session.update(namespace + ".bisDeleteUpdate", brno);
 		
 	}
+
+	@Override
+	public List<BeautyRequestVO> beautyDeadlineList(String uid) {
+		return session.selectList(namespace + ".beautyDeadlineList", uid);
+	}
+
+	@Override
+	public int brno(String uid) {
+		return session.selectOne(namespace + ".brno", uid);
+	}
+
 	
 }

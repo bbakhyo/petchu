@@ -59,7 +59,7 @@
 		</tr>
 		<tr>
 			<td rowspan="2"><img class="image" src="{{pimage}}" width=100></td>
-			<td>{{pname}}</td>
+			<td>{{pname}} · {{amount}}개</td>
 			<td class="price" pprice="{{pprice}}" amount="{{amount}}">가격*수량 값</td>
 		</tr>
 		</tbody>

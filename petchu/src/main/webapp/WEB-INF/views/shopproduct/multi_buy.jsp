@@ -5,6 +5,14 @@
 	.cart_item_img img {width:90px; height:90px;}
 	.checkout_delivery_address, .terms_wrapper{text-align:left;}
 	.none{display:none;}
+	#delivery_message{
+		padding: 5px;
+ 		text-align: center;
+ 		margin: 0px;
+ 		width:400px;
+ 		line-height:50px;
+ 		font-size:15px;
+	}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="/resources/checkout_page.css" rel="stylesheet">
@@ -85,12 +93,15 @@
             <div>
               <div><input type="text" name="delivery_address2" placeholder="주소2" id="delivery_addy2" size=55></div>
             </div><br>
+            <div>
+              <div><input type="text" name="delivery_message" placeholder="배송시 요청사항" id="delivery_message" size=55></div>
+            </div>
           </div>
         </div>
 
         <!--  포인트 정보       -->
         
-        <div class="coupon_points_card">
+        <div class="coupon_points_card" style="height:90px;">
 <!--           <div class="card_heading"><span>포인트</span></div> -->
 
 <!--           <p class="points_header">보유 포인트</p> -->
@@ -107,7 +118,7 @@
             </div>
           <div class="coupon_line3">
             <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
-            <span><button class="point_apply">적용</button></span><br><br>
+            <span><button class="point_apply">적용</button></span>
             <span><button class="point_disapply" style="display:none;">사용취소</button></span><br><br>
 			</div>
           
@@ -190,7 +201,7 @@
 
                 <div class="terms_line2">
                   <label for="terms_agreement">
-                    &nbsp;<span style='font-size:10px;'></span>&#9493;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="terms_agree_all" id="terms_agreement">구매조건 확인 및 결제진행에 동의</label>
+                    &nbsp;<span style='font-size:10px;'></span>&#9493;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="terms_agree_it" id="terms_agreement">구매조건 확인 및 결제진행에 동의</label>
                 </div>
               </div>
             </div>
@@ -465,10 +476,11 @@ Handlebars.registerHelper("display", function(sum){
 						usePoint=0;
 					}
 					
+					var omessage = $("#delivery_message").val();
 					$.ajax({
 						type: "post",
 						url: "/shopproduct/user_order_insert",	
-						data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint},
+						data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint, omessage:omessage},
 						success: function(){
 							location.href="/shopproduct/order_list";
 						}
@@ -487,31 +499,32 @@ Handlebars.registerHelper("display", function(sum){
 	});
 
 	
-	//전체동의 버튼	
-	$("#terms_agree_all").on("change", function(){
-		//체크 되었을 경우
-		if($("#terms_agree_all").is(":checked")) {
-			$("#terms_agreement").attr("checked", "checked");
-		}else{
-			$("#terms_agreement").attr("checked", false);
-		}
-	});
+// 	//전체동의 버튼	
+// 	$("#terms_agree_all").on("change", function(){
+// 		//체크 되었을 경우
+// 		if($(this).is(":checked")) {
+// 			alert("체크됨")
+// 			$("#terms_agreement").attr("checked", "checked");
+// 		}else{
+// 			alert("체크해제됨")
+// 			$("#terms_agreement").attr("checked", false);
+// 		}
+// 	});
 	
-	//일반동의 버튼
-	$("#terms_agreement").on("change", function(){
-		//체크 되었을 경우
-		if($("#terms_agreement").is(":checked")) {
-			$("#terms_agree_all").attr("checked", "checked");
-		}else{
-			$("#terms_agree_all").attr("checked", false);
-		}
-	});
+// 	//일반동의 버튼
+// 	$("#terms_agreement").on("click", function(){
+// 		alert("테스트");
+// 		return;
+// 		//체크 되었을 경우
+// 		if($("#terms_agreement").is(":checked")) {
+// 			$("#terms_agree_all").attr("checked", "checked");
+// 		}else{
+// 			$("#terms_agree_all").attr("checked", false);
+// 		}
+// 	});
 	
 
-	//전화번호 포멧//////////////여기부터 시작!!!!!!!!!!!!!!!!!! 멀티바이도 수정해야함
-	
-	
-	
+	//전화번호 포멧
 	function getNumberFormat(){
 		var num = $(".buyer_phone").html();
 		var formatNum = '';
@@ -528,10 +541,7 @@ Handlebars.registerHelper("display", function(sum){
 		 $("#delivery_contact").val(formatNum);
 		 $("#delivery_contact").attr("tel", num);
 	}
-	//
-	//동의버튼 번갈아 사용시 작동 안하니 생각 좀 해보기 
-	//
-    //readonly가 앞에 있는 buy 페이지에서는 작동하는데 여기서는 안함
+
     
     //포인트가 변경될 때
     $(".point_apply").on("click", function(){
@@ -550,7 +560,7 @@ Handlebars.registerHelper("display", function(sum){
     		$(".point").focus();
     		return;
     	}
-    	if(Number(point)<0){
+    	if(Number(point)<=0){
     		alert("정확한 숫자를 입력하십시오.");
     		$(".point").val("");
     		$(".point").focus();
@@ -604,6 +614,10 @@ Handlebars.registerHelper("display", function(sum){
     //포인트 엔터시 적용버튼 클릭
     $(".point").on("keypress", function(e){
     	if(e.key === "Enter"){
+    		if($(".point_apply").attr("style")=="display:none;"){
+    			$(".point_disapply").click();
+    			return;
+    		}
     		$(".point_apply").click();
     	}
     });

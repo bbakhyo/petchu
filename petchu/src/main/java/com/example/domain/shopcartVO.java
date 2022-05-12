@@ -28,8 +28,16 @@ public class shopcartVO {
 	private int sellcount;
 	//
 	private int point;
+	//
+	private String omessage;
 	
 	
+	public String getOmessage() {
+		return omessage;
+	}
+	public void setOmessage(String omessage) {
+		this.omessage = omessage;
+	}
 	public int getPoint() {
 		return point;
 	}

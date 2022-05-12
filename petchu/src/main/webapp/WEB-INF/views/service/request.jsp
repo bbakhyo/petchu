@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/resources/chart.js"></script>
 
 <body>
-	<p>견적서를 제출할 서비스 종류를 선택하세요</p>
+	<p class="title">요청서를 제출할 서비스 종류를 선택하세요</p>
 	<div id="regi">
 		<input type="radio" class="radio1" name="service" id="modal_btn1"> <label for="modal_btn1">미용</label> &nbsp;
 		<input type="radio" class="radio1"name="service" id="modal_btn2">	<label for="modal_btn2">홈클리닝</label> &nbsp;
@@ -216,13 +216,13 @@
 	   		 	</div>
 	   		 	<div class="page3">
 	    		    <p class="title">[7/11] 레슨 받기 좋은 날짜를 기입해주세요</p>
-	    		    <label><input type="checkbox" class="rad" name="wish_date" value="월"> 월 </label> <br/>
-	    		     <label><input type="checkbox" class="rad" name="wish_date" value="화"> 화</label>  <br/>
-	    		     <label><input type="checkbox" class="rad" name="wish_date" value="수"> 수</label>  <br/>
-	    		     <label><input type="checkbox" class="rad" name="wish_date" value="목"> 목</label>  <br/>
-	    		     <label><input type="checkbox" class="rad" name="wish_date" value="금"> 금</label> <br/>
-	    		     <label><input type="checkbox" class="rad" name="wish_date" value="토"> 토</label> <br/>
-	    		     <label><input type="checkbox" class="rad" name="wish_date" value="상담 후"></label> 상담 후
+	    		    <input type="checkbox" class="rad" name="wish_date" value="월" id="mon"><label for="mon"> 월 </label> <br/>
+	    		    <input type="checkbox" class="rad" name="wish_date" value="화" id="tue"><label for="tue"> 화</label>  <br/>
+	    		    <input type="checkbox" class="rad" name="wish_date" value="수" id="wen"> <label for="wen"> 수</label>  <br/>
+	    		    <input type="checkbox" class="rad" name="wish_date" value="목" id="thu"> <label for="thu"> 목</label>  <br/>
+	    		    <input type="checkbox" class="rad" name="wish_date" value="금" id="fri"> <label for="fri"> 금</label> <br/>
+	    		    <input type="checkbox" class="rad" name="wish_date" value="토" id="sat"> <label for="sat"> 토</label> <br/>
+	    		    <input type="checkbox" class="rad" name="wish_date" value="상담 후" id="lat"> <label for="lat">상담 후</label> 
 	   		 	</div>
 	   		 	<div class="page3">
 	    		    <p class="title">[8/11] 희망하는 레슨 시간대를 선택해주세요</p>

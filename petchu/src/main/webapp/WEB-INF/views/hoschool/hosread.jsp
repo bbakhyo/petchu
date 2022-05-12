@@ -7,7 +7,6 @@
 
 	* {
 	box-sizing: border-box;
-
 	}
 	
 	.icon-score{
@@ -18,20 +17,18 @@
 	}
 
 	.icon-score .rating2{
-	width: 100%;
 		z-index : 1;
 		position: relative;
-
 	}
 	.icon-score .rating3{
-width: 100%;
 		z-index : 0;
 		position: relative;
-
+		margin-top: -37px;
 	}
 
 	.rating2 .star {
 		width: 100;
+		color: #D3D3D3;
 		overflow: hidden;
 	}
 	
@@ -100,8 +97,8 @@ width: 100%;
       width: 420px;
       margin: 10px;
       float: right;
-      text-align: center;
       margin-right: 50px;
+      text-align: left; 
    }
    h2 {
       margin-bottom: 20px;
@@ -166,24 +163,7 @@ width: 100%;
 
 
 <div id="page">
-<div class="icon-score">
-		        <div class="rating2">
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		         </div>
-		         <div class="rating3" data-rate="5">
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
-		         </div>
-			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;">${avgRate}</span>
-	    	</div>
-   <h1>호텔/유치원 상세보기</h1>
+
    <form name="frm">
       <!-- 백그라운드 이미지 -->
       <div id="topArea">
@@ -200,7 +180,7 @@ width: 100%;
             <p>전화: <span class="tel">${vo.sctel}</span></p>
             <p>위치: ${vo.scaddress1}</p>
             <p>최저가격: <span class = "price">${vo.scprice }</span></p>
-            <p>별점:<span id="avgRate">★${avgRate}</span></p>
+
             <div class="icon-score">
 		        <div class="rating2">
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
@@ -209,14 +189,14 @@ width: 100%;
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		         </div>
-		         <div class="rating3" data-rate="5">
+		         <div class="rating3">
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		         </div>
-			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;">${avgRate}</span>
+			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;" avgRate="${avgRate}">${avgRate}</span>
 	    	</div>
             <p>
                <c:if test="${vo.sconeline != ''}">
@@ -341,13 +321,15 @@ width: 100%;
 	var page=1;
 	var perPageNum=5;
 	
+	//별점 색칠하기
 	$(".rating2").each(function(){
-		
-		var targetscore = $(this).parent().find("#rating").html();;
-		$('#rating').html(targetscore);
+		var targetscore = $(this).parent().find("#rating").html();
+		//var targetscore = $(this).parent().find("#rating").attr("avgRate");
+		//$('#rating').html(targetscore);
 		console.log(targetscore);
 		var firstDigit = targetscore.split('.');	
 			console.log(firstDigit);
+			console.log("테스트   "+firstDigit.length);
 			if(firstDigit.length > 1) {
 				for(var i=0; i<firstDigit[0]; i++){
 					$(this).find('.star').eq(i).css({width:'100%', color: '#F08d28'}); //인덱스 번호에 해당하는 요소 찾기
@@ -360,19 +342,19 @@ width: 100%;
 			}
 			
 	});
-	
+	//페이지 이전버튼
 	$("#prev").on("click", function(){
 		page--;
 		getReview();
 
 	});
-	
+	//페이지 다음버튼
 	$("#next").on("click", function(){
 		page++;
 		getReview();
 
 	});
-	
+	//scno값 불러오기
 	var scno = $(myform.scno).val();
 	getReview();
 	

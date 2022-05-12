@@ -238,6 +238,7 @@ public class shopproductController {
 	public String order_read(Model model, String orno){
 		model.addAttribute("orno", orno);
 		model.addAttribute("uvo", cartdao.order_read_user(orno));
+		model.addAttribute("ovo", cartdao.read_user_order(orno));
 		model.addAttribute(	"pageName", "shopproduct/order_read.jsp");
 		return "/home";
 	}

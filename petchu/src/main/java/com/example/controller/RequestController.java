@@ -24,11 +24,14 @@ import com.example.dao.DoctorRequestDAO;
 import com.example.dao.LessonDAO;
 import com.example.dao.PointhistoryDAO;
 import com.example.dao.ServiceCoDAO;
+import com.example.dao.ServiceEstimateDAO;
 import com.example.dao.UserDAO;
 import com.example.dao.UserRequestDAO;
+import com.example.domain.BeautyRequestVO;
 import com.example.domain.DoctorRequestVO;
 import com.example.domain.DoctorVO;
 import com.example.domain.PointhistoryVO;
+import com.example.domain.ServiceEstimateVO;
 import com.example.domain.UserRequestVO;
 
 @Controller
@@ -61,6 +64,9 @@ public class RequestController {
 	
 	@Autowired
 	ServiceCoDAO scdao;
+	
+	@Autowired
+	ServiceEstimateDAO sedao;
 	
 	@RequestMapping(value="/send", method=RequestMethod.POST)
 	public String send(UserRequestVO vo, HttpSession session, MultipartHttpServletRequest multi) throws Exception{
@@ -134,8 +140,60 @@ public class RequestController {
 	
 	@RequestMapping(value="/result")
 	public String resultRequestList(Model model, HttpSession session){
+		model.addAttribute("bvo", bdao.myBeautyRead(session.getAttribute("id").toString()));
+	    model.addAttribute("cvo", cdao.myCleanRead(session.getAttribute("id").toString()));
+	    model.addAttribute("lvo", ldao.myLessonRead(session.getAttribute("id").toString()));
 		model.addAttribute("list", drdao.resultRequestList(session.getAttribute("id").toString()));
 		model.addAttribute("pageName", "user/resultRequestList.jsp");
+		return "/home";
+	}
+	
+	// 미용 견적서 리스트
+	@RequestMapping("/belist.json")
+	@ResponseBody
+	public List<ServiceEstimateVO> belistJson(int brno){
+		List<ServiceEstimateVO> list=sedao.brnolist(brno);
+		return list;
+	}
+	
+	// 미용 견적서별 업체 정보
+	@RequestMapping("/beread")
+	public String beautyEstimateRead(int brno, int scno, Model model, HttpSession session){
+		model.addAttribute("bvo", sedao.beautyEstimateRead(brno, scno));
+		model.addAttribute("pageName", "user/beautyEstimateInfo.jsp");
+		return "/home";
+	}
+	
+	// 홈클리닝 견적서 리스트
+	@RequestMapping("/celist.json")
+	@ResponseBody
+	public List<ServiceEstimateVO> celistJson(int crno){
+		List<ServiceEstimateVO> list=sedao.crnolist(crno);
+		return list;
+	}
+	
+	// 홈클리닝 견적서별 업체 정보
+	@RequestMapping("/ceread")
+	public String cleanEstimateRead(int crno, int scno, Model model, HttpSession session){
+		model.addAttribute("cvo", sedao.cleanEstimateRead(crno, scno));
+		model.addAttribute("pageName", "user/cleanEstimateInfo.jsp");
+		return "/home";
+	}
+	
+	
+	// 레슨 견적서 리스트
+	@RequestMapping("/lelist.json")
+	@ResponseBody
+	public List<ServiceEstimateVO> lelistJson(int lrno){
+		List<ServiceEstimateVO> list=sedao.lrnolist(lrno);
+		return list;
+	}
+	
+	//레슨 견적서별 업체 정보
+	@RequestMapping("/leread")
+	public String lessonEstimateRead(int lrno, int scno, Model model, HttpSession session){
+		model.addAttribute("lvo", sedao.lessonEstimateRead(lrno, scno));
+		model.addAttribute("pageName", "user/lessonEstimateInfo.jsp");
 		return "/home";
 	}
 	

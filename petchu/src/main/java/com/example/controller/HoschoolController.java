@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.awt.Window;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,6 +48,8 @@ public class HoschoolController {
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
+		List<RateVO> rvo = rdao.avgRate();
+		model.addAttribute("rlist", rvo);
 		model.addAttribute("pageName", "hoschool/hoschool.jsp");
 		return "/home";
 	}
@@ -58,8 +61,12 @@ public class HoschoolController {
 		model.addAttribute("vo",dao.read(scno));
 		model.addAttribute("uvo",udao.read(id));
 		model.addAttribute("pageName", "hoschool/hosread.jsp");
-		System.out.println("............................avgRate: " + rdao.avgRate());
 		return "/home";
+	}
+	@RequestMapping(value="/avgRate", method=RequestMethod.POST)
+	@ResponseBody
+	public double avgRate(int scno){
+		return rdao.avgRateRead(scno);
 	}
 	@RequestMapping("/reviewList")
 	@ResponseBody
@@ -116,7 +123,7 @@ public class HoschoolController {
 	
 	@RequestMapping(value="/servicedelete", method=RequestMethod.POST)
 	public String servicedelete(String id,ServiceVO vo,int scno) {
-		dao.delete(scno);;
+		dao.delete(scno);
 		return "redirect:/hoschool/myList?id="+vo.getId();
 	}
 	

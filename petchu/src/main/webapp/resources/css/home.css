@@ -4,17 +4,18 @@
 .notosanskr * { 
  font-family: 'Noto Sans KR', sans-serif;
 }
-*{
+* :not(i){
 	font-family: 'Noto Sans KR', sans-serif;
-		color: 3B402B;
+	color: 3B402B;
 }
-#home_body{
+#home_body:not(.ho_body){
 	display: table; 
 	margin-left: auto;
 	margin-right: auto;
 	min-width: 960px;
 	text-align: center;
 }
+
 #page {
 	
 	margin-bottom: 50px;

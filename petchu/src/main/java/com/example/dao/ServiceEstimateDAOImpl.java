@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -78,6 +79,45 @@ public class ServiceEstimateDAOImpl implements ServiceEstimateDAO {
 	@Override
 	public ServiceEstimateVO lessonViewRead(ServiceEstimateVO vo) {
 		return session.selectOne(namespace+ ".lessonViewRead" , vo);
+	}
+
+	@Override
+	public List<ServiceEstimateVO> brnolist(int brno) {
+		return session.selectList(namespace + ".brnoList", brno);
+	}
+
+	@Override
+	public List<ServiceEstimateVO> crnolist(int crno) {
+		return session.selectList(namespace + ".crnoList", crno);
+	}
+
+	@Override
+	public List<ServiceEstimateVO> lrnolist(int lrno) {
+		return session.selectList(namespace + ".lrnoList", lrno);
+	}
+
+	@Override
+	public ServiceEstimateVO beautyEstimateRead(int brno, int scno) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("brno", brno);
+		map.put("scno", scno);
+		return session.selectOne(namespace+ ".beautyEstimateRead" , map);
+	}
+
+	@Override
+	public ServiceEstimateVO cleanEstimateRead(int crno, int scno) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("crno", crno);
+		map.put("scno", scno);
+		return session.selectOne(namespace+ ".cleanEstimateRead" , map);
+	}
+
+	@Override
+	public ServiceEstimateVO lessonEstimateRead(int lrno, int scno) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("lrno", lrno);
+		map.put("scno", scno);
+		return session.selectOne(namespace+ ".lessonEstimateRead" , map);
 	}
 	
 }

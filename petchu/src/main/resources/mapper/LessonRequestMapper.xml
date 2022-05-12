@@ -23,6 +23,10 @@
    		select * from lessonrequest where uid=#{uid} and isDelete=0
    	</select>
    	
+   	<select id="lessonDeadlineList" resultType="com.example.domain.LessonRequestVO">
+   		select * from lessonrequest where uid=#{uid} and isDelete=1
+   	</select>
+   	
    	<select id="lessonCount" resultType="int">
    		select count(*) from lessonrequest where uid=#{uid} and isDelete = 0;
    	</select>
@@ -30,4 +34,9 @@
    	<update id="lisDeleteUpdate">
    		update lessonrequest set isDelete = 1 where lrno=#{lrno};
    	</update>
+   	
+   	<select id="lrno" resultType="int">
+   		select lrno from lessonrequest where uid=#{uid} and isDelete = 0;
+   	</select>
+   	
 </mapper>

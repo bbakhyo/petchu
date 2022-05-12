@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<link href="/resources/css/hoschool.css" rel="stylesheet" />
 	<link href="https://www.cssscript.com/demo/segmented-control-toggle-radio/toggle-radios.css" rel="stylesheet" />
-
-
+	<script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
 <div class="page_hoschool">
 	
   	<div class="ho_page_header">
@@ -12,14 +12,13 @@
       </form>
     
     <div id="sort" class="toggle-radio" data-style="rounded">
-  <input type="radio" name="sort" id="default_Option1" class="sort" value="rate">
-  <label for="default_Option1">별점높은순</label>
-  <input type="radio" name="sort" id="default_Option2" class="sort" value="rowPrice">
-  <label for="default_Option2">낮은가격순</label>
-  <input type="radio" name="sort" id="default_Option3" class="sort" value="higPrice">
-  <label for="default_Option3">높은가격순</label>
-</div>
-
+	  <input type="radio" name="sort" id="default_Option1" class="sort" value="rate">
+	  <label for="default_Option1">별점높은순</label>
+	  <input type="radio" name="sort" id="default_Option2" class="sort" value="rowPrice">
+	  <label for="default_Option2">낮은가격순</label>
+	  <input type="radio" name="sort" id="default_Option3" class="sort" value="higPrice">
+	  <label for="default_Option3">높은가격순</label>
+	</div>
 <!--     <div id="sort">
       <input type="radio" name="sort"  class="sort" value="rate">별점높은순
       <input type="radio" name="sort"  class="sort" value="rowPrice">낮은가격순
@@ -80,44 +79,44 @@
     <div class="ho_section_right">
         <div class="ho_content_list">
           	<div id="bigPrame"></div>
-	        <script id="temp" type="text/x-handlebars-template">
+			<script id="temp" type="text/x-handlebars-template">
 			{{#each list}}
          	 <div class="prame" scno="{{scno}}">
-            <div class="prame_content">
-			  <!--  1열(상단) :  업체명/전화번호  -->
-              <div class="prame_row1">
-                <div class="prame_name scname" placeholder="어바웃펫">{{scname}}</div>
-                <div class="prame_contact sctel">☎ {{sctel}}</div>
-              </div>
-              <!--  2열(중간)) :  업체명 상세정보  -->
-                <div class="prame_row2">
-                  <div class="prame_description  sconeline">{{sconeline}}</div>
-                </div>
-              <!--  3열(하단)) :  별점 / isDelete / 금액  -->
-              <div class="prame_row3">
-				<!--   별크기는 .rating (css)에서 font-size로 조절   -->
-                 <div class="rating rating2"><!--
-					--><a href="#5" title="Give 5 stars">★</a><!--
-					--><a href="#4" title="Give 4 stars">★</a><!--
-					--><a href="#3" title="Give 3 stars">★</a><!--
-					--><a href="#2" title="Give 2 stars">★</a><!--
-					--><a href="#1" title="Give 1 star">★</a>
-				</div>
-                <div><input class="isDelete" type="hidden" value={{isDelete}}></div>
-               <div class="prame_price scprice">{{display scprice}}원</div>
-              </div>
-            </div>         
+           		 <div class="prame_content">
+			  		 <!--  1열(상단) :  업체명/전화번호  -->
+	           		 <div class="prame_row1">
+		                 <div class="prame_name scname" placeholder="어바웃펫">{{scname}}</div>
+		                 <div class="prame_contact sctel">{{sctel}}</div>
+	              	 </div>
+              		 <!--  2열(중간)) :  업체명 상세정보  -->
+	                 <div class="prame_row2">
+	                   	 <div class="prame_description  sconeline">{{sconeline}}</div>
+	                 </div>
+              		 <!--  3열(하단)) :  별점 / isDelete / 금액  -->
+						<div class="prame_row3">
+		              		<div class="icon-score">
+						       <div class="rate" style="position: relative; left : 0px; bottom : 0px; font-size : 30px;">★</div>
+							 	<span class="rating" style="position: relative; left : 120px; bottom : 40px; font-size : 30px;" avgRate="${avgRate}">${avgRate}</span>
+					    	</div>
+	                		<div><input class="isDelete" type="hidden" value={{isDelete}}></div>
+	               			<div class="prame_price scprice">{{display scprice}}원</div>
+               			</div>
+              		</div>
+            	</div>         
           </div>
           {{/each}}
-
          </script>
-        </div>
+         <c:forEach items="${rlist}" var="rvo">
+         	<div class="rvo" scno="${rvo.scno}" avg="${rvo.avgrate }" style="display:none;">
+         		<span class="rvo_scno"></span>
+         		<span class="rvo_avg">${rvo.avgrate }</span>
+         	</div>
+         </c:forEach>
     </div>
-
     
     
     </div>
-  
+  </div>
   	<script>
 	Handlebars.registerHelper("display", function(scprice){
 		return scprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -130,7 +129,6 @@
 	var sort="";
 	var checkin="";
 	var checkout="";
-
 	//체크인 체크아웃 오늘날짜로 설정
 	document.getElementById('checkin').value = new Date().toISOString().substring(0, 10);
 	document.getElementById('checkout').value = new Date().toISOString().substring(0, 10);
@@ -167,11 +165,9 @@
 		getList();
 		
 	});
-
 	//데이트 클릭할때 달력표시하고싶은데 ...........
 	$("#checkinArea").on("click", function(){
 		$(this).find("#checkin");
-
 	});
 		
 	//소트를 체크한 경우
@@ -180,7 +176,6 @@
 		
 		getList();
 	});
-
 	function getList(){
 		console.log('겟리스트가 받은 데이타'+"\n"+'키워드:'+keyword+"\n"+'소트:'+sort+"\n"+'체크인:'+checkin+"\n"+'체크아웃:'+checkout)
 		$.ajax({
@@ -193,45 +188,91 @@
 				var template = Handlebars.compile($("#temp").html());
 				$("#bigPrame").html(template(data));
 				
+				
+				  //scno에 맞춰서 별점 출력
+				  $(".rvo").each(function(){
+					  var scno = $(this).attr("scno");
+					  var avg = $(this).attr("avg");
+					  $(".prame").each(function(){
+						 var conScno = $(this).attr("scno");
+						 if(scno==conScno){
+							$(this).find(".prame_content .prame_row3 .icon-score .rating").html(avg);
+							var rate=$(this).find(".prame_content .prame_row3 .icon-score .rating").html();
+							if(rate >= 4.5){
+								$(this).find(".prame_content .icon-score .rate").html("⭐⭐⭐⭐⭐");
+							}else if (rate >= 3.5){
+								$(this).find(".prame_content .icon-score .rate").html("⭐⭐⭐⭐");
+							}else if (rate >= 2.5){
+								$(this).find(".prame_content .icon-score .rate").html("⭐⭐⭐");
+							}else if (rate >= 1.5){
+								$(this).find(".prame_content .icon-score .rate").html("⭐⭐");
+							}else{
+								$(this).find(".prame_content .icon-score .rate").html("⭐");
+							}
+						 }
+					  })
+				  })
+				//별점에 색깔입히기
+				$(".rating2").each(function(){
+					var targetscore = $(this).parent().find(".rating").html();
+					//var targetscore = $(this).parent().find("#rating").attr("avg");
+					//$('#rating').html(targetscore);
+					console.log(targetscore);
+					var firstDigit = targetscore.split('.');	
+						console.log(firstDigit);
+						if(firstDigit.length > 1) {
+							for(var i=0; i<firstDigit[0]; i++){
+								$(this).find('.star').eq(i).css({width:'100%', color: '#F08d28'}); //인덱스 번호에 해당하는 요소 찾기
+							}
+							$(this).find('.star').eq(firstDigit[0]).css({width:firstDigit[1] + '0%', color : '#F08d28'});
+						}else {
+							for(var i=0; i<targetscore; i++){
+								$(this).find('.star').eq(i).css({width:'100%', color: '#F08d28'}); //인덱스 번호에 해당하는 요소 찾기
+							}
+						}
+				});
+				
+				
 				var i = 0;
 				$(".prame").each(function(){
 					var bg=$(".image").html();
-						//백그라운드 이미지 수만큼 반복
-							if(i==0){
-								//$(this).style.backgroundimage="url('/resources/TBN/TBN01.jpg')";
-								$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); 
-								$(this).css({"background-size":"700px 200px"}); 
-								i++;
-							}else if(i==1){
-								$(this).css({"background":"url(/resources/TBN/TBN04.png"});
-								$(this).css({"background-size":"700px 200px"}); 
-								i++;
-							}else if(i==2){
-								$(this).css({"background":"url(/resources/TBN/TBN05.png"});
-								$(this).css({"background-size":"700px 200px"}); 
-								i++;
-							}else if(i==3){
-								$(this).css({"background":"url(/resources/TBN/TBN06.png"});
-								$(this).css({"background-size":"700px 200px"}); 
-								i=0;
-							}
+					//백그라운드 이미지 수만큼 반복하여 Prame마다 다른이미지 적용
+					if(i==0){
+						//$(this).style.backgroundimage="url('/resources/TBN/TBN01.jpg')";
+						$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); 
+						$(this).css({"background-size":"700px 200px"}); 
 						
-							var num = $(this).find(".sctel").html();
-							var formatNum = '';
-							
-						    if(num.length==11){
-						        formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-						    }else if(num.length==8){
-						        formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
-						    }else if(num.indexOf('02')==0){
-						        formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
-						    }else if(num.length==12){
-						        formatNum = num.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
-						    }else{
-						        formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
-						    }
-						    	$(this).find(".sctel").html(formatNum);
-						    	
+						i++;
+					}else if(i==1){
+						$(this).css({"background":"url(/resources/TBN/TBN04.png"});
+						$(this).css({"background-size":"700px 200px"}); 
+						i++;
+					}else if(i==2){
+						$(this).css({"background":"url(/resources/TBN/TBN05.png"});
+						$(this).css({"background-size":"700px 200px"}); 
+						i++;
+					}else if(i==3){
+						$(this).css({"background":"url(/resources/TBN/TBN06.png"});
+						$(this).css({"background-size":"700px 200px"}); 
+						i=0;
+					}
+					
+					//전화번호 포멧 적용
+					var num = $(this).find(".sctel").html();
+					var formatNum = '';
+					
+				    if(num.length==11){
+				        formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+				    }else if(num.length==8){
+				        formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+				    }else if(num.indexOf('02')==0){
+				        formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+				    }else if(num.length==12){
+				        formatNum = num.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
+				    }else{
+				        formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+				    }
+				    	$(this).find(".sctel").html(formatNum);
 				});
 			}
 		});
@@ -241,7 +282,6 @@
 	  $(frm).on("submit",function(e){
 		  e.preventDefault();
 		  keyword=$(frm.keyword).val();
-
 		  getList();
 	  });
 		
@@ -262,5 +302,5 @@
 		 	location.href="/hoschool/read?scno=" + scno + "&id=" + id + "&checkin=" + checkin + "&checkout=" + checkout;
 		 
 	  });
+	  
 </script>
-
