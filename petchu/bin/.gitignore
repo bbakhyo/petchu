@@ -2,4 +2,5 @@
 pom.xml
 .DS_Store
 log/
-
+/bin/
+.settings
