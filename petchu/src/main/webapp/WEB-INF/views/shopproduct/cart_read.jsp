@@ -13,6 +13,15 @@
 	.col1_title_row2_img_and_content img{
 		cursor:pointer;
 	}
+	.btn_delete_div{
+		vertical-align:top;
+		padding-bottom:15px;
+	}
+	.button_x {
+	    width: 18px;
+	    height: 18px;
+/* 	    margin-top: 3px; */
+	}
    </style>
 
 <div id="page">

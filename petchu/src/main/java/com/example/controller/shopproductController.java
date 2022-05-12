@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.dao.UserDAO;
 import com.example.dao.shopcartDAO;
 import com.example.dao.shopproductDAO;
+import com.example.domain.Criteria;
+import com.example.domain.PageMaker;
 import com.example.domain.shopcartVO;
 import com.example.domain.shopproductVO;
 
@@ -129,12 +132,28 @@ public class shopproductController {
 	return map;	
 	}
 	
-	//콘텐츠 리스트 JSON
+//	//콘텐츠 리스트 JSON
+//	@RequestMapping("/contents_list.json")
+//	@ResponseBody
+//	public List<shopproductVO> contents_list(String selectCate, String selectCate2, String selectCate3){
+//		List<shopproductVO> list=dao.contents_list(selectCate, selectCate2, selectCate3);
+//		return list;
+//	}
+	
+	//콘텐츠 리스트 JSON test
 	@RequestMapping("/contents_list.json")
 	@ResponseBody
-	public List<shopproductVO> contents_list(String selectCate, String selectCate2, String selectCate3){
-		List<shopproductVO> list=dao.contents_list(selectCate, selectCate2, selectCate3);
-		return list;
+	public Map<String,Object> contents_list(String selectCate, String selectCate2, String selectCate3, Criteria cri){
+		Map<String,Object> map=new HashMap<>();
+		cri.setPerPageNum(20);
+		PageMaker pm=new PageMaker();
+		pm.setCri(cri);
+		pm.setDisplayPageNum(3);
+		pm.setTotalCount(dao.totalCount());
+		System.out.println("asfddsfsdfs.............."+pm.getStartPage()+"\n"+pm.getTotalCount()+"\n"+pm.getCri());
+		map.put("pm", pm);
+		map.put("list", dao.contents_list(selectCate, selectCate2, selectCate3, cri));
+		return map;
 	}
 
 	//필터링된 상품목록
@@ -144,8 +163,8 @@ public class shopproductController {
 		session.setAttribute("cate2", selectCate2);
 		session.setAttribute("cate3", selectCate3);
 		model.addAttribute("pageName", "shopproduct/contents_list.jsp");
-		model.addAttribute("list", dao.contents_list(selectCate, selectCate2, selectCate3));
-		model.addAttribute("list_", dao.list());
+//		model.addAttribute("list", dao.contents_list(selectCate, selectCate2, selectCate3));
+//		model.addAttribute("list_", dao.list());
 		return "/home";
 	}
 	
@@ -272,5 +291,13 @@ public class shopproductController {
 		cartdao.user_point_plus(pricePoint, vo.getUid());
 		//적립내역 history에 기록
 		cartdao.user_point_history_plus(vo.getUid(), pricePoint);
+	}
+	
+	//상품 구매시 point 이동
+	@RequestMapping(value="user_order_delete", method=RequestMethod.POST)
+	@ResponseBody
+	public void order_delete(String bno){
+		System.out.println("asdfdasfasdfdasf2342234324324\n"+bno);
+		cartdao.user_order_delete(bno);
 	}
 }

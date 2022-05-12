@@ -1,10 +1,14 @@
 @charset "UTF-8";
 
+/* 페이지 레이아웃  */
+.checkout_page {
+  background-color: #fbfbfb;
+  width: 900px;
+  border-radius: 20px;
+
 /* SECTION1 (Left SIDE) 주문상풍정보 */
 /* 주문 상품 정보 */
-.checkout_page {
-  background-color: #c7d4d6;
-  width: 960px;
+
 }
 .checkout_page_heading {
   font-size: 1.5rem;
@@ -14,6 +18,8 @@
 .card_heading {
   font-weight: 900;
   font-size: 1.3em;
+  display: flex;
+  justify-content: flex-start;
 }
 .checkout_container_main {
   display: flex;
@@ -22,7 +28,7 @@
   justify-content: center;
   align-content: space-between;
   gap: 40px;
-  background-color: #c7d4d6;
+  background-color: #fbfbfb;
   height: 100vh;
 }
 .checkout_heading {
@@ -34,8 +40,8 @@
   display: flex;
   flex-direction: column;
   flex-basis: 50%;
-  overflow: scroll;
-  background-color: #c7d4d6;
+  overflow: auto;
+  background-color: #fbfbfb;
   gap: 10px;
 }
 .checkout_right_section {
@@ -129,8 +135,7 @@
 /* 쿠폰/포인트	 */
 .coupon_points_card {
   background-color: white;
-
-  padding: 10px;
+ /*  padding: 10px; */
 }
 .coupon_points_card input{
   margin-right:5px;
@@ -228,12 +233,38 @@ hr.transition {
   border: none;
   justify-content: center;
 }
+input[name=terms_agree_all], input[name=same_address]{
+	width: 20px;
+	height: 20px;
+	accent-color: green;
+	position: relative;
+	top: 5px;
+}
+input[name=same_address]{
+	
+	width: 20px;
+	height: 20px;
+	accent-color: green;
+	position: relative;
+	top: 5px;
+}
 
+#chk_row{
+	text-align: left;
+	/* border: 1px solid black; */
+	width: 350px;
+	position: relative;
+	left: 20px;
+	
+	
+	
+}
 .btn_shape {
   height: 25px;
   text-align: center;
-  padding: 13px 0px 10px 0px;
+  padding: 6px 0px 10px 6px;
   background-color: black;
+  
 }
 
 a.pay_btn:link {
@@ -266,3 +297,7 @@ input[name=delivery_address1]::focus, input[name=delivery_address2]::focus  {
     border:1px solid red;
     box-shadow: 0 0 10px #719ECE;
   }
+
+input#delivery_message{
+	width: 100%;
+}

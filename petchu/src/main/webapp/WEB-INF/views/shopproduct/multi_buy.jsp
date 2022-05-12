@@ -98,31 +98,6 @@
             </div>
           </div>
         </div>
-
-        <!--  포인트 정보       -->
-        
-        <div class="coupon_points_card" style="height:90px;">
-<!--           <div class="card_heading"><span>포인트</span></div> -->
-
-<!--           <p class="points_header">보유 포인트</p> -->
-<!--           <div class="coupon_line1"> -->
-<!--             <input type="text" name="apply_coupons" placeholder="보유쿠폰 0장" id="apply_coupons" size=43 readonly> -->
-<!--           <span><button>쿠폰적용</button></span> -->
-<!--           </div> -->
-<!--             <p class="points_header">보유 포인트</p> -->
-<!--           <div class="coupon_line2"> -->
-<!--             <input type="text" name="my_point" id="my_point" size=20 readonly> -->
-<!--           </div> -->
-            <div class="point_paragraphs"><br>
-              <p class="points_header">보유 포인트: <a class="my_point" point="${uvo.point}">${uvo.point}</a></p>
-            </div>
-          <div class="coupon_line3">
-            <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
-            <span><button class="point_apply">적용</button></span>
-            <span><button class="point_disapply" style="display:none;">사용취소</button></span><br><br>
-			</div>
-          
-        </div>
       </div>
         
       <!--     /* COLUMN 2(RIGHT SIDE) 최종결제금액 */       -->
@@ -183,29 +158,24 @@
                   <input type="radio" name="pay_type" id="kakao" class="pay" value="kakaopay1">
                   KakaoPay
                 </label>
-
               </div>
             </div>
           </div>
         </div>
 
-        <div class="checkout_terms_card">
-          <div class="terms_outside_wrapper">
-            <div class="terms_inside_wrapper">
-              <div class="terms_wrapper">
-                <div class="terms_line1">
-                  <label for="terms_agree_all">
-                    <input type="checkbox" name="terms_agree_all" id="terms_agree_all">전체동의
-                  </label>
-                </div><br>
-
-                <div class="terms_line2">
-                  <label for="terms_agreement">
-                    &nbsp;<span style='font-size:10px;'></span>&#9493;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="terms_agree_it" id="terms_agreement">구매조건 확인 및 결제진행에 동의</label>
-                </div>
-              </div>
+        <!--  포인트 정보       -->
+        <div class="coupon_points_card" style="height:90px;">
+            <div class="point_paragraphs"><br>
+              <p class="points_header">보유 포인트: <a class="my_point" point="${uvo.point}">${uvo.point}</a></p>
             </div>
-          </div>
+          <div class="coupon_line3">
+            <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
+            <span><button class="point_apply">적용</button></span>
+            <span><button class="point_disapply" style="display:none;">사용취소</button></span><br><br>
+			</div>
+        </div>
+        
+        <div class="checkout_terms_card">
           <div class="terms_agree_button_wrapper">
             <div class="btn_shape"><a class="pay_btn" href="#">결제하기</a> </div>
           </div>

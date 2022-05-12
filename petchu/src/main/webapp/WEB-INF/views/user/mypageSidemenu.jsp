@@ -44,7 +44,7 @@
 			<p><a href="/user/myDeadlineList"> · 마감처리한 요청서</a></p>
 		</div>
 	</c:if>
-	<p><a href="#">구매내역</a></p>
+	<p><a href="/shopproduct/order_list">구매내역</a></p>
 	<c:if test="${type=='일반'}">
 		<p class="companyMenu"><a href="#">예약내역</a></p>
 		<div class="serside" style="display: none;">
