@@ -1,25 +1,35 @@
 @CHARSET "EUC-KR";
 
 body{
-	background-color: F2F7E7;
+	background-color: #c9e17b;
 	padding: 0px;
 	margin: 0px;
 }
 #chatbox{
-	padding: 10px;
-	padding-left: 30px;
-	margin: 15px 5px 15px 5px;
-	cursor: pointer;
-	border-radius: 20px;
-	background-color: white;
-	line-height: 10px;
+    padding: 10px;
+    padding-left: 30px;
+    margin: 20px 20px 20px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: white;
+    line-height: 20px;
+    box-shadow: 2px 2px 6px #bcc3a7;
 }
-#chatbox #dname{
-	font-weight: 900;
+#chatbox:hover{
+    background-color: #f9fdee;
+}
+#chatbox #dname{    
+	font-size: large;
+    font-weight: 900;
 }
 #chatbox #fregdate{
-	font-size: small;
-	color: #96a996;
+    font-size: small;
+    color: #96a996;
+    float: right;
+    position: relative;
+    bottom: 86px;
+    right: 10px;
+}
 }
 
 /*---------------room.jsp-----------------*/

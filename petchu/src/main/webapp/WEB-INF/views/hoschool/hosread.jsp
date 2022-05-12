@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="/resources/css/star.css" rel="stylesheet"/>
 <link href="/resources/css/hosread.css" rel="stylesheet"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
 
 <div id="page">
@@ -143,26 +144,38 @@
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	5c9e09df993f534bf4a2916f4cf43cdd&libraries=services"></script>
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="map" style="height:350px;"></div>
 
 
 	<div id="popup01">
-		<div id="serviceInfo">
-			<h2 style="margin-left: 150px;" id="scname">${vo.scname}</h2>
-			<span id="scno" value="${vo.scno }" style="display:none;"></span>
-			<p>전화: <span class="num" id="sctel">${vo.sctel}</span></p>
-			<p>위치: <span id="scaddress1">${vo.scaddress1}</span></p>
-		</div>
-		
-		<div id="date">
-			<span>체크인 <span id="checkin"><input type="date" id="checkinDate" readonly></span></span>
-			<span>체크아웃 <span id="checkout"><input type="date" id="checkoutDate" readonly></span></span>
-		</div>
-		
+		<span id="scno" value="${vo.scno }" style="display:none;"></span>
+		<h2 style="margin-left: 150px;" id="scname">${vo.scname}</h2>
+		<table id="serviceInfo">
+			<tr>
+				<td width=100>전화</td>
+				<td class="num" id="sctel">${vo.sctel}</td>
+			</tr>
+			<tr>
+				<td>위치</td>
+				<td id="scaddress1">${vo.scaddress1}</td>
+			</tr>
+		</table>
+		<hr>
+		<table id="date">
+			<tr>
+				<td width=100>체크인</td>
+				<td id="checkin"><input type="date" id="checkinDate" readonly></td>
+			</tr>
+			<tr>
+				<td>체크아웃</td>
+				<td id="checkout"><input type="date" id="checkoutDate" readonly></td>
+			</tr>
+		</table>
+		<hr>
 		<div id="user">
 			본인정보와 동일<input type="checkbox" id="userCheck" checked>
 			<p>예약자 성함</p>
-			<input type="text" id="userName" value="${uvo.name}">
+			<input type="text" id="userName" size=4 value="${uvo.name}">
 			<p>예약자 연락처</p>
 			<input type="hidden" id="userTel" name="userTel" value="${uvo.tel}">
 			<input type="text" id="userTel1" size=3>
@@ -170,13 +183,13 @@
 			<input type="text" id="userTel3" size=4>
 		</div>
 		
-		<div>
+		<div id="please">
 			<p>요청사항</p>
-			<p><textarea rows="5" cols="40" id="request">요청사항을 기재해 주세요.</textarea><p>
+			<p><textarea rows="5" cols="50" id="request">요청사항을 기재해 주세요.</textarea><p>
 		</div>
 		<div id="button">
 			<button id="btnReserve">예약하기</button>
-			 <button onclick="payAPI()">결제하기</button>
+			 <button id="btnpay"onclick="payAPI()">결제하기</button>
 		</div>
 		<div id="btnClose">
 			<button class="close">종료</button>
@@ -283,7 +296,7 @@
 		var target = $(myform.comments).val();
 		
 		if(target.length > 500){
-			alert("500자 이내로 작성 가능합니다.")
+			swal("500자 이내로 작성 가능합니다.")
 		}
 		if(!confirm("댓글을 등록하실래요?")) return;
 		myform.submit();
@@ -298,7 +311,7 @@
 		var email = "${email}";
 		var address = "${address}";
 		var zipcode = "${zipcode}";
-		alert(userName+"/"+userTel+"/"+scPrice+"/"+email+"/"+address+"/"+zipcode);
+		swal(userName+"/"+userTel+"/"+scPrice+"/"+email+"/"+address+"/"+zipcode);
 		
 		
 		IMP.request_pay({
@@ -323,7 +336,7 @@
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
 		    }
-		    alert(msg);
+		    swal(msg);
 		});
 		
 	}
