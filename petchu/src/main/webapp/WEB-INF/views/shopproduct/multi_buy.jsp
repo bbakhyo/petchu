@@ -170,7 +170,7 @@
         <!--  포인트 정보       -->
         <div class="coupon_points_card" style="height:90px;">
             <div class="point_paragraphs"><br>
-              <p class="points_header">보유 포인트: <a class="my_point" point="${uvo.point}">${uvo.point}</a></p>
+              <p class="points_header"><span class="spoint">보유 포인트: </span><a class="my_point" point="${uvo.point}">${uvo.point}</a></p>
               <p class="points_header">사용 포인트: <a class="use_point">0</a></p>
             </div>
           <div class="coupon_line3">
@@ -544,17 +544,26 @@ Handlebars.registerHelper("display", function(sum){
     	$(".none").attr("class", "show");
     	$(".checkout_point_line").attr("style", "");
     	$(".card_cart_point_right").html(point);
-    	$('.use_point').html(point);
+    	var formatPoint = point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    	$('.use_point').html(formatPoint);
     	$(".card_cart_point_right").attr("point", point);
     	
+    	//최종가격 계산
     	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
     	fprice = Number(fprice) - Number(point);
     	$(".card_cart_grandtotal_row_right").html(fprice);
+    	
+    	//보유 포인트 계산
+    	var myPoint = $(".my_point").attr("point");
+    	myPoint = Number(myPoint) - Number(point);
+    	myPoint=myPoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    	$(".my_point").html(myPoint);
     	
     	var fmprice = $(".card_cart_grandtotal_row_right").html();
 		fmprice=fmprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		$(".card_cart_grandtotal_row_right").html(fmprice+"원");
 		
+		$(".point").attr("style", "display:none;");
 		$(this).attr("style", "display:none;");
 		$(".point_apply_all").attr("style", "display:none;");
     	$(".point_disapply").attr("style", "");
@@ -565,6 +574,8 @@ Handlebars.registerHelper("display", function(sum){
     	var pointP = $(".card_cart_point_right").html();
 		pointP=pointP.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		$(".card_cart_point_right").html("- "+pointP+"원");
+		
+		$(".spoint").html("남은 포인트: ");
     	return;
     });
 	
@@ -580,14 +591,28 @@ Handlebars.registerHelper("display", function(sum){
     	$(".card_cart_point_right").attr("point", "");
     	$(".checkout_point_line").attr("style", "display:none;");
     	$(this).attr("style", "display:none;");
+    	$(".point").attr("style", "");
     	$(".point_apply").attr("style", "");
     	$(".point_apply_all").attr("style", "");
     	alert("취소완료");
     	$(".point").val("");
+    	//사용 취소시 사용중인 포인트 값도 0으로 변경
+    	$(".use_point").html("0");
+    	//사용 취소시 my_point html값도 다시 넣고 넘버포맷 다시 지정해야함
+    	var myPoint = $(".my_point").attr("point");
+    	myPoint=myPoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');  
+    	$(".my_Point").html(myPoint);
+    	
+    	var pointP = $(".card_cart_point_right").html();
+		pointP=pointP.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		$(".card_cart_point_right").html("- "+pointP+"원");
+		
+    	
     	$(".point").attr("readonly", false);
     	btnPoint = 0;
+    	$(".spoint").html("보유 포인트: ");
     	return;
-    })
+    });
 	
     //포인트 엔터시 적용버튼 클릭
     $(".point").on("keypress", function(e){
