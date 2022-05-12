@@ -1,166 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="/resources/css/star.css" rel="stylesheet"/>
+<link href="/resources/css/hosread.css" rel="stylesheet"/>
 <script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
-
-<style>
-
-	* {
-	box-sizing: border-box;
-	}
-	
-	.icon-score{
-		display: left;
-	}
-	.price{
-		position: absolute;
-	}
-
-	.icon-score .rating2{
-		z-index : 1;
-		position: relative;
-	}
-	.icon-score .rating3{
-		z-index : 0;
-		position: relative;
-		margin-top: -37px;
-	}
-
-	.rating2 .star {
-		width: 100;
-		color: #D3D3D3;
-		overflow: hidden;
-	}
-	
-	.rating2 .star-wrap {
-		width: 36px;
-		display: inline-block;
-		color : #D3D3D3;
-	}
-	
-	.rating3 .star-wrap{
-		width: 36px;
-		display: inline-block;
-	}
-	
-	.rating3 .fa-solid{
-		color : #D3D3D3;
-	}
-	
-	#popup01{
-	    display: none;
-	}
-	#popup01{
-	width: 500px;
-	height: 620px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -250px 0 0 -250px;
-	background-color: #fff;
-	z-index: 2;
-	padding: 20px 100px;
-	border-radius: 30px;
-	}
-	.backon{
-	    content: "";
-	    width: 100%;
-	    height: 100%;
-	    background: #00000054;
-	    position: fixed;
-	    top: 0;
-	    left: 0;
-	    z-index: 1;
-	}
-	.close{
-	  position:absolute;
-	  top:670px;
-	  right: 300px;
-	  cursor:pointer;
-	}
-	
-	.openPopup{
-	
-	  cursor:pointer;
-	
-	}
-
-   #topArea{
-      width: 960px;
-   }
-   #imgArea{
-      width: 400px;
-      margin: 10px;
-      float: left;
-   }
-   #titleArea{
-      width: 420px;
-      margin: 10px;
-      float: right;
-      margin-right: 50px;
-      text-align: left; 
-   }
-   h2 {
-      margin-bottom: 20px;
-   }
-   .oneLine{
-      border: 1px solid gray;
-      border-radius: 20px;
-      height: 150px;
-   }
-   #contentsArea{
-      overflow: hidden;
-      float:none;
-      width: 900px;
-      margin: 50px;
-   }
-   h1 {
-      text-align: center;
-   }
-   .btnClose{
-
-   		text-align: center;
-   		
-   }
-   #serviceInfo, #date{
-   		border-bottom: 1px solid gray;
-   }
-   #date{
-   	padding: 30px 0px;
-   }
-   #btnReserve{
-   		margin-left: 200px;
-   }
-   #checkinDate,#checkoutDate{
-   		color: gray;
-   }
-   #btnReviewArea{
-   	text-align: right;
-   	box-sizing: border-box;
-    border: solid 1.5px #D3D3D3;
-    border-radius: 0px 0px 5px 5px;
-   }
-	.review{
-		width: 100%;
-		box-sizing: border-box;
-	    border: solid 1.5px #D3D3D3;
-	    border-radius: 5px;
-	    text-align: left;
-	    margin-top: 10px;
-	    padding: 20px;
-	}
-	.reviewDate{
-		float: right;
-		font-size: 12px;
-	}
-	.reviewId{
-		font-size: 12px;
-	}
-	.text-bold{
-		font-size: 40px;
-	}
-</style>
-
 
 <div id="page">
 
@@ -176,11 +18,23 @@
          </div>
          <!-- 업체 요약설명 -->
          <div id="titleArea">
-            <h2>${vo.scname }</h2>
-            <p>전화: <span class="tel">${vo.sctel}</span></p>
-            <p>위치: ${vo.scaddress1}</p>
-            <p>최저가격: <span class = "price">${vo.scprice }</span></p>
-
+         	<table id="info">
+         		<tr>
+         			<td colspan=2 id="tblname">${vo.scname }</td>
+         		</tr>
+         		<tr>
+         			<td class="title" width=100>전 &nbsp;&nbsp;&nbsp;&nbsp; 화</td>
+         			<td class="tel">${vo.sctel}</td>
+         		</tr>
+         		<tr>
+         			<td class="title">위 &nbsp;&nbsp;&nbsp;&nbsp; 치</td>
+         			<td>${vo.scaddress1}</td>
+         		</tr>
+         		<tr>
+         			<td class="title">최저가격</td>
+         			<td class="price">${vo.scprice }</td>
+         		</tr>
+         	</table>
             <div class="icon-score">
 		        <div class="rating2">
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
@@ -196,7 +50,7 @@
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		            <div class="star-wrap"><div class="star"> <i class="fa-solid fa-star fa-2x"></i></div></div>
 		         </div>
-			 	<span id="rating" style="position: relative; left : 220px; bottom : 41px; font-size : 36px;" avgRate="${avgRate}">${avgRate}</span>
+			 	<span id="rating"  avgRate="${avgRate}">${avgRate}</span>
 	    	</div>
             <p>
                <c:if test="${vo.sconeline != ''}">
@@ -218,19 +72,31 @@
             </div>
          </div>
       </div>
-
       <br>
       <!-- 상세설명 -->
-      <div id="contentsArea">
-         <h1>상세설명</h1>
-         <p style="font-weight:bold;">영업시간</p>
-         <p>영업시작<span>${vo.opentime}</span></p>
-         <p>브레이크타임<span>${vo.breaktime}</span></p>
-         <p>영업마감<span>${vo.closetime}</span></p>
-         
-         <p style="font-weight:bold;">상세소개</p>
-         <p>${vo.scdetail_description}</p>
-      </div>
+      <table id="contentsArea">
+      	<tr>
+      		<td colspan=2 class="title">영업시간</td>
+      	</tr>
+      	<tr>
+      		<td width=100>OPEN</td>
+      		<td>${vo.opentime}</td>
+      	</tr>
+      	<tr>
+      		<td>BREAK</td>
+      		<td>${vo.breaktime}</td>
+      	</tr>
+      	<tr>
+      		<td>CLOSE</td>
+      		<td>${vo.closetime}</td>
+      	</tr>
+       	<tr>
+       		<td colspan=2 class="title">상세소개</td>
+       	</tr>
+       	<tr>
+       		<td colspan=2>${vo.scdetail_description}</td>
+       	</tr>
+      </table>
       
    </form>
    <form class="mb-3" name="myform" id="myform" method="post" action="rateInsert">
@@ -253,7 +119,7 @@
 			<textarea class="col-auto form-control" type="text" id="reviewContents" name="comments"
 					  placeholder="유치원이나 호텔을 이용하시고 후기를 남겨주시면 큰 도움이 됩니다! 감사합니다!"></textarea>
 			<div id="btnReviewArea">
-				<button id = "btnReview">저장</button>
+				<button id = "btnReview">저&nbsp;&nbsp;&nbsp;&nbsp;장</button>
 			</div>
 		</div>
 	</form>

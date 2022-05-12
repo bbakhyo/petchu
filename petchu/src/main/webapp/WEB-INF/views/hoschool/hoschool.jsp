@@ -6,7 +6,7 @@
 <div class="page_hoschool">
 	
   	<div class="ho_page_header">
-      <form name="frm" style="text-align: center;">
+      <form name="frm"id="searchbox">
         <input type="text" id="keyword" name="keyword" >
         <button id="search" name="search" type="submit" >검색</button>
       </form>
