@@ -9,15 +9,26 @@
 	}
 	table {
 		width: 700px;
+		margin-top: 200px;
 	}
 	td {
 		padding: 20px;
 		margin: 20px;
 	}
+	h1{
+		margin-top: -200px;
+	}
+	#sidemenu{
+		margin-left: -400px;
+		margin-top: -50px;
+	}
 </style>
 
 <form name="frm" action="changepass" method="get">
-<h1>비밀번호 확인</h1>
+	<h1>비밀번호 확인</h1>
+	<div id="sidemenu">
+		<jsp:include page="${sideMenu}" />
+	</div>
 	<table>
 		<tr>
 			<td width=100>비밀번호</td>

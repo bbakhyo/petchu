@@ -52,6 +52,9 @@
 		position: relative;
 		margin-left: 427px;
 	}
+	   #sidemenu{
+   		margin-left: -100px;
+   }
 </style>
 <div id="page">
 	<p style="text-align: center; font-weight: bold">업체를 선택하세요</p>
