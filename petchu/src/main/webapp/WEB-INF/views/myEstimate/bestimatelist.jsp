@@ -12,6 +12,7 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	display: inline-block;
+	cursor : pointer;
 }
 
 #tbl p {
@@ -74,6 +75,7 @@
 	font-size : 15px;
 }
 </style>
+
 <h1>미용 견적서 목록</h1>
 <div id="sidemenu">
 		<jsp:include page="${sideMenu}" />
@@ -89,6 +91,7 @@
 		       <span>{{wish_local1}}</span> <span>{{wish_local2}}</span> </br>
 			   <p>가격 : {{printPrice price}}</p>
 			   <p>견적설명 : {{description}}</p>
+			   <p>{{isDelete}} : {{secheck}}</p>
 			</div>
 	      {{/each}}
 	</script>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetswal/dist/sweetswal.min.js"></script>
 <link href="/resources/css/request.css" rel="stylesheet">
 <style>
 	textarea {
@@ -75,7 +75,7 @@ $("#bigChoose").on("click", function(){
 			url : "/request/cchoose",
 			data : {crno : crno, seno : seno},
 			success : function() {
-				alert(scname + " 업체의 견적서가 채택 되었습니다!");
+				swal(scname + " 업체의 견적서가 채택 되었습니다!");
 				location.href = "/request/result";
 			}
 		});

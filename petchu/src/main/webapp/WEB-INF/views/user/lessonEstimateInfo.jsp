@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="/resources/css/request.css" rel="stylesheet">
+<script src="https://unpkg.com/sweetswal/dist/sweetswal.min.js"></script>
 <style>
 	textarea {
 	margin-left : 0px;
@@ -70,7 +70,7 @@ var seno="${lvo.seno}";
 var crno="${lvo.lrno}"; 
 
 $("#bigChoose").on("click", function(){
-	 alert("채택!");
+	 swal("채택!");
 });
  
 var address="${lvo.scaddress1}";
