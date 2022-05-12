@@ -31,5 +31,5 @@ public interface shopcartDAO {
 	public List<shopcartVO> record_best_items2();
 	public shopcartVO read_user_order(String orno);
 	public void user_order_delete(String bno);
-	
+	public int is_del(String orno);
 }
