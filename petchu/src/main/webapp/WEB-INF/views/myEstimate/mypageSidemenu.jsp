@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 	.sideMenu{
-		margin-left: 100px;
+
 		width: 150px; 
 		float: left;
 		height:100%

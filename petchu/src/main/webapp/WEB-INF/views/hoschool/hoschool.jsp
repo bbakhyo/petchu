@@ -86,11 +86,10 @@
 			  		 <!--  1열(상단) :  업체명/전화번호  -->
 	           		 <div class="prame_row1">
 		                 <div class="prame_name scname" placeholder="어바웃펫">{{scname}}</div>
-		                 <div class="prame_contact sctel">{{sctel}}</div>
 	              	 </div>
               		 <!--  2열(중간)) :  업체명 상세정보  -->
 	                 <div class="prame_row2">
-	                   	 <div class="prame_description  sconeline">{{sconeline}}</div>
+	                   	 <div class="prame_description sctel">{{sctel}}</div>
 	                 </div>
               		 <!--  3열(하단)) :  별점 / isDelete / 금액  -->
 						<div class="prame_row3">
@@ -232,30 +231,25 @@
 						}
 				});
 				
-				
-				var i = 0;
-				$(".prame").each(function(){
-					var bg=$(".image").html();
-					//백그라운드 이미지 수만큼 반복하여 Prame마다 다른이미지 적용
-					if(i==0){
-						//$(this).style.backgroundimage="url('/resources/TBN/TBN01.jpg')";
-						$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); 
-						$(this).css({"background-size":"700px 200px"}); 
-						
-						i++;
-					}else if(i==1){
-						$(this).css({"background":"url(/resources/TBN/TBN04.png"});
-						$(this).css({"background-size":"700px 200px"}); 
-						i++;
-					}else if(i==2){
-						$(this).css({"background":"url(/resources/TBN/TBN05.png"});
-						$(this).css({"background-size":"700px 200px"}); 
-						i++;
-					}else if(i==3){
-						$(this).css({"background":"url(/resources/TBN/TBN06.png"});
-						$(this).css({"background-size":"700px 200px"}); 
-						i=0;
-					}
+				  //업체별 백그라운드 적용 
+				  $(".prame").each(function(){
+						var scname=$(this).find(".prame_name").html();
+
+						var bg=$(".image").html();
+						//백그라운드 이미지 수만큼 반복하여 Prame마다 다른이미지 적용
+						if(scname=="어바웃펫"){
+							$(this).css({"background":"url(/resources/TBN/TBN01.jpg"}); //어바웃펫
+							$(this).css({"background-size":"700px 200px"}); 
+						}else if(scname=="사랑스럽개"){
+							$(this).css({"background":"url(/resources/TBN/TBN04.png"});	//사랑스럽개
+							$(this).css({"background-size":"700px 200px"}); 
+						}else if(scname=="꽃피는견생(유치원)"){
+							$(this).css({"background":"url(/resources/TBN/TBN05.png"});	//꽃피는견생(유치원)
+							$(this).css({"background-size":"700px 200px"}); 
+						}else if(scname=="꽃피는견생(호텔)"){
+							$(this).css({"background":"url(/resources/TBN/TBN06.png"});	//꽃피는견생(호텔)
+							$(this).css({"background-size":"700px 200px"}); 
+						}
 					
 					//전화번호 포멧 적용
 					var num = $(this).find(".sctel").html();
