@@ -42,10 +42,10 @@
 				<!--중간 : 배송 정보 -->
 				<div class="info_shippingInfo_container">
 					<div class="shipping_date_line">
-						<em>내일(일요일) 도착 보장</em>
+						<em>내일 도착 예정</em>
 					</div>
 					<div class="shipping_fee_line">
-						<em>무료배송</em>
+						<em>배송비: 3,000원</em>
 					</div>
 				</div>
 				<div class="extra_info_wrapper">

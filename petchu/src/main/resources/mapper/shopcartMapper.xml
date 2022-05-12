@@ -38,13 +38,13 @@
 	<select id="order_list" resultType="com.example.domain.shopcartVO">
 		select orno, pimage, p.pno, pname, pprice, o.amount, odate from 
 		orderlist o, shopproduct p 
-		where o.pno=p.pno and uid=#{uid}
+		where o.pno=p.pno and uid=#{uid}and isDelete = 0
 		order by odate desc
 	</select>
 	<select id="order_read" resultType="com.example.domain.shopcartVO">
 		select o.*, p.pimage, p.pname, p.pprice 
 		from orderlist o, shopproduct p
-		where orno = #{orno} and o.pno=p.pno
+		where orno = #{orno} and o.pno=p.pno and isDelete=0
 	</select>
 	<select id="cart_check" resultType="com.example.domain.shopcartVO">
 		select * from shopcart
@@ -112,4 +112,8 @@
 	 	select * from user_order 
 	 	where orno = #{orno}
 	</select>
+	<update id="user_order_delete">
+		update orderlist set isDelete=1
+		where bno=#{bno}
+	</update>
 </mapper>

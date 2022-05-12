@@ -99,7 +99,7 @@ height:180px;
 	    	
 	      <script id="temp" type="text/x-handlebars-template">
 
-	{{#each .}}
+	{{#each list}}
       <div class="content_item_box_container" pno="{{pno}}" onclick='getLocation(this)'>
         <img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
         	<div class="content_item_title" pno="{{pno}}">{{pname}}</div>
@@ -114,10 +114,16 @@ height:180px;
         </script>		  
 	 	 </div> 
 	 </div>
-
+	<div class="pagination"></div>
 </body>
-
-
+<script>
+ $("#pagination a").click(function(e){
+ e.preventDefault();
+ var page=$(this).attr("href");
+ frm.page.value=page;
+ alert(frm);
+ });
+</script>
 <script>
 /*Brand명이 없으면 'House Brand를 러턴 */
 	Handlebars.registerHelper("replace",function(pbrand){
@@ -137,12 +143,13 @@ height:180px;
 <script>
 	var selectCate="${cate}";
 	var selectCate2="${cate2}";
+	var selectCate3="${cate3}";
 	getContentsList();
 	
 	//상품 클릭시 리드페이지로 이동
 	function getLocation(e){
 		var pno = $(e).attr("pno");
-		location.href="read?pno="+pno+"&selectCate="+selectCate+"&selectCate2="+selectCate2; 
+		location.href="read?pno="+pno+"&selectCate="+selectCate+"&selectCate2="+selectCate2+"&selectCate3="+selectCate3; 
 	}
 	
 	
@@ -150,11 +157,11 @@ height:180px;
 		$.ajax({
 			type: "get",
 			dataType: "json",
-			url: "/shopproduct/contents_list.json?selectCate="+selectCate+"&selectCate2="+selectCate2,
+			url: "/shopproduct/contents_list.json?selectCate="+selectCate+"&selectCate2="+selectCate2+"&selectCate3="+selectCate3,
 			success:function(data){
 				var template = Handlebars.compile($("#temp").html());
 				$(".content_item_container_row").html(template(data));
-				
+				$(".pagination").html(getPagination(data));
 			}
 		});
 	}
