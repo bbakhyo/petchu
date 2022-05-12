@@ -4,6 +4,17 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link href="/resources/css/mypage.css" rel="stylesheet" > 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+	h1{
+		margin-left: 250px;
+	}
+	table {
+		margin-left: 350px;
+	}
+	button{
+		text-align: center;
+	}
+</style>
 
 <div id="page">
 	<h1>마이페이지</h1>

@@ -86,6 +86,9 @@
    		display: none;
    		color:red;
    }
+   #sidemenu{
+   		margin-left: -100px;
+   }
 </style>
 <div id="page">
 	<div id="reserveList">

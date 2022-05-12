@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="/resources/css/mypage.css" rel="stylesheet" > 
-
+<style>
+	h1{
+		margin-left: 250px;
+	}
+	table {
+		margin-left: 350px;
+	}
+	button{
+		text-align: center;
+	}
+</style>
 <div id="page">
-	<h1>마이펫 추가하기</h1>
+	<h1>마이펫 등록하기</h1>
 	<div id="sidemenu">
 		<jsp:include page="${sideMenu}" />
 	</div>
 	<form name="frm" action="insertPet" method="post" enctype="multipart/form-data">
 		<div id="contents">
-			<table width=700 style="margin: 0px auto; margin: 20px; margin-left: 150px;">
+			<table width=600 >
 				<tr>
 					<td width=100>아이디</td>
 					<td width=500 class="id">
