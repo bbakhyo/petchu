@@ -9,6 +9,7 @@
 <script src="/resources/pagination.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/resources/chart.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <body>
 	<p class="title">요청서를 제출할 서비스 종류를 선택하세요</p>
@@ -264,7 +265,6 @@ var i=0;
 var s=0;
 var t=0;
 
-
 //기타
 $("input:radio[name='house_size']").click(function(){
 	var etcCheck1 = $('input:radio[name="house_size"]:checked').val();
@@ -344,34 +344,32 @@ $(frm1).on("submit", function(e){
 	var wish_local2 = $(frm1.wish_local2).val();
 	var detailed_matters = $(frm1.detailed_matters).val();
 	
-	alert(nick + "\n" + uid + "\n" + pcate + "\n" + beauty_classification + "\n" +  weight + "\n" + age + "\n" + last_beautydate + "\n" + service_place + 
-			"\n" + wish_date + "\n" + wish_local1 + "\n" + wish_local2 + "\n" + detailed_matters);
 	if(pcate == null){
-		alert("1번 문항을 선택해주세요");
+		swal("1번 문항을 선택해주세요");
 		return;
 	}else if(beauty_classification == null){
-		alert("2번 문항을 선택해주세요");
+		swal("2번 문항을 선택해주세요");
 		return;
 	}else if(weight == null){
-		alert("3번 문항을 선택해주세요");
+		swal("3번 문항을 선택해주세요");
 		return;
 	}else if(age == null){
-		alert("4번 문항을 선택해주세요");
+		swal("4번 문항을 선택해주세요");
 		return;
 	}else if(last_beautydate == null){
-		alert("5번 문항을 선택해주세요");
+		swal("5번 문항을 선택해주세요");
 		return;
 	}else if(service_place == null){
-		alert("6번 문항을 선택해주세요");
+		swal("6번 문항을 선택해주세요");
 		return;
 	}else if(wish_date == null){
-		alert("7번 문항을 선택해주세요");
+		swal("7번 문항을 선택해주세요");
 		return;
 	}else if(wish_local1 ==""){
-		alert("8번 문항을 기입해주세요");
+		swal("8번 문항을 기입해주세요");
 		return;
 	}else if(wish_local2 ==""){
-		alert("8번 문항을 기입해주세요");
+		swal("8번 문항을 기입해주세요");
 		return;
 	}
 	if(!confirm("요청서를 작성하시겠습니까?")) return;
@@ -418,23 +416,21 @@ $(frm2).on("submit", function(e){
 	var house_size_etc = $("#house_size_text").val();
 	var wish_date_date = $("#wish_date_date").val();
 	
-	alert("uid : " + uid + "\n" + "building_classification : " + building_classification + "\n" +  "house_size : " + house_size + "\n" +   "wish_date : " + wish_date + "\n" + wish_local1 + "\n" + wish_local2 + "\n" + hope_matters
-			+ "\n" + "house_size_etc : " + house_size_etc + "\n" + "wish_date_date : " + wish_date_date);
 	
 	if(building_classification== null){
-		alert("1번 문항을 선택해주세요");
+		swal("1번 문항을 선택해주세요");
 		return;
 	}else if(house_size == null && house_size_text == ""){
-		alert("2번 문항을 선택해주세요");
+		swal("2번 문항을 선택해주세요");
 		return;
 	}else if(wish_date == null &&  wish_date_date == ""){
-		alert("3번 문항을 선택해주세요");
+		swal("3번 문항을 선택해주세요");
 		return;
 	}else if(wish_local1 == ""){
-		alert("4번 문항을 선택해주세요");
+		swal("4번 문항을 선택해주세요");
 		return;
 	}else if(wish_local2 ==""){
-		alert("4번 문항을 선택해주세요");
+		swal("4번 문항을 선택해주세요");
 		return;
 	}else{
 		if(!confirm("요청서를 작성하시겠습니까?")) return;
@@ -498,42 +494,36 @@ $(frm3).on("submit", function(e){
 	var lesson_place_etc = $("#place_text").val();
 	
 	console.log(wish_date);
-	alert("uid : " + uid + "\n" + "lesson_classification : " + lesson_classification + "\n" +  
-	"lesson_goal : " + lesson_goal + "\n" + "lesson_method : " + lesson_method + "\n" + "age : " + age + "\n" + "gender : " + gender 
-	+ "\n" + "wish_gender : " + wish_gender + "\n" + "wish_date : " + wish_date + "\n" + "wish_time : " + wish_time 
-	+ "\n" + "lesson_place : " + lesson_place + "\n" + "wish_local1 : " + wish_local1 + "\n" + "wish_local2 : " + wish_local2 +
-	"\n" + "detailed_matters : " + detailed_matters + "\n" + "lesson_classification_etc : " + lesson_classification_etc + "\n" 
-	+ "lesson_place_etc : " +  lesson_place_etc);
 	
 	if(lesson_classification == null && lesson_classification_etc == ""){
-		alert("1번 문항을 선택해주세요");
+		swal("1번 문항을 선택해주세요");
 		return;
 	}else if(lesson_goal == null){
-		alert("2번 문항을 선택해주세요");
+		swal("2번 문항을 선택해주세요");
 		return;
 	}else if(lesson_method == null){
-		alert("3번 문항을 선택해주세요");
+		swal("3번 문항을 선택해주세요");
 		return;
 	}else if(age == null){
-		alert("4번 문항을 선택해주세요");
+		swal("4번 문항을 선택해주세요");
 		return;
 	}else if(gender == null){
-		alert("5번 문항을 선택해주세요");
+		swal("5번 문항을 선택해주세요");
 		return;
 	}else if(wish_gender == null){
-		alert("6번 문항을 선택해주세요");
+		swal("6번 문항을 선택해주세요");
 		return;
 	}else if(wish_date == null){
-		alert("7번 문항을 선택해주세요");
+		swal("7번 문항을 선택해주세요");
 		return;
 	}else if(wish_time == null){
-		alert("8번 문항을 선택해주세요");
+		swal("8번 문항을 선택해주세요");
 		return;
 	}else if(lesson_place == null && lesson_place_etc == ""){
-		alert("9번 문항을 선택해주세요");
+		swal("9번 문항을 선택해주세요");
 		return;
 	}else if(wish_local1 == "" || wish_local2 == ""){
-		alert("10번 문항을 선택해주세요");
+		swal("10번 문항을 선택해주세요");
 		return;
 	}else{
 		if(!confirm("요청서를 작성하시겠습니까?")) return;
@@ -572,8 +562,6 @@ for(a=0; a < services.length; a++){
 }
 
 window.onload = function() {
-	 
-
     function offClick() {
         document.querySelector('#modal_wrap1').style.display ='none';
         document.querySelector('.black_bg').style.display ='none';

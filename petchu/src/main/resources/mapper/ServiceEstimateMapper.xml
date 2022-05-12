@@ -6,6 +6,23 @@
         select * from serviceEstimate
     </select>
     
+   <!-- 채택시 -->
+   <update id="secheck">
+   		update serviceEstimate set secheck=1 where seno=#{seno}
+   </update>
+   
+   <update id="bfailCheck">
+   		update serviceEstimate set failcheck=1 where brno=#{brno} and secheck=0;
+   </update>
+   
+   <update id="cfailCheck">
+   		update serviceEstimate set failcheck=1 where crno=#{crno} and secheck=0;
+   </update>
+   
+   <update id="lfailCheck">
+   		update serviceEstimate set failcheck=1 where lrno=#{lrno} and secheck=0;
+   </update>
+    
   <!-- call view -->
    	<!-- 미용 -->
     <select id="beautyViewList" resultType="com.example.domain.ServiceEstimateVO">
@@ -67,22 +84,22 @@
     <!-- 미용  -->
     <insert id="brnoInsert">
     	insert into serviceEstimate(scno, scname, brno, price, description) 
-    	values(#{scno}, #{scname}, #{brno}, #{price}, #{description});
+    	values(#{scno}, #{scname}, #{brno}, #{price}, #{description})
     </insert>
     
     <select id="brnoList" resultType="com.example.domain.ServiceEstimateVO">
-    	select * from serviceEstimate where brno=#{brno};
+    	select * from serviceEstimate where brno=#{brno} order by seno desc
     </select>
     
     
     <!-- 홈 클리닝 -->
      <insert id="crnoInsert">
     	insert into serviceEstimate(scno, scname, crno, price, description) 
-    	values(#{scno}, #{scname}, #{crno}, #{price}, #{description});
+    	values(#{scno}, #{scname}, #{crno}, #{price}, #{description})
     </insert>
     
     <select id="crnoList" resultType="com.example.domain.ServiceEstimateVO">
-    	select * from serviceEstimate where crno=#{crno};
+    	select * from serviceEstimate where crno=#{crno} order by seno desc
     </select>
     
     <!-- 레슨 -->
@@ -92,6 +109,6 @@
     </insert>
     
     <select id="lrnoList" resultType="com.example.domain.ServiceEstimateVO">
-    	select * from serviceEstimate where lrno=#{lrno};
+    	select * from serviceEstimate where lrno=#{lrno} order by seno desc
     </select>
 </mapper>

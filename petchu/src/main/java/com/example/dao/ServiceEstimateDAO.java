@@ -5,6 +5,15 @@ import java.util.List;
 import com.example.domain.ServiceEstimateVO;
 
 public interface ServiceEstimateDAO {
+	//채택
+	public void secheckUpdate(int seno);
+	
+	public void bfailCheckUpdate(int brno);
+	
+	public void cfailCheckUpdate(int crno);
+	
+	public void lfailCheckUpdate(int lrno);
+	
 	//중복체크
 	public int overlabCheck(ServiceEstimateVO vo);
 	
