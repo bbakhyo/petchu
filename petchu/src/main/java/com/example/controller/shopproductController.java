@@ -148,8 +148,8 @@ public class shopproductController {
 		cri.setPerPageNum(20);
 		PageMaker pm=new PageMaker();
 		pm.setCri(cri);
-		pm.setDisplayPageNum(3);
-		pm.setTotalCount(dao.totalCount());
+		pm.setDisplayPageNum(10);
+		pm.setTotalCount(dao.totalCount(selectCate, selectCate2, selectCate3, cri));
 		System.out.println("asfddsfsdfs.............."+pm.getStartPage()+"\n"+pm.getTotalCount()+"\n"+pm.getCri());
 		map.put("pm", pm);
 		map.put("list", dao.contents_list(selectCate, selectCate2, selectCate3, cri));
@@ -258,6 +258,7 @@ public class shopproductController {
 		model.addAttribute("orno", orno);
 		model.addAttribute("uvo", cartdao.order_read_user(orno));
 		model.addAttribute("ovo", cartdao.read_user_order(orno));
+		model.addAttribute("del", cartdao.is_del(orno));
 		model.addAttribute(	"pageName", "shopproduct/order_read.jsp");
 		return "/home";
 	}

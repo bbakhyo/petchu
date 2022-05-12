@@ -155,4 +155,9 @@ public class shopcartDAOImpl implements shopcartDAO{
 	public void user_order_delete(String bno) {
 		session.update(namespace+".user_order_delete", bno);
 	}
+
+	@Override
+	public int is_del(String orno) {
+		return session.selectOne(namespace+".is_del", orno);
+	}
 }

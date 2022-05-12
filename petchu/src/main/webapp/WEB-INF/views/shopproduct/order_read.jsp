@@ -238,7 +238,7 @@ td {
 		<tr class="td_title">
 			<th colspan="3"
 				style="border-bottom: 2px solid; padding-bottom: 20px; width: 750px;"
-				class="title left back_white">결제</th>
+				class="title left back_white">결제<span class="del nprice"></span></th>
 		</tr>
 		<tr>
 			<td rowspan="2"
@@ -324,36 +324,26 @@ td {
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
 
-				//vo.final_price 계산
-				// 			var vo_pprice = $(".pprice").attr("pprice");
-				// 			var vo_amount = $(".pprice").attr("amount");
-				// 			var vo_final_price = Number(vo_pprice) * Number(vo_amount);  
-				// 			//alert(vo_final_price);
-				// 			$(".final_price").html(vo_final_price);
-
-				//each final_price 계산
+				var withoutDel = 0;
 				$(".price").each(function() {
 					var price = $(this).attr("pprice");
 					var amount = $(this).attr("amount");
 					var final_price = Number(price) * Number(amount);
 					$(this).html(final_price);
+					var i = final_price;
+					//삭제된 값을 제외한 가격
+					withoutDel = withoutDel + Number(i)
 				});
-
-				//주문날짜 substring
-				// 			var odate = $(".odate").html();
-				// 			odate = odate.substring(0, 9); 
-				// 			$(".odate").html(odate+" 주문");
-
-				//구매상품 가격포맷
-				// 			var fprice = $(".final_price").html();
-				// 			fprice=fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-				// 			alert(fprice);
-				// 			$(".final_price").html(fprice);
-				//같이 구매한 상품 가격포맷
-
-				getFormatPrice();
+				var sum = "${ovo.sum}" - withoutDel;
 				//.date 날짜포맷
 				getDate();
+				//삭제된 항목 수 표시
+				if("${del}">0){
+					$(".del").html(' 주문내역에서 삭제된 상품: 총 ${del}개 ( ' + sum + '원 )');
+					$(".del").attr("style", "font-size: 13; font-weight: 300; float: right;");
+				}
+				//가격포맷
+				getFormatPrice();
 			}
 		});
 	}
@@ -381,7 +371,6 @@ td {
 	//전화번호 포멧
 	var num = $(".tel").find(".tel_number").html();
 	var formatNum = '';
-
 	if (num.length == 11) {
 		formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
 	} else if (num.length == 8) {
@@ -414,7 +403,8 @@ td {
 	$(".oldPrice").html(oldPrice);
 	
 	//적립 포인트 계산
-	$(".payBack").html(sum/10);
+	sum = Math.floor(sum/10);
+	$(".payBack").html(sum);
 	var fprice = $(".payBack").html();
 	fprice = fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	$(".payBack").html(fprice);
@@ -453,7 +443,6 @@ td {
 	//구매목록에서 삭제
 	function del_ohistory(){
 		var orno = "${orno}";
-		alert(bno)
 // 		user_order_delete
 		$.ajax({
 			type: "post",

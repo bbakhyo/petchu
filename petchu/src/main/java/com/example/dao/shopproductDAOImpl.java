@@ -38,6 +38,7 @@ public class shopproductDAOImpl implements shopproductDAO{
 		map.put("selectCate2", selectCate2);
 		map.put("selectCate3", selectCate3);
 		map.put("cri", cri);
+		map.put("keyword", cri.getKeyword());
 		return session.selectList(namespace+".contents_list", map);
 	}
 
@@ -48,8 +49,13 @@ public class shopproductDAOImpl implements shopproductDAO{
 		}
 
 		@Override
-		public int totalCount() {
-			return session.selectOne(namespace+".totalCount");
+		public int totalCount(String selectCate, String selectCate2, String selectCate3, Criteria cri) {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("selectCate", selectCate);
+			map.put("selectCate2", selectCate2);
+			map.put("selectCate3", selectCate3);
+			map.put("keyword", cri.getKeyword());
+			return session.selectOne(namespace+".totalCount", map);
 		}
 	
 	

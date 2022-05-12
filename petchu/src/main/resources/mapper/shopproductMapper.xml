@@ -18,10 +18,23 @@
 		<if test="selectCate3 != null">
 		and pcate2 like concat('%',#{selectCate3},'%')
 		</if>
+		<if test="keyword != null">
+		and pname like concat('%',#{keyword},'%')
+		</if>
 		order by pno desc
  		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="totalCount" resultType="int">
- 		select count(*) from tbl_board;
+ 		select count(*) from shopproduct
+ 		where pcate4 like concat('%',#{selectCate},'%')		
+		<if test="selectCate2 != null">
+		and pcate3 like concat('%',#{selectCate2},'%')
+		</if>	
+		<if test="selectCate3 != null">
+		and pcate2 like concat('%',#{selectCate3},'%')
+		</if>
+		<if test="keyword != null">
+		and pname like concat('%',#{keyword},'%')
+		</if>
 	</select>
 </mapper>

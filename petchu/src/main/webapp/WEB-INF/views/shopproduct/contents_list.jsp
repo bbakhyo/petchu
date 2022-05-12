@@ -86,14 +86,53 @@
   gap:0;
 }
 .content_img{
-width:180px;
-height:180px;
+	width:180px;
+	height:180px;
+}
+.contents_box{
+	background: #A7CA37;
+	height: 60px;
+}
+.content_item_container_row{
+	margin: 10px auto;
+}
+.content_item_box_container{
+	margin: 1px;
+}
+#search_text{
+    width: 300px;
+    height: 40px;
+    margin-top: 11px;
+    padding: 0 3px 0;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    color: #333;
+    letter-spacing: 0;
+    border: none;
+    background: transparent;
+    border: solid 2px white;
+    border-radius: 5px;
 }
 </style>
 </head>
 <body>
 	<div id="page">
-		<h1 class="contents_name">해당 컨텐츠의 전체 내용  "${cate}", "${cate2}"</h1>
+		<div class="contents_box">
+			<select name="animal_type" class="animal_type">
+				<option>전체</option>
+				<option>강아지</option>
+				<option>고양이</option>
+			</select>
+			<select name="item_type" class="item_type">
+				<option>전체</option>
+				<option>사료</option>
+				<option>간식</option>
+				<option>용품</option>
+			</select>
+			<input type="text" name="keyword" id="search_text">
+			<input type="button" value="검색" class="btn_search">
+		</div>
 		 <div class="content_container">
 	    	<div class="content_item_container_row"></div> 
 	    	
@@ -121,7 +160,6 @@ height:180px;
  e.preventDefault();
  var page=$(this).attr("href");
  frm.page.value=page;
- alert(frm);
  });
 </script>
 <script>
@@ -141,6 +179,8 @@ height:180px;
 </script>
 
 <script>
+	var page=1;
+	var keyword="";
 	var selectCate="${cate}";
 	var selectCate2="${cate2}";
 	var selectCate3="${cate3}";
@@ -157,12 +197,42 @@ height:180px;
 		$.ajax({
 			type: "get",
 			dataType: "json",
+			data: {page:page, keyword:keyword},
 			url: "/shopproduct/contents_list.json?selectCate="+selectCate+"&selectCate2="+selectCate2+"&selectCate3="+selectCate3,
 			success:function(data){
 				var template = Handlebars.compile($("#temp").html());
 				$(".content_item_container_row").html(template(data));
 				$(".pagination").html(getPagination(data));
+				window.scroll({ top: 0, left: 0, behavior: "smooth" })
 			}
 		});
 	}
+	
+	$(".pagination").on("click", "a", function(e){
+		e.preventDefault();
+		page=$(this).attr("href");
+		getContentsList();
+	});
+	
+	//검색버튼을 클릭했을 경우
+	$(".btn_search").on("click", function(){
+		keyword = $("#search_text").val();
+		selectCate="";
+		selectCate2=$(".item_type").val();
+		selectCate3=$(".animal_type").val();
+		if(selectCate2=="전체") {
+			selectCate2 = "";
+		}if(selectCate3=="전체"){
+			selectCate3 = "";
+		}
+		getContentsList();
+	});
+	
+	
+    //엔터 프레스 => click()
+    $("#search_text").on("keypress", function(e){
+    	if(e.key === "Enter"){
+    		$(".btn_search").click();
+    	}
+    });
 </script>

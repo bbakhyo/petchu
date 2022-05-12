@@ -13,6 +13,10 @@
  		width:400px;
  		line-height:50px;
  		font-size:15px;
+        height: 100px;
+	}
+	.point_apply{
+		margin-right:5px;
 	}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -85,16 +89,16 @@
             </div>
 
             <div class="receiver_line3">
-              <div><input type="text" name="delivery_address1" placeholder="주소1" id="delivery_addy1" size=55></div>
+              <div><input type="text" name="delivery_address1" placeholder="주소1" id="delivery_addy1" size=50></div>
             </div>
 
             <div>
-              <div><input type="text" name="delivery_address2" placeholder="주소2" id="delivery_addy2" size=55></div>
+              <div><input type="text" name="delivery_address2" placeholder="주소2" id="delivery_addy2" size=50></div>
             </div>
             <br>
             
             <div>
-              <div><input type="text" name="delivery_message" placeholder="배송시 요청사항" id="delivery_message" ></div>
+              <textarea cols="10" rows="10" placeholder="배송시 요청사항" id="delivery_message"></textarea>
             </div>
             
           </div>
@@ -172,10 +176,11 @@
         <div class="coupon_points_card" style="height:120px;">
             <div class="point_paragraphs"><br>
               <p class="points_header">보유 포인트: <a class="my_point">${uvo.point}</a></p>
+              <p class="points_header">사용 포인트: <a class="use_point">0</a></p>
             </div>
           <div class="coupon_line3">
             <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
-            <span><button class="point_apply">적용</button></span>
+            <span><button class="point_apply">사용</button><button class="point_apply_all">모두사용</button></span>
             <span><button class="point_disapply" style="display:none;">사용취소</button></span><br><br>
 			</div>
             <div class="terms_agree_button_wrapper">
@@ -185,10 +190,6 @@
 
         <div class="checkout_terms_card">
           <div class="terms_outside_wrapper">
-            <div class="terms_inside_wrapper">
-              <div class="terms_wrapper">
-              </div>
-            </div>
           </div>
 
         </div>
@@ -358,7 +359,7 @@
 				var usePoint = $(".card_cart_point_right").attr("point");
 				var serverPoint = "${uvo.point}";
 				//사용할 포인트가 서버에서 불러온 데이터보다 작다면 (정상적이라면)
-				if(Number(usePoint)<Number(serverPoint)){
+				if(Number(usePoint)<=Number(serverPoint)){
 					final_price = final_price - Number(usePoint);
 					alert("데이터 테스트 통과");
 				}else{//아니라면 (비정상적인 접근이라면)
@@ -498,7 +499,7 @@
 	 $("#delivery_contact").attr("tel", num);
 	    
 	
-	 //포인트가 변경될 때
+	 //포인트가 사용버튼 눌렀을 떄
 	    $(".point_apply").on("click", function(){
 	    	var point = $(this).parent().parent().find(".point").val();
 	    	var myPoint = $(".my_point").html();
@@ -524,6 +525,7 @@
 	    	$(".none").attr("class", "show");
 	    	$(".checkout_point_line").attr("style", "");
 	    	$(".card_cart_point_right").html(point);
+	    	$('.use_point').html(point);
 	    	$(".card_cart_point_right").attr("point", point);
 	    	
 	    	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
@@ -535,6 +537,7 @@
 			$(".card_cart_grandtotal_row_right").html(fmprice+"원");
 			
 			$(this).attr("style", "display:none;");
+			$(".point_apply_all").attr("style", "display:none;");
 	    	$(".point_disapply").attr("style", "");
 	    	$(".point").attr("readonly", "readonly")
 			alert("포인트 적용 완료");
@@ -558,7 +561,8 @@
 	    	$(".card_cart_point_right").attr("point", "");
 	    	$(".checkout_point_line").attr("style", "display:none;");
 	    	$(this).attr("style", "display:none;");
-	    	$(".point_apply").attr("style", "");
+	    	$(".point_apply").attr("style", "margin-right:5px;");
+	    	$(".point_apply_all").attr("style", "");
 	    	alert("취소완료");
 	    	$(".point").val("");
 	    	$(".point").attr("readonly", false);
@@ -577,6 +581,11 @@
     	}
     });
 	 
-	
+	//포인트 모두사용 눌렀을 때
+	$(".point_apply_all").on("click", function(){
+		var myPoint = "${uvo.point}";
+		$(".point").val(myPoint);
+		$(".point_apply").click();
+	});	
 
 </script>

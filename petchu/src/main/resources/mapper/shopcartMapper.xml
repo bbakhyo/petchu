@@ -116,4 +116,8 @@
 		update orderlist set isDelete=1
 		where bno=#{bno}
 	</update>
+	<select id="is_del" resultType="int">
+	 	select count(*) from orderlist
+	 	where orno = #{orno} and isDelete=1
+	</select>
 </mapper>
