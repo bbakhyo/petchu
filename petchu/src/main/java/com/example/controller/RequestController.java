@@ -148,6 +148,31 @@ public class RequestController {
 		return "/home";
 	}
 	
+	//채택
+	@ResponseBody
+	@RequestMapping("/bchoose")
+	public void beutyChoose(int seno, int brno){
+		sedao.secheckUpdate(seno);
+		bdao.bisDeleteUpdate(brno);
+		sedao.bfailCheckUpdate(brno);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/cchoose")
+	public void celanChoose(int seno, int crno){
+		sedao.secheckUpdate(seno);
+		cdao.cisDeleteUpdate(crno);
+		sedao.cfailCheckUpdate(crno);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/lchoose")
+	public void lessonChoose(int seno, int lrno){
+		sedao.secheckUpdate(seno);
+		ldao.lisDeleteUpdate(lrno);
+		sedao.lfailCheckUpdate(lrno);
+	}
+	
 	// 미용 견적서 리스트
 	@RequestMapping("/belist.json")
 	@ResponseBody

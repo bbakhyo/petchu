@@ -25,6 +25,7 @@
 		</table>
 		<div id="btn">
 			<button id="bigbtn" onClick="location.href='result'">목록이동</button>
+			<button id="bigChoose">채택하기</button>
 		</div>
 	</div>
 	<div id="hosinfo">
@@ -64,13 +65,15 @@
 	</div>
 </div>
 <script>
+var scname = "${lvo.scname}";
+var seno="${lvo.seno}";
+var crno="${lvo.lrno}"; 
 
-
-</script>
-<script>
+$("#bigChoose").on("click", function(){
+	 alert("채택!");
+});
  
- 
-var address="${bvo.scaddress1}";
+var address="${lvo.scaddress1}";
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표

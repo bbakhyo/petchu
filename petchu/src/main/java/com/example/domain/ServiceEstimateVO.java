@@ -15,6 +15,15 @@ public class ServiceEstimateVO extends EstimateDTO{
 	public Date sedate; 
 	public int price;
 	public String fprice;
+	public int secheck;
+	public int failcheck;
+	
+	public int getFailcheck() {
+		return failcheck;
+	}
+	public void setFailcheck(int failcheck) {
+		this.failcheck = failcheck;
+	}
 	public String getFprice() {
 		return fprice;
 	}
@@ -37,7 +46,7 @@ public class ServiceEstimateVO extends EstimateDTO{
 	public void setBuilding_classification(String building_classification) {
 		this.building_classification = building_classification;
 	}
-	public int secheck;
+	
 	
 	public String getScname() {
 		return scname;

@@ -11,7 +11,7 @@
 <div id="sendrequpage">
 	<div id="request">
 		<p class="title">
-			<b>${cvo.scname}</b> 에서 답변한 견적서
+			<b>${cvo.scname}</b>에서 답변한 견적서
 		</p>
 		<table id="petinfo">
 			<tr>
@@ -25,6 +25,7 @@
 		</table>
 		<div id="btn">
 			<button id="bigbtn" onClick="location.href='result'">목록이동</button>
+			<button id="bigChoose">채택하기</button>
 		</div>
 	</div>
 	<div id="hosinfo">
@@ -63,9 +64,24 @@
 	</div>
 </div>
 <script>
- 
- 
-var address="${cvo.scaddress1}";
+var scname = "${cvo.scname}";
+var seno="${cvo.seno}";
+var crno="${cvo.crno}"; 
+
+$("#bigChoose").on("click", function(){
+ 	if(!confirm("해당 견적서를 채택하시겠습니까?")) return;
+	$.ajax({
+			type : "post",
+			url : "/request/cchoose",
+			data : {crno : crno, seno : seno},
+			success : function() {
+				alert(scname + " 업체의 견적서가 채택 되었습니다!");
+				location.href = "/request/result";
+			}
+		});
+	});
+
+	var address = "${cvo.scaddress1}";
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표

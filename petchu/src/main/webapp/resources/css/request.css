@@ -161,7 +161,7 @@ table, tr, td{
 	margin: 30px;
 	margin-top: 80px;
 }
-#sendrequest, #bigbtn{
+#sendrequest, #bigbtn, #bigChoose{
 	width: 200px;
 	height: 50px;
 	border: none;
@@ -185,7 +185,7 @@ table, tr, td{
 #replyrequest{
 	width: 960px;	
 }
-#sendrequest:hover, #bigbtn:hover{
+#sendrequest:hover, #bigbtn:hover, #bigChoose:hover{
 	background-color: 7F9730;
 }
 body{
