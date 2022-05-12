@@ -5,6 +5,9 @@ body{
 	padding: 0px;
 	margin: 0px;
 }
+#message{
+	margin-bottom: 100px;
+}
 #chatbox{
     padding: 10px;
     padding-left: 30px;
@@ -33,9 +36,10 @@ body{
 }
 
 /*---------------room.jsp-----------------*/
-#nevi{
-   position: sticky;
-   top: 0;
+#navi {
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 td{
 	vertical-align: middle;
@@ -47,7 +51,7 @@ td{
 }
 #menubar{
 	width: 100%;
-	height: 50px;
+	height:  67px;
 	background-color: #A7CA37;
 }
 .all{
@@ -60,6 +64,7 @@ td{
 	
 	
 }
+
 .messagebox{
 	display: inline-block;
 	padding: 15px;
@@ -71,7 +76,7 @@ td{
 .messagebox.right{
 	float: right;
 	margin-right: 15px;
-	background-color: #ffe99d;
+	background-color: #ffd74c;;
 }
 .messagebox.left{
 	margin-left: 15px;
@@ -81,15 +86,16 @@ td{
 	position: relative;
 	top: 2px;
 	font-size: 13px;
-	color: #96a996;
+	color: #737e5f;
 }
 .date.left{
 	margin-left: 20px;
 }
 .date.right{
-	float:right;
-	margin-right: 20px;
-    margin-left: 157px;
+    max-width: 192px;
+    top: 66px;
+    left: 264px;
+    text-align: right
 }
 .id.right {display:none;}
 .id.left{
@@ -101,7 +107,7 @@ td{
 }
 .readdate.right{
 	font-size: small;
-	color: #96a996;
+	color: #737e5f;
     float: right;
     margin-top: 47px;
 }

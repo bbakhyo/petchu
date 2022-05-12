@@ -12,12 +12,14 @@
 			<c:if test="${type=='ÀÇ»ç'}">${vo.nick}</c:if>
 			<c:if test="${type=='ÀÏ¹Ý'}">${vo.dname}</c:if>
 		</p>
+		<!-- 
 		<small id="bell">
 			<small id="count">¾å</small>
 			<script id="temp" type="text/x-handlebars-template">
 				{{data}}
 			</script>
 		</small>
+		 -->
 		<p id="fmessage">${vo.message}</p>
 		<p id="fregdate">${vo.regdate}</p>
 	</div>

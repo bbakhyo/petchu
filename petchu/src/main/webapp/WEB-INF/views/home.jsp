@@ -55,6 +55,14 @@
 					<a href="/request/list">견적서</a>
 					<a href="#">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
+							<span>
+							<span id="bell">
+								<small id="count">0</small>
+								<script id="countdata" type="text/x-handlebars-template">
+									{{data}}
+								</script>
+							</span>
+						</span>
 					<span><a href="/user/mypage?id=${id}">${nick}님</a></span>
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
