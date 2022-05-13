@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.domain.Criteria;
+import com.example.domain.PageMaker;
 import com.example.domain.UserVO;
 
 @Repository
@@ -28,8 +30,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<UserVO> list() {
-		return session.selectList(namespace + ".list");
+	public List<UserVO> list(Criteria cri) {
+		return session.selectList(namespace + ".list", cri);
 	}
 
 	@Override
@@ -78,6 +80,11 @@ public class UserDAOImpl implements UserDAO {
 		map.put("amount", amount);
 		map.put("id", id);
 		session.update(namespace + ".updateCash", map);
+	}
+
+	@Override
+	public int userCount() {
+		return session.selectOne(namespace + ".userCount");
 	}
 
 	
