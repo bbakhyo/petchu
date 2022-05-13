@@ -10,7 +10,6 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/resources/chart.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <body>
 	<p class="title">요청서를 제출할 서비스 종류를 선택하세요</p>
 	<div id="regi">

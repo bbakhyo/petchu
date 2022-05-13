@@ -120,4 +120,8 @@
 	 	select count(*) from orderlist
 	 	where orno = #{orno} and isDelete=1
 	</select>
+	<update id="product_count_update">
+		update shopproduct set pqantity = pqantity-#{amount}
+		where pno=#{pno};
+	</update>
 </mapper>

@@ -28,5 +28,14 @@ public class ChatRoomDAOImpl implements ChatRoomDAO{
 	public ChatRoomVO roominfo(int crno) {
 		return session.selectOne(namespace+ ".roominfo", crno);
 	}
+
+
+	@Override
+	public int selcrno(String doctorid, String userid) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("doctorid", doctorid);
+		map.put("userid", userid);
+		return session.selectOne(namespace + ".selcrno", map);
+	}
 	
 }
