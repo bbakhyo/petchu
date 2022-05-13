@@ -223,8 +223,9 @@ public class RequestController {
 	}
 	
 	@RequestMapping(value="/resultread")
-	public String resultRequest(Model model, int drno){
+	public String resultRequest(Model model, int drno, HttpSession session){
 		model.addAttribute("vo", drdao.resultRequest(drno));
+		model.addAttribute("uvo",udao.read(session.getAttribute("id").toString()));
 		model.addAttribute("pageName", "user/resultRequest.jsp");
 		return "/home";
 	}

@@ -16,7 +16,11 @@
 
 </head>
 <style>
-
+	.goAll{
+	    height: 50px;
+    	width: 100px;
+    	cursor: pointer;
+	}
 </style>
 
 <body>
@@ -28,7 +32,7 @@
 			<!-- 주 카타고리 -->
 		<div class="categoryBody">
 			<div class="category_select">
-				
+				<div><button class="goAll">전체</button></div>
 				<!-- 1. 공양이 -->
 				<div class="category_cat select">
 					<input type="radio" name="animal" value="고양이" id="cat"><label
@@ -536,5 +540,10 @@
 	$(".best_icon").each(function(){
 		i++;
 		$(this).attr("src", "/resources/icon_menu/best_"+i+".png")
+	});
+	
+	//전체버튼 클릭한 경우
+	$(".goAll").on("click", function(){
+		location.href = "/shopproduct/contents_list";
 	});
 </script>

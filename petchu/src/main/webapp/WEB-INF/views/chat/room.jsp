@@ -5,6 +5,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <link href="/resources/css/chat.css" rel="stylesheet" >
+<style>
+#navi {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+</style>
 <div id="navi">
 	<table id="menubar">
 		<tr>

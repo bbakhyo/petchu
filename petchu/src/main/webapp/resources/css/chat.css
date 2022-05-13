@@ -94,8 +94,9 @@ td{
 .date.right{
     max-width: 192px;
     top: 66px;
-    left: 264px;
-    text-align: right
+    left: 215px;
+    text-align: right;
+
 }
 .id.right {display:none;}
 .id.left{

@@ -8,4 +8,7 @@
     <select id="roominfo" resultType="com.example.domain.ChatRoomVO">
     	select * from chatRoom where crno=#{crno}
     </select>
+    <select id="selcrno" resultType="int">
+    	select crno from chatroom where doctorid=#{doctorid} and userid=#{userid}
+    </select>
 </mapper>

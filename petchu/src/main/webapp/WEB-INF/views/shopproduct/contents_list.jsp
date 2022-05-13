@@ -114,11 +114,23 @@
     border: solid 2px white;
     border-radius: 5px;
 }
+.goAll{
+	 float: left; 
+	 margin-left: 10px; 
+	 margin-top: 15; 
+	 cursor: pointer;"
+	 background:white;
+	 border: 1px solid white;
+	 border-radius:10px;
+     width: 70;
+     height: 30;
+}
 </style>
 </head>
 <body>
 	<div id="page">
 		<div class="contents_box">
+			<span><button class="goAll">전체</button></span>
 			<select name="animal_type" class="animal_type">
 				<option>전체</option>
 				<option>강아지</option>
@@ -235,4 +247,8 @@
     		$(".btn_search").click();
     	}
     });
+    
+    $(".goAll").on("click", function(){
+		location.href = "/shopproduct/contents_list";
+	});
 </script>
