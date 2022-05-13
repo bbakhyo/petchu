@@ -276,7 +276,7 @@
 		<!--특가 상품  -->
 		<div class="slider_component">
 			<div style="text-align:center;">
-				<h1>주간 상품</h1>
+				<h2 style="font-size: 30px; margin-bottom:0px;">주간 상품</h2>
 			</div>
 			<div
 				style="padding: 50px 0px; width: 1000x; height: 270px; background-color: white;">
@@ -306,7 +306,7 @@
 		<!-- 오늘의 상품 -->
 		<div class="slider_component">
 			<div style="text-align:center;">
-				<h1>오늘의 상품</h1></div>
+				<h2 style="font-size: 30px; margin-bottom:0px;">오늘의 상품</h2></div>
 			<div
 				style="padding: 50px 0px; width: 1000x; height: 270px; background-color: white;">
 				

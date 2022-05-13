@@ -17,6 +17,12 @@
 	.point_apply{
 		margin-right:5px;
 	}
+	.card_cart_grandtotal_row_right{
+		font-weight:600;
+	}
+	.card_cart_point_right{
+		color:#A7CA37;
+	}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="/resources/checkout_page.css" rel="stylesheet">

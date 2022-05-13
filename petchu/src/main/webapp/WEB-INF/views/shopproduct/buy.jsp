@@ -18,6 +18,12 @@
 	.point_apply{
 		margin-right:5px;
 	}
+	.card_cart_grandtotal_row_right{
+		font-weight:600;
+	}
+	.card_cart_point_right{
+		color:#A7CA37;
+	}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="/resources/checkout_page.css" rel="stylesheet">
@@ -360,7 +366,7 @@
 				//사용할 포인트가 서버에서 불러온 데이터보다 작다면 (정상적이라면)
 				if(Number(usePoint)<=Number(serverPoint)){
 					final_price = final_price - Number(usePoint);
-					alert("데이터 테스트 통과");
+// 					alert("데이터 테스트 통과");
 				}else{//아니라면 (비정상적인 접근이라면)
 					alert("포인트가 부족합니다.");
 					return;
@@ -394,7 +400,7 @@
 				if (rsp.success) {
 					var msg = '결제가 완료되었습니다.';
 					var final1 = pname;
-					msg += '결제 금액 : ' + rsp.paid_amount;
+// 					msg += '결제 금액 : ' + rsp.paid_amount;
 					
 					//결제 성공시 주문목록에 등록
 						var item_info = $(".cartitem_info_right");
