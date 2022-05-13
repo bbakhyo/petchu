@@ -174,7 +174,7 @@
          <!--  포인트 정보       -->
         <div class="coupon_points_card" style="height:120px;">
             <div class="point_paragraphs"><br>
-              <p class="points_header"><span class="spoint">보유 포인트: </span><a class="my_point">${uvo.point}</a></p>
+              <p class="points_header"><span class="spoint">보유 포인트: </span><a class="my_point" point="${uvo.point}">${uvo.point}</a></p>
               <p class="points_header">사용 포인트: <a class="use_point">0</a></p>
             </div>
           <div class="coupon_line3">
@@ -498,7 +498,7 @@
 	 $("#delivery_contact").attr("tel", num);
 	    
 	
-	   //포인트가 변경될 때
+	 //포인트가 변경될 때
 	    $(".point_apply").on("click", function(){
 	    	var point = $(this).parent().parent().find(".point").val();
 	    	var myPoint = $(".my_point").attr("point");
