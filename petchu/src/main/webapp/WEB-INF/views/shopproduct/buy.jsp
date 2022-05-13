@@ -442,28 +442,6 @@
 			});
 		}
 	});
-
-	
-// 	//전체동의 버튼	
-// 	$("#terms_agree_all").on("change", function(){
-// 		//체크 되었을 경우
-// 		if($("#terms_agree_all").is(":checked")) {
-// 			$("#terms_agreement").attr("checked", "checked");
-// 		}else{
-// 			$("#terms_agreement").attr("checked", false);
-// 		}
-// 	});
-	
-// 	//일반동의 버튼
-// 	$("#terms_agreement").on("change", function(){
-// 		//체크 되었을 경우
-// 		if($("#terms_agreement").is(":checked")) {
-// 			$("#terms_agree_all").attr("checked", "checked");
-// 		}else{
-// 			$("#terms_agree_all").attr("checked", false);
-// 		}
-// 	});
-	
 	
 	//가격 포맷
 	numberFormat();

@@ -32,4 +32,5 @@ public interface shopcartDAO {
 	public shopcartVO read_user_order(String orno);
 	public void user_order_delete(String bno);
 	public int is_del(String orno);
+	public void product_count_update(shopcartVO vo);
 }
