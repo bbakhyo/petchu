@@ -226,7 +226,7 @@ td {
 		</tr>
 		<tr class="address" style="margin-bottom: 20px;">
 			<th class="small_title left">주소</th>
-			<td>(${uvo.zipcode}) ${uvo.address1} (${uvo.address2})</td>
+			<td>(${uvo.zipcode}) ${uvo.address1} - ${uvo.address2}</td>
 		</tr>
 		<tr class="message" style="margin-bottom: 20px;">
 			<th class="small_title left">배송요청사항</th>
@@ -344,6 +344,12 @@ td {
 				}
 				//가격포맷
 				getFormatPrice();
+				
+				var showOrno = "${orno}".toString();
+				console.log(showOrno);
+				showOrno = showOrno.substring(0, 13);
+				console.log(showOrno);
+				$(".orno").html("주문번호: " + showOrno);
 			}
 		});
 	}

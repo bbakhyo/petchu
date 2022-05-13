@@ -65,7 +65,7 @@
 								</div>
 								<div class="payment_buttons">
 									<div>
-										<a href="#" class="cart_add" onclick=cartadd() data-pno="${vo.pno}">장바구니 담기</a>
+										<a href="#" class="cart_add" data-pno="${vo.pno}">장바구니 담기</a>
 									</div>
 									<div>
 										<a href="#" class="buy_now" onclick=buynow() data-pno="${vo.pno}">바로구매 〉</a>
