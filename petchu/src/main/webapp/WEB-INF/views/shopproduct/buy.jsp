@@ -172,7 +172,6 @@
         </div>
         
          <!--  포인트 정보       -->
-        
         <div class="coupon_points_card" style="height:120px;">
             <div class="point_paragraphs"><br>
               <p class="points_header"><span class="spoint">보유 포인트: </span><a class="my_point">${uvo.point}</a></p>

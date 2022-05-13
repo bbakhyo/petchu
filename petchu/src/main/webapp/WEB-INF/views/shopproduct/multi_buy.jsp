@@ -166,7 +166,6 @@
             </div>
           </div>
         </div>
-
         <!--  포인트 정보       -->
         <div class="coupon_points_card" style="height:90px;">
             <div class="point_paragraphs"><br>
