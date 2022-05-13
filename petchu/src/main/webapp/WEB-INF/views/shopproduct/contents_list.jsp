@@ -125,6 +125,11 @@
      width: 70;
      height: 30;
 }
+.soldout{
+	position:absolute;
+	top:25%;
+	left:3%;
+}
 </style>
 </head>
 <body>
@@ -152,7 +157,10 @@
 
 	{{#each list}}
       <div class="content_item_box_container" pno="{{pno}}" onclick='getLocation(this)'>
-        <img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
+		<div style="position:relative;">
+        	<img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
+			<img class="soldout" src="/resources/soldout.png" width=170>
+		</div>
         	<div class="content_item_title" pno="{{pno}}">{{pname}}</div>
         	<div class="content_item_price">
           		<div class="price_item1">{{comma pprice}}원</div> 

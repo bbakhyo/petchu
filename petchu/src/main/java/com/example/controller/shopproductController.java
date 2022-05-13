@@ -218,6 +218,8 @@ public class shopproductController {
 		cartdao.chk_delete(vo);
 		//shopproduct 구매수량 추가
 		cartdao.sell_update(vo.getAmount(), vo.getPno());
+		//shopproduct 남은수량 업데이트
+		cartdao.product_count_update(vo);
 	}
 	
 	//장바구니 목록 JSON
@@ -271,6 +273,8 @@ public class shopproductController {
 		cartdao.order_insert(vo);
 		//shopproduct 구매수량 추가
 		cartdao.sell_update(vo.getAmount(), vo.getPno());
+		//shopproduct 상품수량 감소
+		cartdao.product_count_update(vo);
 	}
 	
 	//상품 구매시 point 이동
