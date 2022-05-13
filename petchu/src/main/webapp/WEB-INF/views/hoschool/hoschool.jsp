@@ -13,7 +13,7 @@
     
     <div id="sort" class="toggle-radio" data-style="rounded">
 	  <input type="radio" name="sort" id="default_Option1" class="sort" value="rate">
-	  <label for="default_Option1">별점높은순</label>
+	  <label for="default_Option1">등록순</label>
 	  <input type="radio" name="sort" id="default_Option2" class="sort" value="rowPrice">
 	  <label for="default_Option2">낮은가격순</label>
 	  <input type="radio" name="sort" id="default_Option3" class="sort" value="higPrice">
@@ -139,9 +139,9 @@
 	getList();
 	
 	//체크인이 체인지 된 경우
-	$("#tag").on("change","#checkin",function(){
+	$(".date_box").on("change","#checkin",function(){
 		checkin= $(this).val();
-		checkout=$(this).closest("#tag").find("#checkout");
+		checkout=$(this).closest(".date_box").find("#checkout");
 		checkout.val(checkin);
 		checkout=checkin;
 		

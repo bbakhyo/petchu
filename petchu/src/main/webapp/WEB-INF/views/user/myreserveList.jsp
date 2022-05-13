@@ -374,7 +374,6 @@
 			if(target2.css("display") == "none"){
 				target2.show();
 				target2.html("취소 요청 중 입니다.")
-				alert("isDel이 1일때")
 			}else {
 				target2.hide();
 			}
@@ -455,7 +454,6 @@
 							var isEdit = $(this).closest(".list").attr("isEdit");
 							var isDel = $(this).closest(".list").attr("isDel");
 							var rno = $(this).attr("rno");
-							alert(isEdit+"/"+ isDel+"/"+rno)
 							if(!confirm("예약을 취소하시겠습니까?")) return;
 							isEdit = 0;
 							isDel = 1;
