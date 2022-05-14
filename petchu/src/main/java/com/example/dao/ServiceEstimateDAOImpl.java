@@ -119,5 +119,29 @@ public class ServiceEstimateDAOImpl implements ServiceEstimateDAO {
 		map.put("scno", scno);
 		return session.selectOne(namespace+ ".lessonEstimateRead" , map);
 	}
+
+	@Override
+	public void secheckUpdate(int seno) {
+		session.update(namespace + ".secheck", seno);
+		
+	}
+
+	@Override
+	public void bfailCheckUpdate(int brno) {
+		session.update(namespace + ".bfailCheck", brno);
+		
+	}
+
+	@Override
+	public void cfailCheckUpdate(int crno) {
+		session.update(namespace + ".cfailCheck", crno);
+		
+	}
+
+	@Override
+	public void lfailCheckUpdate(int lrno) {
+		session.update(namespace + ".lfailCheck", lrno);
+		
+	}
 	
 }

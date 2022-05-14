@@ -13,6 +13,16 @@
  		width:400px;
  		line-height:50px;
  		font-size:15px;
+        height: 100px;
+	}
+	.point_apply{
+		margin-right:5px;
+	}
+	.card_cart_grandtotal_row_right{
+		font-weight:600;
+	}
+	.card_cart_point_right{
+		color:#A7CA37;
 	}
 </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,6 +31,7 @@
   <!-- 경계선 -->
 	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
+
 <div class="checkout_page">
     <h1 class="checkout_page_heading">결제하기</h1>
 
@@ -68,8 +79,8 @@
         <!--  배송정보       -->
         <div class="checkout_shipping_info_card">
 
-          <div class=" card_heading"><span>배송 정보</span></div><br>
-          <div><input type="checkbox" name="same_address" id="checkout_same_address"><label for="checkout_same_address">주문자 정보와 동일</label></div>
+          <div class="card_heading"><span>배송 정보</span></div><br>
+          <div id="chk_row"><input type="checkbox" name="same_address" id="checkout_same_address"><label for="checkout_same_address">주문자 정보와 동일</label></div>
 
           <div class="checkout_delivery_address">
 
@@ -84,34 +95,22 @@
             </div>
 
             <div class="receiver_line3">
-              <div><input type="text" name="delivery_address1" placeholder="주소1" id="delivery_addy1" size=55></div>
+              <div><input type="text" name="delivery_address1" placeholder="주소1" id="delivery_addy1" size=50></div>
             </div>
 
             <div>
-              <div><input type="text" name="delivery_address2" placeholder="주소2" id="delivery_addy2" size=55></div>
+              <div><input type="text" name="delivery_address2" placeholder="주소2" id="delivery_addy2" size=50></div>
             </div>
             <br>
             
             <div>
-              <div><input type="text" name="delivery_message" placeholder="배송시 요청사항" id="delivery_message" size=55></div>
+              <textarea cols="10" rows="10" placeholder="배송시 요청사항" id="delivery_message"></textarea>
             </div>
             
           </div>
         </div>
 
-        <!--  포인트 정보       -->
-        
-        <div class="coupon_points_card" style="height:90px;">
-            <div class="point_paragraphs"><br>
-              <p class="points_header">보유 포인트: <a class="my_point">${uvo.point}</a></p>
-            </div>
-          <div class="coupon_line3">
-            <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
-            <span><button class="point_apply">적용</button></span>
-            <span><button class="point_disapply" style="display:none;">사용취소</button></span><br><br>
-			</div>
-          
-        </div>
+       
       </div>
         
       <!--     /* COLUMN 2(RIGHT SIDE) 최종결제금액 */       -->
@@ -177,27 +176,27 @@
             </div>
           </div>
         </div>
+        
+         <!--  포인트 정보       -->
+        <div class="coupon_points_card" style="height:120px;">
+            <div class="point_paragraphs"><br>
+              <p class="points_header"><span class="spoint">보유 포인트: </span><a class="my_point" point="${uvo.point}">${uvo.point}</a></p>
+              <p class="points_header">사용 포인트: <a class="use_point">0</a></p>
+            </div>
+          <div class="coupon_line3">
+            <input type="text" name="points" class="point" id="#my_coupon_points" placeholder="사용할 포인트 입력" size=20>
+            <span><button class="point_apply">사용</button><button class="point_apply_all">모두사용</button></span>
+            <span><button class="point_disapply" style="display:none;">사용취소</button></span><br><br>
+			</div>
+            <div class="terms_agree_button_wrapper">
+            <div class="btn_shape"><a class="pay_btn" href="#">결제하기</a> </div>
+          </div>
+        </div>
 
         <div class="checkout_terms_card">
           <div class="terms_outside_wrapper">
-            <div class="terms_inside_wrapper">
-              <div class="terms_wrapper">
-                <div class="terms_line1">
-                  <label for="terms_agree_all">
-                    <input type="checkbox" name="terms_agree_all" id="terms_agree_all">전체동의
-                  </label>
-                </div><br>
+          </div>
 
-                <div class="terms_line2">
-                  <label for="terms_agreement">
-                    &nbsp;<span style='font-size:10px;'></span>&#9493;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="terms_agree_all" id="terms_agreement">구매조건 확인 및 결제진행에 동의</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="terms_agree_button_wrapper">
-            <div class="btn_shape"><a class="pay_btn" href="#">결제하기</a> </div>
-          </div>
         </div>
       </div>
 
@@ -365,9 +364,9 @@
 				var usePoint = $(".card_cart_point_right").attr("point");
 				var serverPoint = "${uvo.point}";
 				//사용할 포인트가 서버에서 불러온 데이터보다 작다면 (정상적이라면)
-				if(Number(usePoint)<Number(serverPoint)){
+				if(Number(usePoint)<=Number(serverPoint)){
 					final_price = final_price - Number(usePoint);
-					alert("데이터 테스트 통과");
+// 					alert("데이터 테스트 통과");
 				}else{//아니라면 (비정상적인 접근이라면)
 					alert("포인트가 부족합니다.");
 					return;
@@ -401,7 +400,7 @@
 				if (rsp.success) {
 					var msg = '결제가 완료되었습니다.';
 					var final1 = pname;
-					msg += '결제 금액 : ' + rsp.paid_amount;
+// 					msg += '결제 금액 : ' + rsp.paid_amount;
 					
 					//결제 성공시 주문목록에 등록
 						var item_info = $(".cartitem_info_right");
@@ -443,28 +442,6 @@
 			});
 		}
 	});
-
-	
-// 	//전체동의 버튼	
-// 	$("#terms_agree_all").on("change", function(){
-// 		//체크 되었을 경우
-// 		if($("#terms_agree_all").is(":checked")) {
-// 			$("#terms_agreement").attr("checked", "checked");
-// 		}else{
-// 			$("#terms_agreement").attr("checked", false);
-// 		}
-// 	});
-	
-// 	//일반동의 버튼
-// 	$("#terms_agreement").on("change", function(){
-// 		//체크 되었을 경우
-// 		if($("#terms_agreement").is(":checked")) {
-// 			$("#terms_agree_all").attr("checked", "checked");
-// 		}else{
-// 			$("#terms_agree_all").attr("checked", false);
-// 		}
-// 	});
-	
 	
 	//가격 포맷
 	numberFormat();
@@ -508,7 +485,7 @@
 	 //포인트가 변경될 때
 	    $(".point_apply").on("click", function(){
 	    	var point = $(this).parent().parent().find(".point").val();
-	    	var myPoint = $(".my_point").html();
+	    	var myPoint = $(".my_point").attr("point");
 	    	//숫자가 아니거나 0일 경우, 혹은 0보다 작을 경우 작동 안되게 해야함
 	    	if(isNaN(point)==true){
 	    		alert("숫자를 입력하십시오.");
@@ -531,17 +508,28 @@
 	    	$(".none").attr("class", "show");
 	    	$(".checkout_point_line").attr("style", "");
 	    	$(".card_cart_point_right").html(point);
+	    	var formatPoint = point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	    	$('.use_point').html(formatPoint);
 	    	$(".card_cart_point_right").attr("point", point);
 	    	
+	    	//최종가격 계산
 	    	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
 	    	fprice = Number(fprice) - Number(point);
 	    	$(".card_cart_grandtotal_row_right").html(fprice);
+	    	
+	    	//보유 포인트 계산
+	    	var myPoint = $(".my_point").attr("point");
+	    	myPoint = Number(myPoint) - Number(point);
+	    	myPoint=myPoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	    	$(".my_point").html(myPoint);
 	    	
 	    	var fmprice = $(".card_cart_grandtotal_row_right").html();
 			fmprice=fmprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			$(".card_cart_grandtotal_row_right").html(fmprice+"원");
 			
+			$(".point").attr("style", "display:none;");
 			$(this).attr("style", "display:none;");
+			$(".point_apply_all").attr("style", "display:none;");
 	    	$(".point_disapply").attr("style", "");
 	    	$(".point").attr("readonly", "readonly")
 			alert("포인트 적용 완료");
@@ -550,6 +538,8 @@
 	    	var pointP = $(".card_cart_point_right").html();
 			pointP=pointP.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			$(".card_cart_point_right").html("- "+pointP+"원");
+			
+			$(".spoint").html("남은 포인트: ");
 	    	return;
 	    });
 		
@@ -565,13 +555,28 @@
 	    	$(".card_cart_point_right").attr("point", "");
 	    	$(".checkout_point_line").attr("style", "display:none;");
 	    	$(this).attr("style", "display:none;");
+	    	$(".point").attr("style", "");
 	    	$(".point_apply").attr("style", "");
+	    	$(".point_apply_all").attr("style", "");
 	    	alert("취소완료");
 	    	$(".point").val("");
+	    	//사용 취소시 사용중인 포인트 값도 0으로 변경
+	    	$(".use_point").html("0");
+	    	//사용 취소시 my_point html값도 다시 넣고 넘버포맷 다시 지정해야함
+	    	var myPoint = $(".my_point").attr("point");
+	    	myPoint=myPoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');  
+	    	$(".my_Point").html(myPoint);
+	    	
+	    	var pointP = $(".card_cart_point_right").html();
+			pointP=pointP.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			$(".card_cart_point_right").html("- "+pointP+"원");
+			
+	    	
 	    	$(".point").attr("readonly", false);
 	    	btnPoint = 0;
+	    	$(".spoint").html("보유 포인트: ");
 	    	return;
-	    })
+	    });
 		
     //포인트 엔터시 적용버튼 클릭
     $(".point").on("keypress", function(e){
@@ -584,6 +589,11 @@
     	}
     });
 	 
-	
+	//포인트 모두사용 눌렀을 때
+	$(".point_apply_all").on("click", function(){
+		var myPoint = "${uvo.point}";
+		$(".point").val(myPoint);
+		$(".point_apply").click();
+	});	
 
 </script>

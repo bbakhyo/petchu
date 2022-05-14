@@ -5,24 +5,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <link href="/resources/css/chat.css" rel="stylesheet" >
-<div id="nevi">
-<table id="menubar">
-	<tr>
-		<td width=80><a href="/chat/main">뒤로가기</a></td>
-		<td>
-			<c:if test="${type=='의사'}">
-			<span id="hosname">${receinfo.nick}</span>
-			<input type="text" value=0 id="send" style="display:none">
-			<input type="text" value="${roominfo.userid}" id="receiver" style="display:none">
-			</c:if>
-			<c:if test="${type=='일반'}">
-			<span id="hosname">${receinfo.dname}</span>
-			<input type="text" value=1 id="send" style="display:none">
-			<input type="text" value="${roominfo.doctorid}" id="receiver" style="display:none">
-			</c:if>
-		</td>
-	</tr>
-</table>
+<style>
+#navi {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+</style>
+<div id="navi">
+	<table id="menubar">
+		<tr>
+			<td width=30 style="padding-left: 10px"><a href="/chat/main"><img src="/resources/icon/back.png" width=20></a></td>
+			<td>
+				<c:if test="${type=='의사'}">
+				<span id="hosname">${receinfo.nick}</span>
+				<input type="text" value=0 id="send" style="display:none">
+				<input type="text" value="${roominfo.userid}" id="receiver" style="display:none">
+				</c:if>
+				<c:if test="${type=='일반'}">
+				<span id="hosname">${receinfo.dname}</span>
+				<input type="text" value=1 id="send" style="display:none">
+				<input type="text" value="${roominfo.doctorid}" id="receiver" style="display:none">
+				</c:if>
+			</td>
+		</tr>
+	</table>
 </div>
 <div id="message"></div>
 <script id="temp" type="text/x-handlebars-template">
@@ -63,7 +70,18 @@
 <script>
 	var crno = "${crno}";
 	getList();
+	getUpdate();
 	
+	function getUpdate(){
+		$.ajax({
+			type: "post",
+			url: "/chat/update",
+			data: {crno:crno},
+			success:function(){
+				sock.send("updateReadDate");
+			}
+		})
+	}
 	function getList(){
 		$.ajax({
 			type:"get",
@@ -73,15 +91,6 @@
 				var temp = Handlebars.compile($("#temp").html());
 				$("#message").html(temp(data));
 				window.scrollTo(0, $("#message").prop("scrollHeight"));
-				
-				$.ajax({
-					type: "post",
-					url: "/chat/update",
-					data: {crno:crno},
-					success:function(){
-						sock.send("updateReadDate");
-					}
-				})
 			}
 			
 		})

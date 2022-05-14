@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link href="/resources/css/myReserve.css" rel="stylesheet"/>
 
 <style>
 	#popup01{
 	    display: none;
 	}
 	#popup01{
-	width: 500px;
-	height: 620px;
+	width: 658px;
+	height: 782px;
 	position: absolute;
 	top: 30%;
 	left: 50%;
@@ -29,16 +30,33 @@
 	    z-index: 1;
 	}
 	.close{
-	  position:absolute;
-	  top:670px;
-	  right: 300px;
+	  position:relative;
+	  top: 40px;
+	  right: -195px;
 	  cursor:pointer;
 	}
 	
 	.openPopup{
-	
-	  cursor:pointer;
-	
+		border: none;
+	    padding: 8px 12px 8px 12px;
+	    background-color: A7CA37;
+	    border-radius: 10px;
+	    font-size: 15px;
+	    font-weight: 900px;
+	    color: white;
+	    cursor: pointer;
+
+	}
+	.reserveCancel{
+		border: none;
+	    padding: 8px 12px 8px 12px;
+	    background-color: A7CA37;
+	    border-radius: 10px;
+	    font-size: 15px;
+	    font-weight: 900px;
+	    color: white;
+	    cursor: pointer;
+
 	}
 	.list{
 		overflow: auto;
@@ -71,12 +89,14 @@
 	}
    #serviceInfo, #date{
    		border-bottom: 1px solid gray;
+   		width: 400px;
    }
    #date{
    	padding: 30px 0px;
    }
    #btnReserve{
-   		margin-left: 200px;
+   		margin-left: 170px;
+   		text-align: center;
    }
    .EditMessage{
    		display: none;
@@ -85,6 +105,15 @@
    .hiddenbtn2{
    		display: none;
    		color:red;
+   }
+   #sidemenu{
+   		margin-left: -100px;
+   }
+   .list{
+   	box-shadow:2px 2px 5px rgba(212,212,212);
+   }
+   .oldlist{
+   	box-shadow:2px 2px 5px rgba(212,212,212);
    }
 </style>
 <div id="page">
@@ -134,8 +163,7 @@
 								<span class="msg">예약변경이 거절되었습니다.</span>
 							</td>
 							<td colspan=2 class="hiddenbtn2" style="border-left: hidden; border-right:hidden; text-align: right;">
-								<button class="btnYes" rno={{rno}}>확인</button> &nbsp;
-								<button class="reserveCancel" rno={{rno}}>예약취소</button>
+								<button class="reserveCancel" rno={{rno}}>확인</button>
 							</td>
 						</tr>
 						<tr>
@@ -179,8 +207,9 @@
 							<td width=150 class="sctel">{{sctel}}</td>
 						</tr>
 						<tr>
-							<td colspan=4 style="border-left: hidden; border-right:hidden; text-align: right;"></td>
+							<td colspan=4 style="border-left: hidden; border-right:hidden; text-align: right;"><span class="cancelMessage" isDel={{isDel}}></span></td>
 						</tr>
+						
 					</tbody>
 				{{/each}}	
 		</script>
@@ -213,7 +242,6 @@
 				</div>
 				
 				<div>
-					<p>요청사항</p>
 					<p><textarea rows="5" cols="40" id="request">{{request}}</textarea><p>
 				</div>
 				<div id="button">
@@ -352,7 +380,7 @@
 		var isDel = $(this).attr("isDel");
 		var target = $(this).find(".hiddenbtn");	//확인/취소버튼
 		var target2 = $(this).find(".EditMessage");	//메세지출력
-		var target3 = $(this).find(".EditMessage2");	//예약변경 거절시
+		var target3 = $(this).find(".hiddenbtn2");	//예약변경 거절시
 
 		if(isEdit==1){		//예약변경요청 한 경우
 			if(target2.css("display") == "none"){
@@ -371,7 +399,6 @@
 			if(target2.css("display") == "none"){
 				target2.show();
 				target2.html("취소 요청 중 입니다.")
-				alert("isDel이 1일때")
 			}else {
 				target2.hide();
 			}
@@ -447,26 +474,7 @@
 						$(this).find(".sctel").html(formatNum);
 						$(this).find(".userTel").html(formatTel);
 						
-						//취소요청 버튼을 클릭한 경우
-						$("#tbl").on("click",".reserveCancel", function(){
-							var isEdit = $(this).closest(".list").attr("isEdit");
-							var isDel = $(this).closest(".list").attr("isDel");
-							var rno = $(this).attr("rno");
-							alert(isEdit+"/"+ isDel+"/"+rno)
-							if(!confirm("예약을 취소하시겠습니까?")) return;
-							isEdit = 0;
-							isDel = 1;
-							$.ajax({
-								type: "post",
-								url: "/reserve/ReserveEdit",
-								data: {isEdit:isEdit, isDel:isDel, rno:rno},
-								success: function(){
-									if(!confirm("취소요청이 완료되었습니다. 내역을 확인하시겠습니까?")) return;
-									location.href="/reserve/myreserveList?id=${id}";
-									
-								}
-							});
-						});
+						
 				});
 			}
 		});
@@ -479,6 +487,24 @@
 			success: function(data){
 				var template = Handlebars.compile($("#temp2").html());
 				$("#tbl2").html(template(data));
+				//취소요청 버튼을 클릭한 경우
+				$("#tbl").on("click",".reserveCancel", function(){
+					var isEdit = $(this).closest(".list").attr("isEdit");
+					var isDel = $(this).closest(".list").attr("isDel");
+					var rno = $(this).attr("rno");
+					if(!confirm("예약이 취소됩니다.")) return;
+					isEdit = 0;
+					isDel = 2;
+					$.ajax({
+						type: "post",
+						url: "/reserve/ReserveEdit",
+						data: {isEdit:isEdit, isDel:isDel, rno:rno},
+						success: function(){
+							if(!confirm("취소가 완료되었습니다. 내역을 확인하시겠습니까?")) return;
+							location.href="/reserve/myreserveList?id=${id}";
+						}
+					});
+				});
 				
 				//예약날짜 섭스트링
 				$("#oldreserve .oldlist").each(function(){
@@ -516,6 +542,13 @@
 					}
 						$(this).find(".sctel").html(formatNum);
 						$(this).find(".userTel").html(formatTel);
+						
+						var target= $(this).find(".cancelMessage");
+						var isDel= target.attr("isDel");
+						if(isDel==2){
+							target.html("취소된 예약건 입니다.")
+							target.css({"color":"red"});
+						}
 				});
 			}
 		});

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.dao.ChatMessageDAO;
 import com.example.dao.ChatRoomDAO;
 import com.example.dao.ChatRoomJoinDAO;
+import com.example.dao.DoctorDAO;
 import com.example.dao.UserDAO;
 import com.example.domain.ChatMessageVO;
 
@@ -30,6 +32,7 @@ public class ChatController {
 	
 	@Autowired
 	ChatRoomDAO rdao;
+
 	
 	@RequestMapping("/main")
 	public void main(Model model,HttpSession session){
@@ -75,6 +78,15 @@ public class ChatController {
 	public void send(ChatMessageVO vo){
 		mdao.send(vo);
 	}
-
+	@ResponseBody
+	@RequestMapping("/create")
+	public void create(String doctorid, HttpSession session){
+		rdao.create(doctorid, session.getAttribute("id").toString());
+	}
+	@ResponseBody
+	@RequestMapping("/selcrno")
+	public int selcrno(String doctorid, HttpSession session){
+		return rdao.selcrno(doctorid, session.getAttribute("id").toString());
+	}
 
 }

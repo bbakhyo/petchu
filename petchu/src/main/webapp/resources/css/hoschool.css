@@ -1,4 +1,4 @@
-@charset "UTF-8";
+/* @charset "UTF-8"; */
 
 .page_hoschool {
 	display: flex;
@@ -20,6 +20,8 @@
 	flex-direction: row;
 	flex-basis: 100%;
 	height: auto;
+    margin-bottom: 50px;
+	
 	/* background-color: orange; */
 }
 
@@ -37,12 +39,8 @@ input[name='sort'] {
 	margin: 20px;
 }
 
-input[name='keyword'] {
-	font-size: 25px;
-}
-
 .prame {
-	/* 		ÏÇ¨Ïö©ÏûêÍ∞Ä Ïò¨Î¶∞ Î∞±Í∑∏ÎùºÏö¥Îìú Ïù¥ÎØ∏ÏßÄ */
+	/* 		ªÁøÎ¿⁄∞° ø√∏∞ πÈ±◊∂ÛøÓµÂ ¿ÃπÃ¡ˆ */
 	background-image:
 	url("https://img.freepik.com/free-photo/a-scottish-straight-cat-on-a-white-background-looking-up-top-view-copy-space-banner_76158-766.jpg?size=626&ext=jpg");
 	background-size: 500px 200px;
@@ -262,9 +260,9 @@ span.tag {
 }
 
 .sctel {
-	float: right;
+
 	font-size: 17px;
-	margin-top: 30px;
+	margin-top: -4px;
     margin-right: -12px;
 }
 
@@ -325,21 +323,32 @@ span.tag {
 
 #keyword {
 	width: 300px;
-	height: 50px;
-	margin-top: 50px;
-	border-radius: 20px;
+    border-radius: 15px;
+    border: #BFC1B9 1px solid;
+    outline-color: #A7CA37;
+    padding: 13px 10px 13px 10px;
+    margin-bottom: 10px;
 }
 
 #search {
-	width: 100px;
-	height: 50px;
-	background: #a7ca37;
-	color: white;
-	border: none;
-	border-radius: 20px;
-	font-size: 17px;
+	width: 70px;
+    height: 45px;
+    border: none;
+    padding: 8px 12px 8px 12px;
+    background-color: A7CA37;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 900px;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
 }
-
+#search:hover{
+	background-color: #7F9730;
+}
+#searchbox{
+	margin-left: 30px;
+}
 .toggle-radio {
 	background: #f5f5f5;
 	border: 1px solid #ccc
@@ -421,7 +430,7 @@ span.tag {
 		 * Rating styles
 		 */
 
-/* Î≥ÑÌÅ¨Í∏∞ Ï°∞Ï†à */
+/* ∫∞≈©±‚ ¡∂¿˝ */
 .rating {
 	width: block;
 	width: fit-content;

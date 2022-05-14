@@ -93,7 +93,7 @@ function getList() {
 		},
 		url : "/shopproduct/order_list.json",
 		success : function(data) {
-			console.log(data);
+// 			console.log(data);
 			var template = Handlebars.compile($("#temp").html());
 			$("#tbl").html(template(data));
 			

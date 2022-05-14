@@ -14,6 +14,17 @@
 	</select>
 	<select id="list" resultType="com.example.domain.UserVO">
 		select * from user
+		<if test="keyword != null">
+			where name like concat('%',#{keyword},'%')
+			or email like concat('%',#{keyword},'%')
+			or id like concat('%',#{keyword},'%')
+			or nick like concat('%',#{keyword},'%')
+			or birthday like concat('%',#{keyword},'%')
+		</if>
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	<select id="userCount" resultType="int">
+		select count(*) from user
 	</select>
 	<update id="update">
 		update user
@@ -50,4 +61,5 @@
 	<update id="updateCash">
 		update user set cash=cash+#{amount} where id=#{id};
 	</update>
+	
 </mapper>

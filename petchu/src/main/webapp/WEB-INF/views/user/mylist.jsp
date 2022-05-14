@@ -24,6 +24,12 @@
 	margin: 10px;
 	padding: 10px;
 }
+#myList{
+	margin-left: 100px;
+}
+#sidemenu{
+	margin-left: -100px;
+}
 </style>
 
 

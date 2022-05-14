@@ -128,6 +128,73 @@ td {
 .payBack{
 	color:blue;
 }
+.btn_dot{
+	 border:none; 
+	 background:none;
+	 cursor:pointer;
+}
+.btn_dot img{
+	  width:20px;
+}
+.gray_screen{
+	position:fixed;
+	overflow:hidden;
+	opacity:80%;
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;
+	background-color: rgb(0, 0, 0);
+	text-align:center;
+	display:none;
+}
+.full_screen{
+	position:fixed;
+	overflow:hidden;
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;
+	background-color: none;
+	text-align:center;
+	display:none;
+}
+.delete_screen{
+	display: flex;
+	justify-content: center;
+ 	align-items: center;
+ 	min-height: 100vh;
+}
+.btn_screen{
+	display:block;
+	opacity:100%;
+	background-color:rgb(255, 255, 255);
+	border-radius:5px;
+}
+
+.btn_cart_delete{
+	cursor:pointer;
+	width: 300px;
+	height: 80px;
+	background-color:rgb(255, 255, 255);
+	font-size:20px;
+	color:red;
+}
+
+.btn_screen_cancel{
+	cursor:pointer;
+	width:100%;
+	height: 80px;
+	opacity:100%;
+	background-color:rgb(255, 255, 255);
+	font-size:20px;
+}
+.hovGround:active{
+	background:#eeeeee;
+}
+.btn_dot:active {
+	margin-bottom: 10px;
+}
 </style>
 <div id="page">
 	<div style="text-align: center; overflow: hidden;">
@@ -159,7 +226,7 @@ td {
 		</tr>
 		<tr class="address" style="margin-bottom: 20px;">
 			<th class="small_title left">주소</th>
-			<td>(${uvo.zipcode}) ${uvo.address1} (${uvo.address2})</td>
+			<td>(${uvo.zipcode}) ${uvo.address1} - ${uvo.address2}</td>
 		</tr>
 		<tr class="message" style="margin-bottom: 20px;">
 			<th class="small_title left">배송요청사항</th>
@@ -171,7 +238,7 @@ td {
 		<tr class="td_title">
 			<th colspan="3"
 				style="border-bottom: 2px solid; padding-bottom: 20px; width: 750px;"
-				class="title left back_white">결제</th>
+				class="title left back_white">결제<span class="del nprice"></span></th>
 		</tr>
 		<tr>
 			<td rowspan="2"
@@ -218,14 +285,31 @@ td {
 				<td><div class="ellipsis">{{pname}}</div></td>
 				<td class="td_center"><span class="price" pprice="{{pprice}}" amount="{{amount}}"></span>원</td>
 				<td class="td_center" width=60>{{amount}}개</td>
-				<td class="td_center" width=150><button class="btn_review">리뷰 작성하기</button><button class="btn_item_read" onclick='read_click(this)'>상품 페이지 이동</button></td>
+				<td width=10><button class="btn_dot" bno="{{bno}}" onclick='getScreen(this)'><img src="/resources/icon_menu/icon_dot.png"></button></td>
+				<td class="td_center" width=150><button class="btn_review" bno="{{bno}}" pno="{{pno}}" onclick='goReview(this)'>리뷰 작성하기</button><button class="btn_item_read" onclick='read_click(this)'>상품 페이지 이동</button></td>
 			</tr>
 		</tbody>
 		{{/each}}
 	</script>
+	<div class="gray_screen screen">
+	</div>
+	<div class="full_screen screen">
+		<div class="delete_screen" style="text-align:center;">
+			<div>
+				<div class="btn_screen">
+					<button class = "btn_cart_delete hovGround" style="border:none; border-bottom:2px solid #eeeeee; border-radius: 5px 5px 0px 0px;" onclick='del_ohistory()'>주문내역 삭제</button>
+				</div>
+				<div class="btn_screen">
+					<button class = "btn_screen_cancel hovGround" style="border:none; border-radius: 0px 0px 5px 5px;" onclick='throwScreen()'>닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
+	var pno = "";
+	var bno = "";
 	getList();
 	function getList() {
 		var orno = "${orno}";
@@ -240,43 +324,39 @@ td {
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
 
-				//vo.final_price 계산
-				// 			var vo_pprice = $(".pprice").attr("pprice");
-				// 			var vo_amount = $(".pprice").attr("amount");
-				// 			var vo_final_price = Number(vo_pprice) * Number(vo_amount);  
-				// 			//alert(vo_final_price);
-				// 			$(".final_price").html(vo_final_price);
-
-				//each final_price 계산
+				var withoutDel = 0;
 				$(".price").each(function() {
 					var price = $(this).attr("pprice");
 					var amount = $(this).attr("amount");
 					var final_price = Number(price) * Number(amount);
 					$(this).html(final_price);
+					var i = final_price;
+					//삭제된 값을 제외한 가격
+					withoutDel = withoutDel + Number(i)
 				});
-
-				//주문날짜 substring
-				// 			var odate = $(".odate").html();
-				// 			odate = odate.substring(0, 9); 
-				// 			$(".odate").html(odate+" 주문");
-
-				//구매상품 가격포맷
-				// 			var fprice = $(".final_price").html();
-				// 			fprice=fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-				// 			alert(fprice);
-				// 			$(".final_price").html(fprice);
-				//같이 구매한 상품 가격포맷
-
-				getFormatPrice();
+				var sum = "${ovo.sum}" - withoutDel;
 				//.date 날짜포맷
 				getDate();
+				//삭제된 항목 수 표시
+				if("${del}">0){
+					$(".del").html(' 주문내역에서 삭제된 상품: 총 ${del}개 ( ' + sum + '원 )');
+					$(".del").attr("style", "font-size: 13; font-weight: 300; float: right;");
+				}
+				//가격포맷
+				getFormatPrice();
+				
+				var showOrno = "${orno}".toString();
+				console.log(showOrno);
+				showOrno = showOrno.substring(0, 13);
+				console.log(showOrno);
+				$(".orno").html("주문번호: " + showOrno);
 			}
 		});
 	}
 
 	//상품 이미지 클릭시 해당 페이지로 이동1
 	$(".image").on("click", function() {
-		var pno = $(this).attr("pno");
+		pno = $(this).attr("pno");
 		location.href = "/shopproduct/read?pno=" + pno;
 	});
 	
@@ -284,20 +364,19 @@ td {
 	
 	//상품 이미지 클릭시 해당 페이지로 이동2
 	$("#tbl").on("click", ".image", function() {
-		var pno = $(this).attr("pno");
+		pno = $(this).attr("pno");
 		location.href = "/shopproduct/read?pno=" + pno;
 	});
 	
 	//상품페이지 이동btn
 	function read_click(e){
-		var pno = $(e).closest(".tbody").find(".image").attr("pno");
+		pno = $(e).closest(".tbody").find(".image").attr("pno");
 		location.href = "/shopproduct/read?pno=" + pno;
 	}
 
 	//전화번호 포멧
 	var num = $(".tel").find(".tel_number").html();
 	var formatNum = '';
-
 	if (num.length == 11) {
 		formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
 	} else if (num.length == 8) {
@@ -330,7 +409,8 @@ td {
 	$(".oldPrice").html(oldPrice);
 	
 	//적립 포인트 계산
-	$(".payBack").html(sum/10);
+	sum = Math.floor(sum/10);
+	$(".payBack").html(sum);
 	var fprice = $(".payBack").html();
 	fprice = fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	$(".payBack").html(fprice);
@@ -348,5 +428,35 @@ td {
 	//목록으로 돌아가기
 	function goBack(){
 		location.href="/shopproduct/order_list";
+	}
+	
+	//리뷰 페이지 입장
+	function goReview(e){
+		pno = $(e).attr("pno");
+		bno = $(e).attr("bno");
+		location.href="/review/insert?pno="+pno+"&bno="+bno;
+	}
+	
+	//기록삭제 버튼 노출
+	function getScreen(e){
+		bno = $(e).attr("bno");
+		$(".screen").attr("style", "display:block");
+	}
+	//기록삭제 버튼 아웃
+	function throwScreen(){
+		$(".screen").attr("style", "display:none");
+	}
+	//구매목록에서 삭제
+	function del_ohistory(){
+		var orno = "${orno}";
+// 		user_order_delete
+		$.ajax({
+			type: "post",
+			url: "/shopproduct/user_order_delete",	
+			data: {bno:bno},
+			success: function(){
+					location.href="/shopproduct/order_read?orno=" + orno;
+			}
+		});
 	}
 </script>

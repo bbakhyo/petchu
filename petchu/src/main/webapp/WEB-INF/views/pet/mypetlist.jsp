@@ -4,6 +4,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
 <link href="/resources/css/mypage.css" rel="stylesheet" > 
+
+<style>
+	h1{
+		margin-left: 250px;
+	}
+	#slider-div{
+		margin-left: 200px;
+	}
+</style>
+
 <div id="page">
 	<h1>마이펫 리스트</h1>
 	<div id="sidemenu">
@@ -11,7 +21,7 @@
 	</div>
 	<div id="box">
 		<form name="frm">
-			<div style="padding:50px; width:960px; height:300px; background-color:white;">
+			<div style="padding:50px; width:960px; height:300px; background-color:white; margin-top: -100px;">
 			    <div id="slider-div">
 				
 					<c:forEach items="${list}" var="vo">

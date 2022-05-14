@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="/resources/css/request.css" rel="stylesheet">
+<script src="https://unpkg.com/sweetswal/dist/sweetswal.min.js"></script>
 <style>
 	textarea {
 	margin-left : 0px;
@@ -11,7 +11,7 @@
 <div id="sendrequpage">
 	<div id="request">
 		<p class="title">
-			<b>${bvo.scname}</b> 에서 답변한 견적서
+			<b>${bvo.scname}</b>에서 답변한 견적서
 		</p>
 		<table id="petinfo">
 			<tr>
@@ -25,6 +25,7 @@
 		</table>
 		<div id="btn">
 			<button id="bigbtn" onClick="location.href='result'">목록이동</button>
+			<button id="bigChoose" >채택하기</button>
 		</div>
 	</div>
 	<div id="hosinfo">
@@ -72,7 +73,23 @@
 
 </script>
 <script>
- 
+
+var scname = "${bvo.scname}";
+var seno="${bvo.seno}"; 
+var brno="${bvo.brno}";
+
+ $("#bigChoose").on("click", function(){
+	 if(!confirm("해당 견적서를 채택하시겠습니까?")) return;
+	 $.ajax({
+		type : "post",
+		url : "/request/bchoose",
+		data : {brno:brno, seno:seno},
+		success:function(){
+			swal(scname + " 업체의 견적서가 채택 되었습니다!");
+			location.href="/request/result";
+		}
+	 });
+ });
  
 var address="${bvo.scaddress1}";
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

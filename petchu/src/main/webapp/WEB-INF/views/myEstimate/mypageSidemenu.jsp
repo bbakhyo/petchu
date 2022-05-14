@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
+	.sideMenu{
+
+		width: 150px; 
+		float: left;
+		height:100%
+	}
 	*{
 	text-align: left;
 	}
-	.serside, #esside, #requestside{
+	.serside, #esside, #requestside, .resside{
 		font-size: 12px; margin-left: 5px;
 	}
 	#petSmallMenu{
@@ -12,7 +18,7 @@
 	}
 </style>
     
-<div class="sideMenu" style="width: 150px; float: left">
+<div class="sideMenu">
 	<p><a href="/user/mypage?id=${id}">마이페이지</a></p> 
 	<p id="petMiddleMenu"><a href="#">마이펫 관리</a></p> 
 	<div id="petSmallMenu" style="display: none;">
@@ -46,16 +52,16 @@
 	</c:if>
 	<p><a href="#">구매내역</a></p>
 	<c:if test="${type=='일반'}">
-		<p class="companyMenu"><a href="#">예약내역</a></p>
-		<div class="serside" style="display: none;">
+		<p class="reserveMenu"><a href="#">예약내역</a></p>
+		<div class="resside" style="display: none;">
 		<p><a href="/reserve/myreserveList?id=${id}"> · 내 예약리스트</a></p>
 		</div>
 	</c:if>
 	<c:if test="${type=='업체'}">
-		<p class="companyMenu"><a href="#">예약내역</a></p>
-		<div class="serside" style="display: none;">
+		<p class="reserveMenu"><a href="#">예약내역</a></p>
+		<div class="resside" style="display: none;">
 		<p><a href="/reserve/myreserveList?id=${id}"> · 내 예약리스트</a></p>
-		<p><a href="reserve/comReserveList?id=${id}"> · 우리업체 예약리스트</a></p>
+		<p><a href="/reserve/comReserveList?id=${id}"> · 우리업체 예약리스트</a></p>
 		</div>
 	</c:if>
 	<p><a href="#">후기관리</a></p>
@@ -79,6 +85,13 @@ $("#petMiddleMenu").on("click", function(){
 			$(".serside").hide();
 		}
 	})
+	$(".reserveMenu").on("click", function(){
+	if($(".resside").css("display") == "none"){
+		$(".resside").show();
+	}else {
+		$(".resside").hide();
+	}
+})
 	
 	$("#estimateMenu").on("click", function(){
 		if($("#esside").css("display") == "none"){

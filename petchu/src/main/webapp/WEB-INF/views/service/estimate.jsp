@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 h1 {
 	text-align : left;
@@ -75,7 +76,7 @@ textarea {
 	 //글자수 제한
 	 if(content.length > 500){
 		 $(this).val($(this).val().substring(0, 500));
-		 alert("500자까지 입력 가능합니다");
+		 swal("500자까지 입력 가능합니다");
 	 }
  });
  
@@ -90,22 +91,20 @@ textarea {
 	 
 	 
  
-	 alert("scno : " + scno + "\n" + "scname : " + scname + "\n" + "brno : " + brno + "\n" + "crno : " + crno
-			 + "\n" + "lrno : " + lrno + "\n" + "price : " + price + "\n" + "description : " + description);
 		if(!confirm("견적서를 작성하시겠습니까?")) return;	
  		
 		if(brno != null && crno == 'null' && lrno == 'null' && scno ==""){
-			alert("미용 업체 등록 후 견적서 작성이 가능합니다!");
+			swal("미용 업체 등록 후 견적서 작성이 가능합니다!");
 			return;
 		}
 		
 		if(crno != null && brno == 'null' && lrno == 'null' && scno ==""){
-			alert("홈 클리닝 업체 등록 후 견적서 작성이 가능합니다!");
+			swal("홈 클리닝 업체 등록 후 견적서 작성이 가능합니다!");
 			return;
 		}
 		
 		if(lrno != null && brno == 'null' && crno == 'null' && scno ==""){
-			alert("레슨 업체 등록 후 견적서 작성이 가능합니다!");
+			swal("레슨 업체 등록 후 견적서 작성이 가능합니다!");
 			return;
 		}
 		
@@ -117,10 +116,10 @@ textarea {
 						data : {scno:scno, scname:scname, brno:brno, price:price, description:description},
 						success:function(overlapCheck){
 							if(overlapCheck == 0){
-								alert("성공");
+								swal("성공");
 								location.href="/request/servicelist"
 							}else if(overlapCheck ==1){
-								alert("견적서 작성은 요청서별  1회만 가능합니다!");
+								swal("견적서 작성은 요청서별  1회만 가능합니다!");
 							}
 							 
 						}
@@ -137,10 +136,10 @@ textarea {
 					data : {scno:scno, scname:scname, crno:crno, price:price, description:description},
 					success:function(overlapCheck){
 						if(overlapCheck == 0){
-							alert("성공");
+							swal("성공");
 							location.href="/request/servicelist"
 						}else if(overlapCheck ==1){
-							alert("견적서 작성은 요청서별  1회만 가능합니다!");
+							swal("견적서 작성은 요청서별  1회만 가능합니다!");
 						}
 					}
 				});
@@ -155,10 +154,10 @@ textarea {
 					data : {scno:scno, scname:scname, lrno:lrno, price:price, description:description},
 					success:function(overlapCheck){
 						if(overlapCheck == 0){
-							alert("성공");
+							swal("성공");
 							location.href="/request/servicelist"
 						}else if(overlapCheck ==1){
-							alert("견적서 작성은 요청서별  1회만 가능합니다!");
+							swal("견적서 작성은 요청서별  1회만 가능합니다!");
 						}
 					}
 				});

@@ -42,10 +42,10 @@
 				<!--중간 : 배송 정보 -->
 				<div class="info_shippingInfo_container">
 					<div class="shipping_date_line">
-						<em>내일(일요일) 도착 보장</em>
+						<em>내일 도착 예정</em>
 					</div>
 					<div class="shipping_fee_line">
-						<em>무료배송</em>
+						<em>배송비: 3,000원</em>
 					</div>
 				</div>
 				<div class="extra_info_wrapper">
@@ -65,7 +65,7 @@
 								</div>
 								<div class="payment_buttons">
 									<div>
-										<a href="#" class="cart_add" onclick=cartadd() data-pno="${vo.pno}">장바구니 담기</a>
+										<a href="#" class="cart_add" data-pno="${vo.pno}">장바구니 담기</a>
 									</div>
 									<div>
 										<a href="#" class="buy_now" onclick=buynow() data-pno="${vo.pno}">바로구매 〉</a>
@@ -326,10 +326,6 @@ console.log(pprice);
 			});
 	//장바구니 버튼을 클릭한 경우 session에 저장된 id를 읽어서 장바구니DB에 등록
 	$(".cart_add").on("click", function() {
-	/* 	var pno = $
-		{
-			vo.pno
-		} */
 		var buynow = document.querySelector(".buy_now");
 		var pno = buynow.getAttribute('data-pno');
 		; // 상품번호
@@ -362,11 +358,6 @@ console.log(pprice);
 	$(".buy_now").on(
 			"click",
 			function() {
-				/* var pno = $
-				{
-					vo.pno
-				} */
-				
 				var buynow = document.querySelector(".buy_now");
 				var pno = buynow.getAttribute('data-pno');
 				; // 상품번호
@@ -382,12 +373,7 @@ console.log(pprice);
 		fcount--;
 		$(".input-text").val(fcount);
 		$(".input-text").html(fcount);
-/* 		var fprice = $
-		{
-			vo.pprice
-		}
-		; */
-		$(".final_price").html(fcount * pprice);
+		$(".final_price").html(fcount * pprice + 3000);
 		
 		
 		numberFormat();
@@ -398,13 +384,8 @@ console.log(pprice);
 		fcount++;
 		$(".input-text").val(fcount);
 		$(".input-text").html(fcount);
-		
-	/* 	var fprice = $
-		{
-			vo.pprice
-		} */
 		;
-		$(".final_price").html(fcount * pprice);
+		$(".final_price").html(fcount * pprice  + 3000);
 		numberFormat();
 	});
 </script>
@@ -433,7 +414,7 @@ console.log(pprice);
 	//페이지 입장 후 최종가격 출력
 	var fcount = $(".input-text").html();
 	var fprice = "${vo.pprice}";
-	$(".final_price").html(fcount * fprice);
+	$(".final_price").html(fcount * fprice + 3000);
 	
 	numberFormat();
 	function numberFormat() {
@@ -441,19 +422,5 @@ console.log(pprice);
 		fprice = fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		$(".final_price").html(fprice);
 	}
-</script>
-
-<script>
-
-/* function buynow(){
-	
-	var buynow = document.querySelector(".buy_now");
-	var pno = buynow.getAttribute('data-pno');
-	var amount = $('.input-text').val();
-	location.href = "/shopproduct/buy?pno=" + pno + "&amount="
-	+ amount + "&uid=${id}";
-	
-}  */
-
 </script>
 </html>

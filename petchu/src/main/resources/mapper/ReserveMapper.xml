@@ -63,7 +63,7 @@
     <select id="comList" resultType="com.example.domain.ReserveVO">
        	select r.* , s.scname
 		from serviceco s , reserve r
-		where s.scno=r.scno and isDelete=0 and s.id=#{id} and checkin > now()
+		where s.scno=r.scno and isDelete=0 and s.id=#{id} and checkin > now() 
 		and s.scname like concat('%',#{keyword},'%')
 
 		order by rno desc
@@ -76,6 +76,6 @@
 		order by rno desc
     </select>
     <select id="myCompany" resultType="com.example.domain.ReserveVO">
-    	select * from serviceco where id=#{id} and isDelete=0;
+    	select * from serviceco where id=#{id} and isDelete=0 and (sccate='유치원' or sccate='호텔')
     </select>
 </mapper>

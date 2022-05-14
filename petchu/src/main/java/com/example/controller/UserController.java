@@ -85,6 +85,7 @@ public class UserController {
 	}
 	@RequestMapping("/passchk")
 	public String passchk(Model model,String id) {
+		model.addAttribute("sideMenu","mypageSidemenu.jsp");
 		model.addAttribute("vo",dao.read(id));
 		model.addAttribute("pageName", "user/passchk.jsp");
 		return "/home";
@@ -92,6 +93,7 @@ public class UserController {
 	
 	@RequestMapping("/deletechk")
 	public String deletechk(Model model,String id) {
+		model.addAttribute("sideMenu","mypageSidemenu.jsp");
 		model.addAttribute("vo",dao.read(id));
 		model.addAttribute("pageName", "user/deletechk.jsp");
 		return "/home";

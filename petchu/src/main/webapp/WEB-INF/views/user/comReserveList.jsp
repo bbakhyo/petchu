@@ -52,6 +52,9 @@
 		position: relative;
 		margin-left: 427px;
 	}
+	   #sidemenu{
+   		margin-left: -100px;
+   }
 </style>
 <div id="page">
 	<p style="text-align: center; font-weight: bold">업체를 선택하세요</p>
@@ -156,7 +159,7 @@
 	getComList();
 	
 	//예약변경 거절버튼을 클릭한 경우
-	$("#tbl").on("click",".btnYes",function(){
+	$("#tbl").on("click",".btnNo",function(){
 		var isEdit= $(this).closest(".clicker").find(".isEdit").html();
 		var isDel= $(this).closest(".clicker").find(".isDel").html();
 		var rno= $(this).closest(".clicker").find(".rno").html();
@@ -369,7 +372,7 @@
 			type: "get",
 			url: "/reserve/comReserveList.json",
 			dataType: "json",
-			data: {id:id},
+			data: {id:id, keyword:keyword},
 			success: function(data){
 
 				if(data.oldlist.length==0){

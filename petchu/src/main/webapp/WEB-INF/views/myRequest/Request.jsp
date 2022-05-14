@@ -5,11 +5,12 @@
 <style>
 .middlePrame {
 	margin: 10px;
+	width : 760px;
 	padding: 10px;
 	background-color: A7CA37;
 	font-size: 20px;
 	font-weight: bold;
-	margin-left: 150px;
+	margin-left: 200px;
 }
 
 .btnPrame {
@@ -23,7 +24,12 @@
 	margin: 10px;
 	padding: 10px;
 	width : 900px;
-	margin-left : 150px;
+	margin-left : 200px;
+}
+
+.myList hr {
+	width : 750px;
+	margin-left : 0px;
 }
 </style>
 <div class="myList" style="text-align : left;">
@@ -68,7 +74,7 @@
 					<p>${bvo.detailed_matters}</p>
 				</c:when>
 			<c:when test="${bvo == null}">
-				<h2>작성한 요청서가 없습니다</h2>
+				<p>작성한 요청서가 없습니다</p>
 			</c:when>
 		</c:choose>
 			
@@ -100,7 +106,7 @@
 					<p>${cvo.hope_matters}</p>
 				</c:when>
 			<c:when test="${cvo == null}">
-				<h2>작성한 요청서가 없습니다</h2>
+				<p>작성한 요청서가 없습니다</p>
 			</c:when>
 		</c:choose>
 		</div>
@@ -149,7 +155,7 @@
 					<p>${lvo.detailed_matters}</p>
 				</c:when>
 			<c:when test="${lvo == null}">
-				<h2>작성한 요청서가 없습니다</h2>
+				<p>작성한 요청서가 없습니다</p>
 			</c:when>
 		</c:choose>
 		</div>

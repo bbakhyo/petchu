@@ -13,6 +13,9 @@
 	margin-left: 150px;
 	margin-bottom: 30px;
 }
+#sidemenu{
+	margin-left: -100px;
+}
 </style>
 
 

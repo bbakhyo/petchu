@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
  var message = "${msg}";
- alert(message);
+ swal(message);
  location.href="/service/request";
 </script>
