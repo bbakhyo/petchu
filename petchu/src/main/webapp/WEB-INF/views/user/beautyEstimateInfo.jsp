@@ -2,7 +2,7 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="/resources/css/request.css" rel="stylesheet">
-<script src="https://unpkg.com/sweetswal/dist/sweetswal.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	textarea {
 	margin-left : 0px;
@@ -24,7 +24,7 @@
 			</tr>
 		</table>
 		<div id="btn">
-			<button id="bigbtn" onClick="location.href='result'">목록이동</button>
+			<button class="bigbtn" onClick="location.href='result'">목록이동</button>
 			<button id="bigChoose" >채택하기</button>
 		</div>
 	</div>

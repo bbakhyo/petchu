@@ -367,6 +367,16 @@ public class UserController {
 		return "/home";
 	}
 	
+	//채택한 요청서
+		@RequestMapping(value="/myChooseList")
+		public String myChooseList(Model model, HttpSession session){
+			model.addAttribute("bvo", bdao.beautyChooseList(session.getAttribute("id").toString()));
+			model.addAttribute("cvo", cdao.cleanChooseList(session.getAttribute("id").toString()));
+			model.addAttribute("lvo", ldao.lessonChooseList(session.getAttribute("id").toString()));
+			model.addAttribute("sideMenu", "mypageSidemenu.jsp");
+			model.addAttribute("pageName", "myRequest/chooseRequest.jsp");
+			return "/home";
+		}
 	
 	//미용 마감
 	@ResponseBody
