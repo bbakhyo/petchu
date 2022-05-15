@@ -116,8 +116,8 @@ textarea {
 						data : {scno:scno, scname:scname, brno:brno, price:price, description:description},
 						success:function(overlapCheck){
 							if(overlapCheck == 0){
-								swal("성공");
 								location.href="/request/servicelist"
+								swal("성공");
 							}else if(overlapCheck ==1){
 								swal("견적서 작성은 요청서별  1회만 가능합니다!");
 							}

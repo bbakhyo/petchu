@@ -1,18 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<style>
-		.smallBox {
-	border: 2px double gray;
-	margin-bottom: 10px;
-	margin-right: 5px;
-	width: 180px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	display: inline-block;
-}
+<link href="/resources/css/request.css" rel="stylesheet">
 
+<style>
 #tbl p {
 	white-space: nowrap;
 	overflow: hidden;
@@ -71,6 +61,10 @@
 .modal_wrap p{
 	font-size : 15px;
 }
+
+textarea {
+	margin-left : 0px;
+}
 </style>
 
 <h1>레슨 견적서 목록</h1>
@@ -84,11 +78,14 @@
 	<script id="temp" type="text/x-handlebars-template">
 	      {{#each .}}
 			<div class="smallBox" lrno={{lrno}} scno={{scno}}>
-		       <p style="text-align : center;">{{nick}}님의 요청서</p>
+		       <p style="text-align : center;" class="dname">{{nick}}님의 요청서</p>
 			   <p>{{lesson_classification}}</p>
 		       <span>{{wish_local1}}</span> <span>{{wish_local2}}</span> </br>
-			   <p>가격 : {{printPrice price}}</p>
-			   <p>견적설명 : {{description}}</p>
+ 			   <p>견적설명 : {{description}}</p>
+			   <p class="drprice">가격 : {{printPrice price}}</p>
+			   <p class="isDelete" isDelete="{{isDelete}}">{{isDelete}}</p>
+			   <p class="secheck" secheck="{{secheck}}" >{{secheck}}</p>
+			   <p class="choose_check" choose_check="{{choose_check}}">{{choose_check}}</p>
 			</div>
 	      {{/each}}
 	</script>
@@ -105,7 +102,7 @@
 			<p>진행 장소 : {{lesson_place}}</p>
 			<p>문의 사항 : {{detailed_matters}}</p>
 			<h4 style="margin-bottom : 3px;">견적 설명</h4>
-			<textarea cols="72.5" rows="13" readonly>{{description}}</textarea>
+			<textarea cols="66.5" rows="13" readonly>{{description}}</textarea>
 		</script>
 </div>
 <script>
@@ -113,7 +110,9 @@ Handlebars.registerHelper("printPrice", function(price){
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
  });
  
-var target = document.getElementById("text");
+var target = document.getElementsByClassName("isDelete");
+var target1 = document.getElementsByClassName("secheck");
+var target2 = document.getElementsByClassName("choose_check");
 
 getList();
 	function getList(){
@@ -124,7 +123,20 @@ getList();
 			success:function(data){
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
-				
+
+				for(i=0; i <target.length; i++){
+					var isDelete = target[i].getAttribute("isDelete");
+					var secheck = target1[i].getAttribute("secheck");
+					if(isDelete == 1 && secheck == 0){
+						target[i].style.display = 'block';
+					}
+				}
+				for(i=0; i <target1.length; i++){
+					var secheck = target1[i].getAttribute("secheck");
+					if(secheck == 1){
+						target1[i].style.display = 'block';
+					}
+				}
 			},
 			error : function(xhr, ajaxSettings, thrownError) 
 			   {
@@ -136,7 +148,7 @@ getList();
 	$("#tbl").on("click", ".smallBox", function(){
 		var lrno = $(this).attr('lrno');
 		var scno = $(this).attr('scno');
-		alert(lrno + scno);
+		
 		document.querySelector('.black_bg').style.display ='block';
     	document.querySelector('#modal_wrap1').style.display ='block';
     		$.ajax({

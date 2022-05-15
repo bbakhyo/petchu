@@ -23,7 +23,11 @@
    	</select>
    	
    	<select id="beautyDeadlineList" resultType="com.example.domain.BeautyRequestVO">
-   		select * from beautyrequest where uid=#{uid} and isDelete=1
+   		select * from beautyrequest where uid=#{uid} and isDelete=1 and choose_check = 0
+   	</select>
+   	
+   	<select id="beautyChooseList" resultType="com.example.domain.BeautyRequestVO">
+   		select * from beautyrequest where uid=#{uid} and choose_check = 1
    	</select>
    	
    	<select id="beautyCount" resultType="int">
@@ -32,6 +36,10 @@
    	
    	<update id="bisDeleteUpdate">
    		update beautyrequest set isDelete = 1 where brno=#{brno};
+   	</update>
+   	
+   	<update id="bChooseUpdate">
+   		update beautyrequest set choose_check = 1 where brno=#{brno};
    	</update>
    	
    	<select id="brno" resultType="int">

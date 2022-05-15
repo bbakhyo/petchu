@@ -20,7 +20,11 @@
    	</select>
    	
    	<select id="cleanDeadlineList" resultType="com.example.domain.CleaningRequestVO">
-   		select * from cleaningrequest where uid=#{uid} and isDelete=1
+   		select * from cleaningrequest where uid=#{uid} and isDelete=1 and choose_check = 0
+   	</select>
+   	
+   	<select id="cleanChooseList" resultType="com.example.domain.CleaningRequestVO">
+   		select * from cleaningrequest where uid=#{uid} and choose_check = 1
    	</select>
    	
    	<select id="cleaningCount" resultType="int">
@@ -29,6 +33,10 @@
    	
    	<update id="cisDeleteUpdate">
    		update cleaningrequest set isDelete = 1 where crno=#{crno};
+   	</update>
+   	
+   	<update id="cChooseUpdate">
+   		update cleaningrequest set choose_check = 1 where crno=#{crno};
    	</update>
    	
    	<select id="crno" resultType="int">
