@@ -6,7 +6,7 @@ import com.example.domain.ReviewVO;
 
 public interface ReviewDAO {
 
-	public List<ReviewVO> list(int bno);//¸®½ºÆ®
+	public List<ReviewVO> list(int bno);//ë¦¬ìŠ¤íŠ¸
 	public void insert(ReviewVO vo);//insert
 	public ReviewVO read(int rid, int pno); //read
 	public void update(ReviewVO vo); //update

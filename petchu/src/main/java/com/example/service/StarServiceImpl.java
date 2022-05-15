@@ -39,11 +39,11 @@ public class StarServiceImpl implements StarService{
 	@Override
 	public void updateRatingAvg(int pno) {
 		StarVO vo=new StarVO();
-		double ratingAvg = sdao.RatingAvg(pno); //»óÇ°º° Æò±Õ ÆòÁ¡ ±¸ÇÏ±â
+		double ratingAvg = sdao.RatingAvg(pno); //ìƒí’ˆë³„ í‰ê·  í‰ì  êµ¬í•˜ê¸°
 		
 		vo.setPno(pno);
 		vo.setRatingAvg(ratingAvg); 
 		
-		sdao.updateRating(vo); // Æò±Õ ÆòÁ¡ DB¿¡ Àû¿ë
+		sdao.updateRating(vo); // í‰ê·  í‰ì  DBì— ì ìš©
 	}
 }

@@ -4,14 +4,14 @@ public class PetVO extends UserVO{
 	private int pno;
 	private String pname;
 	private String pimage;
-	private String pcate; //´ëºĞ·ù | °í¾çÀÌ: 1, °­¾ÆÁö : 2, etc :3
+	private String pcate; //ëŒ€ë¶„ë¥˜ | ê³ ì–‘ì´: 1, ê°•ì•„ì§€ : 2, etc :3
 	private String pcate_1;
 	private int pweight;
-	private String pgender; // ³² / ¿© / ¸ğ¸§
-	private String pspaying; //Áß¼ºÈ­¿©ºÎ | ÇÔ / ¾ÈÇÔ / ¸ğ¸§
-	private int page; //³ªÀÌ
-	private String pbreed; //Ç°Á¾
-	private String id; //»ç¿ëÀÚ ¾ÆÀÌµğ
+	private String pgender; // ë‚¨ / ì—¬ / ëª¨ë¦„
+	private String pspaying; //ì¤‘ì„±í™”ì—¬ë¶€ | í•¨ / ì•ˆí•¨ / ëª¨ë¦„
+	private int page; //ë‚˜ì´
+	private String pbreed; //í’ˆì¢…
+	private String id; //ì‚¬ìš©ì ì•„ì´ë””
 	
 	public int getPno() {
 		return pno;

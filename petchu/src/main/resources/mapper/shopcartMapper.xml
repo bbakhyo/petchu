@@ -38,8 +38,13 @@
 	<select id="order_list" resultType="com.example.domain.shopcartVO">
 		select orno, pimage, p.pno, pname, pprice, o.amount, odate from 
 		orderlist o, shopproduct p 
-		where o.pno=p.pno and uid=#{uid}and isDelete = 0
+		where o.pno=p.pno and uid=#{uid} and isDelete = 0
 		order by odate desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="order_count" resultType="int">
+	select count(*) from orderlist o, shopproduct p
+	where o.pno=p.pno and uid=#{uid} and isDelete = 0
 	</select>
 	<select id="order_read" resultType="com.example.domain.shopcartVO">
 		select o.*, p.pimage, p.pname, p.pprice 

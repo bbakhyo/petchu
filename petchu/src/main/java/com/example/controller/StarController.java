@@ -24,7 +24,7 @@ import com.example.service.StarService;
 
 @Controller
 @RequestMapping("/star")
-public class StarController { //府轰 牧飘费矾
+public class StarController { //赂庐潞盲 脛脕脝庐路脩路炉
 	@Autowired
 	StarDAO sdao;
 	

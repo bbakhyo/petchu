@@ -11,6 +11,6 @@ public interface shopproductDAO {
 	public List<shopproductVO> list();
 	public shopproductVO read(int pno);
 	public List<shopproductVO> contents_list(String selectCate, String selectCate2, String selectCate3, Criteria cri);
-	public shopcartVO cart_read(String uid); //ÁÖ¹®¸ñ·Ï
-	public int totalCount(String selectCate, String selectCate2, String selectCate3, Criteria cri); //ÀüÃ¼ µ¥ÀÌÅÍÀÇ °³¼ö¸¦ ¸®ÅÏ ÇÏ´Â ¸Ş¼­µå
+	public shopcartVO cart_read(String uid); //ì£¼ë¬¸ëª©ë¡
+	public int totalCount(String selectCate, String selectCate2, String selectCate3, Criteria cri); //ì „ì²´ ë°ì´í„°ì˜ ê°œìˆ˜ë¥¼ ë¦¬í„´ í•˜ëŠ” ë©”ì„œë“œ
 }

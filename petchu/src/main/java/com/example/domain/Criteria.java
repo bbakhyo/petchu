@@ -1,11 +1,11 @@
 package com.example.domain;
 
 public class Criteria {
-	private int page; //ÇöÀçÆäÀÌÁö
-	private int perPageNum; //ÇÑÆäÀÌÁö Ãâ·Â µ¥ÀÌÅÍ¼ö
-	private String searchType; //°Ë»öÅ°
-	private String keyword; //°Ë»ö¾î
-	private String sort; //Á¤·Ä
+	private int page; //í˜„ì¬í˜ì´ì§€
+	private int perPageNum; //í•œí˜ì´ì§€ ì¶œë ¥ ë°ì´í„°ìˆ˜
+	private String searchType; //ê²€ìƒ‰í‚¤
+	private String keyword; //ê²€ìƒ‰ì–´
+	private String sort; //ì •ë ¬
 
 	public String getSort() {
 		return sort;
@@ -24,7 +24,7 @@ public class Criteria {
 		this.perPageNum = perPageNum;
 	}
 
-	// 1ÆäÀÌÁöÀÎ °æ¿ì pageStart´Â 0
+	// 1í˜ì´ì§€ì¸ ê²½ìš° pageStartëŠ” 0
 	public int getPageStart() {
 		return (this.page - 1) * perPageNum;
 	}

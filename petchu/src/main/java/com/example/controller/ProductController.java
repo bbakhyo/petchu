@@ -122,7 +122,7 @@ public class ProductController {
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	public void insert(ProductVO vo){
-		//ÀÌ¹ÌÁö ³» pc·Î Ä«ÇÇ
+		//ì´ë¯¸ì§€ ë‚´ pcë¡œ ì¹´í”¼
 		/*
 		String str = vo.getPimage();
 		String fileName = str.substring(str.lastIndexOf("/")+1);
@@ -135,7 +135,7 @@ public class ProductController {
 			vo.setPimage("product/" + fileName);
 			dao.insert(vo);
 		} catch (Exception e) {
-			System.out.println("¿À·ù: " + e.toString());
+			System.out.println("ì˜¤ë¥˜: " + e.toString());
 		}
 		*/
 		dao.insert(vo);

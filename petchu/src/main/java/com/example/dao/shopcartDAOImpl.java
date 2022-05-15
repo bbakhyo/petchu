@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.domain.Criteria;
 import com.example.domain.shopcartVO;
 
 @Repository
@@ -50,6 +51,7 @@ public class shopcartDAOImpl implements shopcartDAO{
 	@Override
 	public List<shopcartVO> cart_buy(String uid) {
 		return session.selectList(namespace+".cart_buy", uid);
+		
 	}
 
 	@Override
@@ -63,8 +65,11 @@ public class shopcartDAOImpl implements shopcartDAO{
 	}
 
 	@Override
-	public List<shopcartVO> order_list(String uid) {
-		return session.selectList(namespace+".order_list", uid);
+	public List<shopcartVO> order_list(String uid, Criteria cri) {
+		HashMap<String,Object> omap = new HashMap<String,Object>();
+		omap.put("uid",uid);
+		omap.put("cri", cri);
+		return session.selectList(namespace+".order_list", omap);
 	}
 
 	@Override
@@ -83,7 +88,7 @@ public class shopcartDAOImpl implements shopcartDAO{
 
 	@Override
 	public void sell_update(int amount, int pno) {
-		//¼ö·®Áõ°¡
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("amount", amount);
 		map.put("pno", pno);
@@ -164,5 +169,10 @@ public class shopcartDAOImpl implements shopcartDAO{
 	@Override
 	public void product_count_update(shopcartVO vo) {
 		session.update(namespace+".product_count_update", vo);
+	}
+
+	@Override
+	public int order_count(String uid) {
+		return session.selectOne(namespace+".order_count", uid);
 	}
 }

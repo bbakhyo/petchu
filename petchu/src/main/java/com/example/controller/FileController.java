@@ -22,12 +22,12 @@ public class FileController {
 	@Resource(name = "uploadPath")
 	String path;
 
-	// ÀÌ¹ÌÁöÆÄÀÏ ºê¶ó¿ìÀú¿¡ Ãâ·Â
+	// ì´ë¯¸ì§€íŒŒì¼ ë¸Œë¼ìš°ì €ì— ì¶œë ¥
 	@RequestMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> display(String fileName) throws Exception {
 		ResponseEntity<byte[]> result = null;
-		// display fileNameÀÌ ÀÖ´Â °æ¿ì
+		// display fileNameì´ ìˆëŠ” ê²½ìš°
 		if (!fileName.equals("")) {
 			System.out.println("......" + path);
 			File file = new File(path + fileName);
@@ -44,7 +44,7 @@ public class FileController {
 	public HashMap<String,Object> updatePost(MultipartHttpServletRequest multi) throws Exception{
 		HashMap<String, Object> map=new HashMap<>();
 		MultipartFile file=multi.getFile("upload");
-		//ÆÄÀÏ¾÷·Îµå
+		//íŒŒì¼ì—…ë¡œë“œ
 		if(!file.isEmpty()) {
 			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 			file.transferTo(new File(path + "ckupload/" + fileName));

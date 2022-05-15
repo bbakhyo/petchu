@@ -12,7 +12,7 @@ import com.example.service.StarService;
 
 @RestController
 @RequestMapping("/help")
-public class HelpController { //´ñ±Û Áßº¹Ã¼Å© ÄÁÆ®·Ñ·¯
+public class HelpController { //Â´Ã±Â±Ã› ÃÃŸÂºÂ¹ÃƒÂ¼Ã…Â© Ã„ÃÃ†Â®Â·Ã‘Â·Â¯
 	
 	@Autowired
 	HelpDAO hdao;
@@ -24,11 +24,11 @@ public class HelpController { //´ñ±Û Áßº¹Ã¼Å© ÄÁÆ®·Ñ·¯
 	public int updateHelp(HelpVO vo, Model model){
 		int count=hdao.helpcheckcount(vo);
 			if(service.helpcount(vo.getRid()) >= 0) {
-				if(count == 0){ //Ã³À½À¸·Î µûºÀ ´©¸¦‹š
+				if(count == 0){ //ÃƒÂ³Ã€Â½Ã€Â¸Â·ÃŽ ÂµÃ»ÂºÃ€ Â´Â©Â¸Â¦â€¹Å¡
 					service.updatehelpcount(vo.getRid());
 					hdao.inserthelp(vo);
 					hdao.updatehelpcheck(vo);
-				}else if(count == 1){ //µûºÀ Ãë¼Ò 
+				}else if(count == 1){ //ÂµÃ»ÂºÃ€ ÃƒÃ«Â¼Ã’ 
 					hdao.updatehelpcheckcancel(vo);
 					service.updatehelpcountcancel(vo.getRid());
 					hdao.deletehelp(vo);

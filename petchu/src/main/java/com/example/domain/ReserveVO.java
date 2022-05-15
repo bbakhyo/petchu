@@ -13,7 +13,7 @@ public class ReserveVO extends ServiceVO{
 	private String request;
 	private String userName;
 	private String userTel;
-	private String keyword; //°Ë»ö¾î
+	private String keyword; //ê²€ìƒ‰ì–´
 	private String sort;
 	private String reserveDate;
 	private int isEdit;

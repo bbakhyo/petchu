@@ -20,7 +20,7 @@ public class FaqController {
 	@Autowired
 	FaqDAO dao;
 	
-	//¸ñ·ÏÆäÀÌÁö
+	//ëª©ë¡í˜ì´ì§€
 	@RequestMapping("/list")
 	public String list(Model model, Criteria cri){
 		cri.setPerPageNum(5);
@@ -51,14 +51,14 @@ public class FaqController {
 
 		return map;
 	}
-	//°Ô½Ã±ÛÀÔ·ÂÈ­¸é
+	//ê²Œì‹œê¸€ì…ë ¥í™”ë©´
 	@RequestMapping("/insert")
 	public String insert(Model model){
 		model.addAttribute("pageName", "faq/insert.jsp");
 		return "/home";
 	}
 	
-	//°Ô½Ã±ÛÀÔ·Â
+	//ê²Œì‹œê¸€ì…ë ¥
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insertPost(FaqVO vo){
 		dao.insert(vo);

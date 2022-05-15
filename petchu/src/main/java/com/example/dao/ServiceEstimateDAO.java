@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.domain.ServiceEstimateVO;
 
 public interface ServiceEstimateDAO {
-	//Ã¤ÅÃ
+	//ì±„íƒ
 	public void secheckUpdate(int seno);
 	
 	public void bfailCheckUpdate(int brno);
@@ -14,14 +14,14 @@ public interface ServiceEstimateDAO {
 	
 	public void lfailCheckUpdate(int lrno);
 	
-	//Áßº¹Ã¼Å©
+	//ì¤‘ë³µì²´í¬
 	public int overlabCheck(ServiceEstimateVO vo);
 	
 	public int overlabCheck2(ServiceEstimateVO vo);
 	
 	public int overlabCheck3(ServiceEstimateVO vo);
 	
-	//¹Ì¿ë
+	//ë¯¸ìš©
 	public void binsert(ServiceEstimateVO vo);
 	
 	public List<ServiceEstimateVO> blist(int scno);
@@ -30,7 +30,7 @@ public interface ServiceEstimateDAO {
 	
 	public ServiceEstimateVO beautyEstimateRead(int brno, int scno);
 	
-	//È¨ Å¬¸®´×
+	//í™ˆ í´ë¦¬ë‹
 	public void cinsert(ServiceEstimateVO vo);
 	
 	public List<ServiceEstimateVO> crnolist(int crno);
@@ -38,14 +38,14 @@ public interface ServiceEstimateDAO {
 	public ServiceEstimateVO cleanEstimateRead(int crno, int scno);
 	
 	
-	//·¹½¼
+	//ë ˆìŠ¨
 	public void linsert(ServiceEstimateVO vo);
 	
 	public List<ServiceEstimateVO> lrnolist(int lrno);
 	
 	public ServiceEstimateVO lessonEstimateRead(int lrno, int scno);
 	
-	//³»°¡ ¾´ °ßÀû¼­ º¸±â
+	//ë‚´ê°€ ì“´ ê²¬ì ì„œ ë³´ê¸°
 	
 	public List<ServiceEstimateVO> beautyViewList(int scno);
 	public ServiceEstimateVO beautyViewRead(ServiceEstimateVO vo);

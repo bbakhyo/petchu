@@ -59,7 +59,7 @@ public class ServiceController {
 	public String binsert(HttpSession session, Model model, BeautyRequestVO bvo){
 		int count= bdao.beautyCount(session.getAttribute("id").toString());
 		if(count >= 1){
-			model.addAttribute("msg", "ÀÌ¹Ì ÀÛ¼ºÇÑ ¿äÃ»¼­°¡ ÀÖ½À´Ï´Ù. ¸¶°¨Ã³¸® ÈÄ ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä");
+			model.addAttribute("msg", "ì´ë¯¸ ì‘ì„±í•œ ìš”ì²­ì„œê°€ ìˆìŠµë‹ˆë‹¤. ë§ˆê°ì²˜ë¦¬ í›„ ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”");
 			model.addAttribute("pageName", "service/alert.jsp");
 			return "/home";
 		}else{
@@ -96,7 +96,7 @@ public class ServiceController {
 	public String cinsert(HttpSession session, Model model, CleaningRequestVO cvo){
 		int count= cdao.cleaningCount(session.getAttribute("id").toString());
 		if(count >= 1){
-			model.addAttribute("msg", "ÀÌ¹Ì ÀÛ¼ºÇÑ ¿äÃ»¼­°¡ ÀÖ½À´Ï´Ù. ¸¶°¨Ã³¸® ÈÄ ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä");
+			model.addAttribute("msg", "ì´ë¯¸ ì‘ì„±í•œ ìš”ì²­ì„œê°€ ìˆìŠµë‹ˆë‹¤. ë§ˆê°ì²˜ë¦¬ í›„ ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”");
 			model.addAttribute("pageName", "service/alert.jsp");
 			return "/home";
 		}else{
@@ -133,7 +133,7 @@ public class ServiceController {
 	public String cinsert(HttpSession session, Model model, LessonRequestVO lvo){
 		int count= ldao.lessonCount(session.getAttribute("id").toString());
 		if(count >= 1){
-			model.addAttribute("msg", "ÀÌ¹Ì ÀÛ¼ºÇÑ ¿äÃ»¼­°¡ ÀÖ½À´Ï´Ù. ¸¶°¨Ã³¸® ÈÄ ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä");
+			model.addAttribute("msg", "ì´ë¯¸ ì‘ì„±í•œ ìš”ì²­ì„œê°€ ìˆìŠµë‹ˆë‹¤. ë§ˆê°ì²˜ë¦¬ í›„ ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”");
 			model.addAttribute("pageName", "service/alert.jsp");
 			return "/home";
 		}else{
@@ -169,7 +169,7 @@ public class ServiceController {
 	
 	//Estimate
 	
-	//¹Ì¿ë °ßÀû¼­
+	//ë¯¸ìš© ê²¬ì ì„œ
 	@ResponseBody
 	@RequestMapping(value ="/beinsert", method = RequestMethod.POST)
 	public int beinsert1(ServiceEstimateVO vo){
@@ -188,7 +188,7 @@ public class ServiceController {
 		return "/home";
 	}
 	
-	//È¨ Å¬¸®´× °ßÀû¼­
+	//í™ˆ í´ë¦¬ë‹ ê²¬ì ì„œ
 	@ResponseBody
 	@RequestMapping(value ="/ceinsert", method = RequestMethod.POST)
 	public int ceinsert1(ServiceEstimateVO vo){
@@ -207,7 +207,7 @@ public class ServiceController {
 		return "/home";
 	}
 	
-	//·¹½¼ Å¬¸®´× °ßÀû¼­
+	//ë ˆìŠ¨ í´ë¦¬ë‹ ê²¬ì ì„œ
 		@ResponseBody
 		@RequestMapping(value ="/leinsert", method = RequestMethod.POST)
 		public int leinsert1(ServiceEstimateVO vo){
@@ -224,9 +224,9 @@ public class ServiceController {
 			return "/home";
 		}
 		
-	//³»°¡ ¾´ °ßÀû¼­
+	//ë‚´ê°€ ì“´ ê²¬ì ì„œ
 		
-		//¹Ì¿ë
+		//ë¯¸ìš©
 		@RequestMapping("/beslist")
 		public String beslist(HttpSession session, Model model){
 			model.addAttribute("sideMenu", "mypageSidemenu.jsp");
@@ -252,7 +252,7 @@ public class ServiceController {
 			return read;
 		}
 		
-		//È¨ Å¬¸®´×
+		//í™ˆ í´ë¦¬ë‹
 		@RequestMapping("/ceslist")
 		public String ceslist(HttpSession session, Model model){
 			model.addAttribute("sideMenu","mypageSidemenu.jsp");
@@ -278,7 +278,7 @@ public class ServiceController {
 			return read;
 		}
 		
-		//·¹½¼
+		//ë ˆìŠ¨
 		@RequestMapping("/leslist")
 		public String leslist(HttpSession session, Model model){
 			model.addAttribute("sideMenu","mypageSidemenu.jsp");

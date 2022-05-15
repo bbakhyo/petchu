@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class HelpVO extends StarVO { //´ñ±ÛÃßÃµ Áßº¹Ã¼Å©  DB
+public class HelpVO extends StarVO { //ëŒ“ê¸€ì¶”ì²œ ì¤‘ë³µì²´í¬  DB
 	private int hno;
 	private String uid;
 	private int rid;

@@ -1,12 +1,12 @@
 package com.example.domain;
 
 public class PageMaker {
-	private int totalCount; //ÀüÃ¼µ¥ÀÌÅÍ¼ö
-	private int startPage; //½ÃÀÛÆäÀÌÁö
-	private int endPage; //¸¶Áö¸·ÆäÀÌÁö
-	private boolean prev; //ÀÌÀü
-	private boolean next; //´ÙÀ½
-	private int displayPageNum = 10; //È­¸é¿¡ º¸ÀÌ´Â ÆäÀÌÁö¼ö
+	private int totalCount; //ì „ì²´ë°ì´í„°ìˆ˜
+	private int startPage; //ì‹œì‘í˜ì´ì§€
+	private int endPage; //ë§ˆì§€ë§‰í˜ì´ì§€
+	private boolean prev; //ì´ì „
+	private boolean next; //ë‹¤ìŒ
+	private int displayPageNum = 10; //í™”ë©´ì— ë³´ì´ëŠ” í˜ì´ì§€ìˆ˜
 	private Criteria cri;
 
 	public void setCri(Criteria cri) {

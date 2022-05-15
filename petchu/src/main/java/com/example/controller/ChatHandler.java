@@ -11,31 +11,31 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 
 public class ChatHandler extends TextWebSocketHandler{
-	//¼¼¼Ç ¸®½ºÆ®
+	//ì„¸ì…˜ ë¦¬ìŠ¤íŠ¸
 	ArrayList<WebSocketSession> sessions = new ArrayList<>();
 	
 	
-	//Å¬¶óÀÌ¾ğÆ®¿Í ¿¬°áÀÌ ²÷±ä °æ¿ì
+	//í´ë¼ì´ì–¸íŠ¸ì™€ ì—°ê²°ì´ ëŠê¸´ ê²½ìš°
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println("¿¬°á ²÷±è : " + session.getId());
-		sessions.remove(session); //¼¼¼Ç¿¡¼­ »èÁ¦
+		System.out.println("ì—°ê²° ëŠê¹€ : " + session.getId());
+		sessions.remove(session); //ì„¸ì…˜ì—ì„œ ì‚­ì œ
 		super.afterConnectionClosed(session, status);
 	}
 
-	//Å¬¶óÀÌ¾ğÆ®°¡ ¿¬°á µÈ °æ¿ì
+	//í´ë¼ì´ì–¸íŠ¸ê°€ ì—°ê²° ëœ ê²½ìš°
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("¿¬°á µÊ : " + session.getId());
-		sessions.add(session); //¼¼¼Ç¿¡ Ãß°¡
+		System.out.println("ì—°ê²° ë¨ : " + session.getId());
+		sessions.add(session); //ì„¸ì…˜ì— ì¶”ê°€
 		super.afterConnectionEstablished(session);
 	}
 
-	//Å¬¶óÀÌ¾ğÆ®¿¡°Ô¼­ ¸Ş¼¼Áö°¡ Àü¼Û µÈ °æ¿ì
+	//í´ë¼ì´ì–¸íŠ¸ì—ê²Œì„œ ë©”ì„¸ì§€ê°€ ì „ì†¡ ëœ ê²½ìš°
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String strMessage = message.getPayload();
-		System.out.println("¸Ş¼¼Áö Àü¼Û");
+		System.out.println("ë©”ì„¸ì§€ ì „ì†¡");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String date = sdf.format(new Date());
 		strMessage += "|" + date;

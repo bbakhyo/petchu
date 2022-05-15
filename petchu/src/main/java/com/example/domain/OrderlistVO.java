@@ -5,10 +5,10 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class OrderlistVO extends shopproductVO {
-	private int bno; //orderlistÀÇ ¹øÈ£
-	private String uid; //À¯Àú¾ÆÀÌµğ
-	private int pno; //»óÇ°¹øÈ£ ÀÌ°Ô ¾ÈµÊ
-	private int amount;//ÃÑ °¹¼ö
+	private int bno; //orderlistì˜ ë²ˆí˜¸
+	private String uid; //ìœ ì €ì•„ì´ë””
+	private int pno; //ìƒí’ˆë²ˆí˜¸ ì´ê²Œ ì•ˆë¨
+	private int amount;//ì´ ê°¯ìˆ˜
 	private int final_price;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date odate;

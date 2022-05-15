@@ -5,17 +5,17 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ReviewVO extends OrderlistVO{
-	private int rid;//¸®ºä¹øÈ£
-	private String rtitle; //ÇÑÁÙ¿ä¾à
-	private Double Star; //º°
-	private String review; //¸®ºä ³»¿ë
+	private int rid;//ë¦¬ë·°ë²ˆí˜¸
+	private String rtitle; //í•œì¤„ìš”ì•½
+	private Double Star; //ë³„
+	private String review; //ë¦¬ë·° ë‚´ìš©
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
-	private Date rdate; //¸®ºäÀÛ¼º½Ã°£
+	private Date rdate; //ë¦¬ë·°ì‘ì„±ì‹œê°„
 	private String rimage1; 
-	private String rimage2; //»óÇ°ÀÌ¹ÌÁö
-	private int helpcount; // µµ¿òµÇ¸é Áõ°¡
-	private int pno; //»óÇ°¹øÈ£
-	private String uid; //À¯Àú¾ÆÀÌµğ
+	private String rimage2; //ìƒí’ˆì´ë¯¸ì§€
+	private int helpcount; // ë„ì›€ë˜ë©´ ì¦ê°€
+	private int pno; //ìƒí’ˆë²ˆí˜¸
+	private String uid; //ìœ ì €ì•„ì´ë””
 	private int bno;
 	
 

@@ -130,7 +130,7 @@ public class HoschoolController {
 	@RequestMapping(value="/serviceInsert", method=RequestMethod.POST)
 	public String serviceInsert(ServiceVO vo, MultipartHttpServletRequest multi)throws Exception {
 		
-		System.out.println("............................ÄÁÆ®·Ñ·¯ ³Ñ¾î¿È");
+		System.out.println("............................ì»¨íŠ¸ë¡¤ëŸ¬ ë„˜ì–´ì˜´");
 		MultipartFile file=multi.getFile("file");
 		MultipartFile backfile=multi.getFile("backfile");
 		if(!file.isEmpty()){
@@ -147,7 +147,7 @@ public class HoschoolController {
 			backfile.transferTo(new File(path + image));
 			vo.setBgimage(image);
 		}
-		System.out.println("............................ÄÁÆ®·Ñ·¯ Áö³ª°¨");
+		System.out.println("............................ì»¨íŠ¸ë¡¤ëŸ¬ ì§€ë‚˜ê°");
 		dao.insert(vo);
 		return "redirect:/user/mypage?id="+vo.getId();
 	}

@@ -41,7 +41,7 @@
   margin-bottom:20px;
 }
 
-.content_item_box_container {
+.img_container>img {
 	cursor:pointer;
 }
 .content_item_box_container:hover{
@@ -63,13 +63,13 @@
 .price_item1{
   font-size:13px;
   font-weight:700;
-  padding: 10px;
+ /*  padding: 10px; */
 }
-.price_item2{
+/* .price_item2{
   font-size:15px;
   color:blue;
   padding: 10px;
-}
+} */
 .content_item_title_row{
   align-items:flex-end;
   width:100%;
@@ -109,7 +109,7 @@
     line-height: 15px;
     color: #333;
     letter-spacing: 0;
-    border: none;
+   /*  border: none; */
     background: transparent;
     border: solid 2px white;
     border-radius: 5px;
@@ -130,6 +130,12 @@
 	top:25%;
 	left:3%;
 }
+.cart_add1, .cart_add1>img{
+width: 35px;
+padding-right: 5px;
+cursor:pointer;
+}
+
 </style>
 </head>
 <body>
@@ -156,14 +162,14 @@
 	      <script id="temp" type="text/x-handlebars-template">
 
 	{{#each list}}
-      <div class="content_item_box_container" pno="{{pno}}" onclick='getLocation(this)'>
-		<div style="position:relative;">
+      <div class="content_item_box_container" pno="{{pno}}" data-pno="{{pno}}">
+		<div class="img_container" style="position:relative;" onclick='getLocation(this)' pno="{{pno}}">
         	<img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
 			<img class="soldout" src="/resources/soldout.png" width=170>
 		</div>
         	<div class="content_item_title" pno="{{pno}}">{{pname}}</div>
         	<div class="content_item_price">
-          		<div class="price_item1">{{comma pprice}}원</div> 
+          		<div class="price_item1">{{comma pprice}}원</div> <div class="cart_add1"><img src="/resources/icon_menu/cart_add.png" id="cart_add1"></div>
        		</div>
         	<div class="content_item_title_row">
 				<div class="content_item_title">{{replace pbrand}}</div>   
@@ -207,11 +213,19 @@
 	getContentsList();
 	
 	//상품 클릭시 리드페이지로 이동
-	function getLocation(e){
-		var pno = $(e).attr("pno");
+	function getLocation(e){	
+		var pno = $(e).attr("pno"); 
 		location.href="read?pno="+pno+"&selectCate="+selectCate+"&selectCate2="+selectCate2+"&selectCate3="+selectCate3; 
 	}
 	
+	/* 장바구니 버턴 */
+	$(".content_item_container_row").on("click",".cart_add1" ,function(){
+		var pno = $(".content_item_title").find("pno");
+		alert("add to cart"+"pno:"+pno);
+	})
+
+	
+		
 	
 	function getContentsList(){
 		$.ajax({

@@ -53,7 +53,7 @@ public class ReviewController {
 	@Resource(name="uploadPath")
 	String path;
 
-	//¸®ºä ÀÔ·ÂÆäÀÌÁö
+	//ë¦¬ë·° ì…ë ¥í˜ì´ì§€
 		@RequestMapping("/insert")
 		public String insert(Model model,int pno, int bno){
 			model.addAttribute("vo",odao.read(pno,bno));
@@ -61,9 +61,9 @@ public class ReviewController {
 			model.addAttribute("pageName", "review/insert.jsp");
 			return "/home";
 		}
-	//orderlist/review ¸ñ·Ï json µ¥ÀÌÅÍ »ı¼º
+	//orderlist/review ëª©ë¡ json ë°ì´í„° ìƒì„±
 	@RequestMapping("/list.json")
-	@ResponseBody //µ¥ÀÌÅÍ¸¦ ¸®ÅÏ
+	@ResponseBody //ë°ì´í„°ë¥¼ ë¦¬í„´
 	public HashMap<String,Object> listJSON(Criteria cri, int bno){
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		
@@ -79,12 +79,12 @@ public class ReviewController {
 		return map;
 
 	}
-	//¸®ºä ÆäÀÌÁö
-	//orderlistÀÇ °ª°ú userÀÇ nameÀ» °¡Á®¿À°í ½ÍÀ½
+	//ë¦¬ë·° í˜ì´ì§€
+	//orderlistì˜ ê°’ê³¼ userì˜ nameì„ ê°€ì ¸ì˜¤ê³  ì‹¶ìŒ
 	@RequestMapping("/list")
-	public String list(Model model,Criteria cri){ //model¿¡ Ãâ·ÂÇÏ°íÀÚÇÏ´Â ÆäÀÌÁö¸¦ ´ã¾ÆÁÜ
+	public String list(Model model,Criteria cri){ //modelì— ì¶œë ¥í•˜ê³ ìí•˜ëŠ” í˜ì´ì§€ë¥¼ ë‹´ì•„ì¤Œ
 		//model.addAttribute("name",udao.read(session.getAttribute("id").toString()));
-		//session.setAttribute("username", "red"); //·Î±×ÀÎÇÁ·Î±×·¥Çß´Ù°í °¡Á¤Çß´Ù »ı°¢ÇÏ°í
+		//session.setAttribute("username", "red"); //ë¡œê·¸ì¸í”„ë¡œê·¸ë¨í–ˆë‹¤ê³  ê°€ì •í–ˆë‹¤ ìƒê°í•˜ê³ 
 		cri.setPerPageNum(5);
 		//cri.setPage(1);
 		PageMaker pm=new PageMaker();
@@ -100,7 +100,7 @@ public class ReviewController {
 	
 		return "/home";
 	}
-	//¸®ºä ÆäÀÌÁö
+	//ë¦¬ë·° í˜ì´ì§€
 		@RequestMapping("/reviewable")
 		public String reviewable(Model model,int bno){
 			
@@ -110,13 +110,13 @@ public class ReviewController {
 		}
 	
 	
-	//ÆÄÀÏ¾÷·ÎµåÆäÀÌÁö
+	//íŒŒì¼ì—…ë¡œë“œí˜ì´ì§€
 	@RequestMapping("/fileupload")
 	public String fileupload(Model model){
 		model.addAttribute("pageName", "review/fileupload.jsp");
 		return "/home";
 	}
-	//ÀÌ°Å ¼öÁ¤ÇØ¾ßÇÔ
+	//ì´ê±° ìˆ˜ì •í•´ì•¼í•¨
 	@ResponseBody
 	@RequestMapping(value="/fileupload", method=RequestMethod.POST)
 	public String fileuploadPost(@RequestParam("article_file")List<MultipartFile> multi,
@@ -132,25 +132,25 @@ public class ReviewController {
 						System.out.println(fileRoot);
 						String originFileName = file.getOriginalFilename();
 						String extension = originFileName.substring(originFileName.lastIndexOf("."));
-						//ÀúÀåµÉ ÆÄÀÏ¸í
+						//ì €ì¥ë  íŒŒì¼ëª…
 						String saveFileName ="review/" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
-						//ÀÌ°Å ÀÌÇØ¾ÈµÊ
+						//ì´ê±° ì´í•´ì•ˆë¨
 						File targetFile = new File(fileRoot+saveFileName);
 						try{
 							InputStream fileStream = file.getInputStream();
-							//ÆÄÀÏÀúÀå
+							//íŒŒì¼ì €ì¥
 							FileUtils.copyInputStreamToFile(fileStream, targetFile);
 						}catch(Exception e){
-							//ÆÄÀÏ »èÁ¦
+							//íŒŒì¼ ì‚­ì œ
 							FileUtils.deleteQuietly(targetFile);
-							//ÀúÀåµÈ ÇöÀç ÆÄÀÏ »èÁ¦
+							//ì €ì¥ëœ í˜„ì¬ íŒŒì¼ ì‚­ì œ
 							e.printStackTrace();
 							break;
 						}
 					}
 					strResult = "{\"result\" : \"OK\" }";
 				}
-				//ÆÄÀÏ Ã·ºÎ ¾ÈÇßÀ» ¶§
+				//íŒŒì¼ ì²¨ë¶€ ì•ˆí–ˆì„ ë•Œ
 				else{
 					strResult = "{\"result\" : \"OK\"}";
 				}
