@@ -22,6 +22,10 @@
 	    height: 18px;
 /* 	    margin-top: 3px; */
 	}
+	.i_qnt{
+	    font-size: 10;
+	    color:gray;
+	}
    </style>
 
 <div id="page">
@@ -62,8 +66,8 @@
                      </div>
                   </div>
                   <div class="content_col2_quantity">
-                     <div class="cart_update_container">
-                       <select class="select_quantity" data_quantity={{amount}}>
+                     <div class="cart_update_container" style="text-align:center;">
+                       <select class="select_quantity" data_quantity={{amount}} quantity="{{pqantity}}">
 							<option value="0" class="none">0</option>
 							<option vlue="1">1</option>
 							<option vlue="2">2</option>
@@ -82,6 +86,7 @@
 							<input type="button" class="quantity-chg" id="quantity-chg" value="수량변경" 
 							onclick='getSelect(this)'>
 						</a>
+					<div class="i_qnt" qnt = "{{pqantity}}">남은 수량: {{pqantity}}개</div>
                      </div>
                   </div>
                   <div class="content_col3_subtotal_container">
@@ -252,7 +257,6 @@
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
 				
-				
 				//페이지 입장시 기존 amount값에 따라 option selected
 				$("#tbl .select_quantity").each(function(){
 					var amount = $(this).parent().parent().parent().parent().parent().attr("amount");
@@ -323,17 +327,41 @@
 		
 	//수량 : select optoin을 선택했을 경우
 	$("#tbl").on("change", ".select_quantity", function() {
-		
-		//
 		//select 10+ 선택시 입력칸 생성
 		if($(this).val()=="10+"){
 			$(this).parent().find("block").attr("class", "none");
 			$(this).attr("style", "display:none");
-			$(this).parent().find(".select-text").attr("style", "display:block");
+			$(this).parent().find(".select-text").attr("style", "display:block;");
 			return;
 		}
 		var selected = $(this).val(); //선택한 option의 value 값을 불러온다.
-		$(this).attr('data_quantity', selected); //불러온 value값을 (data_quantity)에 집어넣는다.
+		////////////////수정중 
+		var item_qnt = $(this).attr("quantity");	//해당 상품의 남은 수량을 불러온다.
+		if(Number(selected)>Number(item_qnt)){
+			alert("상품의 남은 수량보다 많이 선택하셨습니다!\n해당 상품의 잔존수량: "+item_qnt+"개");
+			
+			
+			//추가해야할 것이 있다 -> 만약 재고소진이 아니라 애매하게 1개 정도 남은 상품일 경우도 생각해야 함
+			//바로 0을 꽂아버리는 게 아니라 선택한 value 값을 기준으로 계산한 값을 넣어야함 
+			//selected => 선택한 수량
+			//선택한 수량이 잔존수량보다 많게 클릭했기 때문에 현재수량을 잔존수량으로 바꾸고 값을 다시 계산한다.
+			selected=item_qnt;
+			
+			//가격 표시줄 0원으로 설정하기
+// 			$(this).parent().parent().parent().find(".content_col3_subtotal_container .content_col3_subtotal_amount").html(0);
+// 			$(this).parent().parent().parent().find(".content_col3_subtotal_container .content_col3_subtotal_amount").attr("price", 0);
+// 			selected = 0;
+// 			alert($(this).parent().parent().parent().find(".content_col3_subtotal_container .content_col3_subtotal_amount").html());
+// 			alert($(this).parent().parent().parent().find(".content_col3_subtotal_container .content_col3_subtotal_amount").attr("price"));
+			//최대 데이터 수량넣기
+			var data_qnt = $(this).attr("quantity");
+			$(this).val(data_qnt);
+			$(this).attr("data_quantity", data_qnt);
+			//수량 재설정하지 않으면 값이 바뀜.
+		}else{
+			$(this).attr('data_quantity', selected); //불러온 value값을 (data_quantity)에 집어넣는다.
+		}
+		///////////////////
 		//선택된 option value에 따라 바뀌는 총합액을 갱신
 		var price = $(this).parent().parent().parent().parent().parent().attr("price");
 		var vsum = Number(selected) * Number(price);
@@ -361,7 +389,31 @@
 	//구매 버튼을 클릭한 경우
 	$("#tbl").on("click", ".payment_submit_now", function(){
 		if(chked_all==0){
-			alert("주문할 상품을 선택해주세요!");
+// 			alert("주문할 상품을 선택해주세요!");
+			return;
+		}
+		getList();
+		var qntTest = 0;
+		$(".i_qnt").each(function(){//상품 전체 수량 체크
+// 			alert("이치 테스트");
+			var tempQnt = $(this).attr("qnt");
+			if(tempQnt==0){//만약 상품 중에 재고 0인 상품이 있다면
+// 				alert("템프 테스트");
+				var chk = $(this).closest(".cart_item_content_row_itemCard").find(".chk_box_col0 .bigCheckbox_item").attr("chk");
+// 				alert("chk=" + chk);
+				if(chk==1){//만약 그 상품의 chk가 체크된 상태라면
+					$(this).closest(".cart_item_content_row_itemCard").find(".chk_box_col0 .bigCheckbox_item").attr("checked", false);
+					$(this).closest(".cart_item_content_row_itemCard").find(".chk_box_col0 .bigCheckbox_item").attr("chk", 0);
+// 					alert($(this).closest(".cart_item_content_row_itemCard").find(".chk_box_col0 .bigCheckbox_item").attr("chk"));
+					chk_update();
+					qntTest = 1;
+				}	
+				return;
+			}
+		});
+		if(qntTest==1) {
+			alert("재고가 소진된 상품이 존재합니다!");
+			getList();
 			return;
 		}
 		location.href="/shopproduct/multi_buy?uid=${id}";
@@ -380,9 +432,22 @@
 	function getSelect(e){
 		//클릭시 parent.find.quantity-text.val() 불러오기
 		var textVal = $(e).parent().find(".quantity-text").val();
+		//---------------------남은수량보다 많이 선택한 경우---------------------
+		var item_qnt = $(e).parent().parent().find(".select_quantity").attr("quantity");	
+		//해당 상품의 남은 수량을 불러온다.
+		if(Number(textVal)>Number(item_qnt)){
+			//해당 상품의 남은 수량만큼 선택된다.
+			$(e).parent().find(".quantity-text").val(item_qnt);
+// 			var test11 = $(e).parent().find(".quantity-text").val();
+// 			alert(test11);
+			alert("상품의 남은 수량을 초과하여 최대수량으로 조정합니다!");
+			getSelect(e);
+			return;
+		}
+		//---------------------------------------------------------------
 		//해당 정보를 기존 select에 넣고 display 교체
 		var select = $(e).parent().parent().find(".select_quantity");
-		select.attr("style", "display:block");
+		select.attr("style", "display:block margin:0px auto;");
 		//display none이었던 0번째 옵션의 val을 textVal로 변경시키고 show, attr 또한 변경하며 열려있는 text박스 display none
 		select.find(".none").val(textVal);
 // 		select.find(".none").html(textVal);
@@ -397,7 +462,7 @@
 		var amount = $(e).parent().parent().find(".select_quantity").attr("data_quantity");
 		var price = $(e).parent().parent().parent().parent().parent().parent().attr("price");
 		$(e).parent().parent().attr("amount", amount);
-		//가격에 가격 업데이트 --- 제대로 안됨@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		//가격에 가격 업데이트 ---
 		var final_price = Number(price) * Number(amount)
 		$(e).parent().parent().parent().parent().find(".content_col3_subtotal_container .content_col3_subtotal_amount").html(final_price);
 		$(e).parent().parent().parent().parent().find(".content_col3_subtotal_container .content_col3_subtotal_amount").attr("price", final_price);
@@ -415,6 +480,8 @@
 		});
 		getReserve();	
 		getFormatNum1();
+		
+		
 	}
 
 	function getCount(){
@@ -506,4 +573,5 @@
 			$(this).parent().parent().parent().find(".content_col4_deliveryFee_container .content_col4_deliveryFee_amount .reserves").html(reserve);
 		});
 	}
+	
 </script>

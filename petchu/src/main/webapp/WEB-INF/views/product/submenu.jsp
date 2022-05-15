@@ -8,4 +8,5 @@
 <div id="menu" >
 	<a href="/product/insert">상품등록</a>
 	<a href="/product/list">상품목록</a>
+	<a href="/product/order_list">주문목록</a>
 </div>

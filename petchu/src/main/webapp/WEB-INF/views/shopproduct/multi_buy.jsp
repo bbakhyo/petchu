@@ -165,8 +165,13 @@
                 </label>
 
                 <label for="kakao" for="pay_type">
-                  <input type="radio" name="pay_type" id="kakao" class="pay" value="kakaopay1">
+                  <input type="radio" name="pay_type" id="kakao" class="pay" value="kakaopay1" checked>
                   KakaoPay
+                </label>
+                
+                   <label for="kakao" for="pay_type" class="payLabel" style="display:none;">
+                  <input type="radio" name="pay_type" id="payPoint" class="pay" value="payPoint">
+                  포인트 사용
                 </label>
               </div>
             </div>
@@ -321,9 +326,13 @@ Handlebars.registerHelper("display", function(sum){
 		}).open();
 	})	
 	
-	/* <!--  (checkout_shipping_info_card)       --> */	
+	/* <!--  (checkout_shipping_info_card)       --> */
+	
+	//결제 click시
+	
 	$(".checkout_container_main").on("click",".pay_btn",function(){
-		/* alert("결제하기"); */
+
+		
 		/*card1=checkout_shipping_info_card(배송정보 : 주소 )  */
 		var card1 = $(".checkout_shipping_info_card");
 		var receiver = card1.find("#order_receiver").val();
@@ -357,7 +366,7 @@ Handlebars.registerHelper("display", function(sum){
 		} //for
 			
 		} //else
-		
+// 		alert(paytype);
 		//유효성 체크
 		if(receiver==''||null){
 		alert("수령자 이름을 입력 하세요!");
@@ -400,7 +409,44 @@ Handlebars.registerHelper("display", function(sum){
 				//사용할 포인트가 서버에서 불러온 데이터보다 작다면 (정상적이라면)
 				if(Number(usePoint)<=Number(serverPoint)){
 					final_price = final_price - Number(usePoint);
-					alert("데이터 테스트 통과");
+					var omessage = $("#delivery_message").val();
+					//포인트 사용으로 인해 최종 결제금액이 0이라면
+					if(final_price == 0){
+						//결제 성공시 주문목록에 등록
+						if(!confirm("포인트를 사용하여 구매하시겠습니까?")) return;
+						var orno = Date.now() + uid;
+						$(".cartitem_info_right").each(function(){
+							var pno = $(this).attr("pno");
+							var amount = $(this).attr("amount");
+							console.log(uid);
+							console.log(amount);
+							console.log(orno);
+							console.log(zipcode);
+							console.log(address1);
+							console.log(receiver);
+							console.log(tel);
+							console.log(final_price);
+							console.log(usePoint);
+							console.log(btnPoint);
+							console.log(omessage);
+							$.ajax({
+								type: "post",
+								url: "/shopproduct/order_insert",	
+								data: {uid:uid, pno:pno, amount:amount, orno:orno, zipcode:zipcode, address1:address1, address2:address2, receiver:receiver, tel:tel},
+								success: function(){
+								}
+							});
+						});		
+						$.ajax({
+							type: "post",
+							url: "/shopproduct/user_order_insert",	
+							data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint, omessage:omessage},
+							success: function(){
+								location.href="/shopproduct/order_list";
+							}
+						});
+						return;
+					}
 				}else{//아니라면 (비정상적인 접근이라면)
 					alert("포인트가 부족합니다.");
 					return;
@@ -456,7 +502,6 @@ Handlebars.registerHelper("display", function(sum){
 						usePoint=0;
 					}
 					
-					var omessage = $("#delivery_message").val();
 					$.ajax({
 						type: "post",
 						url: "/shopproduct/user_order_insert",	
@@ -478,31 +523,6 @@ Handlebars.registerHelper("display", function(sum){
 		}
 	});
 
-	
-// 	//전체동의 버튼	
-// 	$("#terms_agree_all").on("change", function(){
-// 		//체크 되었을 경우
-// 		if($(this).is(":checked")) {
-// 			alert("체크됨")
-// 			$("#terms_agreement").attr("checked", "checked");
-// 		}else{
-// 			alert("체크해제됨")
-// 			$("#terms_agreement").attr("checked", false);
-// 		}
-// 	});
-	
-// 	//일반동의 버튼
-// 	$("#terms_agreement").on("click", function(){
-// 		alert("테스트");
-// 		return;
-// 		//체크 되었을 경우
-// 		if($("#terms_agreement").is(":checked")) {
-// 			$("#terms_agree_all").attr("checked", "checked");
-// 		}else{
-// 			$("#terms_agree_all").attr("checked", false);
-// 		}
-// 	});
-	
 
 	//전화번호 포멧
 	function getNumberFormat(){
@@ -523,8 +543,9 @@ Handlebars.registerHelper("display", function(sum){
 	}
 
     
-    //포인트가 변경될 때
+    //포인트 적용 버튼 클릭했을 때
     $(".point_apply").on("click", function(){
+    	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
     	var point = $(this).parent().parent().find(".point").val();
     	var myPoint = $(".my_point").attr("point");
     	//숫자가 아니거나 0일 경우, 혹은 0보다 작을 경우 작동 안되게 해야함
@@ -546,6 +567,16 @@ Handlebars.registerHelper("display", function(sum){
     		$(".point").focus();
     		return;
     	}
+    	//보유 포인트가 결제금액보다 높을 경우 최대포인트 가격으로 수정
+    	console.log("포인트="+point);
+    	console.log("최종가격="+fprice);
+    	if(Number(point)>Number(fprice)){
+    		point = fprice;
+    	}
+    	if(Number(point)==Number(fprice)){
+    		$(".payLabel").attr("style", "display:block;");
+    		$("input[name='pay_type']:radio").prop("checked",true);;
+    	}
     	$(".none").attr("class", "show");
     	$(".checkout_point_line").attr("style", "");
     	$(".card_cart_point_right").html(point);
@@ -554,7 +585,7 @@ Handlebars.registerHelper("display", function(sum){
     	$(".card_cart_point_right").attr("point", point);
     	
     	//최종가격 계산
-    	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
+//     	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
     	fprice = Number(fprice) - Number(point);
     	$(".card_cart_grandtotal_row_right").html(fprice);
     	
@@ -616,6 +647,10 @@ Handlebars.registerHelper("display", function(sum){
     	$(".point").attr("readonly", false);
     	btnPoint = 0;
     	$(".spoint").html("보유 포인트: ");
+    	
+		
+		$(".payLabel").attr("style", "display:none;");
+		$("input[name='pay_type']:radio").prop("checked", false);;
     	return;
     });
 	
@@ -636,4 +671,5 @@ Handlebars.registerHelper("display", function(sum){
 		$(".point").val(myPoint);
 		$(".point_apply").click();
 	});	
+	
 </script>

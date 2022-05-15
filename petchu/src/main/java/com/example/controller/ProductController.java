@@ -124,4 +124,33 @@ public class ProductController {
 		dao.adminUpdate(vo);
 		return "redirect:/product/list";
 	}
+	
+	
+	@RequestMapping("/order_list.json")
+	@ResponseBody
+	public Map<String,Object> order_list(Criteria cri){
+		Map<String,Object> map = new HashMap<>();
+		cri.setPerPageNum(10);
+		
+		PageMaker pm = new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(dao.order_count());
+		
+		map.put("pm", pm);
+		map.put("list", dao.order_list(cri));
+		
+		return map;
+	}
+	
+	@RequestMapping("/order_list")
+	public String order_list(Model model) {
+		model.addAttribute("submenu", "submenu.jsp");
+		model.addAttribute("pageName", "product/order_list.jsp");
+		return "/home";
+	}
+	
+	@RequestMapping(value="order_state_update", method=RequestMethod.POST)
+	public void order_state_update(ProductVO vo){
+		dao.order_state_update(vo);
+	}
 }

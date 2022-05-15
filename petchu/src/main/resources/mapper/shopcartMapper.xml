@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.mapper.shopcartMapper">
 	<select id="cart_read" resultType="com.example.domain.shopcartVO">
-		select c.uid, c.pno, p.pimage, p.pname, p.pprice, c.amount, cno, c.amount * pprice sum, chk
+		select c.uid, c.pno, p.pimage, p.pname, p.pprice, c.amount, cno, c.amount * pprice sum, chk, pqantity
 		from shopproduct p, shopcart c
 		where c.uid=#{uid} and c.pno = p.pno
 		order by cno desc
