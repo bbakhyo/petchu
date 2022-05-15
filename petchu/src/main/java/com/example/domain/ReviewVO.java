@@ -5,26 +5,18 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ReviewVO extends OrderlistVO{
-	private int rid;//ë¦¬ë·°ë²ˆí˜¸
-	private String rtitle; //í•œì¤„ìš”ì•½
-	private Double Star; //ë³„
-	private String review; //ë¦¬ë·° ë‚´ìš©
+	private int rid;//¸®ºä¹øÈ£
+	private String rtitle; //ÇÑÁÙ¿ä¾à
+	private double star; //º°
+	private String review; //¸®ºä ³»¿ë
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
-	private Date rdate; //ë¦¬ë·°ì‘ì„±ì‹œê°„
+	private Date rdate; //¸®ºäÀÛ¼º½Ã°£
 	private String rimage1; 
-	private String rimage2; //ìƒí’ˆì´ë¯¸ì§€
-	private int helpcount; // ë„ì›€ë˜ë©´ ì¦ê°€
-	private int pno; //ìƒí’ˆë²ˆí˜¸
-	private String uid; //ìœ ì €ì•„ì´ë””
+	private String rimage2; //»óÇ°ÀÌ¹ÌÁö
+	private int helpcount; // µµ¿òµÇ¸é Áõ°¡
+	private int pno; //»óÇ°¹øÈ£
+	private String uid; //À¯Àú¾ÆÀÌµğ
 	private int bno;
-	
-
-	public int getBno() {
-		return bno;
-	}
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
 	public int getRid() {
 		return rid;
 	}
@@ -37,11 +29,11 @@ public class ReviewVO extends OrderlistVO{
 	public void setRtitle(String rtitle) {
 		this.rtitle = rtitle;
 	}
-	public Double getStar() {
-		return Star;
+	public double getStar() {
+		return star;
 	}
-	public void setStar(Double star) {
-		Star = star;
+	public void setStar(double star) {
+		this.star = star;
 	}
 	public String getReview() {
 		return review;
@@ -85,12 +77,20 @@ public class ReviewVO extends OrderlistVO{
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	@Override
 	public String toString() {
-		return "ReviewVO [rid=" + rid + ", rtitle=" + rtitle + ", Star=" + Star + ", review=" + review + ", rdate="
+		return "ReviewVO [rid=" + rid + ", rtitle=" + rtitle + ", star=" + star + ", review=" + review + ", rdate="
 				+ rdate + ", rimage1=" + rimage1 + ", rimage2=" + rimage2 + ", helpcount=" + helpcount + ", pno=" + pno
-				+ ", uid=" + uid + "]";
+				+ ", uid=" + uid + ", bno=" + bno + "]";
 	}
+	
+
 	
 	
 	

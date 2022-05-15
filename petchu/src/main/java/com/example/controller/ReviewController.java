@@ -34,6 +34,7 @@ import com.example.domain.PageMaker;
 import com.example.domain.ProductVO;
 import com.example.domain.ReviewVO;
 import com.example.domain.shopproductVO;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
 
 @Controller
 @RequestMapping("/review")
@@ -52,19 +53,124 @@ public class ReviewController {
 	
 	@Resource(name="uploadPath")
 	String path;
-
-	//ë¦¬ë·° ì…ë ¥í˜ì´ì§€
+	
+	//¸®ºä ÀÔ·ÂÆäÀÌÁö(Ãâ·Â)
+			@RequestMapping("/update")
+			public String update(Model model,int rid){
+				model.addAttribute("vo",dao.updateread(rid));
+				model.addAttribute("pageName", "review/update.jsp");
+				
+				return "/home";
+			}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String updatePost(ReviewVO vo,MultipartHttpServletRequest multi)throws Exception{
+		System.out.println(".................file: "+vo.getRimage1());
+		List<MultipartFile> fileList = multi.getFiles("uploadFile");
+		int i = 0;
+		System.out.println(".................if¹® Á÷Àü: "+vo.getRimage1());
+		if(fileList.size() != 0){
+			
+				if(fileList.isEmpty()){
+					System.out.println(".................if¹® µé¾î¿È: "+vo.getRimage1());
+					for(MultipartFile mf : fileList){
+						String image = System.currentTimeMillis() + "_" + mf.getOriginalFilename();
+							mf.transferTo(new File(path + image ));
+							i++;
+							System.out.println("..." + image + ":" + i + "¹øÂ°" );
+							
+							if(i==1){
+								vo.setRimage1(image);
+								
+							}
+							if(i==2){
+								vo.setRimage2(image);
+							}	
+					}
+				}
+			
+		}
+		
+		dao.update(vo);
+		System.out.println(vo.toString());
+		return "redirect:/review/list";
+	
+	}
+	//¸®ºä delete
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public void delete(int rid){
+		dao.delete(rid);
+	}
+	//¸®ºä ¸®µåÆäÀÌÁö
+	@RequestMapping("/list")
+	public String list(Model model){
+		model.addAttribute("pageName", "review/list.jsp");
+	
+		return "/home";
+	}
+	@RequestMapping("/list.json")
+	@ResponseBody
+	public HashMap<String,Object> readJOSN(Criteria cri){
+		HashMap<String,Object> map = new HashMap<>();
+		cri.setPerPageNum(3);
+		PageMaker pm=new PageMaker();
+		pm.setCri(cri);
+		pm.setDisplayPageNum(3);
+		pm.setTotalCount(dao.count());
+		
+		map.put("pm", pm);
+		map.put("cri", cri);
+		map.put("join", dao.join(cri));
+		return map;
+		
+	}
+	//¸®ºä ÀÔ·ÂÆäÀÌÁö(Ãâ·Â)
 		@RequestMapping("/insert")
-		public String insert(Model model,int pno, int bno){
+		public String insert(Model model,int pno, int bno,ReviewVO vo){
 			model.addAttribute("vo",odao.read(pno,bno));
-			model.addAttribute("rvo",dao.list(bno));
 			model.addAttribute("pageName", "review/insert.jsp");
+			
 			return "/home";
 		}
-	//orderlist/review ëª©ë¡ json ë°ì´í„° ìƒì„±
-	@RequestMapping("/list.json")
-	@ResponseBody //ë°ì´í„°ë¥¼ ë¦¬í„´
-	public HashMap<String,Object> listJSON(Criteria cri, int bno){
+		@RequestMapping(value="/insert", method=RequestMethod.POST)
+		public String insert(ReviewVO vo,MultipartHttpServletRequest multi)throws Exception{
+			System.out.println(".................file: "+vo.getRimage1());
+			List<MultipartFile> fileList = multi.getFiles("uploadFile");
+			int i = 0;
+			System.out.println(".................if¹® Á÷Àü: "+vo.getRimage1());
+			if(fileList.size() != 0){
+				
+					if(fileList.isEmpty()){
+						System.out.println(".................if¹® µé¾î¿È: "+vo.getRimage1());
+						for(MultipartFile mf : fileList){
+							String image = System.currentTimeMillis() + "_" + mf.getOriginalFilename();
+								mf.transferTo(new File(path + image ));
+								i++;
+								System.out.println("..." + image + ":" + i + "¹øÂ°" );
+								
+								if(i==1){
+									vo.setRimage1(image);
+									
+								}
+								if(i==2){
+									vo.setRimage2(image);
+								}	
+						}
+					}
+				
+			}
+			
+			dao.insert(vo);
+			System.out.println(vo.toString());
+			return "redirect:/review/list";
+			
+		
+		}
+	//orderlist/review ¸ñ·Ï json µ¥ÀÌÅÍ »ı¼º
+	@RequestMapping("/reviewable.json")
+	@ResponseBody //µ¥ÀÌÅÍ¸¦ ¸®ÅÏ
+	public HashMap<String,Object> reviewableJSON(Criteria cri, int bno){
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		
 		cri.setPerPageNum(5);
@@ -79,12 +185,12 @@ public class ReviewController {
 		return map;
 
 	}
-	//ë¦¬ë·° í˜ì´ì§€
-	//orderlistì˜ ê°’ê³¼ userì˜ nameì„ ê°€ì ¸ì˜¤ê³  ì‹¶ìŒ
-	@RequestMapping("/list")
-	public String list(Model model,Criteria cri){ //modelì— ì¶œë ¥í•˜ê³ ìí•˜ëŠ” í˜ì´ì§€ë¥¼ ë‹´ì•„ì¤Œ
+	//¸®ºä ÆäÀÌÁö
+	//orderlistÀÇ °ª°ú userÀÇ nameÀ» °¡Á®¿À°í ½ÍÀ½
+	@RequestMapping("/reviewable")
+	public String reviewable(Model model,Criteria cri){ //model¿¡ Ãâ·ÂÇÏ°íÀÚÇÏ´Â ÆäÀÌÁö¸¦ ´ã¾ÆÁÜ
 		//model.addAttribute("name",udao.read(session.getAttribute("id").toString()));
-		//session.setAttribute("username", "red"); //ë¡œê·¸ì¸í”„ë¡œê·¸ë¨í–ˆë‹¤ê³  ê°€ì •í–ˆë‹¤ ìƒê°í•˜ê³ 
+		//session.setAttribute("username", "red"); //·Î±×ÀÎÇÁ·Î±×·¥Çß´Ù°í °¡Á¤Çß´Ù »ı°¢ÇÏ°í
 		cri.setPerPageNum(5);
 		//cri.setPage(1);
 		PageMaker pm=new PageMaker();
@@ -92,75 +198,11 @@ public class ReviewController {
 		pm.setDisplayPageNum(5);
 		pm.setTotalCount(odao.count(cri));
 
-		
 		model.addAttribute("pm", pm);
 		model.addAttribute("page",cri.getPage());
 		model.addAttribute("join" ,odao.join(cri));
-		model.addAttribute("pageName", "review/list.jsp");
+		model.addAttribute("pageName", "review/reviewable.jsp");
 	
 		return "/home";
 	}
-	//ë¦¬ë·° í˜ì´ì§€
-		@RequestMapping("/reviewable")
-		public String reviewable(Model model,int bno){
-			
-			model.addAttribute("list",dao.list(bno));
-			model.addAttribute("pageName", "review/reviewable.jsp");
-			return "/home";
-		}
-	
-	
-	//íŒŒì¼ì—…ë¡œë“œí˜ì´ì§€
-	@RequestMapping("/fileupload")
-	public String fileupload(Model model){
-		model.addAttribute("pageName", "review/fileupload.jsp");
-		return "/home";
-	}
-	//ì´ê±° ìˆ˜ì •í•´ì•¼í•¨
-	@ResponseBody
-	@RequestMapping(value="/fileupload", method=RequestMethod.POST)
-	public String fileuploadPost(@RequestParam("article_file")List<MultipartFile> multi,
-	HttpServletRequest request){
-		String strResult = "{\"result\":\"FAIL\"}";
-		System.out.println(strResult+"..");
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot;
-			try{
-				if(multi.size()>0 && !multi.get(0).getOriginalFilename().equals("")){
-					for(MultipartFile file:multi){
-						fileRoot = path;
-						System.out.println(fileRoot);
-						String originFileName = file.getOriginalFilename();
-						String extension = originFileName.substring(originFileName.lastIndexOf("."));
-						//ì €ì¥ë  íŒŒì¼ëª…
-						String saveFileName ="review/" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
-						//ì´ê±° ì´í•´ì•ˆë¨
-						File targetFile = new File(fileRoot+saveFileName);
-						try{
-							InputStream fileStream = file.getInputStream();
-							//íŒŒì¼ì €ì¥
-							FileUtils.copyInputStreamToFile(fileStream, targetFile);
-						}catch(Exception e){
-							//íŒŒì¼ ì‚­ì œ
-							FileUtils.deleteQuietly(targetFile);
-							//ì €ì¥ëœ í˜„ì¬ íŒŒì¼ ì‚­ì œ
-							e.printStackTrace();
-							break;
-						}
-					}
-					strResult = "{\"result\" : \"OK\" }";
-				}
-				//íŒŒì¼ ì²¨ë¶€ ì•ˆí–ˆì„ ë•Œ
-				else{
-					strResult = "{\"result\" : \"OK\"}";
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		return strResult;
-		
-			
-	}
-	
-	
 }

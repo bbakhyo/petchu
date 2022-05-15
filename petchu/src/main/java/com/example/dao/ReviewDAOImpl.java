@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.domain.Criteria;
 import com.example.domain.ReviewVO;
 
 @Repository
@@ -46,8 +47,19 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public List<ReviewVO> r_join() {
-		return session.selectList(namespace + ".r_join");
+	public List<ReviewVO> join(Criteria cri) {
+		return session.selectList(namespace + ".join", cri);
+	}
+
+	@Override
+	public int count() {
+		return session.selectOne(namespace + ".count");
+	}
+
+	@Override
+	public ReviewVO updateread(int rid) {
+
+		return session.selectOne(namespace + ".updateread", rid);
 	}
 
 
