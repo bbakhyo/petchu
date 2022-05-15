@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ReviewVO extends OrderlistVO{
 	private int rid;//리뷰번호
 	private String rtitle; //한줄요약
-	private Double Star; //별
+	private double star; //별
 	private String review; //리뷰 내용
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date rdate; //리뷰작성시간
@@ -17,14 +17,6 @@ public class ReviewVO extends OrderlistVO{
 	private int pno; //상품번호
 	private String uid; //유저아이디
 	private int bno;
-	
-
-	public int getBno() {
-		return bno;
-	}
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
 	public int getRid() {
 		return rid;
 	}
@@ -37,11 +29,11 @@ public class ReviewVO extends OrderlistVO{
 	public void setRtitle(String rtitle) {
 		this.rtitle = rtitle;
 	}
-	public Double getStar() {
-		return Star;
+	public double getStar() {
+		return star;
 	}
-	public void setStar(Double star) {
-		Star = star;
+	public void setStar(double star) {
+		this.star = star;
 	}
 	public String getReview() {
 		return review;
@@ -85,12 +77,20 @@ public class ReviewVO extends OrderlistVO{
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	@Override
 	public String toString() {
-		return "ReviewVO [rid=" + rid + ", rtitle=" + rtitle + ", Star=" + Star + ", review=" + review + ", rdate="
+		return "ReviewVO [rid=" + rid + ", rtitle=" + rtitle + ", star=" + star + ", review=" + review + ", rdate="
 				+ rdate + ", rimage1=" + rimage1 + ", rimage2=" + rimage2 + ", helpcount=" + helpcount + ", pno=" + pno
-				+ ", uid=" + uid + "]";
+				+ ", uid=" + uid + ", bno=" + bno + "]";
 	}
+	
+
 	
 	
 	
