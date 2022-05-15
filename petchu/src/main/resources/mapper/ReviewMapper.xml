@@ -12,20 +12,29 @@
         order by rid desc
     </select>
     <insert id="insert">
-    	insert into review(rtitle,star,review,rdate,rimage1,rimage2,uid, pno)
-    	values(#{rtitle}, #{star}, #{riview}, #{rdate}, #{rimage1}, #{rimage2}, #{uid}, #{pno})
+    	insert into review(rtitle,star,review,rdate,rimage1,rimage2,uid,pno)
+    	values(#{rtitle}, #{star}, #{review}, #{rdate}, #{rimage1}, #{rimage2}, #{uid}, #{pno})
     </insert>
     <update id="update">
     	update review
-    	set rtitle=#{rtitle}, star=#{star}, review=#{review}, updatedate=now()
+    	set rtitle=#{rtitle}, star=#{star}, review=#{review}, rimage1=#{rimage1}, rimage2=#{rimage2},rdate=now()
     	where rid=#{rid}
     </update>
     <delete id="delete">
     	delete from review
     	where rid=#{rid}
     </delete>
-    <select id="r_join" resultType="com.example.domain.ReviewVO">
+    <select id="join" resultType="com.example.domain.ReviewVO">
     	select r.*, p.pname, p.pimage from review r, shopproduct p
-		where r.pno=p.pno;
+		where r.pno=p.pno
+		order by rdate desc
+		limit #{pageStart}, #{perPageNum}
     </select>
+    <select id="count" resultType="int">
+    	select count(*) from rinfo
+    </select>
+	<select id="updateread" resultType="com.example.domain.ReviewVO">
+		select r.*, p.pname, p.pimage from review r, shopproduct p
+		where r.pno=p.pno and r.rid=#{rid};
+	</select>
 </mapper>
