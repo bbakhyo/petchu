@@ -74,11 +74,15 @@ textarea {
 .drprice {
 	text-align : left;
 } 
+#sidemenu{
+	margin-left: -100px;
+}
+</style>
 </style>
 
 <h1>레슨 견적서 목록</h1>
 <div id="sidemenu">
-		<jsp:include page="${sideMenu}" />
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
 </div>
 
 <h2 id="text" style="display:none;">작성된 견적서가 없습니다</h2>

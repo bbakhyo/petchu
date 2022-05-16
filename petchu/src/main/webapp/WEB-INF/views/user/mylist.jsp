@@ -23,6 +23,7 @@
 	display: none;
 	margin: 10px;
 	padding: 10px;
+	margin-left: 140px
 }
 #myList{
 	margin-left: 100px;
@@ -36,7 +37,7 @@
 <div id="page">
 	<h1>내 업체목록</h1>
 	<div id="sidemenu">
-		<jsp:include page="${sideMenu}" />
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
 	</div>
 	<div id="myList">
 	
@@ -49,7 +50,7 @@
 			
 				<form name="frm"  action="serviceUpdate" method="post" enctype="multipart/form-data">
 					<div class="smallPrame" >	
-						<table>
+						<table style="width: 740px;">
 							
 							<tr>
 								<td width=150>scno</td>
