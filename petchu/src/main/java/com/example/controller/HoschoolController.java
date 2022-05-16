@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.dao.HoschoolDAO;
 import com.example.dao.RateDAO;
+import com.example.dao.ReserveDAO;
 import com.example.dao.UserDAO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
@@ -40,6 +41,9 @@ public class HoschoolController {
 	
 	@Autowired
 	RateDAO rdao;
+	
+	@Autowired
+	ReserveDAO vdao;
 	
 	
 	@Resource(name="uploadPath")
@@ -115,6 +119,18 @@ public class HoschoolController {
 	@ResponseBody
 	public List<ServiceVO> mylist(String id) {
 		return dao.myList(id);
+	}
+	
+	@RequestMapping(value="/reviewAllCount", method=RequestMethod.POST)
+	@ResponseBody
+	public int reviewAllCount(String id, int scno) {
+		return dao.reviewAllCount(scno, id);
+	}
+	
+	@RequestMapping(value="/reviewWriteCount", method=RequestMethod.POST)
+	@ResponseBody
+	public int reviewWriteCount(String id, int scno) {
+		return dao.reviewWriteCount(scno, id);
 	}
 	
 	

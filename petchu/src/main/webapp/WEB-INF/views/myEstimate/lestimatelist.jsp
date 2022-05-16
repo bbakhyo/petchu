@@ -78,7 +78,7 @@ textarea {
 	margin-left: -100px;
 }
 </style>
-</style>
+
 
 <h1>레슨 견적서 목록</h1>
 <div id="sidemenu">
