@@ -126,6 +126,7 @@
      height: 30;
 }
 .soldout{
+ 	display:none; 
 	position:absolute;
 	top:25%;
 	left:3%;
@@ -157,7 +158,7 @@
 
 	{{#each list}}
       <div class="content_item_box_container" pno="{{pno}}" onclick='getLocation(this)'>
-		<div style="position:relative;">
+		<div class = "itemImg" quantity="{{pqantity}}" style="position:relative;">
         	<img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
 			<img class="soldout" src="/resources/soldout.png" width=170>
 		</div>
@@ -224,6 +225,14 @@
 				$(".content_item_container_row").html(template(data));
 				$(".pagination").html(getPagination(data));
 				window.scroll({ top: 0, left: 0, behavior: "smooth" })
+				
+				//상품 재고가 소진되었을 경우 soldOUt 표기
+				$(".itemImg").each(function(){
+// 					alert("......");
+					if($(this).attr("quantity")==0){
+						$(this).find(".soldout").attr("style", "display:block;");
+					}
+				});
 			}
 		});
 	}
@@ -259,4 +268,6 @@
     $(".goAll").on("click", function(){
 		location.href = "/shopproduct/contents_list";
 	});
+    
+
 </script>

@@ -47,6 +47,9 @@
 </style>
 <div id="page">
 	<h1>구매목록</h1>
+	<div id="sidemenu">
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
+	</div>
 	<table id="tbl"></table>
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each .}}	
@@ -172,5 +175,8 @@ function getGrayLine(){
 		}
 	});
 }
+
+//메뉴바 css 정렬
+$(".sideMenu").css("margin-left", "0px");
 
 </script>
