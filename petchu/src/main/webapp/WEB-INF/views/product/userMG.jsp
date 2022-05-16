@@ -43,7 +43,7 @@
 					<td width=50 class="info id">{{id}}</td>
 				
 					<td width=50 class="title">생년월일</td>
-					<td width=300 class="info">{{birthday}}</td>
+					<td width=300 class="info birthday">{{birthday}}</td>
 
 					<td width=70 class="title">타입</td>
 					<td width=70 class="info type">{{type}}</td>
@@ -125,7 +125,12 @@
 					}else{
 						target.find(".isDel").html("정상")
 					}
-				})
+					
+					//생년월일 섭스트링
+					target = target.find(".birthday");
+					var birth = target.html().substring(0,11);
+					target.html(birth);
+				});
 			}
 		});
 	}
