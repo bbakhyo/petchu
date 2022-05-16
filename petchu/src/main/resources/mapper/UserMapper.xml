@@ -67,7 +67,7 @@
 		group by uid
 	</select>
 	<select id="chartDate" resultType="hashmap"> 
-		select date_format(paydate,'%Y%m%d') fdate, sum(point) point, sum(sum) sum, sum(point+sum) total
+		select date_format(paydate,'%Y-%m-%d') fdate, sum(point) point, sum(sum) sum, sum(point+sum) total
 		from user_order
 		group by fdate
 	</select>

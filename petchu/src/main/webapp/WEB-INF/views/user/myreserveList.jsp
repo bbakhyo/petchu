@@ -435,7 +435,12 @@
 			dataType:"json",
 			success: function(data){
 				var template = Handlebars.compile($("#temp").html());
-				$("#tbl").html(template(data));
+				if(data.list == ""){
+					$("#tbl").html("<h2 style='margin-left:-100px;'>... 예약리스트가 없습니다 ...</h2>");
+				}else{
+					$("#tbl").html(template(data));
+				}
+				
 				
 				//예약날짜 섭스트링
 				$(".list").each(function(){
@@ -486,7 +491,12 @@
 			dataType:"json",
 			success: function(data){
 				var template = Handlebars.compile($("#temp2").html());
-				$("#tbl2").html(template(data));
+				if(data.oldlist == ""){
+					$("#tbl2").html("<h2 style='margin-left:-100px;'>... 지난예약리스트가 없습니다 ...</h2>");
+				}else{
+					$("#tbl2").html(template(data));
+				}
+				
 				//취소요청 버튼을 클릭한 경우
 				$("#tbl").on("click",".reserveCancel", function(){
 					var isEdit = $(this).closest(".list").attr("isEdit");

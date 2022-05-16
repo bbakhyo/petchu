@@ -451,7 +451,7 @@ public class UserController {
 	@ResponseBody
 	public List<List<Object>> chartDate(){
 		List<List<Object>> array=new ArrayList<>();
-		List<HashMap<String, Object>> list = dao.chartPrice();
+		List<HashMap<String, Object>> list = dao.chartDate();
 		
 		List<Object> arr = new ArrayList<>();
 		arr.add("일자");
