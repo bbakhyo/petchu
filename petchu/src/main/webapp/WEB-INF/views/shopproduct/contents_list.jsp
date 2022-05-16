@@ -1,230 +1,166 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <head>
 <title>Content list</title>
 <link href="/resources/temp_page.css" rel="stylesheet">
+<link href="/resources/css/content_list.css" rel="stylesheet">
 <style>
-	
-#page{
-/*   display:flex; */
-  flex-direction:column;
-  font-family:NanumGothic;
-}
-.page_border{
-  border:1px solid black;
-}
-.menu_item_title{
-  font-size:13px;
-  font-family:NanumGothic;
-  font-weight: 700;
-  letter-spacing:-0.5px;
-  line-height:15px;
-  text-align:center;
-  margin-top:10px;
-}
 
-.content_item_container_row{
-  display:flex;
-  flex-direction:row;
-  width:960px;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.content_item_box_container{
-  display:flex;
-  flex-direction:column;
-  width:180px;
-  height:346px;
-  box-shadow:5px 5px 15px 5px rgba(0,0,0,0);
-  border:1px solid #d1d0cf;
-  margin-bottom:20px;
-}
-
-.content_item_box_container {
-	cursor:pointer;
-}
-.content_item_box_container:hover{
-	border:solid 1px blue;
-}
- .content_item_title{
-    font-size:13px;
-    height: 60px;
-    padding:10px;
-  }  
-.content_item_price{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  width:100%;
-  height: 45px;
-/*   background-color:#f07f7f; */
-}
-.price_item1{
-  font-size:13px;
-  font-weight:700;
-  padding: 10px;
-}
-.price_item2{
-  font-size:15px;
-  color:blue;
-  padding: 10px;
-}
-.content_item_title_row{
-  align-items:flex-end;
-  width:100%;
-  height: 45px;
-  background-color:#f5f5f5;
-}
-.content_item_title{
-  padding:10px;
-}
-
-.content_banner_area{
-  display:flex;
-  flex-direction:row;
-  gap:0;
-}
-.content_img{
-	width:180px;
-	height:180px;
-}
-.contents_box{
-	background: #A7CA37;
-	height: 60px;
-}
-.content_item_container_row{
-	margin: 10px auto;
-}
-.content_item_box_container{
-	margin: 1px;
-}
-#search_text{
-    width: 300px;
-    height: 40px;
-    margin-top: 11px;
-    padding: 0 3px 0;
-    font-weight: bold;
-    font-size: 13px;
-    line-height: 15px;
-    color: #333;
-    letter-spacing: 0;
-    border: none;
-    background: transparent;
-    border: solid 2px white;
-    border-radius: 5px;
-}
-.goAll{
-	 float: left; 
-	 margin-left: 10px; 
-	 margin-top: 15; 
-	 cursor: pointer;"
-	 background:white;
-	 border: 1px solid white;
-	 border-radius:10px;
-     width: 70;
-     height: 30;
-}
-.soldout{
- 	display:none; 
-	position:absolute;
-	top:25%;
-	left:3%;
-}
-.cart_add1, .cart_add1>img{
-	width: 35px;
-	padding-right: 5px;
-	cursor:pointer;
-}
 </style>
 </head>
 <body>
-	<div id="page">
-		<div class="contents_box">
-			<span><button class="goAll">전체</button></span>
-			<select name="animal_type" class="animal_type">
+	<div id="content_page">
+		<!-- <div class="contents_box">
+			<span><button class="goAll">전체</button></span> <select
+				name="animal_type" class="animal_type">
 				<option>전체</option>
 				<option>강아지</option>
 				<option>고양이</option>
-			</select>
-			<select name="item_type" class="item_type">
+			</select> <select name="item_type" class="item_type">
 				<option>전체</option>
 				<option>사료</option>
 				<option>간식</option>
 				<option>용품</option>
-			</select>
-			<input type="text" name="keyword" id="search_text">
-			<input type="button" value="검색" class="btn_search">
-		</div>
-		 <div class="content_container">
-	    	<div class="content_item_container_row"></div> 
-	    	
-	      <script id="temp" type="text/x-handlebars-template">
+			</select> <input type="text" name="keyword" id="search_text"> <input
+				type="button" value="검색" class="btn_search">
+		</div> -->
+		
+		<div class="top_nav_bar">
+  <div class="btn_all_container">
+    <a href="#" class="btn_show_all">전체보기</a>
+    </div>
+  
+  <div class="menu_container_main">
+  <div class="menu_container1">
+       
+           <div>펫타입: </div>
+            <div class="menu-options">
+            <div>
+              <input type="radio" name="main_category" id="menu_dog" checked>
+                <label for="menu_dog">
+                  강아지 
+                </label>
+            </div>
+            <div>
+              <input type="radio" name="main_category" id="menu_cat">
+                <label for="menu_cat">
+                  고양이
+                </label>
+            </div>
+           </div>
+  </div>
+  <div class="menu_container2">
+    <div class="select_container">
+        <select name="animal_type" class="animal_type">
+        <option>전체</option>
+        <option>강아지</option>
+        <option>고양이</option>
+      </select>
+
+      <select name="item_type" class="item_type">
+        <option>전체</option>
+        <option>사료</option>
+        <option>간식</option>
+        <option>용품</option>
+      </select>
+     </div>
+    </div>
+  
+  <div class="menu_container3">
+    <div class="menu_item1"></div>
+  <div class="menu_item2">
+      <div class="searchfield">
+        <input type="text" name="keyword" id="search_text">
+        <div class="btn_search"><img src="/resources/icon_menu/icon_navbar_loupe.png" alt='search icon' width=40></div>
+        
+    </div>
+  </div>
+  
+  </div>
+    </div>
+  <div class="menu_option_icon"><img src="/resources/icon_menu/navbar_list.png" width=40></div>
+</div>
+
+		<div class="content_container">
+			<div class="content_item_container_row"></div>
+
+			<script id="temp" type="text/x-handlebars-template">
 
 	{{#each list}}
       <div class="content_item_box_container" pno="{{pno}}">
-		<div class = "itemImg" quantity="{{pqantity}}" style="position:relative;" onclick='getLocation(this)'>
+		<div class="img_container" style="position:relative;" onclick='getLocation(this)' pno="{{pno}}" quantity="{{pqantity}}">
         	<img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
 			<img class="soldout" src="/resources/soldout.png" width=170>
 		</div>
-        	<div class="content_item_title" pno="{{pno}}">{{pname}}</div>
-        	<div class="content_item_price">
-          		<div class="price_item1">{{comma pprice}}원</div> 
-				<div class="cart_add1"><img src="/resources/icon_menu/cart_add.png" id="cart_add1"></div>
+        	<div class="content_item_title" pno="{{pno}}" data-price="{{pprice}}" data-pno="{{pno}}">{{pname}}</div>
+        	<div class="content_rating_container">
+				<div class="rating rating2"><!--
+		--><a href="#5" title="Give 5 stars">★</a><!--
+		--><a href="#4" title="Give 4 stars">★</a><!--
+		--><a href="#3" title="Give 3 stars">★</a><!--
+		--><a href="#2" title="Give 2 stars">★</a><!--
+		--><a href="#1" title="Give 1 star">★</a>
+				</div>
+			</div>
+			<div class="content_item_price">
+          		<div class="price_item1">{{comma pprice}}원</div> <div class="cart_add1"><img src="/resources/icon_menu/cart_add.png" id="cart_add1"></div>
        		</div>
-        	<div class="content_item_title_row">
+        	<div class="content_item_title_row" pno="{{pno}}">
 				<div class="content_item_title">{{replace pbrand}}</div>   
        		</div>
 		</div>
 	{{/each}}
-        </script>		  
-	 	 </div> 
-	 </div>
+        </script>
+		</div>
+	</div>
 	<div class="pagination"></div>
 </body>
 <script>
- $("#pagination a").click(function(e){
- e.preventDefault();
- var page=$(this).attr("href");
- frm.page.value=page;
- });
+	$("#pagination a").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		frm.page.value = page;
+	});
 </script>
 <script>
-/*Brand명이 없으면 'House Brand를 러턴 */
-	Handlebars.registerHelper("replace",function(pbrand){
-		var replace ='House Brand';
-		if(pbrand==''){
+	/*Brand명이 없으면 'House Brand를 러턴 */
+	Handlebars.registerHelper("replace", function(pbrand) {
+		var replace = 'House Brand';
+		if (pbrand == '') {
 			return replace;
-		}else{
+		} else {
 			return pbrand;
-		}	
+		}
 	});
 	Handlebars.registerHelper("comma", function(pprice) {
 		return pprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	})
-	
 </script>
 
 <script>
-	var page=1;
-	var keyword="";
-	var selectCate="${cate}";
-	var selectCate2="${cate2}";
-	var selectCate3="${cate3}";
+	var page = 1;
+	var keyword = "";
+	var selectCate = "${cate}";
+	var selectCate2 = "${cate2}";
+	var selectCate3 = "${cate3}";
 	getContentsList();
-	
+
 	//상품 클릭시 리드페이지로 이동
-	function getLocation(e){
-		var pno = $(e).parent().attr("pno");
-		location.href="read?pno="+pno+"&selectCate="+selectCate+"&selectCate2="+selectCate2+"&selectCate3="+selectCate3; 
+	function getLocation(e) {
+		var pno = $(e).attr("pno");
+		location.href = "read?pno=" + pno + "&selectCate=" + selectCate
+				+ "&selectCate2=" + selectCate2 + "&selectCate3=" + selectCate3;
 	}
-	
-	/* 장바구니 button */
-	$(".content_item_container_row").on("click",".cart_add1" ,function(){
+
+	/* 장바구니 버턴 - 바구니에 추가 (update/insert) */
+	$(".content_item_container_row").on("click", ".cart_add1", function() {
 		var pno = $(this).closest(".content_item_box_container").attr("pno");
 		//장바구니 버튼을 클릭한 경우 session에 저장된 id를 읽어서 장바구니DB에 등록
 		var uid = "${id}";
 		var amount = 1;
+		alert("Hello" + " pno: " + pno + "!" + uid+amount);
+
 		$.ajax({
 			type : "post",
 			url : "/shopproduct/insert",
@@ -234,7 +170,6 @@
 				amount : amount
 			},
 			success : function(data) {
-				//장바구니 페이지로 이동하기
 				if (data == 1) {
 					//장바구니 등록 완료
 					alert('장바구니 등록완료!');
@@ -243,24 +178,32 @@
 					alert('이미 장바구니에 등록된 상품입니다.');
 				}
 			}
-		});
-	});
-		
-	function getContentsList(){
+		})
+	})
+
+	function getContentsList() {
 		$.ajax({
-			type: "get",
-			dataType: "json",
-			data: {page:page, keyword:keyword},
-			url: "/shopproduct/contents_list.json?selectCate="+selectCate+"&selectCate2="+selectCate2+"&selectCate3="+selectCate3,
-			success:function(data){
+			type : "get",
+			dataType : "json",
+			data : {
+				page : page,
+				keyword : keyword
+			},
+			url : "/shopproduct/contents_list.json?selectCate=" + selectCate
+					+ "&selectCate2=" + selectCate2 + "&selectCate3="
+					+ selectCate3,
+			success : function(data) {
 				var template = Handlebars.compile($("#temp").html());
 				$(".content_item_container_row").html(template(data));
 				$(".pagination").html(getPagination(data));
-				window.scroll({ top: 0, left: 0, behavior: "smooth" })
-				
+				window.scroll({
+					top : 0,
+					left : 0,
+					behavior : "smooth"
+				});
 				//상품 재고가 소진되었을 경우 soldOUt 표기
-				$(".itemImg").each(function(){
-// 					alert("......");
+				$(".img_container").each(function(){
+					alert("......");
 					if($(this).attr("quantity")==0){
 						$(this).find(".soldout").attr("style", "display:block;");
 					}
@@ -268,38 +211,36 @@
 			}
 		});
 	}
-	
-	$(".pagination").on("click", "a", function(e){
+
+	$(".pagination").on("click", "a", function(e) {
 		e.preventDefault();
-		page=$(this).attr("href");
+		page = $(this).attr("href");
 		getContentsList();
 	});
-	
+
 	//검색버튼을 클릭했을 경우
-	$(".btn_search").on("click", function(){
+	$(".btn_search").on("click", function() {
 		keyword = $("#search_text").val();
-		selectCate="";
-		selectCate2=$(".item_type").val();
-		selectCate3=$(".animal_type").val();
-		if(selectCate2=="전체") {
+		selectCate = "";
+		selectCate2 = $(".item_type").val();
+		selectCate3 = $(".animal_type").val();
+		if (selectCate2 == "전체") {
 			selectCate2 = "";
-		}if(selectCate3=="전체"){
+		}
+		if (selectCate3 == "전체") {
 			selectCate3 = "";
 		}
 		getContentsList();
 	});
-	
-	
-    //엔터 프레스 => click()
-    $("#search_text").on("keypress", function(e){
-    	if(e.key === "Enter"){
-    		$(".btn_search").click();
-    	}
-    });
-    
-    $(".goAll").on("click", function(){
+
+	//엔터 프레스 => click()
+	$("#search_text").on("keypress", function(e) {
+		if (e.key === "Enter") {
+			$(".btn_search").click();
+		}
+	});
+
+	$(".goAll").on("click", function() {
 		location.href = "/shopproduct/contents_list";
 	});
-    
-
 </script>
