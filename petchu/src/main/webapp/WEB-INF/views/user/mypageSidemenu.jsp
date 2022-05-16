@@ -28,6 +28,9 @@
 	<c:if test="${type=='의사'}">
 		<p><a href="#">병원관리</a></p>
 	</c:if>
+	<c:if test="${type=='관리'}">
+		<p><a href="#">병원관리</a></p>
+	</c:if>
 	<c:if test="${type=='업체'}">
 		<p class="companyMenu"><a href="#">업체관리</a></p>
 		<div class="serside" style="display: none;">
@@ -35,7 +38,22 @@
 		<p><a href="/hoschool/myList?id=${id }"> · 내 업체 목록</a></p>
 		</div>
 	</c:if>
+	<c:if test="${type=='관리'}">
+		<p class="companyMenu"><a href="#">업체관리</a></p>
+		<div class="serside" style="display: none;">
+		<p><a href="/hoschool/insert?id=${id }"> · 내 업체 등록</a></p>
+		<p><a href="/hoschool/myList?id=${id }"> · 내 업체 목록</a></p>
+		</div>
+	</c:if>
 	<c:if test="${type=='업체'}">
+		<p id="estimateMenu"><a href="#">견적서 관리</a></p>
+		<div id="esside" style="display: none;">
+			<p><a href="/service/beslist"> · 미용</a></p>
+			<p><a href="/service/ceslist"> · 홈 클리닝</a></p>
+			<p><a href="/service/leslist"> · 레슨</a></p>
+		</div>
+	</c:if>
+	<c:if test="${type=='관리'}">
 		<p id="estimateMenu"><a href="#">견적서 관리</a></p>
 		<div id="esside" style="display: none;">
 			<p><a href="/service/beslist"> · 미용</a></p>
@@ -51,6 +69,14 @@
 			<p><a href="/user/myChooseList"> · 채택한 요청서</a></p>
 		</div>
 	</c:if>
+	<c:if test="${type=='관리'}">
+		<p id="requestMenu"><a href="#">서비스 요청서 관리</a></p>
+		<div id="requestside" style="display: none;">
+			<p><a href="/user/myRequest"> · 내가 작성한 요청서</a></p>
+			<p><a href="/user/myDeadlineList"> · 마감처리한 요청서</a></p>
+			<p><a href="/user/myChooseList"> · 채택한 요청서</a></p>
+		</div>
+	</c:if>
 	<p><a href="/shopproduct/order_list">구매내역</a></p>
 	<c:if test="${type=='일반'}">
 		<p class="reserveMenu"><a href="#">예약내역</a></p>
@@ -59,6 +85,13 @@
 		</div>
 	</c:if>
 	<c:if test="${type=='업체'}">
+		<p class="reserveMenu"><a href="#">예약내역</a></p>
+		<div class="resside" style="display: none;">
+		<p><a href="/reserve/myreserveList?id=${id}"> · 내 예약리스트</a></p>
+		<p><a href="/reserve/comReserveList?id=${id}"> · 우리업체 예약리스트</a></p>
+		</div>
+	</c:if>
+	<c:if test="${type=='관리'}">
 		<p class="reserveMenu"><a href="#">예약내역</a></p>
 		<div class="resside" style="display: none;">
 		<p><a href="/reserve/myreserveList?id=${id}"> · 내 예약리스트</a></p>
