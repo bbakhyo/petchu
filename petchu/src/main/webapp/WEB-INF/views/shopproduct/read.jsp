@@ -309,7 +309,7 @@
 								class="prod-delivery-return-policy-table__phone-link"
 								href="tel:+8215777011" target="_blank">1577-7011</a>
 							</td>
-						</tr>
+						</tr> 
 					</tbody>
 				</table>
 				<div class="prod-minor-notice">미성년자가 체결한 계약은 법정대리인이 동의하지 않는 경우
