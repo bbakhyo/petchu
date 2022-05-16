@@ -163,7 +163,16 @@
 		<!--Review TAB  -->
 		<div id="Review" class="tabcontent">
 			<h3>리뷰</h3>
-			<p>Content</p>
+			<div id="re">
+<!-- 				여기 작업중 -->
+				<table id="tbl"></table>
+				<script id="temp" type="text/x-handlebars-template">
+					{{#each .}}
+						<span>({{review}}){{rid}}</span><br>
+					{{/each}}
+				</script>
+
+			</div>
 		</div>
 		
 		<!-- Questions TAB  -->
@@ -470,5 +479,22 @@ console.log(pprice);
 	$(".prod-inquiry-list_write-btn").on("click", function(){
 		location.href="/faq/list";
 	})
+	
+	
+	getList();
+	function getList(){
+		var buynow = document.querySelector(".buy_now");
+		var pno = buynow.getAttribute('data-pno');
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			data: {pno:pno},
+			url: "/shopproduct/shop_review_list.json",
+			success:function(data){
+				var template = Handlebars.compile($("#temp").html());
+				$("#tbl").html(template(data));
+			}
+		});
+	}
 </script>
 </html>

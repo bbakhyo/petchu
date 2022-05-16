@@ -1,5 +1,9 @@
 package com.example.domain;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class shopcartVO {
 	private int cno;
 	private int pno;
@@ -32,8 +36,68 @@ public class shopcartVO {
 	private String omessage;
 	private int pqantity;
 	private int state;
+	////////////////////
+	////review/////////
+	private int rid;//리뷰번호
+	private String rtitle; //한줄요약
+	private double star; //별
+	private String review; //리뷰 내용
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
+	private Date rdate; //리뷰작성시간
+	private String rimage1; 
+	private String rimage2; //상품이미지
+	private int helpcount; // 도움되면 증가
+
 	
 	
+	public int getRid() {
+		return rid;
+	}
+	public void setRid(int rid) {
+		this.rid = rid;
+	}
+	public String getRtitle() {
+		return rtitle;
+	}
+	public void setRtitle(String rtitle) {
+		this.rtitle = rtitle;
+	}
+	public double getStar() {
+		return star;
+	}
+	public void setStar(double star) {
+		this.star = star;
+	}
+	public String getReview() {
+		return review;
+	}
+	public void setReview(String review) {
+		this.review = review;
+	}
+	public Date getRdate() {
+		return rdate;
+	}
+	public void setRdate(Date rdate) {
+		this.rdate = rdate;
+	}
+	public String getRimage1() {
+		return rimage1;
+	}
+	public void setRimage1(String rimage1) {
+		this.rimage1 = rimage1;
+	}
+	public String getRimage2() {
+		return rimage2;
+	}
+	public void setRimage2(String rimage2) {
+		this.rimage2 = rimage2;
+	}
+	public int getHelpcount() {
+		return helpcount;
+	}
+	public void setHelpcount(int helpcount) {
+		this.helpcount = helpcount;
+	}
 	public int getState() {
 		return state;
 	}

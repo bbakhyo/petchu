@@ -132,4 +132,7 @@
 	<select id="state_read" resultType="com.example.domain.shopcartVO">
 		select state from user_order where orno = #{orno};
 	</select>
+	<select id="shop_review_list" resultType="com.example.domain.shopcartVO">
+		select * from review where pno=#{pno} order by rid desc;
+	</select>
 </mapper>

@@ -3,6 +3,7 @@ package com.example.dao;
 import java.util.List;
 
 import com.example.domain.Criteria;
+import com.example.domain.ReviewVO;
 import com.example.domain.shopcartVO;
 
 
@@ -37,4 +38,5 @@ public interface shopcartDAO {
 	public List<shopcartVO> order_list(String uid, Criteria cri);
 	public int order_count(String uid);
 	public shopcartVO state_read(String orno);
+	public List<shopcartVO> shop_review_list(int pno);
 }

@@ -23,7 +23,15 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public void insert(ReviewVO vo) {
-		session.insert(namespace + ".insert", vo);
+		HashMap<String,Object> omap = new HashMap<String,Object>();
+		omap.put("uid", vo.getUid());
+		omap.put("rtitle", vo.getRtitle());
+		omap.put("star", vo.getStar());
+		omap.put("review", vo.getReview());
+		omap.put("pno", vo.getPno());
+		omap.put("bno", vo.getBno());
+//		System.out.println("test====="+omap);
+		session.insert(namespace + ".insert", omap);
 		
 	}
 
@@ -60,6 +68,15 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public ReviewVO updateread(int rid) {
 
 		return session.selectOne(namespace + ".updateread", rid);
+	}
+
+	@Override
+	public int user_review_count(String uid, int bno) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("uid", uid);
+		map.put("bno", bno);
+		System.out.println(map+">>>>>>>><<<<<<");
+		return session.selectOne(namespace+".user_review_count", map);
 	}
 
 
