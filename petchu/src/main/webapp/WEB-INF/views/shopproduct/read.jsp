@@ -34,8 +34,22 @@
 				</div>
 				<!-- 상품금액(RED font) -->
 				<div class="info_price_container">
-					<div class="price_container_price_value">
-						<span id="product_price" data-pprice="${vo.pprice}"> 상품가격: </span><fmt:formatNumber value="${vo.pprice}" pattern="#,###원" />
+					<div class ="info_price_row">
+						<div class="price_container_price_value">
+							<span id="product_price" data-pprice="${vo.pprice}"> 상품가격: </span><fmt:formatNumber value="${vo.pprice}" pattern="#,###원" />
+						</div>
+						<div class="shopproduct_read_buttons">
+							<div class="share_before">
+							<img src="/resources/icon_menu/share_before.png" alt='share'>
+							</div>
+							<div class="share_after none">
+							<img src="/resources/icon_menu/share_afer.png" alt='share'>
+							</div>
+							<img src="/resources/icon_menu/shopproduct_share.png" alt='share'>
+							
+							
+							
+						</div>
 					</div>
 				</div>
 				
@@ -53,7 +67,7 @@
 					
 						<!-- 금액 -->
 						<div class="info_container_row1">
-							최종가격: &nbsp;<span class="final_price">${vo.pprice}</span>원
+							최종가격: &nbsp;<span class="final_price">${vo.pprice}</span>원<div class="sharebutton"></div>
 						</div>
 						<!-- 결제 버턴 -->
 						<div class="info_payment_container3">

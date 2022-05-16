@@ -103,7 +103,15 @@ span.input-text qty text {
 	color: #ae0000;
 	font-weight: 700;
 }
-
+.info_price_row{
+	width: 470px;
+	display: flex;
+	justify-content: space-between;
+}
+share::after{
+	
+}
+	
 .price_container_quantity_value {
 	width: 470px;
 	height: 15px;
@@ -580,4 +588,11 @@ line-height: 20px;
 .loupe img {
 	position: absolute;
 	right: 0;
+}
+.shopproduct_read_buttons{
+	height: 50px;
+	width: 100px;
+}
+.none{
+	display: none;
 }

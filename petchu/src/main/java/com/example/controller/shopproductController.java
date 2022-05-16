@@ -240,26 +240,10 @@ public class shopproductController {
 		omap.put("olist", cartdao.order_list(uid,cri));
 //	pagination
 		System.out.println("contents of omap:"+omap);
-		System.out.println("asfddsfsdfs.............."+opm.getStartPage()+"\n"+opm.getTotalCount()+"\n"+opm.getCri());
+//		System.out.println("asfddsfsdfs.............."+opm.getStartPage()+"\n"+opm.getTotalCount()+"\n"+opm.getCri());
 		return omap;
 	}
-	
 
-//	//장바구니 목록 JSON
-//	@RequestMapping("/order_list.json")
-//	@ResponseBody
-//	public List<shopcartVO> order_list(String uid, Criteria cri){
-//		HashMap<String,Object> omap =new HashMap<String,Object>();
-//		List<shopcartVO> olist=cartdao.order_list(uid, cri);
-////	pagination
-//		PageMaker opm= new PageMaker();
-//		opm.setStartPage(1);
-//		opm.setDisplayPageNum(5);  //pagination에서 페이지 버턴 몇개식 보이는
-////	pagination
-//		Criteria ocri = new Criteria();
-//		ocri.setPerPageNum(30); //page 당 결과 
-//		return olist;
-//	}
 	//구매목록 - 상세 구매 페이지 이동기능 달아야 함
 	@RequestMapping("/order_list")
 	public String order_list(Model model){

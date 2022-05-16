@@ -80,10 +80,6 @@
  </div>
   
   <div class="footer">
-    <div class="page_buttons">
-    
-    </div>
-    
     <div class = "pagination"></div>
   </div>
  </div>
@@ -196,7 +192,6 @@ function getList() {
 			
 // 			//같이 구매한 상품 가격포맷
 // 			getFormatPrice();
-
 			
 		}
 	});
