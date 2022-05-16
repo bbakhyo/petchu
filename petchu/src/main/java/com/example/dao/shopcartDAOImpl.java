@@ -180,4 +180,9 @@ public class shopcartDAOImpl implements shopcartDAO{
 	public int order_count(String uid) {
 		return session.selectOne(namespace+".order_count", uid);
 	}
+
+	@Override
+	public shopcartVO state_read(String orno) {
+		return session.selectOne(namespace+".state_read", orno);
+	}
 }

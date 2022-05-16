@@ -34,7 +34,7 @@
     	select count(*) from user_order
     </select>
      <select id="order_list" resultType="com.example.domain.ProductVO">
-    	select u.uono, u.uid, u.orno, u.sum, u.point, u.paydate, u.omessage, o.zipcode, o.address1, o.address2, receiver, tel, state
+    	select u.uono, u.uid, u.orno, u.sum, u.point, u.paydate, u.omessage, o.zipcode, o.address1, o.address2, receiver, tel
 		from user_order u, orderlist o
 		where u.orno=o.orno
 		GROUP BY uono

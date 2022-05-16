@@ -36,4 +36,5 @@ public interface shopcartDAO {
 	public void product_count_update(shopcartVO vo);
 	public List<shopcartVO> order_list(String uid, Criteria cri);
 	public int order_count(String uid);
+	public shopcartVO state_read(String orno);
 }
