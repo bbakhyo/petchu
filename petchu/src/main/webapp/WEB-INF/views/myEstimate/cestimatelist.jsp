@@ -63,11 +63,21 @@
 
 .isDelete, .secheck, .choose_check {
 	display : none;
+
 }
 
 textarea {
 	margin-left : 0px;
 }
+
+.smallBox {
+	margin-left : 30px;
+	min-height : 256px;
+}
+
+.drprice {
+	text-align : left;
+} 
 </style>
 <h1>홈 클리닝 견적서 목록</h1>
 <div id="sidemenu">
@@ -84,9 +94,9 @@ textarea {
 			   <p>{{building_classification}}, {{house_size}}</p>
 		       <span>{{wish_local1}}</span> <span>{{wish_local2}}</span> </br>
 			   <p>견적설명 : {{description}}</p>
-			   <p class="drprice">가격 : {{printPrice price}}</p>
+			   <p class="drprice">제시 가격 : {{printPrice price}}</p>
 			   <p class="isDelete" isDelete="{{isDelete}}">마감</p>
-			    <p class="secheck" secheck="{{secheck}}" >채택</p>
+			   <p class="secheck" secheck="{{secheck}}" >채택</p>
 			   <p class="choose_check" choose_check="{{choose_check}}">채택</p>
 			</div>
 	      {{/each}}
@@ -112,6 +122,7 @@ Handlebars.registerHelper("printPrice", function(price){
 var target = document.getElementsByClassName("isDelete");
 var target1 = document.getElementsByClassName("secheck");
 var target2 = document.getElementsByClassName("choose_check");
+var text = document.getElementById("text");
 
 getList();
 	function getList(){
@@ -122,7 +133,7 @@ getList();
 			success:function(data){
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
-
+				
 				for(i=0; i <target.length; i++){
 					var isDelete = target[i].getAttribute("isDelete");
 					var secheck = target1[i].getAttribute("secheck");
@@ -139,7 +150,7 @@ getList();
 			},
 			error : function(xhr, ajaxSettings, thrownError) 
 			   {
-				target.style.display = 'block';
+				text.style.display = 'block';
 			   }
 
 		});

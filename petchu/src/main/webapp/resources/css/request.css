@@ -452,8 +452,8 @@ a:visited {
 	font-weight: 900;
 	text-align: center;
 }
-.smallBox .drprice{
-	text-align: right;
+.smallBox .isDelete, .secheck, .choose_check{
+	text-align : right;
 	font-weight: 900;
 	color: #9f1f11;
 }
