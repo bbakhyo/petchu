@@ -34,6 +34,7 @@ import com.example.domain.PageMaker;
 import com.example.domain.ProductVO;
 import com.example.domain.ReviewVO;
 import com.example.domain.shopproductVO;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
 
 @Controller
 @RequestMapping("/review")
@@ -52,19 +53,124 @@ public class ReviewController {
 	
 	@Resource(name="uploadPath")
 	String path;
-
-	//리뷰 입력페이지
+	
+	//리뷰 입력페이지(출력)
+			@RequestMapping("/update")
+			public String update(Model model,int rid){
+				model.addAttribute("vo",dao.updateread(rid));
+				model.addAttribute("pageName", "review/update.jsp");
+				
+				return "/home";
+			}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String updatePost(ReviewVO vo,MultipartHttpServletRequest multi)throws Exception{
+		System.out.println(".................file: "+vo.getRimage1());
+		List<MultipartFile> fileList = multi.getFiles("uploadFile");
+		int i = 0;
+		System.out.println(".................if문 직전: "+vo.getRimage1());
+		if(fileList.size() != 0){
+			
+				if(fileList.isEmpty()){
+					System.out.println(".................if문 들어옴: "+vo.getRimage1());
+					for(MultipartFile mf : fileList){
+						String image = System.currentTimeMillis() + "_" + mf.getOriginalFilename();
+							mf.transferTo(new File(path + image ));
+							i++;
+							System.out.println("..." + image + ":" + i + "번째" );
+							
+							if(i==1){
+								vo.setRimage1(image);
+								
+							}
+							if(i==2){
+								vo.setRimage2(image);
+							}	
+					}
+				}
+			
+		}
+		
+		dao.update(vo);
+		System.out.println(vo.toString());
+		return "redirect:/review/list";
+	
+	}
+	//리뷰 delete
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public void delete(int rid){
+		dao.delete(rid);
+	}
+	//리뷰 리드페이지
+	@RequestMapping("/list")
+	public String list(Model model){
+		model.addAttribute("pageName", "review/list.jsp");
+	
+		return "/home";
+	}
+	@RequestMapping("/list.json")
+	@ResponseBody
+	public HashMap<String,Object> readJOSN(Criteria cri){
+		HashMap<String,Object> map = new HashMap<>();
+		cri.setPerPageNum(3);
+		PageMaker pm=new PageMaker();
+		pm.setCri(cri);
+		pm.setDisplayPageNum(3);
+		pm.setTotalCount(dao.count());
+		
+		map.put("pm", pm);
+		map.put("cri", cri);
+		map.put("join", dao.join(cri));
+		return map;
+		
+	}
+	//리뷰 입력페이지(출력)
 		@RequestMapping("/insert")
-		public String insert(Model model,int pno, int bno){
+		public String insert(Model model,int pno, int bno,ReviewVO vo){
 			model.addAttribute("vo",odao.read(pno,bno));
-			model.addAttribute("rvo",dao.list(bno));
 			model.addAttribute("pageName", "review/insert.jsp");
+			
 			return "/home";
 		}
+		@RequestMapping(value="/insert", method=RequestMethod.POST)
+		public String insert(ReviewVO vo,MultipartHttpServletRequest multi)throws Exception{
+			System.out.println(".................file: "+vo.getRimage1());
+			List<MultipartFile> fileList = multi.getFiles("uploadFile");
+			int i = 0;
+			System.out.println(".................if문 직전: "+vo.getRimage1());
+			if(fileList.size() != 0){
+				
+					if(fileList.isEmpty()){
+						System.out.println(".................if문 들어옴: "+vo.getRimage1());
+						for(MultipartFile mf : fileList){
+							String image = System.currentTimeMillis() + "_" + mf.getOriginalFilename();
+								mf.transferTo(new File(path + image ));
+								i++;
+								System.out.println("..." + image + ":" + i + "번째" );
+								
+								if(i==1){
+									vo.setRimage1(image);
+									
+								}
+								if(i==2){
+									vo.setRimage2(image);
+								}	
+						}
+					}
+				
+			}
+			
+			dao.insert(vo);
+			System.out.println(vo.toString());
+			return "redirect:/review/list";
+			
+		
+		}
 	//orderlist/review 목록 json 데이터 생성
-	@RequestMapping("/list.json")
+	@RequestMapping("/reviewable.json")
 	@ResponseBody //데이터를 리턴
-	public HashMap<String,Object> listJSON(Criteria cri, int bno){
+	public HashMap<String,Object> reviewableJSON(Criteria cri, int bno){
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		
 		cri.setPerPageNum(5);
@@ -81,8 +187,8 @@ public class ReviewController {
 	}
 	//리뷰 페이지
 	//orderlist의 값과 user의 name을 가져오고 싶음
-	@RequestMapping("/list")
-	public String list(Model model,Criteria cri){ //model에 출력하고자하는 페이지를 담아줌
+	@RequestMapping("/reviewable")
+	public String reviewable(Model model,Criteria cri){ //model에 출력하고자하는 페이지를 담아줌
 		//model.addAttribute("name",udao.read(session.getAttribute("id").toString()));
 		//session.setAttribute("username", "red"); //로그인프로그램했다고 가정했다 생각하고
 		cri.setPerPageNum(5);
@@ -92,75 +198,11 @@ public class ReviewController {
 		pm.setDisplayPageNum(5);
 		pm.setTotalCount(odao.count(cri));
 
-		
 		model.addAttribute("pm", pm);
 		model.addAttribute("page",cri.getPage());
 		model.addAttribute("join" ,odao.join(cri));
-		model.addAttribute("pageName", "review/list.jsp");
+		model.addAttribute("pageName", "review/reviewable.jsp");
 	
 		return "/home";
 	}
-	//리뷰 페이지
-		@RequestMapping("/reviewable")
-		public String reviewable(Model model,int bno){
-			
-			model.addAttribute("list",dao.list(bno));
-			model.addAttribute("pageName", "review/reviewable.jsp");
-			return "/home";
-		}
-	
-	
-	//파일업로드페이지
-	@RequestMapping("/fileupload")
-	public String fileupload(Model model){
-		model.addAttribute("pageName", "review/fileupload.jsp");
-		return "/home";
-	}
-	//이거 수정해야함
-	@ResponseBody
-	@RequestMapping(value="/fileupload", method=RequestMethod.POST)
-	public String fileuploadPost(@RequestParam("article_file")List<MultipartFile> multi,
-	HttpServletRequest request){
-		String strResult = "{\"result\":\"FAIL\"}";
-		System.out.println(strResult+"..");
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot;
-			try{
-				if(multi.size()>0 && !multi.get(0).getOriginalFilename().equals("")){
-					for(MultipartFile file:multi){
-						fileRoot = path;
-						System.out.println(fileRoot);
-						String originFileName = file.getOriginalFilename();
-						String extension = originFileName.substring(originFileName.lastIndexOf("."));
-						//저장될 파일명
-						String saveFileName ="review/" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
-						//이거 이해안됨
-						File targetFile = new File(fileRoot+saveFileName);
-						try{
-							InputStream fileStream = file.getInputStream();
-							//파일저장
-							FileUtils.copyInputStreamToFile(fileStream, targetFile);
-						}catch(Exception e){
-							//파일 삭제
-							FileUtils.deleteQuietly(targetFile);
-							//저장된 현재 파일 삭제
-							e.printStackTrace();
-							break;
-						}
-					}
-					strResult = "{\"result\" : \"OK\" }";
-				}
-				//파일 첨부 안했을 때
-				else{
-					strResult = "{\"result\" : \"OK\"}";
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		return strResult;
-		
-			
-	}
-	
-	
 }

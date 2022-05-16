@@ -14,12 +14,11 @@
 </head>
 	<div id="page">
 	  <form name="frm" method="post" enctype="multipart/form-data">
-	  <div class="all">
+	  
 	  <div class="insert_page">
 	   <div class="page_title">
 				<h2>REVIEW</h2>
 			</div>
-	   
 	     <div class="page_info"><!--helpcount까지-->
 	        <div class="inin_page"><!--한줄요약까지-->
 	          <div class="r_q">
@@ -27,9 +26,9 @@
 	          <p>상품에 대해서 얼마나 만족하시나요?</p>
 	          </div><!--r_q--> 
 	         <div class="p_info">
-	            <div class="bno" style="display:none;">
-	         		<div id="bno">${vo.bno}</div>
-	         		<div id="pno">${vo.pno}</div>
+	            <div class="rid">
+	         		<div id="rid" style="display:none;">${vo.rid}</div>
+	         		
 	         	</div>
 	           <div id="p_img">
 							 <img src="${vo.pimage}" width=200 height=200/>
@@ -38,15 +37,16 @@
 	             <div id="pname">
 	               <div>${vo.pname}</div>
 	             </div>
-	             <div  class="make_star">
-	              <div class="star">
-	               	<select id="makeStar" name="star">
-						<option  value="0">0</option>
-						<option  value="1">1</option>				
-						<option  value="2">2</option>
-						<option  value="3">3</option>
-						<option  value="4">4</option>
-						<option  value="5">5</option>
+	             <div class="star">
+	              <div class="make_star">
+	              <input type="hidden" value="${vo.star}" style="dispaly:hidden;">
+	               	<select id="makeStar" name="star" >
+						<option  value="0" <c:out value="${vo.star=='0' ? 'selected' : ''}"/>>0</option>
+						<option  value="1" <c:out value="${vo.star=='1' ? 'selected' : ''}"/>>1</option>				
+						<option  value="2" <c:out value="${vo.star=='2' ? 'selected' : ''}"/>>2</option>
+						<option  value="3" <c:out value="${vo.star=='3' ? 'selected' : ''}"/>>3</option>
+						<option  value="4" <c:out value="${vo.star=='4' ? 'selected' : ''}"/>>4</option>
+						<option  value="5" <c:out value="${vo.star=='5' ? 'selected' : ''}"/>>5</option>
 					</select>
 					
 						<br/>
@@ -68,7 +68,7 @@
 	            </div>
 	            <div class="textarea">
 	              <textarea name="review" rows="10" cols="80"
-						placeholder="리뷰는 10자 이상 작성부탁드립니다"></textarea>
+						placeholder="리뷰는 10자 이상 작성부탁드립니다">${vo.review}</textarea>
 						</div>
 	          </div>
 	          <div class="r_photo">
@@ -87,12 +87,12 @@
 	            <div id="rtitle">
 	              <div class="textarea">
 	                <textarea name="rtitle" rows="3" cols="80"
-						placeholder="한 줄 요약을 입력해주세요"></textarea>
+						placeholder="한 줄 요약을 입력해주세요">${vo.rtitle}</textarea>
 	              </div>
 	            </div>
 	          </div><!--rtitle-->
 	         </div><!--inin_page-->
-	            <div class="h_info" style="display:none;">
+	            <div class="h_info">
 	              <div class="satis"><p>만족도</p></div>
 	              <div>
 	              </div>
@@ -104,44 +104,20 @@
 	             <input class="button" type="submit" value="리뷰등록">
 	          </div>
 	      </div><!--insert_page-->
-	      </div>
 	    </form>
   </div>
 <script>
 	//별점
-	var rating = $('.rating');
+	/* var rating = $('.rating');
 	
 	
-	/* rating.each(function(){ 
+	rating.each(function(){ 
 		var tagetscore = $(this).attr('data-rate');
 		console.log(tagetscore);
 		$(this).find('.fa-solid').css({color:'#D3D3D3'});
 		$(this).find('.fa-solid:nth-child(-n+' + tagetscore + ')').css({color:'#F08d28'});
 	}); */
-	var userScore = $('#makeStar');
-	
-	userScore.change(function(){
-		var userScoreNum = $(this).val();
-		switch(userScoreNum){
-		case "1":
-			$("#evaluation").html("별로에요");
-			break;
-		case "2":
-			$("#evaluation").html("조금 별로에요");
-			break;
-		case "3":
-			$("#evaluation").html("보통이에요");
-			break;
-		case "4":
-			$("#evaluation").html("좋아요");
-			break;
-		case "5":
-			$("#evaluation").html("아주 좋아요");
-			break;
-	}
-		$('.make_star .fa-solid').css({color:'#D3D3D3'})
-		$('.make_star .fa-solid:nth-child(-n+' + userScoreNum + ')').css({color:'#F08d28'});
-	});
+
 	
 	var userScore = $('#makeStar');
 	userScore.change(function(){
@@ -206,8 +182,9 @@
 		$("input[type='file']").change(function(e){
 			
 			//div 내용 비워주기
-			$('#preview').empty();
-			
+			if(file == null){
+				$('#preview').empty();
+			}
 			var files = e.target.files;
 		      arr =Array.prototype.slice.call(files);
 			
@@ -281,9 +258,9 @@
 		e.preventDefault();
 		var review=$(frm.review).val();
 		var rtitle=$(frm.rtitle).val();
-		var star=$(frm.star).val();
-		var file = $(frm.uploadFile).val();
-		alert(file);
+		var star = $(frm.makeStar).val();
+		alert(star);
+		//var file = $(frm.uploadFile).val();
 
 
 		
@@ -299,10 +276,11 @@
 			return;
 		}
 		
-		if(!confirm("리뷰를 등록하실래요?")) return;
-		alert(file);
-
+		if(!confirm("리뷰를 수정하실래요?")) return;
+		alert(star);
 		frm.submit();
+		alert("수정완료");
+		
 
 	});
 	

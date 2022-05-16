@@ -30,8 +30,14 @@ public class shopcartVO {
 	private int point;
 	//
 	private String omessage;
+	private int pqantity;
 	
-	
+	public int getPqantity() {
+		return pqantity;
+	}
+	public void setPqantity(int pqantity) {
+		this.pqantity = pqantity;
+	}
 	public String getOmessage() {
 		return omessage;
 	}

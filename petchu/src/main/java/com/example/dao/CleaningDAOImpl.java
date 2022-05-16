@@ -58,4 +58,15 @@ public class CleaningDAOImpl implements CleaningDAO{
 		return session.selectOne(namespace + ".crno", uid);
 	}
 
+	@Override
+	public List<CleaningRequestVO> cleanChooseList(String uid) {
+		return session.selectList(namespace + ".cleanChooseList", uid);
+	}
+
+	@Override
+	public void cleanChooseUpdate(int crno) {
+		session.update(namespace + ".cChooseUpdate", crno);
+		
+	}
+
 }

@@ -101,9 +101,9 @@
 	<input type="radio" id="tab-3" name="show" /> 
 	<input type="radio" id="tab-4" name="show" />
 	<div class="tab">
-		<label for="tab-1">마감한 요청서[미용]</label> 
-		<label for="tab-2">마감한 요청서[홈 클리닝]</label> 
-		<label for="tab-3">마감한 요청서[레슨]</label> 
+		<label for="tab-1">채택한 요청서[미용]</label> 
+		<label for="tab-2">채택한 요청서[홈 클리닝]</label> 
+		<label for="tab-3">채택한 요청서[레슨]</label> 
 	</div>
 <div class="contentss">
     <div class="content-dis">
