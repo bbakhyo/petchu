@@ -78,6 +78,9 @@ textarea {
 .drprice {
 	text-align : left;
 } 
+#sidemenu{
+	margin-left: -100px;
+}
 </style>
 <h1>홈 클리닝 견적서 목록</h1>
 <div id="sidemenu">

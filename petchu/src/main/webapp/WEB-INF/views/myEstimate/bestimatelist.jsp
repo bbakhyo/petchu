@@ -88,6 +88,9 @@ textarea {
 .drprice {
 	text-align : left;
 } 
+#sidemenu{
+	margin-left: -100px;
+}
 </style>
 
 <h1>미용 견적서 목록</h1>
