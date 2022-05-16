@@ -62,6 +62,11 @@
 	</script>
 	<div class="pagination"></div>
 </div>
+<hr>
+<div>
+	<p>일자별 구매금액</p>
+	<div id="chart" style="width: 900px; height: 500px;"></div>
+</div>
 <script>
 		Handlebars.registerHelper("display", function(pprice){
 			return pprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -71,6 +76,38 @@
 	var page=1;
 	getList();
 	
+	//차트 출력
+	var title="일자별 매출금액"
+		$.ajax({
+			type: "get",
+			url: "/user/chartDate.json",
+			success: function(data){
+				barChart(title,data);
+			}
+		});
+	//차트 펑션
+	function barChart(chartTitle,chartData) {
+		google.charts.load('current', {
+			'packages' : [ 'bar' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable(chartData);
+					
+			var options = {
+				chart : {
+					title : chartTitle,
+				},
+				bars : 'vertical' // Required for Material Bar Charts.
+			};
+
+			var chart = new google.charts.Bar(document.getElementById('chart'));
+
+			chart.draw(data, google.charts.Bar.convertOptions(options));
+		}
+	}
+
 	function getList(){
 		$.ajax({
 			type: "get",

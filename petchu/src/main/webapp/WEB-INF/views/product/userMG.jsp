@@ -90,7 +90,7 @@
 	getList();
 	
 	//차트 출력
-	var title="사용자별 사용금액"
+	var title="사용자별 결제금액"
 		$.ajax({
 			type: "get",
 			url: "/user/chartPrice.json",
