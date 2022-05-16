@@ -65,6 +65,15 @@
 textarea {
 	margin-left : 0px;
 }
+
+.smallBox {
+	margin-left : 30px;
+	min-height : 256px;
+}
+
+.drprice {
+	text-align : left;
+} 
 </style>
 
 <h1>레슨 견적서 목록</h1>
@@ -113,6 +122,7 @@ Handlebars.registerHelper("printPrice", function(price){
 var target = document.getElementsByClassName("isDelete");
 var target1 = document.getElementsByClassName("secheck");
 var target2 = document.getElementsByClassName("choose_check");
+var text = document.getElementById("text");
 
 getList();
 	function getList(){
@@ -140,7 +150,7 @@ getList();
 			},
 			error : function(xhr, ajaxSettings, thrownError) 
 			   {
-				target.style.display = 'block';
+				text.style.display = 'block';
 			   }
 
 		});

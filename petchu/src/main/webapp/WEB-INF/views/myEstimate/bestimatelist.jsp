@@ -79,6 +79,15 @@
 textarea {
 	margin-left : 0px;
 }
+
+.smallBox {
+	margin-left : 30px;
+	min-height : 256px;
+}
+
+.drprice {
+	text-align : left;
+} 
 </style>
 
 <h1>미용 견적서 목록</h1>
@@ -126,10 +135,11 @@ Handlebars.registerHelper("printPrice", function(price){
 var target = document.getElementsByClassName("isDelete");
 var target1 = document.getElementsByClassName("secheck");
 var target2 = document.getElementsByClassName("choose_check");
+var text = document.getElementById("text");
 
 getList();
 	function getList(){
-		target.setAttribute('data-value', 'gg');
+
 		var i = 1;
 		$.ajax({
 			type : "get",
@@ -138,7 +148,7 @@ getList();
 			success:function(data){
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
-
+				/*
 				for(i=0; i <target.length; i++){
 					var isDelete = target[i].getAttribute("isDelete");
 					var secheck = target1[i].getAttribute("secheck");
@@ -151,11 +161,11 @@ getList();
 					if(secheck == 1){
 						target1[i].style.display = 'block';
 					}
-				}
+				}*/
 			},
 			error : function(xhr, ajaxSettings, thrownError) 
 			   {
-				target.style.display = 'block';
+				text.style.display = 'block';
 			   }
 
 		});
