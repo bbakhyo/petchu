@@ -31,6 +31,9 @@
 #sidemenu{
 	margin-left: -100px;
 }
+#cke_editor46{
+	width: 740px;
+}
 </style>
 
 

@@ -19,4 +19,6 @@ public interface HoschoolDAO {
 	public void addinfo(int sno);
 	public int chkscno();
 	public void userDelete(String id);
+	public int reviewAllCount(int scno, String id);
+	public int reviewWriteCount(int scno, String id);
 }
