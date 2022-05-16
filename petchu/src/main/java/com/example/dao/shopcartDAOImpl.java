@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Criteria;
+import com.example.domain.ReviewVO;
 import com.example.domain.shopcartVO;
 
 @Repository
@@ -184,5 +185,10 @@ public class shopcartDAOImpl implements shopcartDAO{
 	@Override
 	public shopcartVO state_read(String orno) {
 		return session.selectOne(namespace+".state_read", orno);
+	}
+	
+	@Override
+	public List<shopcartVO> shop_review_list(int pno) {
+		return session.selectList(namespace+".shop_review_list", pno);
 	}
 }

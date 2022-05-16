@@ -18,6 +18,7 @@ import com.example.dao.shopcartDAO;
 import com.example.dao.shopproductDAO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
+import com.example.domain.ReviewVO;
 import com.example.domain.shopcartVO;
 import com.example.domain.shopproductVO;
 
@@ -325,5 +326,14 @@ public class shopproductController {
 	public shopcartVO state_read(String orno){
 		shopcartVO resutlState = cartdao.state_read(orno);
 		return resutlState;
+	}
+	
+	//상품 리뷰목록 json
+	@RequestMapping("/shop_review_list.json")
+	@ResponseBody
+	public List<shopcartVO> shop_review_list(int pno){
+		//shopcartVO vo=cartdao.order_read(pno, orno);
+		List<shopcartVO> list=cartdao.shop_review_list(pno);
+		return list;
 	}
 }
