@@ -85,7 +85,6 @@ public class HoschoolController {
 	@RequestMapping("/myList")
 	public String myList(Model model, String id) {
 		model.addAttribute("list", dao.myList(id));
-		model.addAttribute("sideMenu","mypageSidemenu.jsp");
 		model.addAttribute("pageName", "user/mylist.jsp");
 		return "/home";
 	}
@@ -108,7 +107,6 @@ public class HoschoolController {
 	}
 	@RequestMapping("/insert")
 	public String insert(Model model) {
-		model.addAttribute("sideMenu","mypageSidemenu.jsp");
 		model.addAttribute("pageName", "hoschool/hosInsert.jsp");
 		return "/home";
 	}

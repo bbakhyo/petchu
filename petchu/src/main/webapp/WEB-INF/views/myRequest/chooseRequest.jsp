@@ -90,10 +90,13 @@
 .content-dis {
 	text-align : left;
 }
+#sidemenu{
+	margin-left: -100px;
+}
 </style>
 <h2>Deadline</h2>
 <div id="sidemenu">
-	<jsp:include page="${sideMenu}" />
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
 </div>
 <div class="main">
 	<input type="radio" id="tab-1" name="show" checked /> 
