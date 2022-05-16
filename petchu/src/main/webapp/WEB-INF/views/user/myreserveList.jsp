@@ -256,8 +256,6 @@
 </div>
 
 <script>
-	
-	
 	//종료버튼 클릭시
 	$(".close").on("click",function(e){
 		e.preventDefault();
