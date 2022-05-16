@@ -129,5 +129,7 @@
    <select id="order_count" resultType="int">
    		select count(*) from orderlist where uid=#{uid}
    </select>
-	
+	<select id="state_read" resultType="com.example.domain.shopcartVO">
+		select state from user_order where orno = #{orno};
+	</select>
 </mapper>

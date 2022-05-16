@@ -44,7 +44,7 @@
 				<td>{{display point}}</td>		
 				<td>배송현황</td>
 				<td>
-					<select name="state" class="state" state="{{state}}">
+					<select name="state" class="state" state="{{state}}" uono="{{uono}}">
 						<option value=0>배송준비중</option>
 						<option value=1>배송중</option>
 						<option value=2>배송완료</option>
@@ -70,35 +70,6 @@
 <script>
 	var page=1;
 	getList();
-	
-	$("#tbl").on("click", ".row .pname", function(){
-		var row=$(this).parent();
-		var pno=row.find(".pno").html();
-		location.href="/product/read?pno=" + pno;
-	});
-	
-	$("#tbl").on("click",".row .btnUpdate", function(e){
-		var row=$(this).parent().parent();
-		var code=row.find(".pno").html();
-		var qnt=row.find(".qnt").val();
-
-		if(qnt<0 || qnt.replace(/[0-9]/g,'')){
-			alert("변경 수량은 숫자로 입력하세요!");
-			row.find(".qnt").focus();
-			return;
-		}
-		
-		if(!confirm(code + "번 상품의 수량을 " + qnt + "개로 수정하실래요?")) return;
-		$.ajax({
-			type: "post",
-			url: "/product/qntUpdate",
-			data: {code:code, qnt:qnt},
-			success: function(){
-				alert("수량변경 완료!");
-				getList();
-			}
-		});
-	});
 	
 	function getList(){
 		$.ajax({
@@ -129,7 +100,7 @@
 	//배송현황 변경시 DB 업데이트
 	$("#tbl").on("change", ".state", function() {
 		var change_state = $(this).val();
-		var uono = $(this).parent().parent().find(".uono").html();
+		var uono = $(this).attr("uono");
 // 		alert(change_state);
 		$.ajax({
 			type: "post",

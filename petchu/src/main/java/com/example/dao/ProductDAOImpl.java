@@ -68,7 +68,7 @@ public class ProductDAOImpl implements ProductDAO{
 	@Override
 	public void order_state_update(ProductVO vo) {
 		session.update(namespace+".order_state_update", vo);
-//		System.out.println("............"+vo.getUono()+"\n"+vo.getState());
+		System.out.println("............"+vo.getUono()+"\n"+vo.getState());
 	}
 
 

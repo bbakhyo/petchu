@@ -155,10 +155,28 @@ function getList() {
 				$(this).html(strDate);
 			});
 			
-			
-// 			//같이 구매한 상품 가격포맷
-// 			getFormatPrice();
-
+			//상품 배송정보 불러오기
+			var state=0;
+			$(".delState").each(function(){
+				var onthis = $(this);
+				var orno = $(this).closest(".tbody").attr("orno");
+// 				alert(orno);
+				$.ajax({
+					type : "post",
+					dataType : "json",
+					data : {
+						orno:orno
+					},
+					url : "/shopproduct/state_read",
+					success : function(data){
+						alert(data.state);
+						state = data.state;
+						onthis.attr("state", state);
+						}
+					});
+				alert($(this).attr("class"));
+				
+			});
 			
 		}
 	});

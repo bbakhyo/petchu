@@ -318,4 +318,12 @@ public class shopproductController {
 		System.out.println("asdfdasfasdfdasf2342234324324\n"+bno);
 		cartdao.user_order_delete(bno);
 	}
+	
+//	//주문상황 출력
+	@RequestMapping(value="state_read", method=RequestMethod.POST)
+	@ResponseBody
+	public shopcartVO state_read(String orno){
+		shopcartVO resutlState = cartdao.state_read(orno);
+		return resutlState;
+	}
 }
