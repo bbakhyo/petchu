@@ -222,13 +222,26 @@ public class shopproductController {
 		cartdao.product_count_update(vo);
 	}
 	
-	//장바구니 목록 JSON
+	/////
+	//주문목록 JSON
 	@RequestMapping("/order_list.json")
 	@ResponseBody
-	public List<shopcartVO> order_list(String uid){
-		List<shopcartVO> olist=cartdao.order_list(uid);
-		return olist;
+	public HashMap<String,Object> order_list(String uid, Criteria cri){
+		HashMap<String,Object> omap =new HashMap<String,Object>();
+		cri.setPerPageNum(20);
+//	pagination
+		PageMaker opm= new PageMaker();
+		opm.setCri(cri);
+		opm.setTotalCount(cartdao.order_count(uid));
+		opm.setDisplayPageNum(5);  //pagination에서 페이지 버턴 몇개식 보이는
+		omap.put("pm", opm);
+		omap.put("olist", cartdao.order_list(uid,cri));
+
+		return omap;
 	}
+	
+	
+	
 	
 	//구매목록 - 상세 구매 페이지 이동기능 달아야 함
 	@RequestMapping("/order_list")

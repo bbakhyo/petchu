@@ -52,11 +52,12 @@
 	</div>
 	<table id="tbl"></table>
 	<script id="temp" type="text/x-handlebars-template">
-		{{#each .}}	
+		{{#each olist}}	
 		<tbody class="tbody" orno="{{orno}}" pno="{{pno}}">
 		<tr class="date_tr" style="text-align:right;">
-			<td colspan="3"><span class="date_td" style="margin-right:78%;">{{odate}}</span>
-				<span class="order_read date_td" orno="{{orno}}" >주문 상세보기</span>
+			<td colspan="3"><span class="date_td">{{odate}}</span>
+				<span class="center delState"><{{state}}></span>
+				<span class="order_read date_td" orno="{{orno}}" style="float: right;">주문 상세보기</span>
 			</td>
 			
 		</tr>
@@ -68,11 +69,14 @@
 		</tbody>
 		{{/each}}
 	</script>
+	  <div class="footer">
+	    <div class = "pagination"></div>
+	  </div>
 </div>
-
     
 <script>	
 var uid = "${id}";
+var page = 1;
 
 // $(".date_box_righgt").on("click", "span", function(){
 // 	alert("리드이동");
@@ -92,6 +96,7 @@ function getList() {
 		type : "get",
 		dataType : "json",
 		data : {
+			page : page,
 			uid : uid
 		},
 		url : "/shopproduct/order_list.json",
@@ -99,7 +104,7 @@ function getList() {
 // 			console.log(data);
 			var template = Handlebars.compile($("#temp").html());
 			$("#tbl").html(template(data));
-			
+			$(".pagination").html(getPagination(data));
 			
 			//가격 계산
 			$(".price").each(function(){
@@ -179,4 +184,10 @@ function getGrayLine(){
 //메뉴바 css 정렬
 $(".sideMenu").css("margin-left", "0px");
 
+//페이지네이션 클릭시 페이지 이동
+$(".pagination").on("click", "a", function(e){
+	e.preventDefault();
+	page=$(this).attr("href");
+	getList();
+});
 </script>

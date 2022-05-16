@@ -2,6 +2,7 @@ package com.example.dao;
 
 import java.util.List;
 
+import com.example.domain.Criteria;
 import com.example.domain.shopcartVO;
 
 
@@ -14,7 +15,7 @@ public interface shopcartDAO {
 	public List<shopcartVO> cart_buy(String uid);
 	public void order_insert(shopcartVO vo);
 	public void chk_delete(shopcartVO vo);
-	public List<shopcartVO> order_list(String uid);
+//	public List<shopcartVO> order_list(String uid);
 	public List<shopcartVO> order_read(String orno);
 	public shopcartVO cart_check(shopcartVO vo);
 	public shopcartVO order_read_user(String orno);
@@ -33,4 +34,6 @@ public interface shopcartDAO {
 	public void user_order_delete(String bno);
 	public int is_del(String orno);
 	public void product_count_update(shopcartVO vo);
+	public List<shopcartVO> order_list(String uid, Criteria cri);
+	public int order_count(String uid);
 }
