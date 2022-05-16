@@ -2,12 +2,17 @@
 <style>
 	#tbl{
 		overflow: hidden;
-		width: 1400px;
+		width: 960px;
 		margin: 0px auto;
 		text-align:center;
 	}
 	.name{
 		width: 80px;
+	}
+	.blank{
+		border-right: hidden;
+	    border-left: hidden;
+	    height: 60px;
 	}
 </style>
 <div id="page">
@@ -16,37 +21,43 @@
 	</div>
 	<table id="tbl"></table>
 	<script id="temp" type="text/x-handlebars-template">
-		<tr class="title">
-			<td width=200>주문번호</td>
-			<td width=100>구매자</td>
-			<td width=130>가격</td>
-			<td width=200>구매일</td>
-			<td width=150>수령자</td>
-			<td width=800>주소</td>
-			<td width=200>전화번호</td>
-			<td width=500>배송시 요청사항</td>
-			<td width=200>배송현황</td>
-		</tr>
 	{{#each list}}
-		<tr class="row">
-			<td class="uono">{{uono}}</td>
-			<td class="uid">{{uid}}</td>
-			<td>{{display sum}}원({{display point}})</td>
-			<td>{{paydate}}</td>
-			<td>{{receiver}}</td>
-			<td>({{zipcode}}) {{address1}} {{address2}}</td>
-			<td>{{tel}}</td>
-			<td>{{omessage}}</td>
-			<td>
-				<select name="state" class="state" state="{{state}}">
-					<option value=0>배송준비중</option>
-					<option value=1>배송중</option>
-					<option value=2>배송완료</option>
-				</select>
+		<tbody>
+			<tr class="title">
+				<td>주문번호</td>
+				<td>{{uono}}</td>
+				<td>구매일</td>
+				<td colspan=3>{{paydate}}</td>
+			</tr>
+			<tr>
+				<td>구매자</td>		
+				<td>{{uid}}</td>
+				<td>가격</td>
+				<td>{{display sum}}원</td>		
+				<td>전화번호</td>
+				<td>{{tel}}</td>
+			</tr>
+			<tr>
+				<td>주소</td>		
+				<td>({{zipcode}}) {{address1}} {{address2}}</td>
+				<td>포인트사용</td>
+				<td>{{display point}}</td>		
+				<td>배송현황</td>
+				<td>
+					<select name="state" class="state" state="{{state}}">
+						<option value=0>배송준비중</option>
+						<option value=1>배송중</option>
+						<option value=2>배송완료</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>요청사항</td>		
+				<td colspan=5>{{omessage}}</td>
+			</tr>
 
-			</td>
-
-		</tr>
+			<tr class="blank"><td colspan=6></td></tr>
+		</tbody>
 	{{/each}}
 	</script>
 	<div class="pagination"></div>

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.domain.Criteria;
 import com.example.domain.shopcartVO;
 
 @Repository
@@ -62,10 +63,10 @@ public class shopcartDAOImpl implements shopcartDAO{
 		session.delete(namespace+".chk_delete", vo);
 	}
 
-	@Override
-	public List<shopcartVO> order_list(String uid) {
-		return session.selectList(namespace+".order_list", uid);
-	}
+//	@Override
+//	public List<shopcartVO> order_list(String uid) {
+//		return session.selectList(namespace+".order_list", uid);
+//	}
 
 	@Override
 	public List<shopcartVO> order_read(String orno) {
@@ -164,5 +165,19 @@ public class shopcartDAOImpl implements shopcartDAO{
 	@Override
 	public void product_count_update(shopcartVO vo) {
 		session.update(namespace+".product_count_update", vo);
+	}
+
+	@Override
+	public List<shopcartVO> order_list(String uid, Criteria cri) {
+		HashMap<String,Object> omap = new HashMap<String,Object>();
+		omap.put("uid",uid);
+		omap.put("cri", cri);
+		return session.selectList(namespace+".order_list", omap);
+
+	}
+
+	@Override
+	public int order_count(String uid) {
+		return session.selectOne(namespace+".order_count", uid);
 	}
 }

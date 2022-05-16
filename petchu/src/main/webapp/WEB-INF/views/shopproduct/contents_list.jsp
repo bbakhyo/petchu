@@ -131,6 +131,11 @@
 	top:25%;
 	left:3%;
 }
+.cart_add1, .cart_add1>img{
+	width: 35px;
+	padding-right: 5px;
+	cursor:pointer;
+}
 </style>
 </head>
 <body>
@@ -157,14 +162,15 @@
 	      <script id="temp" type="text/x-handlebars-template">
 
 	{{#each list}}
-      <div class="content_item_box_container" pno="{{pno}}" onclick='getLocation(this)'>
-		<div class = "itemImg" quantity="{{pqantity}}" style="position:relative;">
+      <div class="content_item_box_container" pno="{{pno}}">
+		<div class = "itemImg" quantity="{{pqantity}}" style="position:relative;" onclick='getLocation(this)'>
         	<img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
 			<img class="soldout" src="/resources/soldout.png" width=170>
 		</div>
         	<div class="content_item_title" pno="{{pno}}">{{pname}}</div>
         	<div class="content_item_price">
           		<div class="price_item1">{{comma pprice}}원</div> 
+				<div class="cart_add1"><img src="/resources/icon_menu/cart_add.png" id="cart_add1"></div>
        		</div>
         	<div class="content_item_title_row">
 				<div class="content_item_title">{{replace pbrand}}</div>   
@@ -209,11 +215,37 @@
 	
 	//상품 클릭시 리드페이지로 이동
 	function getLocation(e){
-		var pno = $(e).attr("pno");
+		var pno = $(e).parent().attr("pno");
 		location.href="read?pno="+pno+"&selectCate="+selectCate+"&selectCate2="+selectCate2+"&selectCate3="+selectCate3; 
 	}
 	
-	
+	/* 장바구니 button */
+	$(".content_item_container_row").on("click",".cart_add1" ,function(){
+		var pno = $(this).closest(".content_item_box_container").attr("pno");
+		//장바구니 버튼을 클릭한 경우 session에 저장된 id를 읽어서 장바구니DB에 등록
+		var uid = "${id}";
+		var amount = 1;
+		$.ajax({
+			type : "post",
+			url : "/shopproduct/insert",
+			data : {
+				pno : pno,
+				uid : uid,
+				amount : amount
+			},
+			success : function(data) {
+				//장바구니 페이지로 이동하기
+				if (data == 1) {
+					//장바구니 등록 완료
+					alert('장바구니 등록완료!');
+					return;
+				} else {
+					alert('이미 장바구니에 등록된 상품입니다.');
+				}
+			}
+		});
+	});
+		
 	function getContentsList(){
 		$.ajax({
 			type: "get",
