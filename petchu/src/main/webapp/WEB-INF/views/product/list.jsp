@@ -8,6 +8,24 @@
 	.name{
 		width: 80px;
 	}
+	.pname{
+		 width: 300px;
+		 white-space: nowrap;
+		 overflow: hidden;
+		 text-overflow: ellipsis;  /* 말줄임 적용 */
+	}
+	.qnt{
+		width: 50px;
+	}
+	.btnUpdate{
+		width: 50px;
+		height: 35px;
+		background-color: #A7CA37;
+		color: white;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
+	}
 </style>
 <div id="page">
 	<div id="menu">
@@ -18,17 +36,17 @@
 		<tr class="title">
 			<td width=50>코드</td>
 			<td width=100>이미지</td>
-			<td width=500>제품명</td>
+			<td width=300>제품명</td>
 			<td width=100>가격</td>
 			<td width=100>브랜드</td>
-			<td width=100>재고</td>
+			<td width=50>재고</td>
 			<td width=50>수정</td>
 		</tr>
 	{{#each list}}
 		<tr class="row">
 			<td class="pno">{{pno}}</td>
 			<td><img src="{{pimage}}" width=70></td>
-			<td class="pname">{{pname}}</td>
+			<td><p class="pname">{{pname}}<p></td>
 			<td>{{display pprice}}원</td>
 			<td>{{pbrand}}</td>
 			<td><input type="number" class="qnt" value="{{pqantity}}"></td>

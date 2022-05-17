@@ -19,10 +19,26 @@
 		width: 300px;
 		height: 50px;
 		margin-bottom: 40px;
+		border-radius: 10px;
+		border: 5px solid #A7CA37;
 	}
 	#search{
 		width: 80px;
 		height: 50px;
+		background-color: #A7CA37;
+		color: white;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	.getOut{
+		width: 80px;
+		height: 35px;
+		background-color: #A7CA37;
+		color: white;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
 	}
 </style>
 <div id="page">
@@ -77,11 +93,8 @@
 	</script>
 	<div class="pagination"></div>
 </div>
-<hr>
-<div>
-	<p>회원별 구매금액</p>
-	<div id="chart" style="width: 900px; height: 500px;"></div>
-</div>
+
+
 
 <script>
 	var page = "${param.page==null ? 1: param.page}";
@@ -89,37 +102,7 @@
 	
 	getList();
 	
-	//차트 출력
-	var title="사용자별 결제금액"
-		$.ajax({
-			type: "get",
-			url: "/user/chartPrice.json",
-			success: function(data){
-				barChart(title,data);
-			}
-		});
-	//차트 펑션
-	function barChart(chartTitle,chartData) {
-		google.charts.load('current', {
-			'packages' : [ 'bar' ]
-		});
-		google.charts.setOnLoadCallback(drawChart);
-
-		function drawChart() {
-			var data = google.visualization.arrayToDataTable(chartData);
-					
-			var options = {
-				chart : {
-					title : chartTitle,
-				},
-				bars : 'horizontal' // Required for Material Bar Charts.
-			};
-
-			var chart = new google.charts.Bar(document.getElementById('chart'));
-
-			chart.draw(data, google.charts.Bar.convertOptions(options));
-		}
-	}
+	
 
 	//강제탈퇴 버튼 클릭시 
 	$("#tbl").on("click", ".getOut", function(){
