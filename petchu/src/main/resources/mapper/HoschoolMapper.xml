@@ -90,10 +90,4 @@
 	<select id="avgRateRead" resultType="double">
 		select format(avg(rate),1) avgrate from rate where scno=#{scno}
 	</select>
-	<select id="reviewAllCount" resultType="int">
-		select count(*) from reserve where scno=#{scno} and id=#{id} and now() &lt; DATE_ADD(reserveDate, INTERVAL 1 DAY) and isDel=0
-	</select>
-	<select id="reviewWriteCount" resultType="int">
-		select count(*) from rate where scno=#{scno} and id=#{id}
-	</select>
 </mapper>

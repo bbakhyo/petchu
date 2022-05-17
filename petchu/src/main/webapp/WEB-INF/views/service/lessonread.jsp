@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<style>
-.requestInfo {
-	text-align : left;
-	padding : 0px 100px;
-}
-.requestInfo hr {
-	width : 800px;
-}
-</style>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div class="requestInfo" uid="${lvo.uid}}" lrno="${lvo.lrno}">
 	<h1>[${lvo.nick}]님의 요청서</h1>
 	<h3>1. 원하는 레슨 분류</h3>

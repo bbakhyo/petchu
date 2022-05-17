@@ -33,7 +33,6 @@ import com.example.domain.OrderlistVO;
 import com.example.domain.PageMaker;
 import com.example.domain.ProductVO;
 import com.example.domain.ReviewVO;
-import com.example.domain.shopcartVO;
 import com.example.domain.shopproductVO;
 import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
 
@@ -134,22 +133,8 @@ public class ReviewController {
 			
 			return "/home";
 		}
-		
-		
 		@RequestMapping(value="/insert", method=RequestMethod.POST)
-		@ResponseBody
-		public String insert(ReviewVO vo,MultipartHttpServletRequest multi, String uid)throws Exception{
-			System.out.println(uid+"ㅅㅂ진짜 이게 말이 되냐고");
-			vo.setUid(uid);
-			System.out.println(uid+"\n"+vo.getUid()+"<<<<<<<<<<<");
-			int result = dao.user_review_count(uid, vo.getBno());
-			System.out.println(vo.toString()+"\n"+result+"<<<<<<<<<<<<");
-			if(result>0){
-				System.out.println("1개 이상 존재");
-				return "redirect:/review/insert?pno="+vo.getPno()+"&bno="+vo.getBno();	//값이 1개 이상일 때
-			}
-			
-//			System.out.println(vo.toString()+"\ntttttttttttteeeeeeeeeest======="+vo.getUid());
+		public String insert(ReviewVO vo,MultipartHttpServletRequest multi)throws Exception{
 			System.out.println(".................file: "+vo.getRimage1());
 			List<MultipartFile> fileList = multi.getFiles("uploadFile");
 			int i = 0;
@@ -177,10 +162,10 @@ public class ReviewController {
 			}
 			
 			dao.insert(vo);
-//			System.out.println(vo.toString());
-//			return "0개";
+			System.out.println(vo.toString());
 			return "redirect:/review/list";
 			
+		
 		}
 	//orderlist/review 목록 json 데이터 생성
 	@RequestMapping("/reviewable.json")
@@ -220,5 +205,4 @@ public class ReviewController {
 	
 		return "/home";
 	}
-
 }

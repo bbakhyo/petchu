@@ -8,7 +8,7 @@
 }
 
 .order_info {
-	width:895px;
+	width:830px;
 	margin: 0px auto;
 	text-align: center;
 	padding-top: 40px;
@@ -269,6 +269,7 @@ td {
 			<th class="small_title left pdl" style="border-bottom: 1px solid;"><b>최종 결제금액</b></th>
 			<td class="right" style="border-bottom: 1px solid gray;"><b><span
 					class="sum nprice">${ovo.sum}</span>원</b></td>
+
 		</tr>
 	</table>
 	<div>
@@ -309,9 +310,7 @@ td {
 <script>
 	var pno = "";
 	var bno = "";
-	var orno = "${orno}";
 	getList();
-	
 	function getList() {
 		var orno = "${orno}";
 		$.ajax({
@@ -351,13 +350,6 @@ td {
 				showOrno = showOrno.substring(0, 13);
 				console.log(showOrno);
 				$(".orno").html("주문번호: " + showOrno);
-				
-				var dataLength = $("#tbl .tbody").length;
-				
-				//만약 데이터의 수가 0이라면 (유저가 데이터를 삭제해서 더 이상 보여질 데이터가 없다면) => 주문목록 페이지로 이동
-				if(dataLength==0){
-					location.href="/shopproduct/order_list";
-				}
 			}
 		});
 	}
@@ -456,6 +448,7 @@ td {
 	}
 	//구매목록에서 삭제
 	function del_ohistory(){
+		var orno = "${orno}";
 // 		user_order_delete
 		$.ajax({
 			type: "post",

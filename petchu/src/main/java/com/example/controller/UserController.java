@@ -2,9 +2,6 @@ package com.example.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -370,16 +367,6 @@ public class UserController {
 		return "/home";
 	}
 	
-	//채택한 요청서
-		@RequestMapping(value="/myChooseList")
-		public String myChooseList(Model model, HttpSession session){
-			model.addAttribute("bvo", bdao.beautyChooseList(session.getAttribute("id").toString()));
-			model.addAttribute("cvo", cdao.cleanChooseList(session.getAttribute("id").toString()));
-			model.addAttribute("lvo", ldao.lessonChooseList(session.getAttribute("id").toString()));
-			model.addAttribute("sideMenu", "mypageSidemenu.jsp");
-			model.addAttribute("pageName", "myRequest/chooseRequest.jsp");
-			return "/home";
-		}
 	
 	//미용 마감
 	@ResponseBody
@@ -423,52 +410,4 @@ public class UserController {
 			model.addAttribute("pageName", "myRequest/lessonread.jsp");
 			return "/home";
 		}
-	@RequestMapping("/chartPrice.json")
-	@ResponseBody
-	public List<List<Object>> chartPrice(){
-		List<List<Object>> array=new ArrayList<>();
-		List<HashMap<String, Object>> list = dao.chartPrice();
-		
-		List<Object> arr = new ArrayList<>();
-		arr.add("ID");
-		arr.add("포인트 사용액");
-		arr.add("결제금액");
-		arr.add("총 결제금액");
-		array.add(arr);
-		
-		for(HashMap<String, Object> map : list){
-			arr = new ArrayList<>();
-			arr.add(map.get("uid"));
-			arr.add(map.get("point"));
-			arr.add(map.get("sum"));
-			arr.add(map.get("total"));
-			array.add(arr);
-		}
-		System.out.println("........................123123"+ array);
-		return array;
-	}
-	@RequestMapping("/chartDate.json")
-	@ResponseBody
-	public List<List<Object>> chartDate(){
-		List<List<Object>> array=new ArrayList<>();
-		List<HashMap<String, Object>> list = dao.chartDate();
-		
-		List<Object> arr = new ArrayList<>();
-		arr.add("일자");
-		arr.add("포인트 사용액");
-		arr.add("결제금액");
-		arr.add("총 결제금액");
-		array.add(arr);
-		
-		for(HashMap<String, Object> map : list){
-			arr = new ArrayList<>();
-			arr.add(map.get("fdate"));
-			arr.add(map.get("point"));
-			arr.add(map.get("sum"));
-			arr.add(map.get("total"));
-			array.add(arr);
-		}
-		System.out.println("........................123123"+ array);
-		return array;
-	}
 }

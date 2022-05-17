@@ -31,13 +31,10 @@
 	width : 750px;
 	margin-left : 0px;
 }
-#sidemenu{
-	margin-left: -100px;
-}
 </style>
 <div class="myList" style="text-align : left;">
 	<div id="sidemenu">
-		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
+		<jsp:include page="${sideMenu}" />
 	</div>
 	<h1>작성한 요청서</h1>
 	<div class="bigPrame">

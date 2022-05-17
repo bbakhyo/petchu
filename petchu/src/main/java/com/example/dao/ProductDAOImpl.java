@@ -55,22 +55,6 @@ public class ProductDAOImpl implements ProductDAO{
 		return session.selectOne(namespace + ".read", pno);
 	}
 
-	@Override
-	public List<ProductVO> order_list(Criteria cri) {
-		return session.selectList(namespace + ".order_list", cri);
-	}
-
-	@Override
-	public int order_count() {
-		return session.selectOne(namespace+".order_count");
-	}
-
-	@Override
-	public void order_state_update(ProductVO vo) {
-		session.update(namespace+".order_state_update", vo);
-		System.out.println("............"+vo.getUono()+"\n"+vo.getState());
-	}
-
 
 
 }

@@ -11,7 +11,6 @@ import com.example.dao.DoctorRequestDAO;
 import com.example.dao.MysqlDAO;
 import com.example.dao.RateDAO;
 import com.example.dao.ReserveDAO;
-import com.example.dao.UserDAO;
 import com.example.dao.UserRequestDAO;
 import com.example.domain.DoctorRequestVO;
 import com.example.domain.RateVO;
@@ -21,11 +20,11 @@ import com.example.domain.ReserveVO;
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
 public class ServiceTest2 {
     @Autowired
-    private UserDAO dao;
+    private RateDAO dao;
     
     @Test
     public void getTime(){
     	
-    	dao.chartPrice();
+    	dao.avgRate();
     }
 }

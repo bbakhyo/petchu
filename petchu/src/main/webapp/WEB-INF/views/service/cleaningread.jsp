@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<style>
-.requestInfo {
-	text-align : left;
-	padding : 0px 100px;
-}
-.requestInfo hr {
-	width : 800px;
-}
-
-</style>
 <div class="requestInfo" uid="${cvo.uid}}" crno="${cvo.crno}">
 	<h1>[${cvo.nick}]님의 요청서</h1>
 	<h3>1. 건물유형</h3>

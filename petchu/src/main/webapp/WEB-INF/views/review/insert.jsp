@@ -28,9 +28,6 @@
 	          </div><!--r_q--> 
 	         <div class="p_info">
 	            <div class="bno" style="display:none;">
-	            	<select id="makeStar" name="uid">
-						<option value="${vo.uid}" selected>${vo.uid}</option>
-					</select>
 	         		<div id="bno">${vo.bno}</div>
 	         		<div id="pno">${vo.pno}</div>
 	         	</div>
@@ -286,8 +283,11 @@
 		var rtitle=$(frm.rtitle).val();
 		var star=$(frm.star).val();
 		var file = $(frm.uploadFile).val();
-		var uid="${id}";
-		alert(file+"\n"+uid);		
+		alert(file);
+
+
+		
+		
 		if(review==""){
 			alert("리뷰를 입력해주세요");
 			$(frm.review).focus();

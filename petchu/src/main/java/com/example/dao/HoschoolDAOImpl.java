@@ -77,22 +77,6 @@ public class HoschoolDAOImpl implements HoschoolDAO{
 		return session.selectList(namespace + ".list", vo);
 	}
 
-	@Override
-	public int reviewAllCount(int scno, String id) {
-		HashMap<String , Object> map = new HashMap<>();
-		map.put("scno", scno);
-		map.put("id", id);
-		return session.selectOne(namespace + ".reviewAllCount", map);
-	}
-
-	@Override
-	public int reviewWriteCount(int scno, String id) {
-		HashMap<String , Object> map = new HashMap<>();
-		map.put("scno", scno);
-		map.put("id", id);
-		return session.selectOne(namespace + ".reviewWriteCount", map);
-	}
-
 	
 
 }

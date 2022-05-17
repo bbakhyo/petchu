@@ -163,7 +163,7 @@
 								<span class="msg">예약변경이 거절되었습니다.</span>
 							</td>
 							<td colspan=2 class="hiddenbtn2" style="border-left: hidden; border-right:hidden; text-align: right;">
-								<button class="reserveCancel2" rno={{rno}}>확인</button>
+								<button class="reserveCancel" rno={{rno}}>확인</button>
 							</td>
 						</tr>
 						<tr>
@@ -256,6 +256,8 @@
 </div>
 
 <script>
+	
+	
 	//종료버튼 클릭시
 	$(".close").on("click",function(e){
 		e.preventDefault();
@@ -407,6 +409,15 @@
 				target3.hide();
 
 			}
+		}else if(isDel==2){		//예약변경요청 한 경우
+			if(target2.css("display") == "none"){
+				
+				target2.find(".msg").html("예약이 취소되었습니다.");
+				target2.show();
+			}else {
+				target2.hide();
+			}
+			
 		}
 	});
 		
@@ -424,12 +435,7 @@
 			dataType:"json",
 			success: function(data){
 				var template = Handlebars.compile($("#temp").html());
-				if(data.list == ""){
-					$("#tbl").html("<h2 style='margin-left:-100px;'>... 예약리스트가 없습니다 ...</h2>");
-				}else{
-					$("#tbl").html(template(data));
-				}
-				
+				$("#tbl").html(template(data));
 				
 				//예약날짜 섭스트링
 				$(".list").each(function(){
@@ -480,14 +486,9 @@
 			dataType:"json",
 			success: function(data){
 				var template = Handlebars.compile($("#temp2").html());
-				if(data.oldlist == ""){
-					$("#tbl2").html("<h2 style='margin-left:-100px;'>... 지난예약리스트가 없습니다 ...</h2>");
-				}else{
-					$("#tbl2").html(template(data));
-				}
-				
-				//확인 버튼을 클릭한 경우
-				$("#tbl").on("click",".reserveCancel2", function(){
+				$("#tbl2").html(template(data));
+				//취소요청 버튼을 클릭한 경우
+				$("#tbl").on("click",".reserveCancel", function(){
 					var isEdit = $(this).closest(".list").attr("isEdit");
 					var isDel = $(this).closest(".list").attr("isDel");
 					var rno = $(this).attr("rno");
@@ -505,24 +506,6 @@
 					});
 				});
 				
-				//취소요청 버튼을 클릭한 경우
-				$("#tbl").on("click",".reserveCancel", function(){
-					var isEdit = $(this).closest(".list").attr("isEdit");
-					var isDel = $(this).closest(".list").attr("isDel");
-					var rno = $(this).attr("rno");
-					if(!confirm("예약을 취소요청하시겠습니까?")) return;
-					isEdit = 0;
-					isDel = 1;
-					$.ajax({
-						type: "post",
-						url: "/reserve/ReserveEdit",
-						data: {isEdit:isEdit, isDel:isDel, rno:rno},
-						success: function(){
-							if(!confirm("취소요청이 완료되었습니다. 내역을 확인하시겠습니까?")) return;
-							location.href="/reserve/myreserveList?id=${id}";
-						}
-					});
-				});
 				//예약날짜 섭스트링
 				$("#oldreserve .oldlist").each(function(){
 					var target = $(this).find(".checkin").html();

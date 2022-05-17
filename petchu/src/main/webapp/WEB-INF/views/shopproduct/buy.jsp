@@ -167,14 +167,9 @@
                   PAYCO
                 </label>
 
-                <label for="kakao" for="pay_type" class="kakaoLabel">
-                  <input type="radio" name="pay_type" id="kakao" class="pay" value="kakaopay1" checked>
+                <label for="kakao" for="pay_type">
+                  <input type="radio" name="pay_type" id="kakao" class="pay" value="kakaopay1">
                   KakaoPay
-                </label>
-                
-                 <label for="kakao" for="pay_type" class="payLabel" style="display:none;">
-                  <input type="radio" name="pay_type" id="payPoint" class="pay" value="payPoint">
-                  포인트 사용
                 </label>
 
               </div>
@@ -324,8 +319,8 @@
 					if(select_pay_type[i].checked)
 						var paytype=select_pay_type[i].value;
 				}
+		   
 		} //for
-// 		alert(paytype);
 			
 		} //else
 		
@@ -371,44 +366,7 @@
 				//사용할 포인트가 서버에서 불러온 데이터보다 작다면 (정상적이라면)
 				if(Number(usePoint)<=Number(serverPoint)){
 					final_price = final_price - Number(usePoint);
-					var omessage = $("#delivery_message").val();
-					//포인트 사용으로 인해 최종 결제금액이 0이라면
-					if(final_price == 0){
-						//결제 성공시 주문목록에 등록
-						if(!confirm("포인트를 사용하여 구매하시겠습니까?")) return;
-						var orno = Date.now() + uid;
-							var pno = $(".cartitem_info_right").attr("pno");
-							var amount = $(".cartitem_info_right").attr("amount");
-// 							var tel = card1.find("#delivery_contact").attr("tel");
-							console.log(uid);
-							console.log(amount);
-							console.log(orno);
-							console.log(zipcode);
-							console.log(address1);
-							console.log(receiver);
-							console.log(tel);
-							console.log(final_price);
-							console.log(usePoint);
-							console.log(btnPoint);
-							console.log(omessage);
-							$.ajax({
-								type: "post",
-								url: "/shopproduct/order_insert",	
-								data: {uid:uid, pno:pno, amount:amount, orno:orno, zipcode:zipcode, address1:address1, address2:address2, receiver:receiver, tel:tel},
-								success: function(){
-								}
-							});
-						$.ajax({
-							type: "post",
-							url: "/shopproduct/user_order_insert",	
-							data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint, omessage:omessage},
-							success: function(){
-								alert("구매완료!");
-								location.href="/shopproduct/order_list";
-							}
-						});
-						return;
-					}
+// 					alert("데이터 테스트 통과");
 				}else{//아니라면 (비정상적인 접근이라면)
 					alert("포인트가 부족합니다.");
 					return;
@@ -416,10 +374,10 @@
 			}
 			
 			var IMP = window.IMP; // 생략가능
-			IMP.init('imp61649606'); 
+			IMP.init('imp71996590'); 
 			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
 			IMP.request_pay({
-				pg: 'inicis',
+				pg: 'kakao',
 				pay_method: 'card',
 				merchant_uid: 'merchant_' + new Date().getTime(),
 				/* 
@@ -524,9 +482,8 @@
 	 $("#delivery_contact").attr("tel", num);
 	    
 	
-	  //포인트 적용 버튼 클릭했을 때
+	 //포인트가 변경될 때
 	    $(".point_apply").on("click", function(){
-	    	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
 	    	var point = $(this).parent().parent().find(".point").val();
 	    	var myPoint = $(".my_point").attr("point");
 	    	//숫자가 아니거나 0일 경우, 혹은 0보다 작을 경우 작동 안되게 해야함
@@ -548,16 +505,6 @@
 	    		$(".point").focus();
 	    		return;
 	    	}
-	    	//보유 포인트가 결제금액보다 높을 경우 최대포인트 가격으로 수정
-	    	console.log("포인트="+point);
-	    	console.log("최종가격="+fprice);
-	    	if(Number(point)>Number(fprice)){
-	    		point = fprice;
-	    	}
-	    	if(Number(point)==Number(fprice)){
-	    		$(".payLabel").attr("style", "");
-	    		$("input[name='pay_type']:radio").prop("checked",true);;
-	    	}
 	    	$(".none").attr("class", "show");
 	    	$(".checkout_point_line").attr("style", "");
 	    	$(".card_cart_point_right").html(point);
@@ -566,7 +513,7 @@
 	    	$(".card_cart_point_right").attr("point", point);
 	    	
 	    	//최종가격 계산
-//	     	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
+	    	var fprice = $(".card_cart_grandtotal_row_right").attr("final_price");
 	    	fprice = Number(fprice) - Number(point);
 	    	$(".card_cart_grandtotal_row_right").html(fprice);
 	    	
@@ -628,9 +575,6 @@
 	    	$(".point").attr("readonly", false);
 	    	btnPoint = 0;
 	    	$(".spoint").html("보유 포인트: ");
-	    	
-    		$(".payLabel").attr("style", "display:none;");
-    		$("input[name='pay_type']:radio").prop("checked", false);;
 	    	return;
 	    });
 		

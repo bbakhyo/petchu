@@ -13,7 +13,4 @@ public interface ProductDAO {
 	public void qntUpdate(int code, int qnt);
 	public void adminUpdate(ProductVO vo);
 	public ProductVO read(int pno);
-	public int order_count();
-	public List<ProductVO> order_list(Criteria cri);
-	public void order_state_update(ProductVO vo);
 }

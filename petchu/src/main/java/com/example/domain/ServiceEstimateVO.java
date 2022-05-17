@@ -17,7 +17,6 @@ public class ServiceEstimateVO extends EstimateDTO{
 	public String fprice;
 	public int secheck;
 	public int failcheck;
-	public int choose_check;
 	
 	public int getFailcheck() {
 		return failcheck;

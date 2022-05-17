@@ -321,11 +321,7 @@ a:visited {
 	color: white;
 }
 
-#sidemenu a:visited {
-	color: black;
-}
-
-.menu_box, .smallBox{
+.menu_box{
 	float: left;
     background-color: white;
     margin: 10px;
@@ -447,22 +443,6 @@ a:visited {
 	border-radius: 5px;
 	transition: 0.2s;
 }
-
-.smallBox .dname{
-	font-weight: 900;
-	text-align: center;
-}
-.smallBox .isDelete, .secheck, .choose_check{
-	text-align : right;
-	font-weight: 900;
-	color: #9f1f11;
-}
-.smallBox:hover{
-	border: 2px solid #A7CA37;
-	border-radius: 5px;
-	transition: 0.2s;
-}
-
 .receRequest #inputfile{
 	margin-top: 20px;
 }

@@ -65,17 +65,4 @@ public class LessonDAOImpl implements LessonDAO {
 	public int lrno(String uid) {
 		return session.selectOne(namespace + ".lrno", uid);
 	}
-
-
-	@Override
-	public List<LessonRequestVO> lessonChooseList(String uid) {
-		return session.selectList(namespace + ".lessonChooseList", uid);
-	}
-
-
-	@Override
-	public void lChooseUpdate(int lrno) {
-		session.update(namespace + ".lChooseUpdate", lrno);
-		
-	}
 }

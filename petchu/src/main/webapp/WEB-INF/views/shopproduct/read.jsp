@@ -5,19 +5,7 @@
 <link href="/resources/css/shopproduct_read.css" rel="stylesheet">
 <script data-require="jquery@3.1.1" data-semver="3.1.1"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<style>
-	.remQnt{
-	    width: 155;
-	    text-align: center;
-	    font-size: 15px;
-		padding-left: 5%;
-	    margin-right: 10%;
-        font-style: italic;
-	}
-	.info_container_row1{
-		justify-content: center;
-	}
-</style>
+
 <%-- <head>
 <meta charset="UTF-8">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -174,16 +162,7 @@
 		<!--Review TAB  -->
 		<div id="Review" class="tabcontent">
 			<h3>리뷰</h3>
-			<div id="re">
-<!-- 				여기 작업중 -->
-				<table id="tbl"></table>
-				<script id="temp" type="text/x-handlebars-template">
-					{{#each .}}
-						<span>({{review}}){{rid}}</span><br>
-					{{/each}}
-				</script>
-
-			</div>
+			<p>Content</p>
 		</div>
 		
 		<!-- Questions TAB  -->
@@ -192,7 +171,7 @@
 				<div class="prod-inquiry-list">
 					<div class="clearFix">
 						<h4 class="prod-inquiry-list__title">상품문의</h4>
-						<button class="prod-inquiry-list_write-btn" style="cursor:pointer;">문의하기</button>
+						<button class="prod-inquiry-list_write-btn">문의하기</button>
 					</div>
 					<div class="prod-inquiry-list__emphasis">
 						<ul>
@@ -329,7 +308,7 @@
 								class="prod-delivery-return-policy-table__phone-link"
 								href="tel:+8215777011" target="_blank">1577-7011</a>
 							</td>
-						</tr> 
+						</tr>
 					</tbody>
 				</table>
 				<div class="prod-minor-notice">미성년자가 체결한 계약은 법정대리인이 동의하지 않는 경우
@@ -393,11 +372,6 @@ console.log(pprice);
 	$(".buy_now").on(
 			"click",
 			function() {
-				quantity = "${vo.pqantity}";
-				if(quantity<=0){
-					alert("상품이 매진되어 구매하실 수 없습니다!");
-					return;
-				}
 				var buynow = document.querySelector(".buy_now");
 				var pno = buynow.getAttribute('data-pno');
 				; // 상품번호
@@ -421,16 +395,6 @@ console.log(pprice);
 	//증가버튼 누를 경우 구매수량 증가
 	$(".plus").on("click", function() {
 		var fcount = $(".input-text").html();
-		//상품의 남은 수량보다 높일 수 없도록 설정
-		var compareCount = Number(fcount)+1;
-		if(compareCount>quantity){
-			if(quantity==0){
-				alert("상품이 매진되었습니다!");
-				return;
-			}
-			alert("최대수량입니다.");
-			return;
-		}
 		fcount++;
 		$(".input-text").val(fcount);
 		$(".input-text").html(fcount);
@@ -438,20 +402,6 @@ console.log(pprice);
 		$(".final_price").html(fcount * pprice  + 3000);
 		numberFormat();
 	});
-	
-	//로딩시 수량이 0이라면 바로구매 비활성화
-	var quantity = "${vo.pqantity}";
-	if(quantity<=0){
-		$(".buy_now").html("구매불가");
-		$(".buy_now").attr("style", "background:red; border: 1px solid red;");
-	}
-	
-	//로딩시 남은 수량이 10 이하라면 남은수량 강조
-	if(quantity<=10){
-		$(".remQnt").css("color", "red");
-		$(".remQnt").css("font-weight", "bold");
-	}
-	
 </script>
 <script>
 	/*페이지 텝  */
@@ -485,27 +435,6 @@ console.log(pprice);
 		var fprice = $(".final_price").html();
 		fprice = fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		$(".final_price").html(fprice);
-	}
-	
-	$(".prod-inquiry-list_write-btn").on("click", function(){
-		location.href="/faq/list";
-	})
-	
-	
-	getList();
-	function getList(){
-		var buynow = document.querySelector(".buy_now");
-		var pno = buynow.getAttribute('data-pno');
-		$.ajax({
-			type: "get",
-			dataType: "json",
-			data: {pno:pno},
-			url: "/shopproduct/shop_review_list.json",
-			success:function(data){
-				var template = Handlebars.compile($("#temp").html());
-				$("#tbl").html(template(data));
-			}
-		});
 	}
 </script>
 </html>

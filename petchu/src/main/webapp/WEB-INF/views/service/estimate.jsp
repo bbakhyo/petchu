@@ -2,7 +2,6 @@
     pageEncoding="EUC-KR"%>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <style>
 h1 {
 	text-align : left;
@@ -24,24 +23,6 @@ textarea {
 	padding : 10px;
 	resize : none;
 }
-
-#send {
-    /* left: 40%; */
-    border-radius: 10px;
-    border: #A7CA39 2.5px solid;
-    color: #799c08;
-    font-weight: 1300;
-    background-color: white;
-    padding: 5px 10px 5px 10px;
-    cursor: pointer;
-    width: 95%;
-    font-size : larger;
-}
-
-#send:hover{
-	background-color: #A7CA37;
-	color:white;
-}
 </style>
 <div style="float : right; text-align : left; margin-right : 120px;">
 	<h1>견적 보내기</h1><span style="display:none;" scno="${sc.scno}" scname="${sc.scname}" id="scinfo"></span>
@@ -61,13 +42,11 @@ textarea {
 	</div>
 	<br/>
 	<div style="text-align : center;">
-		<button id="send">견적 보내기</button>
+		<button style="width : 699.6px;" id="send">견적 보내기</button>
 	</div>
 	<br/><br/>
 </div>
 <script>
-
-
 /*
  var price = document.querySelector('#price');
  
@@ -90,7 +69,7 @@ textarea {
 	 //글자수
 	 var content = $(this).val();
 	 if(content.length == 0 || content == ''){
-		 $('.textCount').text('0');
+		 $('.textCount').text('0자');
 	 }else{
 		 $('.textCount').text(content.length);
 	 }
@@ -137,7 +116,7 @@ textarea {
 						data : {scno:scno, scname:scname, brno:brno, price:price, description:description},
 						success:function(overlapCheck){
 							if(overlapCheck == 0){
-								alert("견적서 작성완료");
+								swal("성공");
 								location.href="/request/servicelist"
 							}else if(overlapCheck ==1){
 								swal("견적서 작성은 요청서별  1회만 가능합니다!");
@@ -157,8 +136,8 @@ textarea {
 					data : {scno:scno, scname:scname, crno:crno, price:price, description:description},
 					success:function(overlapCheck){
 						if(overlapCheck == 0){
-							alert("견적서 작성완료");
-							location.href="/request/servicelist";
+							swal("성공");
+							location.href="/request/servicelist"
 						}else if(overlapCheck ==1){
 							swal("견적서 작성은 요청서별  1회만 가능합니다!");
 						}
@@ -175,8 +154,8 @@ textarea {
 					data : {scno:scno, scname:scname, lrno:lrno, price:price, description:description},
 					success:function(overlapCheck){
 						if(overlapCheck == 0){
-							alert("견적서 작성완료");
-							location.href="/request/servicelist";
+							swal("성공");
+							location.href="/request/servicelist"
 						}else if(overlapCheck ==1){
 							swal("견적서 작성은 요청서별  1회만 가능합니다!");
 						}
