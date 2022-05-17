@@ -15,6 +15,16 @@
 	.naming{
 		text-align: center;
 	}
+	#petcontent{
+		margin-left: 305px;
+	}
+	#btnCombi{
+		margin-left: 627px;
+	}
+	#nameBox{
+	margin: 23px;
+	margin-top: 35px;
+	}
 </style>
 
 <div id="page">

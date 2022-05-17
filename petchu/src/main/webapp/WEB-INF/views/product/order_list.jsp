@@ -14,6 +14,19 @@
 	    border-left: hidden;
 	    height: 60px;
 	}
+	.state{
+		width: 100px;
+		height: 35px;
+	}
+	.title{
+		font-size: 12px;
+		font-weight: bold;
+		text-align: center;
+	}
+	.row{
+		font-size: 12px;
+		text-align: center;
+	}
 </style>
 <div id="page">
 	<div id="menu">
@@ -23,26 +36,26 @@
 	<script id="temp" type="text/x-handlebars-template">
 	{{#each list}}
 		<tbody>
-			<tr class="title">
-				<td>주문번호</td>
-				<td>{{uono}}</td>
-				<td>구매일</td>
-				<td colspan=3>{{paydate}}</td>
+			<tr>
+				<td class="title">주문번호</td>
+				<td class="row">{{uono}}</td>
+				<td class="title">구매일</td>
+				<td colspan=3 class="row">{{paydate}}</td>
 			</tr>
 			<tr>
-				<td>구매자</td>		
-				<td>{{uid}}</td>
-				<td>가격</td>
-				<td>{{display sum}}원</td>		
-				<td>전화번호</td>
-				<td>{{tel}}</td>
+				<td class="title">구매자</td>		
+				<td class="row">{{uid}}</td>
+				<td class="title">가격</td>
+				<td class="row">{{display sum}}원</td>		
+				<td class="title">전화번호</td>
+				<td class="row">{{tel}}</td>
 			</tr>
 			<tr>
-				<td>주소</td>		
-				<td>({{zipcode}}) {{address1}} {{address2}}</td>
-				<td>포인트사용</td>
-				<td>{{display point}}</td>		
-				<td>배송현황</td>
+				<td class="title">주소</td>		
+				<td class="row">({{zipcode}}) {{address1}} {{address2}}</td>
+				<td class="title">포인트사용</td>
+				<td class="row">{{display point}}</td>		
+				<td class="title">배송현황</td>
 				<td>
 					<select name="state" class="state" state="{{state}}" uono="{{uono}}">
 						<option value=0>배송준비중</option>
@@ -52,8 +65,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td>요청사항</td>		
-				<td colspan=5>{{omessage}}</td>
+				<td class="title">요청사항</td>		
+				<td colspan=5 class="row">{{omessage}}</td>
 			</tr>
 
 			<tr class="blank"><td colspan=6></td></tr>
@@ -62,11 +75,7 @@
 	</script>
 	<div class="pagination"></div>
 </div>
-<hr>
-<div>
-	<p>일자별 구매금액</p>
-	<div id="chart" style="width: 900px; height: 500px;"></div>
-</div>
+
 <script>
 		Handlebars.registerHelper("display", function(pprice){
 			return pprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -76,38 +85,7 @@
 	var page=1;
 	getList();
 	
-	//차트 출력
-	var title="일자별 매출금액"
-		$.ajax({
-			type: "get",
-			url: "/user/chartDate.json",
-			success: function(data){
-				barChart(title,data);
-			}
-		});
-	//차트 펑션
-	function barChart(chartTitle,chartData) {
-		google.charts.load('current', {
-			'packages' : [ 'bar' ]
-		});
-		google.charts.setOnLoadCallback(drawChart);
-
-		function drawChart() {
-			var data = google.visualization.arrayToDataTable(chartData);
-					
-			var options = {
-				chart : {
-					title : chartTitle,
-				},
-				bars : 'vertical' // Required for Material Bar Charts.
-			};
-
-			var chart = new google.charts.Bar(document.getElementById('chart'));
-
-			chart.draw(data, google.charts.Bar.convertOptions(options));
-		}
-	}
-
+	
 	function getList(){
 		$.ajax({
 			type: "get",
