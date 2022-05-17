@@ -15,7 +15,7 @@
 			<img src="/resources/banner2.png"  />
 		</div>
 		<div>
-			<img src="https://placeimg.com/1920/450/animals" />
+			<img src="/resources/banner3.png" />
 		</div>
 	</div>
 </div>

@@ -38,7 +38,7 @@
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
 				<c:if test="${type=='일반'}">
-					<span id="pointarea">포인트 : ${commaPoint}</span>
+					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
 					<a href="/request/result">받은 견적서</a>
 					<a href="/shopproduct/cart_read">장바구니</a> <!-- 아이콘으로 -->
 					<a href="#" id="chat">채팅</a>
@@ -54,7 +54,7 @@
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
 				<c:if test="${type=='의사'}">
-					<span id="pointarea">포인트 : ${commaPoint}</span>
+					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
 					<a href="/request/list">견적서</a>
 					<a href="#">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
@@ -70,7 +70,7 @@
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
 				<c:if test="${type=='업체'}">
-					<span id="pointarea">포인트 : ${commaPoint}</span>
+					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
 					<a href="/request/servicelist">서비스 견적서</a>
 					<span>
 						<span id="bell2">
