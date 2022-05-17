@@ -7,7 +7,29 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="sweetalert2.all.min.js"></script>
-
+<style>
+.swal-text {
+  font-size: 20px;
+  text-align: center;
+}
+.swal-modal {
+  width: 350px;
+  height: 0px
+  }
+  .swal-title{
+  color: #A7CA37;
+  }
+ .swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  width:350px;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  background-color: #A7CA37;
+  text-align: center
+}
+</style>
 <div id="imgslider">
 	<div id="slider-div">
 		<div>
@@ -99,8 +121,8 @@
 		if (id == "") {
 		
 			swal({
-				icon:"warning",
-				title:"로그인후 이용가능합니다",
+				icon:"error",
+				title:"  로그인후 이용가능합니다 . ",
 				button:"로그인하기"
 				  
 			}).then(function(result){
@@ -114,7 +136,6 @@
 			
 		}
 	});
-		
 	
 		
 			
