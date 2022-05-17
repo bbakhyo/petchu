@@ -69,4 +69,9 @@ public class CleaningDAOImpl implements CleaningDAO{
 		
 	}
 
+	@Override
+	public int cleaningTotalCount() {
+		return session.selectOne(namespace + ".cleaningTotalCount");
+	}
+
 }

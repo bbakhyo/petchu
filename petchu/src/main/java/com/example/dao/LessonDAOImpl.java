@@ -78,4 +78,11 @@ public class LessonDAOImpl implements LessonDAO {
 		session.update(namespace + ".lChooseUpdate", lrno);
 		
 	}
+
+
+	@Override
+	public int lessongTotalCount() {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".lessonTotalCount");
+	}
 }
