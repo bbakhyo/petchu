@@ -135,4 +135,11 @@
 	<select id="shop_review_list" resultType="com.example.domain.shopcartVO">
 		select * from review where pno=#{pno} order by rid desc;
 	</select>
+<!-- 	// -->
+	<select id="order_item_qnt" resultType="int">
+		select count(*) from orderlist where orno=#{orno};
+	</select>
+	<select id="order_sum" resultType="int">
+		select sum from user_order where orno=#{orno};
+	</select>
 </mapper>

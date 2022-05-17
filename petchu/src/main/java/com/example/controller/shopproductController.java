@@ -237,7 +237,6 @@ public class shopproductController {
 		opm.setDisplayPageNum(5);  //pagination에서 페이지 버턴 몇개식 보이는
 		omap.put("pm", opm);
 		omap.put("olist", cartdao.order_list(uid,cri));
-
 		return omap;
 	}
 	
@@ -323,9 +322,13 @@ public class shopproductController {
 //	//주문상황 출력
 	@RequestMapping(value="state_read", method=RequestMethod.POST)
 	@ResponseBody
-	public shopcartVO state_read(String orno){
+	public Map<String,Object> state_read(String orno){
 		shopcartVO resutlState = cartdao.state_read(orno);
-		return resutlState;
+		Map<String,Object> map=new HashMap<>();
+		map.put("sum", cartdao.order_sum(orno));
+		map.put("qnt", cartdao.order_item_qnt(orno));
+		map.put("vo", cartdao.state_read(orno));
+		return map;
 	}
 	
 	//상품 리뷰목록 json

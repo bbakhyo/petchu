@@ -191,4 +191,14 @@ public class shopcartDAOImpl implements shopcartDAO{
 	public List<shopcartVO> shop_review_list(int pno) {
 		return session.selectList(namespace+".shop_review_list", pno);
 	}
+
+	@Override
+	public int order_item_qnt(String orno) {
+		return session.selectOne(namespace+".order_item_qnt", orno);
+	}
+
+	@Override
+	public int order_sum(String orno) {
+		return session.selectOne(namespace+".order_sum", orno);
+	}
 }
