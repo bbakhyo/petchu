@@ -213,5 +213,10 @@ public class ReviewController {
 	
 		return "/home";
 	}
+	
+	@RequestMapping("/idReview.json")
+	public String idReview(Model model,Criteria cri){
+		return "/home";
+	}
 
 }
