@@ -15,7 +15,10 @@
 	min-width: 960px;
 	text-align: center;
 }
-
+#pointarea{
+	margin-right: 20px;
+	color: gray;
+}
 #page {
 	
 	margin-bottom: 50px;
