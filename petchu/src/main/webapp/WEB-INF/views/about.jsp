@@ -67,7 +67,7 @@
 		onClick="location.href='/user/sendpage?id=${id}'">
 		<div class="menu_img">
 			<img src="/resources/icon_hospital_2.png" width=100>
-		</div>
+		</div> 
 		<p>병원 견적</p>
 	</div>
 	<div class="menu_box" onClick="location.href='/service/request'">
