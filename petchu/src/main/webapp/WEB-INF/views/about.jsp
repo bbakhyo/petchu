@@ -104,7 +104,7 @@
 				
 			}).then(function(result){
 				console.log(result);
-		        
+		         
 		        if(result){
 		        	location.href = "/user/login";
 		        }
