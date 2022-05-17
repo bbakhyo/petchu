@@ -48,6 +48,14 @@ public class ProductController {
 		model.addAttribute("pageName", "product/userMG.jsp");
 		return "/home";
 	}
+	
+	@RequestMapping("/chart")
+	public String chart(Model model){
+		model.addAttribute("submenu", "submenu.jsp");
+		model.addAttribute("pageName", "product/chart.jsp");
+		return "/home";
+	}
+	
 	@RequestMapping("/userList.json")
 	@ResponseBody
 	public HashMap<String, Object> userListJSON(Criteria cri){

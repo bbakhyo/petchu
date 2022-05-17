@@ -454,10 +454,10 @@ Handlebars.registerHelper("display", function(sum){
 			}
 			
 			var IMP = window.IMP; // 생략가능
-			IMP.init('imp61649606'); 
+			IMP.init('imp71996590'); 
 			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
 			IMP.request_pay({
-				pg: 'inicis',
+				pg: 'kakaopay',
 				pay_method: 'card',
 				merchant_uid: 'merchant_' + new Date().getTime(),
 				/* 

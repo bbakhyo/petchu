@@ -40,11 +40,16 @@
 						<p class="dname">{{scname}}</p>
 						<p>{{sedate}}</p>
 						<p class="ellipsis">{{description}}</p> </br>
-						<p class="drprice">{{price}}원</p>
+						<p class="drprice">{{display price}}</p>
 					</div>
 				{{/each}}
 			</script>
     </div>
+    <script>
+    Handlebars.registerHelper("display", function(price){
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+     });
+    </script>
     <div class="content-dis">
       <div id="content-dis2"><h2 id="text2" style="display:none;">요청서 작성 후 견적서를 받을 수 있습니다</h2></div>
     		<script id="temp2" type="text/x-handlebars-template">

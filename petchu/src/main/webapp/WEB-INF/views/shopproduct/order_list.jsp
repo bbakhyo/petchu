@@ -66,8 +66,8 @@
 		</tr>
 		<tr>
 			<td rowspan="2"><img class="image" src="{{pimage}}" width=100></td>
-			<td>{{pname}} · {{amount}}개</td>
-			<td class="price" pprice="{{pprice}}" amount="{{amount}}">가격*수량 값</td>
+			<td>{{pname}} · <span class="oamount">{{amount}}개</span></td>
+			<td>총 <span class="price" pprice="{{pprice}}" amount="{{amount}}"></span>원</td>
 		</tr>
 		</tbody>
 		{{/each}}
@@ -109,13 +109,13 @@ function getList() {
 			$("#tbl").html(template(data));
 			$(".pagination").html(getPagination(data));
 			
-			//가격 계산
-			$(".price").each(function(){
-				var pprice = $(this).attr("pprice");
-				var amount = $(this).attr("amount");
-				var final_price = Number(pprice) * Number(amount);
-				$(this).html(final_price);
-			});
+// 			//가격 계산
+// 			$(".price").each(function(){
+// 				var pprice = $(this).attr("pprice");
+// 				var amount = $(this).attr("amount");
+// 				var final_price = Number(pprice) * Number(amount);
+// 				$(this).html(final_price);
+// 			});
 			
 			//orno별 구분선 등록
 			var tno = "";
@@ -123,9 +123,9 @@ function getList() {
 			var i = 0
 			$(".tbody").each(function(){
 				orno = $(this).attr("orno");
-				console.log(orno);
+// 				console.log(orno);
 				var test = document.getElementsByClassName('tbody')[i];
-				console.log(test);
+// 				console.log(test);
 				i++;
 				if(tno==""||tno!=orno){
 // 					alert("tno=" + tno + "\norno=" + orno);
@@ -133,7 +133,7 @@ function getList() {
 					$(this).find(".date_tr").find(".date_td").attr("date_only", "date_only");
 				}
 				tno=orno;
-				console.log(tno);
+// 				console.log(tno);
 			});	
 			$(".date_td").each(function(){
 				if(!$(this).attr("date_only")){
@@ -143,12 +143,8 @@ function getList() {
 				}
 			});
 			
-			//가격포맷
-			$(".price").each(function(){
-				var fprice = $(this).html();
-				fprice=fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-				$(this).html(fprice + "원");
-			});
+			getState();
+
 			getGrayLine();//구분선 긋기
 			
 			//날짜포맷
@@ -160,7 +156,7 @@ function getList() {
 				strDate = strDate.replace("-", ".");
 				$(this).html(strDate);
 			});
-			getState();
+		
 		}
 	});
 }
@@ -207,19 +203,39 @@ function getState(){
 				orno:orno
 			},
 			url : "/shopproduct/state_read",
-			success : function(data){//success를 무시하고 넘어간 이후에 한 번에 success 처리되기 때문인 듯
-				state = data.state;
+			success : function(data){
+				state = data.vo.state;
+// 				console.log(data.vo.state);
+// 				console.log(data.sum);
+// 				console.log(data.qnt);
 				if(state==0){
 					state='배송 준비중';
-					onthis.css("color", "");
+					onthis.css("color", "blue");
 				}else if(state==1){
 					state='배송중';
+					onthis.css("color", "red");
 				}else{
 					state='배송완료';
+					onthis.css("font-weight", "bold");
 				}
 				onthis.html(state);
-				}
-			});
+// 				+"\n"+data.sum+"\n"+data.qnt
+				var tbody = onthis.parent().parent().parent();
+				tbody.find(".price").html(data.sum);
+				tbody.find(".oamount").html("외 " + data.qnt + "개");
+				tbody.find(".oamount").css("font-weight", "bold");
+				
+				//가격포맷
+				$(".price").each(function(){
+					var fprice = $(this).html();
+// 					console.log(fprice);
+					fprice=fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+					$(this).html(fprice);
+				});
+			}
+			});//ajax 끝
+		
+		
 	});
 }
 </script>

@@ -137,47 +137,40 @@ public class ReviewController {
 		
 		
 		@RequestMapping(value="/insert", method=RequestMethod.POST)
-		@ResponseBody
 		public String insert(ReviewVO vo,MultipartHttpServletRequest multi, String uid)throws Exception{
-			System.out.println(uid+"ㅅㅂ진짜 이게 말이 되냐고");
+			System.out.println(vo.getUid()+"ㅅㅂ진짜 이게 말이 되냐고");
 			vo.setUid(uid);
-			System.out.println(uid+"\n"+vo.getUid()+"<<<<<<<<<<<");
 			int result = dao.user_review_count(uid, vo.getBno());
 			System.out.println(vo.toString()+"\n"+result+"<<<<<<<<<<<<");
 			if(result>0){
 				System.out.println("1개 이상 존재");
-				return "redirect:/review/insert?pno="+vo.getPno()+"&bno="+vo.getBno();	//값이 1개 이상일 때
+				return  "redirect:insert";	//값이 1개 이상일 때
 			}
-			
 //			System.out.println(vo.toString()+"\ntttttttttttteeeeeeeeeest======="+vo.getUid());
-			System.out.println(".................file: "+vo.getRimage1());
+			
 			List<MultipartFile> fileList = multi.getFiles("uploadFile");
-			int i = 0;
-			System.out.println(".................if문 직전: "+vo.getRimage1());
-			if(fileList.size() != 0){
-				
-					if(fileList.isEmpty()){
-						System.out.println(".................if문 들어옴: "+vo.getRimage1());
-						for(MultipartFile mf : fileList){
-							String image = System.currentTimeMillis() + "_" + mf.getOriginalFilename();
-								mf.transferTo(new File(path + image ));
-								i++;
-								System.out.println("..." + image + ":" + i + "번째" );
-								
-								if(i==1){
-									vo.setRimage1(image);
-									
-								}
-								if(i==2){
-									vo.setRimage2(image);
-								}	
-						}
+			int i=0;
+			if(fileList.size()!=0){
+				for(MultipartFile mf : fileList){
+					String image = "review/shopproduct/" + System.currentTimeMillis() + "_" + mf.getOriginalFilename();
+					
+					mf.transferTo(new File(path + image));
+					i++;
+					System.out.println("갸아아아아아아악" + image + ":" + i + "번째");
+					if(i==1){
+						vo.setRimage1(image);
 					}
-				
+					if(i==2){
+						vo.setRimage2(image);
+					}
+					if(i==3){
+						vo.setRimage3(image);
+					}
+				}
 			}
 			
 			dao.insert(vo);
-//			System.out.println(vo.toString());
+			System.out.println(vo.toString());
 //			return "0개";
 			return "redirect:/review/list";
 			
@@ -218,6 +211,11 @@ public class ReviewController {
 		model.addAttribute("join" ,odao.join(cri));
 		model.addAttribute("pageName", "review/reviewable.jsp");
 	
+		return "/home";
+	}
+	
+	@RequestMapping("/idReview.json")
+	public String idReview(Model model,Criteria cri){
 		return "/home";
 	}
 

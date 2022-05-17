@@ -42,7 +42,7 @@ public class shopcartVO {
 	private String rtitle; //한줄요약
 	private double star; //별
 	private String review; //리뷰 내용
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
+	@JsonFormat(pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date rdate; //리뷰작성시간
 	private String rimage1; 
 	private String rimage2; //상품이미지

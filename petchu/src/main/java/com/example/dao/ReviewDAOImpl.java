@@ -30,7 +30,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 		omap.put("review", vo.getReview());
 		omap.put("pno", vo.getPno());
 		omap.put("bno", vo.getBno());
-//		System.out.println("test====="+omap);
+		omap.put("rimage1", vo.getRimage1());
+		omap.put("rimage2", vo.getRimage2());
+		omap.put("rimage3", vo.getRimage3());
+		System.out.println("test====="+omap);
 		session.insert(namespace + ".insert", omap);
 		
 	}
@@ -77,6 +80,16 @@ public class ReviewDAOImpl implements ReviewDAO {
 		map.put("bno", bno);
 		System.out.println(map+">>>>>>>><<<<<<");
 		return session.selectOne(namespace+".user_review_count", map);
+	}
+
+	@Override
+	public List<ReviewVO> idReview(String uid) {
+		return session.selectList(namespace + ".idReview", uid);
+	}
+
+	@Override
+	public int idReviewCount(String uid) {
+		return session.selectOne(namespace + ".idReviewCount", uid);
 	}
 
 

@@ -4,6 +4,31 @@
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
 <style>
+input[type=checkbox]{
+	width: 20px;
+	height: 20px;
+}
+#cke_editor{
+	margin-left: 180px;
+}
+#button{
+	margin: 30px;
+	margin-left: 460px;
+}
+.button, button, input[type=file]{
+	border: none;
+    padding: 8px 12px 8px 12px;
+    background-color: A7CA37;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 900px;
+    color: white;
+    cursor: pointer;
+}
+input[type=text],input[type=number],select{
+	height: 35px;
+	margin: 5px;
+}
 #page{
 	text-align: center;
 	margin: 0px auto;
@@ -136,7 +161,7 @@
 			</tr>
 			
 		</table>
-		<div style="margin-top:20px;">
+		<div style="margin-top:20px; margin-left: 30px;">
 			<textarea id="editor" rows="100" cols="60" name="scdetail_description" >상세설명을 입력해 주세요</textarea>
 		</div>
 		<div id="button">
@@ -164,29 +189,29 @@
 		var scaddress2= $(frm.scaddress2).val();
 		
 		if(scname==""){
-			alert('업체명을 입력 해주세요')
+			swal('업체명을 입력 해주세요')
 			$(frm.scname).focus();
 			return;
 		}else if(strTel1=="" || strTel2==""|| strTel3=="") {
-			alert('전화번호를 입력 해주세요')
+			swal('전화번호를 입력 해주세요')
 			$(frm.sctel1).focus();
 			return;
 		}else if(sclicense=="") {
-			alert('사업자번호를 입력 해주세요')
+			swal('사업자번호를 입력 해주세요')
 			$(frm.sclicense).focus();
 			return;
 		}else if(file=="") {
-			alert('업체 이미지를 등록 해주세요')
+			swal('업체 이미지를 등록 해주세요')
 			return;
 		}else if(backfile=="") {
-			alert('업체 백그라운드 이미지를 등록 해주세요')
+			swal('업체 백그라운드 이미지를 등록 해주세요')
 			return;
 		}else if(sconeline=="") {
-			alert('한줄메세지를 등록 해 주세요')
+			swal('한줄메세지를 등록 해 주세요')
 			$(frm.sconeline).focus();
 			return;
 		}else if(sczipcode == "" || scaddress1 == "" || scaddress2 == ""){
-			alert('주소지를 등록 해 주세요')
+			swal('주소지를 등록 해 주세요')
 			
 		}else{
 			if(!confirm(scname+" 을(를) "+sccate+" 로 등록 하실래요? ")) return;

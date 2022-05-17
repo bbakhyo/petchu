@@ -237,7 +237,6 @@ public class shopproductController {
 		opm.setDisplayPageNum(5);  //pagination에서 페이지 버턴 몇개식 보이는
 		omap.put("pm", opm);
 		omap.put("olist", cartdao.order_list(uid,cri));
-
 		return omap;
 	}
 	
@@ -275,7 +274,8 @@ public class shopproductController {
 		model.addAttribute("uvo", cartdao.order_read_user(orno));
 		model.addAttribute("ovo", cartdao.read_user_order(orno));
 		model.addAttribute("del", cartdao.is_del(orno));
-		model.addAttribute(	"pageName", "shopproduct/order_read.jsp");
+		model.addAttribute("state", cartdao.state_read(orno));
+		model.addAttribute("pageName", "shopproduct/order_read.jsp");
 		return "/home";
 	}
 
@@ -323,9 +323,13 @@ public class shopproductController {
 //	//주문상황 출력
 	@RequestMapping(value="state_read", method=RequestMethod.POST)
 	@ResponseBody
-	public shopcartVO state_read(String orno){
+	public Map<String,Object> state_read(String orno){
 		shopcartVO resutlState = cartdao.state_read(orno);
-		return resutlState;
+		Map<String,Object> map=new HashMap<>();
+		map.put("sum", cartdao.order_sum(orno));
+		map.put("qnt", cartdao.order_item_qnt(orno));
+		map.put("vo", cartdao.state_read(orno));
+		return map;
 	}
 	
 	//상품 리뷰목록 json
@@ -336,4 +340,13 @@ public class shopproductController {
 		List<shopcartVO> list=cartdao.shop_review_list(pno);
 		return list;
 	}
+	
+//	//주문상황 출력
+	@RequestMapping(value="read_rcount", method=RequestMethod.POST)
+	@ResponseBody
+	public int read_rcount(int bno){
+		int result = cartdao.read_rcount(bno);
+		return result;
+	}
+
 }

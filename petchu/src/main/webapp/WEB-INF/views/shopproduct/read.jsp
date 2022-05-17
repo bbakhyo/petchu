@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://kit.fontawesome.com/21038295a9.js" crossorigin="anonymous"></script>
 <link href="/resources/css/shopproduct_read.css" rel="stylesheet">
 <script data-require="jquery@3.1.1" data-semver="3.1.1"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -16,6 +17,26 @@
 	}
 	.info_container_row1{
 		justify-content: center;
+	}
+	.tabcontent {
+		text-align : left;
+	}
+	#tbl hr {
+		width : 920px;
+	}
+	.fa-thumbs-up {
+		cursor : pointer;
+	}
+	.fa-stack-2x, .fa-stack-1x{
+		position: static;
+    	text-align: start;
+    	width: 0%;
+	}
+	.btnUpdate {
+		visibility:hidden; 
+	}
+	.btnDelete {
+		visibility:hidden;
 	}
 </style>
 <%-- <head>
@@ -165,10 +186,43 @@
 			<h3>리뷰</h3>
 			<div id="re">
 <!-- 				여기 작업중 -->
-				<table id="tbl"></table>
+				<div id="tbl"></div>
 				<script id="temp" type="text/x-handlebars-template">
 					{{#each .}}
-						<span>({{review}}){{rid}}</span><br>
+					<div class="check">
+						<p style="margin-bottom : 0px;">{{uid}}</p>
+
+						<select name="" class="makeStar">
+							<option value="0">0</option>
+							<option value="1">1</option>				
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+
+					<div class="rate" style="display:inline;" data-rate="{{star}}" uid={{uid}}>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i> 
+					</div>
+					<span style="font-size: 12px; color: #555;">{{rdate}}</span> </br>
+					<div style=" display : inline; float : right; position : relative; bottom : 40;">
+						<button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
+					</div> 			
+					<div>
+						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}" disabled="disabled"> <br/><br/>
+ 					</div>
+					<span style="font-size: 13px;">{{helpcount}}명에게 도움 됨</span>
+
+
+						<i rid="{{rid}}" id="goodBlack" class="fa-solid fa-thumbs-up" ></i>
+						<i rid="{{rid}}" id="goodBlue" class="fa-solid fa-thumbs-up" style="color:skyblue; display : none;"></i>
+
+					<hr>
+					</div>
 					{{/each}}
 				</script>
 
@@ -340,6 +394,7 @@ console.log(pprice);
 	var cate1 = "${cate}";
 	var cate2 = "${cate2}";
 	var cate3 = "${cate3}";
+
 	
 	$(".backcontents").on(
 			"click",
@@ -493,8 +548,73 @@ console.log(pprice);
 			success:function(data){
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
+				
+				var ratingClick = document.getElementsByClassName("rate");
+				var starClick = document.getElementsByClassName("fa-star");
+				var makeStar = document.getElementsByClassName("makeStar");
+				var btnUpdate = document.getElementsByClassName("btnUpdate");
+				var btnDelete = document.getElementsByClassName("btnDelete");
+				var text1 = document.getElementsByClassName("reviewText");
+				
+				var rate = $('#tbl .rate');
+				var rating2 = $('#tbl .rating2');
+					rate.each(function(){
+						var tagetscore = $(this).attr("data-rate");
+						var row= $(this).parent();
+						row.find("#makeStar").val(tagetscore);
+						$(this).find('.fa-solid').css({color:'#D3D3D3'});
+						$(this).find('.fa-solid:nth-child(-n+' + tagetscore + ')').css({color:'#F08d28'});
+					});
+					
+					for(i=0; i < ratingClick.length; i++){
+						var uidCheck = ratingClick[i].getAttribute("uid");
+						var uid="${id}";
+						
+						if(uidCheck == uid){
+							ratingClick[i].style.cursor= "pointer";
+							btnUpdate[i].style.visibility = "visible";
+							btnDelete[i].style.visibility = "visible";
+							
+							btnUpdate[i].addEventListener('click', function(){
+								var ccc = $(this).parent().parent();
+								var ccc2 = ccc.find('.reviewText');
+								ccc2.prop('disabled', false);
+							/*  text1[i].removeAttribute("disabled");
+ 								alert("sdflkjsdflkdsjf");  */
+							});
+						}
+					}	
 			}
 		});
 	}
+	$(document).ready(function(){ //댓글 추천
+		$("#tbl").on("click", ".fa-thumbs-up", function(){
+			var rid=$(this).attr("rid");
+			var uid="${id}";
+			alert(rid + "\n" + uid);
+			$.ajax({
+				type: "post",
+				url: "/help/updateHelp",
+				data: {rid:rid, uid:uid},
+				success:function(helpCheck){
+					alert("helpCheck= " + helpCheck);
+					$("#helpCheck").html("helpCheck");
+					if(helpCheck == 0){ //중복체크
+						alert("추천성공!");
+						getList();
+					}
+					else if(helpCheck == 1){
+						alert("추천취소!");
+						getList();
+						
+					}
+					
+				}
+				
+			});
+		});
+	});
+	
+	
 </script>
 </html>

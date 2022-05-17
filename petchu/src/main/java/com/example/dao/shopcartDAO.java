@@ -39,4 +39,9 @@ public interface shopcartDAO {
 	public int order_count(String uid);
 	public shopcartVO state_read(String orno);
 	public List<shopcartVO> shop_review_list(int pno);
+	public int order_item_qnt(String orno);
+	public int order_sum(String orno);
+	public int read_state(String orno);
+	public int read_rcount(int bno);
+	
 }

@@ -195,6 +195,11 @@ td {
 .btn_dot:active {
 	margin-bottom: 10px;
 }
+/* button:disabled{ */
+/*   border: 1px solid #999999; */
+/*   background-color: #cccccc; */
+/*   color: #666666; */
+/* } */
 </style>
 <div id="page">
 	<div style="text-align: center; overflow: hidden;">
@@ -203,7 +208,7 @@ td {
 				<h2>주문상세</h2>
 			</div>
 			<div>
-				<b><span class="date">${uvo.odate}</span></b><span class="orno">주문번호:
+				<b><span class="date">${uvo.odate}</span></b><span class="state">배송현황</span><span class="orno">주문번호:
 					${orno} </span>
 			</div>
 		</div>
@@ -272,8 +277,8 @@ td {
 		</tr>
 	</table>
 	<div>
-		<button class="btn_review" style="margin-top:100px;" onclick='goBack()'>목록으로 돌아가기</button>
-		<button class="btn_review" style="margin-left:20px;">상품 문의하기</button>
+		<button class="goBack btn_item_read" style="margin-top:100px;" onclick='goBack()'>목록으로 돌아가기</button>
+		<button class="btn_FAQ btn_item_read" style="margin-left:20px;">상품 문의하기</button>
 	</div>
 
 	<script id="temp" type="text/x-handlebars-template">
@@ -334,6 +339,7 @@ td {
 					var i = final_price;
 					//삭제된 값을 제외한 가격
 					withoutDel = withoutDel + Number(i)
+
 				});
 				var sum = "${ovo.sum}" - withoutDel;
 				//.date 날짜포맷
@@ -358,6 +364,18 @@ td {
 				if(dataLength==0){
 					location.href="/shopproduct/order_list";
 				}
+				
+				//state 값이 [배송완료]가 아니라면 리뷰 작성 불가능하도록
+				var state = "${state.state}"
+				if(state==0){ //배송준비중
+					$(".state").html("배송현황: 배송 준비중");
+					$(".btn_review").attr("state", 0);
+				}else if(state==1){ //배송준비중
+					$(".state").html("배송현황: 배송중");
+				}else if(state==2){
+					$(".state").html("배송현황: 배송완료");
+					$(".btn_review").attr("state", 2);
+				}
 			}
 		});
 	}
@@ -368,7 +386,7 @@ td {
 		location.href = "/shopproduct/read?pno=" + pno;
 	});
 	
-	//  ↑↓  왜인지 모르겠으나 둘 중 하나만 사라져도 작동이 안 됨. 감수성의 영역.
+	//  ↑↓  왜인지 모르겠으나 둘 중 하나만 사라져도 작동이 안 됨.
 	
 	//상품 이미지 클릭시 해당 페이지로 이동2
 	$("#tbl").on("click", ".image", function() {
@@ -439,10 +457,33 @@ td {
 	}
 	
 	//리뷰 페이지 입장
+	var result = "";
 	function goReview(e){
+		var state = $(e).attr("state");
+// 		alert(state);
+		if(state!=2){
+			alert("배송완료 이후 작성할 수 있습니다.")
+			return;
+		}
+		//이미 등록한 리뷰가 있는지 확인
+// 		var bno = $(e).attr("bno");
 		pno = $(e).attr("pno");
 		bno = $(e).attr("bno");
-		location.href="/review/insert?pno="+pno+"&bno="+bno;
+		$.ajax({
+			type: "post",
+			url: "/shopproduct/read_rcount",	
+			data: {bno:bno},
+			success: function(data){
+				result = data;
+				if(Number(result)>0){
+					alert("기존 리뷰가 존재합니다!");
+					if (!confirm("해당 상품 페이지로 이동하시겠습니까?")) return;
+					location.href="/shopproduct/read?pno="+pno;
+				}else if(result == 0){	//리뷰가 0이라면 값을 가지고 이동
+					location.href="/review/insert?pno="+pno+"&bno="+bno;
+				}
+			}
+		});
 	}
 	
 	//기록삭제 버튼 노출
@@ -466,4 +507,6 @@ td {
 			}
 		});
 	}
+	
+
 </script>

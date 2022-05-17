@@ -1,12 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<style>
+#keyword{
+	width: 300px;
+	height: 50px;
+	margin-bottom: 40px;
+	border-radius: 10px;
+	border: 5px solid #A7CA37;
+}
+#search{
+	width: 80px;
+	height: 50px;
+	background-color: #A7CA37;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+#insert{
+	width: 120px;
+	height: 35px;
+	background-color: #A7CA37;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+input[type=checkbox]{
+	width: 20px;
+	height: 20px;
+	border: 2px solid #A7CA37;
+	border-radius: 10px;
+}
+</style>
 <div id="page">
 	<div id="menu">
 		<jsp:include page="${submenu}"/>
 	</div>
 	<form name="frm" width=960>
-		<input type="text" name="query">
-		<button type="submit">검색</button>
+		<input type="text" name="query" id="keyword">
+		<button type="submit" id="search">검 &nbsp;&nbsp;색</button>
 		검색건수: <span id="total"></span>건
 	</form>
 	<table id="tbl" style="width: 960px;"></table>

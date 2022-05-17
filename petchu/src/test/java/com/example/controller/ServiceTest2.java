@@ -26,6 +26,6 @@ public class ServiceTest2 {
     @Test
     public void getTime(){
     	
-    	dao.chartPrice();
+    	dao.chartDate();
     }
 }
