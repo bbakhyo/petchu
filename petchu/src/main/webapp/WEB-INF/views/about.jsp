@@ -1,11 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link href="/resources/css/about.css" rel="stylesheet">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="sweetalert2.all.min.js"></script>
+<style>
+.swal-text {
+  font-size: 20px;
+  text-align: center;
+}
+.swal-modal {
+  width: 350px;
+  height: 0px
+  }
+  .swal-title{
+  color: #A7CA37;
+  }
+ .swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  width:350px;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  background-color: #A7CA37;
+  text-align: center
+}
+</style>
 <div id="imgslider">
 	<div id="slider-div">
 		<div>
@@ -20,6 +44,41 @@
 	</div>
 </div>
 <div id="about">
+<c:if test="${id==null }">
+	<div class="menu_box">
+		<div class="menu_img">
+			<img src="/resources/icon_shopping.png" width=100>
+		</div>
+		<p>쇼핑몰</p>
+	</div>
+	<div class="menu_box" id="disease"
+		 >
+		<div class="menu_img">
+			<img src="/resources/icon_hospital_2.png" width=100>
+		</div>
+		<p>병원 견적</p>
+	</div>
+	<div class="menu_box" >
+		<div class="menu_img">
+			<img src="/resources/icon_wash.png" width=100>
+		</div>
+		<p>서비스 견적</p>
+	</div>
+	<div class="menu_box"  >
+		<div class="menu_img">
+			<img src="/resources/icon_joy.png" width=100>
+		</div>
+		<p>유치원 예약</p>
+	</div>
+	<div class="menu_box" >
+		<div class="menu_img">
+			<img src="/resources/icon_dog_food.png" width=100>
+		</div>
+		<p>쇼핑몰</p>
+	</div>
+	
+	</c:if>
+	<c:if test="${id!=null}" >
 	<div class="menu_box" onClick="location.href='/shopproduct/main'">
 		<div class="menu_img">
 			<img src="/resources/icon_shopping.png" width=100>
@@ -30,7 +89,7 @@
 		onClick="location.href='/user/sendpage?id=${id}'">
 		<div class="menu_img">
 			<img src="/resources/icon_hospital_2.png" width=100>
-		</div>
+		</div> 
 		<p>병원 견적</p>
 	</div>
 	<div class="menu_box" onClick="location.href='/service/request'">
@@ -51,17 +110,35 @@
 		</div>
 		<p>쇼핑몰</p>
 	</div>
+	</c:if>	
+	
+	
 </div>
 <script>
 	$(".menu_box").on("click", function(e) {
 		e.preventDefault();
 		var id = "${id}"
 		if (id == "") {
-			swal("로그인후 이용가능합니다.");
-			location.href = "/user/login";
+		
+			swal({
+				icon:"error",
+				title:"  로그인후 이용가능합니다 . ",
+				button:"로그인하기"
+				  
+			}).then(function(result){
+				console.log(result);
+		         
+		        if(result){
+		        	location.href = "/user/login"; 
+		        }
+		        
+			})
+			
 		}
 	});
-
+	
+		
+			
 	$(function() {
 		$('#slider-div')
 				.slick(
@@ -83,7 +160,7 @@
 							draggable : true, //드래그 가능 여부 
 
 							responsive : [ // 반응형 웹 구현 옵션
-							{
+							{ 
 								breakpoint : 960, //화면 사이즈 960px
 								settings : {
 									//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
