@@ -7,7 +7,29 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="sweetalert2.all.min.js"></script>
-
+<style>
+.swal-text {
+  font-size: 20px;
+  text-align: center;
+}
+.swal-modal {
+  width: 350px;
+  height: 0px
+  }
+  .swal-title{
+  color: #A7CA37;
+  }
+ .swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  width:350px;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  background-color: #A7CA37;
+  text-align: center
+}
+</style>
 <div id="imgslider">
 	<div id="slider-div">
 		<div>
@@ -99,21 +121,21 @@
 		if (id == "") {
 		
 			swal({
-				title:"로그인후 이용가능합니다",
+				icon:"error",
+				title:"  로그인후 이용가능합니다 . ",
 				button:"로그인하기"
-				 
+				  
 			}).then(function(result){
 				console.log(result);
 		         
 		        if(result){
-		        	location.href = "/user/login";
+		        	location.href = "/user/login"; 
 		        }
 		        
 			})
 			
 		}
 	});
-		
 	
 		
 			
@@ -133,12 +155,12 @@
 							pauseOnHover : true, // 슬라이드 이동    시 마우스 호버하면 슬라이더 멈추게 설정
 							vertical : false, // 세로 방향 슬라이드 옵션
 							prevArrow : "<button type='button' class='slick-prev'>Previous</button>", // 이전 화살표 모양 설정
-						 	nextArrow : "<button type='button' class='slick-next'>Next</button>", // 다음 화살표 모양 설정
+							nextArrow : "<button type='button' class='slick-next'>Next</button>", // 다음 화살표 모양 설정
 							dotsClass : "slick-dots", //아래 나오는 페이지네이션(점) css class 지정
 							draggable : true, //드래그 가능 여부 
- 
+
 							responsive : [ // 반응형 웹 구현 옵션
-							{
+							{ 
 								breakpoint : 960, //화면 사이즈 960px
 								settings : {
 									//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
