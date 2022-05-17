@@ -111,7 +111,21 @@ span.input-text qty text {
 share::after{
 	
 }
-	
+.favorite{
+	width: 45px;
+	height: 45px;
+	cursor: pointer;
+}
+.favorite_active{
+	width: 45px;
+	height: 45px;
+	cursor: pointer;
+}
+.share_button{
+	width: 45px;
+	height: 45px;
+	cursor: pointer;	
+}
 .price_container_quantity_value {
 	width: 470px;
 	height: 15px;
@@ -591,8 +605,23 @@ line-height: 20px;
 }
 .shopproduct_read_buttons{
 	height: 50px;
-	width: 100px;
+	width: 110px;
+
+	display: flex;
 }
 .none{
 	display: none;
 }
+.share_options{
+	position: absolute;
+	display: none;
+	width: 480px;
+	height: 51px;
+	padding: 15px 10px;
+	box-sizing: border-box;
+	border: 1px solid #888;
+	background-color: white;
+	
+}
+
+

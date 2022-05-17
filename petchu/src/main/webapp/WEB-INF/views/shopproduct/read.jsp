@@ -39,13 +39,17 @@
 							<span id="product_price" data-pprice="${vo.pprice}"> 상품가격: </span><fmt:formatNumber value="${vo.pprice}" pattern="#,###원" />
 						</div>
 						<div class="shopproduct_read_buttons">
-							<div class="share_before">
-							<img src="/resources/icon_menu/share_before.png" alt='share'>
+							<div class="favorite" onclick=favorite()>
+								<img src="/resources/icon_menu/share_before.png" alt='share' width=45>
 							</div>
-							<div class="share_after none">
-							<img src="/resources/icon_menu/share_afer.png" alt='share'>
+							<div class="favorite_active none" onclick=un_favorite()>
+								<img src="/resources/icon_menu/share_after.png" alt='share' width=45>
 							</div>
-							<img src="/resources/icon_menu/shopproduct_share.png" alt='share'>
+							<div class="share_button" onclick=btn_share()>
+								<img src="/resources/icon_menu/shopproduct_share.png" alt='share' width=47 onclick=btn_share()>
+								<div class="share_options" ></div>
+							</div>
+							
 							
 							
 							
@@ -67,7 +71,7 @@
 					
 						<!-- 금액 -->
 						<div class="info_container_row1">
-							최종가격: &nbsp;<span class="final_price">${vo.pprice}</span>원<div class="sharebutton"></div>
+							최종가격: &nbsp;<span class="final_price">${vo.pprice}</span>원
 						</div>
 						<!-- 결제 버턴 -->
 						<div class="info_payment_container3">
@@ -436,5 +440,30 @@ console.log(pprice);
 		fprice = fprice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		$(".final_price").html(fprice);
 	}
+</script>
+<script>
+
+	/* 찜버턴 활성화 */
+	function favorite(){
+		var item = $(".payment_buttons").find(".cart_add");
+		var pno = item.data("pno")
+		$(".favorite").css("display", "none");
+		$(".favorite_active").css("display", "block");
+		alert('hello, my pno is:'+pno);
+		
+	}
+	/* 찜버턴 비활성화 */
+	function un_favorite(){
+		$(".favorite_active").hide();
+		$(".favorite").show();
+	}
+	
+	function btn_share(){
+		var item = $(".payment_buttons").find(".cart_add");
+		var pno = item.data("pno");
+		$(".share_options").show();
+		
+	}
+	
 </script>
 </html>

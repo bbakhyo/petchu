@@ -6,7 +6,6 @@
 <link href="/resources/temp_page.css" rel="stylesheet">
 <link href="/resources/css/content_list.css" rel="stylesheet">
 <style>
-
 </style>
 </head>
 <body>
@@ -25,65 +24,62 @@
 			</select> <input type="text" name="keyword" id="search_text"> <input
 				type="button" value="검색" class="btn_search">
 		</div> -->
-		
+
 		<div class="top_nav_bar">
-  <div class="btn_all_container">
-    <a href="#" class="btn_show_all">전체보기</a>
-    </div>
-  
-  <div class="menu_container_main">
-  <div class="menu_container1">
-       
-           <div>펫타입: </div>
-            <div class="menu-options">
-            <div>
-              <input type="radio" name="main_category" id="menu_dog" checked>
-                <label for="menu_dog">
-                  강아지 
-                </label>
-            </div>
-            <div>
-              <input type="radio" name="main_category" id="menu_cat">
-                <label for="menu_cat">
-                  고양이
-                </label>
-            </div>
-           </div>
-  </div>
-<div class="menu_container2">
-  <div class="menu_title">선택: </div>
-    <div class="select_wrapper">
-	    <div class="select_container">
-	        <select name="animal_type" class="animal_type">
-	        <option>전체</option>
-	        <option>강아지</option>
-	        <option>고양이</option>
-	      </select>
-	
-	      <select name="item_type" class="item_type">
-	        <option>전체</option>
-	        <option>사료</option>
-	        <option>간식</option>
-	        <option>용품</option>
-	      </select>
-	     </div>
-    </div>
-    </div>
-  
-  <div class="menu_container3">
-    <div class="menu_item1"></div>
-  <div class="menu_item2">
-      <div class="searchfield">
-        <input type="text" name="keyword" id="search_text">
-        <div class="btn_search"><img src="/resources/icon_menu/icon_navbar_loupe.png" alt='search icon' width=40></div>
-        
-    </div>
-  </div>
-  
-  </div>
-    </div>
-  <div class="menu_option_icon"><img src="/resources/icon_menu/navbar_list.png" width=40></div>
-</div>
+			<div class="btn_all_container">
+				<a href="#" class="btn_show_all">전체보기</a>
+			</div>
+
+			<div class="menu_container_main">
+				<div class="menu_container1">
+
+					<div>펫타입:</div>
+					<div class="menu-options">
+						<div>
+							<input type="radio" name="main_category" id="menu_dog" checked>
+							<label for="menu_dog"> 강아지 </label>
+						</div>
+						<div>
+							<input type="radio" name="main_category" id="menu_cat"> <label
+								for="menu_cat"> 고양이 </label>
+						</div>
+					</div>
+				</div>
+				<div class="menu_container2">
+					<div class="menu_title">선택:</div>
+					<div class="select_wrapper">
+						<div class="select_container">
+							<select name="animal_type" class="animal_type">
+								<option>전체</option>
+								<option>강아지</option>
+								<option>고양이</option>
+							</select> <select name="item_type" class="item_type">
+								<option>전체</option>
+								<option>사료</option>
+								<option>간식</option>
+								<option>용품</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="menu_container3">
+					<div class="menu_item1"></div>
+					<div class="menu_item2">
+						<div class="searchfield">
+							<input type="text" name="keyword" id="search_text">
+							<div class="btn_search">
+								<img src="/resources/icon_menu/icon_navbar_loupe.png"
+									alt='search icon' width=30>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
 
 		<div class="content_container">
 			<div class="content_item_container_row"></div>
