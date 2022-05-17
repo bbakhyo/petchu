@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <link href="/resources/css/order_list.css" rel="stylesheet">
 <style>
-/* #page {
+#page {
 	margin: 0px auto;
 }
 	.order_read{
@@ -44,45 +44,40 @@
 	}
 	.order_read{
 		color:blue;
-		
-	} */
+	}
+	.delState{	/* 	이놈 어떻게 해도 가운데정렬 안됨ㅅㅂ */
+		font-size: 20;
+ 	  	margin-left: 30%;
+	}
 </style>
-
-
-    <div id="page_orderlist">
-  <div id="page_heading">주문목록</div>
-  <div class="order_wrapper">
-	  <div id="tbl"></div>
-  			<script id="temp" type="text/x-handlebars-template">
-  		{{#each olist}}	
-      <div class="order_list_card" orno="{{orno}}" pno="{{pno}}">
-	      <div class="order_header tbody" tno="{{orno}}" pno="{{pno}}">
-		      <div class="order_date date_tr">{{odate}} 주문</div>
-		      <div class="order_read" orno="{{orno}}"><a href="#">주문 상세보기</a></div>
-		  </div>
-	      <div class="order_content_wrapper">
-	        	<div class="content_col1_imgbox"><img class="image order_img" src="{{pimage}}" width=100></div>
-	        <div class="content_col2_title">
-	          <div class="title ellipsis"><div class="pname_title">{{pname}}</div></div>
-	          <div class="qnt">{{amount}}개</div>
-	            <div class="price" pprice="{{pprice}}" amount="{{amount}}">{{pprice}}</div>
-	        </div>
-	        <div class="content_col3_options">  
-				<a href="#" class="orderlist">배송조회</a>  
-				<a href="#" class="orderlist">교환, 반품 신청</a>  
-				<a href="#" class="orderlist">리뷰 작성하기</a></div>
+<div id="page">
+	<h1>구매목록</h1>
+	<div id="sidemenu">
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
+	</div>
+	<table id="tbl"></table>
+	<script id="temp" type="text/x-handlebars-template">
+		{{#each olist}}	
+		<tbody class="tbody" orno="{{orno}}" pno="{{pno}}">
+		<tr class="date_tr" style="text-align:right;">
+			<td colspan="3"><span class="date_td">{{odate}}</span>
+				<span class="delState"></span>
+				<span class="order_read date_td" orno="{{orno}}" style="float: right;">주문 상세보기</span>
+			</td>
 			
-	     </div>
-		</div>
+		</tr>
+		<tr>
+			<td rowspan="2"><img class="image" src="{{pimage}}" width=100></td>
+			<td>{{pname}} · {{amount}}개</td>
+			<td class="price" pprice="{{pprice}}" amount="{{amount}}">가격*수량 값</td>
+		</tr>
+		</tbody>
 		{{/each}}
-      </script>
-    
- </div>
-  
-  <div class="footer">
-    <div class = "pagination"></div>
-  </div>
- </div>
+	</script>
+	  <div class="footer">
+	    <div class = "pagination"></div>
+	  </div>
+</div>
     
 <script>	
 var uid = "${id}";
@@ -132,37 +127,23 @@ function getList() {
 			});
 			
 			//orno별 구분선 등록
-/* 			var tno = "";
+ 			var tno = "";
 			var orno = "";
 			var i = 0
 			$(".tbody").each(function(){
 				orno = $(this).attr("orno");
+				console.log(orno);
 				var test = document.getElementsByClassName('tbody')[i];
+				console.log(test);
 				i++;
 				if(tno==""||tno!=orno){
-					//alert("tno=" + tno + "\norno=" + orno);
+// 					alert("tno=" + tno + "\norno=" + orno);
 					test.classList.add('border');
 					$(this).find(".date_tr").find(".date_td").attr("date_only", "date_only");
 				}
 				tno=orno;
-			});	 */
-			
-			
-		 	
-			 //item card		
-			 var i = 0;
-			$('.order_list_card').each(function(){
-			 	var orno = $(this).attr("orno");
-				
-				if( i > 0 && orno == orno){
-				var tabIndex = $('.order_header').index();
-				console.log(tabIndex);
-				}
-				i++;
-			})
-			
-			
-			
+				console.log(tno);
+			});	
 			$(".date_td").each(function(){
 				if(!$(this).attr("date_only")){
 					$(this).html("");
@@ -188,11 +169,7 @@ function getList() {
 				strDate = strDate.replace("-", ".");
 				$(this).html(strDate);
 			});
-			
-			
-// 			//같이 구매한 상품 가격포맷
-// 			getFormatPrice();
-			
+			getState();
 		}
 	});
 }
@@ -214,4 +191,44 @@ function getGrayLine(){
 	});
 }
 
+//메뉴바 css 정렬
+$(".sideMenu").css("margin-left", "0px");
+
+//페이지네이션 클릭시 페이지 이동
+$(".pagination").on("click", "a", function(e){
+	e.preventDefault();
+	page=$(this).attr("href");
+	getList();
+});
+
+//상품 배송정보 불러오기 
+function getState(){
+// 	alert("tq");
+	var state=0;
+	$(".delState").each(function(){
+		var onthis = $(this);
+		var orno = $(this).closest(".tbody").attr("orno");
+	//		alert(orno);
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			data : {
+				orno:orno
+			},
+			url : "/shopproduct/state_read",
+			success : function(data){//success를 무시하고 넘어간 이후에 한 번에 success 처리되기 때문인 듯
+				state = data.state;
+				if(state==0){
+					state='배송 준비중';
+					onthis.css("color", "");
+				}else if(state==1){
+					state='배송중';
+				}else{
+					state='배송완료';
+				}
+				onthis.html(state);
+				}
+			});
+	});
+}
 </script>

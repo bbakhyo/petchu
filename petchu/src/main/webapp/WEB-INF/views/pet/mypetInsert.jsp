@@ -14,7 +14,7 @@
 <div id="page">
 	<h1>마이펫 등록하기</h1>
 	<div id="sidemenu">
-		<jsp:include page="${sideMenu}" />
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
 	</div>
 	<form name="frm" action="insertPet" method="post" enctype="multipart/form-data">
 		<div id="contents">

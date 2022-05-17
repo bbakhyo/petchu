@@ -87,5 +87,15 @@ public class UserDAOImpl implements UserDAO {
 		return session.selectOne(namespace + ".userCount");
 	}
 
+	@Override
+	public List<HashMap<String, Object>> chartPrice() {
+		return session.selectList(namespace + ".chartPrice");
+	}
+
+	@Override
+	public List<HashMap<String, Object>> chartDate() {
+		return session.selectList(namespace + ".chartDate");
+	}
+
 	
 }

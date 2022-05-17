@@ -4,7 +4,12 @@
 <link href="/resources/css/hosread.css" rel="stylesheet"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
-
+<style>
+:disabled{
+	background-color: #e9ecef;
+	cursor:inherit; 
+	
+</style>
 <div id="page">
 
    <form name="frm">
@@ -251,25 +256,36 @@
 				var lastPage=Math.ceil(total/perPageNum);
 				$("#curpage").html(page+"/"+lastPage);
 				if(page==1){
-		               $("#prev").attr("disabled",true);
-		            }else{
-		               $("#prev").attr("disabled",false);
-		            }
-		            if(page==lastPage){
-		               $("#next").attr("disabled",true);
-		            }else{
-		               $("#next").attr("disabled",false);
-		            }
-		            //별점 부여
-		            $(".rate1").html("⭐");
-		            $(".rate2").html("⭐⭐");
-		            $(".rate3").html("⭐⭐⭐");
-		            $(".rate4").html("⭐⭐⭐⭐");
-		            $(".rate5").html("⭐⭐⭐⭐⭐"); 
-
-
-
-
+	               $("#prev").attr("disabled",true);
+	            }else{
+	               $("#prev").attr("disabled",false);
+	            }
+	            if(page==lastPage){
+	               $("#next").attr("disabled",true);
+	            }else{
+	               $("#next").attr("disabled",false);
+	            }
+	            //별점 부여
+	            $(".rate1").html("⭐");
+	            $(".rate2").html("⭐⭐");
+	            $(".rate3").html("⭐⭐⭐");
+	            $(".rate4").html("⭐⭐⭐⭐");
+	            $(".rate5").html("⭐⭐⭐⭐⭐"); 
+		        
+	            var id = "${id}";
+	            var scno = "${vo.scno}";
+	            $.ajax({
+	            	type:"post",
+	            	url: "/hoschool/reviewAllCount",
+	            	data:{id:id, scno:scno},
+	            	success: function(data){
+	            		if(data == 0){
+	            			$("#reviewContents").attr("disabled",true);
+	            			$("#reviewContents").attr("placeholder", "리뷰는 예약 후 작성이 가능합니다");
+	            		}
+	            	}
+	            });
+	            
 			}
 		});
 	}
@@ -294,12 +310,28 @@
 		e.preventDefault();
 		
 		var target = $(myform.comments).val();
+		 var id = "${id}";
+         var scno = "${vo.scno}";
+         $.ajax({
+         	type:"post",
+         	url: "/hoschool/reviewAllCount",
+         	data:{id:id, scno:scno},
+         	success: function(data){
+         		if(data == 0){
+         			swal("리뷰는 예약 후 작성이 가능합니다.")
+         		}else{
+         			if(target.length > 500){
+         				swal("500자 이내로 작성 가능합니다.")
+         			}else if(target.length == 0){
+         				swal("내용을 입력해주세요.")
+         			}
+         			if(!confirm("댓글을 등록하실래요?")) return;
+         			myform.submit();
+         		}
+         	}
+         });
 		
-		if(target.length > 500){
-			swal("500자 이내로 작성 가능합니다.")
-		}
-		if(!confirm("댓글을 등록하실래요?")) return;
-		myform.submit();
+		
 	});
 	//PG사 결제API
 	function payAPI(){
@@ -390,6 +422,8 @@
         formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
     }else if(num.indexOf('02')==0){
         formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+    }else if(num.length==12){
+        formatNum = num.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
     }else{
         formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
     }

@@ -15,6 +15,6 @@ public interface ReviewDAO {
 	public List<ReviewVO> join(Criteria cri);//reviewjoin
 	public int count();
 	public ReviewVO updateread(int rid);
-	
+	public int user_review_count(String uid, int bno);
 }
 

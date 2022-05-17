@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.dao.HoschoolDAO;
 import com.example.dao.RateDAO;
+import com.example.dao.ReserveDAO;
 import com.example.dao.UserDAO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
@@ -40,6 +41,9 @@ public class HoschoolController {
 	
 	@Autowired
 	RateDAO rdao;
+	
+	@Autowired
+	ReserveDAO vdao;
 	
 	
 	@Resource(name="uploadPath")
@@ -85,7 +89,6 @@ public class HoschoolController {
 	@RequestMapping("/myList")
 	public String myList(Model model, String id) {
 		model.addAttribute("list", dao.myList(id));
-		model.addAttribute("sideMenu","mypageSidemenu.jsp");
 		model.addAttribute("pageName", "user/mylist.jsp");
 		return "/home";
 	}
@@ -108,7 +111,6 @@ public class HoschoolController {
 	}
 	@RequestMapping("/insert")
 	public String insert(Model model) {
-		model.addAttribute("sideMenu","mypageSidemenu.jsp");
 		model.addAttribute("pageName", "hoschool/hosInsert.jsp");
 		return "/home";
 	}
@@ -117,6 +119,18 @@ public class HoschoolController {
 	@ResponseBody
 	public List<ServiceVO> mylist(String id) {
 		return dao.myList(id);
+	}
+	
+	@RequestMapping(value="/reviewAllCount", method=RequestMethod.POST)
+	@ResponseBody
+	public int reviewAllCount(String id, int scno) {
+		return dao.reviewAllCount(scno, id);
+	}
+	
+	@RequestMapping(value="/reviewWriteCount", method=RequestMethod.POST)
+	@ResponseBody
+	public int reviewWriteCount(String id, int scno) {
+		return dao.reviewWriteCount(scno, id);
 	}
 	
 	

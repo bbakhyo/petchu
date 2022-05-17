@@ -18,6 +18,7 @@ import com.example.dao.shopcartDAO;
 import com.example.dao.shopproductDAO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
+import com.example.domain.ReviewVO;
 import com.example.domain.shopcartVO;
 import com.example.domain.shopproductVO;
 import com.gargoylesoftware.htmlunit.javascript.host.Console;
@@ -318,5 +319,22 @@ public class shopproductController {
 	public void order_delete(String bno){
 		System.out.println("asdfdasfasdfdasf2342234324324\n"+bno);
 		cartdao.user_order_delete(bno);
+	}
+	
+//	//�ֹ���Ȳ ���
+	@RequestMapping(value="state_read", method=RequestMethod.POST)
+	@ResponseBody
+	public shopcartVO state_read(String orno){
+		shopcartVO resutlState = cartdao.state_read(orno);
+		return resutlState;
+	}
+	
+	//��ǰ ������ json
+	@RequestMapping("/shop_review_list.json")
+	@ResponseBody
+	public List<shopcartVO> shop_review_list(int pno){
+		//shopcartVO vo=cartdao.order_read(pno, orno);
+		List<shopcartVO> list=cartdao.shop_review_list(pno);
+		return list;
 	}
 }

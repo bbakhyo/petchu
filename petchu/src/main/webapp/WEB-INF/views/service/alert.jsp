@@ -3,6 +3,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
  var message = "${msg}";
- swal(message);
+ alert(message);
  location.href="/service/request";
 </script>

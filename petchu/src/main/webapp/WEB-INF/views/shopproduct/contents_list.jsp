@@ -90,8 +90,8 @@
 			<script id="temp" type="text/x-handlebars-template">
 
 	{{#each list}}
-      <div class="content_item_box_container">
-		<div class="img_container" style="position:relative;" onclick='getLocation(this)' pno="{{pno}}">
+      <div class="content_item_box_container" pno="{{pno}}">
+		<div class="img_container" style="position:relative;" onclick='getLocation(this)' pno="{{pno}}" quantity="{{pqantity}}">
         	<img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
 			<img class="soldout" src="/resources/soldout.png" width=170>
 		</div>
@@ -157,21 +157,28 @@
 
 	/* 장바구니 버턴 - 바구니에 추가 (update/insert) */
 	$(".content_item_container_row").on("click", ".cart_add1", function() {
-		var item = $(this).parent().parent();
-		var pno = item.data("pno");
-		var price = item.data("price");
-		alert("Hello" + " pno: " + pno + "!" + price);
+		var pno = $(this).closest(".content_item_box_container").attr("pno");
+		//장바구니 버튼을 클릭한 경우 session에 저장된 id를 읽어서 장바구니DB에 등록
+		var uid = "${id}";
+		var amount = 1;
+		alert("Hello" + " pno: " + pno + "!" + uid+amount);
 
 		$.ajax({
 			type : "post",
-			url : "/shopproduct/update",
+			url : "/shopproduct/insert",
 			data : {
-				uid : uid,
 				pno : pno,
-				qnt : qnt
+				uid : uid,
+				amount : amount
 			},
-			success : function() {
-				alert('success');
+			success : function(data) {
+				if (data == 1) {
+					//장바구니 등록 완료
+					alert('장바구니 등록완료!');
+					return;
+				} else {
+					alert('이미 장바구니에 등록된 상품입니다.');
+				}
 			}
 		})
 	})
@@ -195,7 +202,14 @@
 					top : 0,
 					left : 0,
 					behavior : "smooth"
-				})
+				});
+				//상품 재고가 소진되었을 경우 soldOUt 표기
+				$(".img_container").each(function(){
+					alert("......");
+					if($(this).attr("quantity")==0){
+						$(this).find(".soldout").attr("style", "display:block;");
+					}
+				});
 			}
 		});
 	}
