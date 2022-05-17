@@ -35,6 +35,10 @@
    		select count(*) from lessonrequest where uid=#{uid} and isDelete = 0;
    	</select>
    	
+   	<select id="lessonTotalCount" resultType="int">
+   		select count(*) from lessonrequest where isDelete = 0;
+   	</select>
+   	
    	<update id="lisDeleteUpdate">
    		update lessonrequest set isDelete = 1 where lrno=#{lrno};
    	</update>

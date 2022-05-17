@@ -15,7 +15,10 @@
 	min-width: 960px;
 	text-align: center;
 }
-
+#pointarea{
+	margin-right: 20px;
+	color: gray;
+}
 #page {
 	
 	margin-bottom: 50px;
@@ -51,7 +54,7 @@ a{
 	margin-right: 30px;
 	font-size: 18px;
 }
-#bell{
+#bell, #bell2{
 	background-color: #a7ca37;
     border-radius: 50%;
     height: 20px;
@@ -62,6 +65,9 @@ a{
     right: 30;
 }
 small#count {
+    color: white;
+}
+small#count2 {
     color: white;
 }
 #menu #login{
