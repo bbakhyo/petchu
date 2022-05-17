@@ -1,15 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+
 <title>Content list</title>
 <link href="/resources/temp_page.css" rel="stylesheet">
 <link href="/resources/css/content_list.css" rel="stylesheet">
 <style>
-
+.menu_container2 {
+  margin: 10px;
+  background: linear-gradient(to bottom, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%);
+  width: 220px;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+}
 </style>
-</head>
-<body>
+
 	<div id="content_page">
 		<!-- <div class="contents_box">
 			<span><button class="goAll">전체</button></span> <select
@@ -51,20 +57,23 @@
            </div>
   </div>
   <div class="menu_container2">
-    <div class="select_container">
-        <select name="animal_type" class="animal_type">
-        <option>전체</option>
-        <option>강아지</option>
-        <option>고양이</option>
-      </select>
-
-      <select name="item_type" class="item_type">
-        <option>전체</option>
-        <option>사료</option>
-        <option>간식</option>
-        <option>용품</option>
-      </select>
-     </div>
+  <div class="menu_title">선택: </div>
+    <div class="select_wrapper">
+	    <div class="select_container">
+	        <select name="animal_type" class="animal_type">
+	        <option>전체</option>
+	        <option>강아지</option>
+	        <option>고양이</option>
+	      </select>
+	
+	      <select name="item_type" class="item_type">
+	        <option>전체</option>
+	        <option>사료</option>
+	        <option>간식</option>
+	        <option>용품</option>
+	      </select>
+	     </div>
+    </div>
     </div>
   
   <div class="menu_container3">
@@ -72,14 +81,13 @@
   <div class="menu_item2">
       <div class="searchfield">
         <input type="text" name="keyword" id="search_text">
-        <div class="btn_search"><img src="/resources/icon_menu/icon_navbar_loupe.png" alt='search icon' width=40></div>
-        
-    </div>
-  </div>
+        <div class="btn_search"><img src="/resources/icon_menu/icon_navbar_loupe.png" alt='search icon' width=30></div>     
+    	</div>
+ 	 </div>
   
   </div>
     </div>
-  <div class="menu_option_icon"><img src="/resources/icon_menu/navbar_list.png" width=40></div>
+  <!-- <div class="menu_option_icon"><img src="/resources/icon_menu/navbar_list.png" width=40></div> -->
 </div>
 
 		<div class="content_container">
@@ -88,8 +96,8 @@
 			<script id="temp" type="text/x-handlebars-template">
 
 	{{#each list}}
-      <div class="content_item_box_container" pno="{{pno}}">
-		<div class="img_container" style="position:relative;" onclick='getLocation(this)' pno="{{pno}}" quantity="{{pqantity}}">
+      <div class="content_item_box_container">
+		<div class="img_container" style="position:relative;" onclick='getLocation(this)' pno="{{pno}}">
         	<img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
 			<img class="soldout" src="/resources/soldout.png" width=170>
 		</div>
@@ -115,7 +123,7 @@
 		</div>
 	</div>
 	<div class="pagination"></div>
-</body>
+
 <script>
 	$("#pagination a").click(function(e) {
 		e.preventDefault();
@@ -155,28 +163,21 @@
 
 	/* 장바구니 버턴 - 바구니에 추가 (update/insert) */
 	$(".content_item_container_row").on("click", ".cart_add1", function() {
-		var pno = $(this).closest(".content_item_box_container").attr("pno");
-		//장바구니 버튼을 클릭한 경우 session에 저장된 id를 읽어서 장바구니DB에 등록
-		var uid = "${id}";
-		var amount = 1;
-		alert("Hello" + " pno: " + pno + "!" + uid+amount);
+		var item = $(this).parent().parent();
+		var pno = item.data("pno");
+		var price = item.data("price");
+		alert("Hello" + " pno: " + pno + "!" + price);
 
 		$.ajax({
 			type : "post",
-			url : "/shopproduct/insert",
+			url : "/shopproduct/update",
 			data : {
-				pno : pno,
 				uid : uid,
-				amount : amount
+				pno : pno,
+				qnt : qnt
 			},
-			success : function(data) {
-				if (data == 1) {
-					//장바구니 등록 완료
-					alert('장바구니 등록완료!');
-					return;
-				} else {
-					alert('이미 장바구니에 등록된 상품입니다.');
-				}
+			success : function() {
+				alert('success');
 			}
 		})
 	})
@@ -200,14 +201,7 @@
 					top : 0,
 					left : 0,
 					behavior : "smooth"
-				});
-				//상품 재고가 소진되었을 경우 soldOUt 표기
-				$(".img_container").each(function(){
-					alert("......");
-					if($(this).attr("quantity")==0){
-						$(this).find(".soldout").attr("style", "display:block;");
-					}
-				});
+				})
 			}
 		});
 	}

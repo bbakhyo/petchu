@@ -154,12 +154,14 @@
 		
 	});
 	//체크아웃이 체인지 된 경우
-	$("#tag").on("change", "#checkout",function(){
-		checkin=$(this).closest("#tag").find("#checkin").val();
+	$(".date_box").on("change", "#checkout",function(e){
+		e.preventDefault();
+		checkin=$(this).closest(".date_box").find("#checkin").val();
 		checkout=$(this).val();
 		console.log("체크아웃이 첸지된 경우" + checkin +"/n" + checkout);
 		if(checkout<checkin){
 			alert("체크아웃은 체크인 이후로 입력가능합니다.");
+			$(this).val(checkin);
 		}
 		getList();
 		

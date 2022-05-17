@@ -3,6 +3,7 @@
 	display: flex;
 	flex-direction: column;
 	font-family: NanumGothic;
+	width: 960px;
 	/* align-items: center; */
 	/* border: 1px solid black; */
 }
@@ -24,7 +25,8 @@
 .content_item_container_row {
 	display: flex;
 	flex-direction: row;
-	width: 970px;
+	justify-content: center;
+	width: 800px;
 	flex-wrap: wrap;
 	gap: 10px;
 	/*  border: 1px solid blue; */
@@ -114,9 +116,9 @@
 	margin: 1px;
 }
 
-#search_text {
+/* #search_text {
 	width: 300px;
-	height: 40px;
+	height: 30px;
 	margin-top: 11px;
 	padding: 0 3px 0;
 	font-weight: bold;
@@ -124,11 +126,11 @@
 	line-height: 15px;
 	color: #333;
 	letter-spacing: 0;
-	/*  border: none; */
+	 border: none;
 	background: transparent;
 	border: solid 2px white;
 	border-radius: 5px;
-}
+} */
 
 .goAll {
 	float: left;
@@ -211,22 +213,12 @@
   font-family: NanumGothic;
   display: flex; 
   justify-items: center;
-  border: 1px solid black;
+ /*  border: 1px solid black; */
 }
 .page_border {
   border: 1px solid black;
 }
 
-.menu_container1 {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 180px;
-  height: 60px;
-  /*   border: 1px solid black; */
-  border-radius: 10px;
-  background-color: #c9f09e;
-}
 .menu-options {
   diplay: flex;
   flex-direction: column;
@@ -276,13 +268,20 @@
   height: 180px;
 }
 .top_nav_bar {
-  background: #a7ca37;
+  background: #A7CA37;
   height: 80px;
-  width: 970px;
+  width: 960px;
   display: flex;
   align-items: center;
   margin-bottom: 50px;
   border-radius: 10px;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c9de96+0,8ab66b+44,398235+100;Green+3D+%233 */
+/* background: rgb(201,222,150); Old browsers
+background: -moz-linear-gradient(top,  rgba(201,222,150,1) 0%, rgba(138,182,107,1) 44%, rgba(57,130,53,1) 100%); FF3.6-15
+background: -webkit-linear-gradient(top,  rgba(201,222,150,1) 0%,rgba(138,182,107,1) 44%,rgba(57,130,53,1) 100%); Chrome10-25,Safari5.1-6
+background: linear-gradient(to bottom,  rgba(201,222,150,1) 0%,rgba(138,182,107,1) 44%,rgba(57,130,53,1) 100%); W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9de96', endColorstr='#398235',GradientType=0 ); IE6-9 */
+  
 }
 
 fieldset {
@@ -303,7 +302,7 @@ fieldset {
   padding: 7px 8px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #ffffff;
-  width: 50px;
+  width: 52px;
 }
 .btn_show_all:hover {
   background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
@@ -316,23 +315,49 @@ fieldset {
 .btn_all_container {
   margin: 10px 20px 10px 20px;
 }
+
 .menu_container1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 180px;
+  height: 60px;
+  /*   border: 1px solid black; */
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%);
   font-size: 1rem;
+  margin-left: -50px;
+  margin-top: 15px;
 }
 .menu_container2 {
   margin: 10px;
-  background-color: #c9f09e;
+  background: linear-gradient(to bottom, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%);
   width: 200px;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  margin-left: -74px;
+  margin-top: 25px;
+}
+.menu_container3 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  /* border: 1px solid black;  */
+  width: 300px;
+  height: 60px;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%);
+  margin-right: 60px;
+  margin-top: 15px;
 }
 .menu_item1 {
   width: 150px;
   height: 30px;
 }
+
 /* Search field */
 .menu_item2 {
   height: 30px;
@@ -341,39 +366,31 @@ fieldset {
   margin-right: 20px;
   margin-left: 20px;
 }
-.menu_container3 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /*    border: 1px solid black;  */
-  width: 250px;
-  height: 60px;
-  border-radius: 10px;
-  background-color: #c9f09e;
-}
+
 input[type="text"] {
-  width: 150px;
-  height: 25px;
+  width: 250px;
+  height: 30px;
   border-radius: 30px;
-  font-size: 20px;
+  font-size: 25px;
   -webkit-transition: width 0.35s ease-in-out;
   transition: width 0.35s ease-in-out;
 }
-input[type="text"]:focus {
-  width: 200px;
+/* input[type="text"]:focus {
+  width: 250px;
   background-color: white;
-}
+} */
 .searchfield {
   display: flex;
   align-items: center;
-  justtify-content: center;
-  border: 1px solid black;
-  width: 200px;
+  justify-content: center;
+  /* border: 1px solid black; */
+  width: 320px;
+  height: 60px;
 }
 .btn_search {
   position: relative;
-  top: 5px;
-  right: 40px;
+  top: 0px;
+  right: 40px; 
   cursor: pointer;
 }
 
@@ -387,12 +404,14 @@ input[type="text"]:focus {
 .menu_container_main{
   margin: 40px;
   display: flex;
-  width: 700px;
+  width: 900px;
   justify-content: space-around;
   align-items: center;
-/*   border: 1px solid black; */
-}
+  /* border: 1px solid black;  */
 
 .menu_option_icon{
   
 }
+
+	
+
