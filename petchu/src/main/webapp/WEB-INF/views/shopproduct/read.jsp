@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://kit.fontawesome.com/21038295a9.js" crossorigin="anonymous"></script>
 <link href="/resources/css/shopproduct_read.css" rel="stylesheet">
 <script data-require="jquery@3.1.1" data-semver="3.1.1"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -16,6 +17,15 @@
 	}
 	.info_container_row1{
 		justify-content: center;
+	}
+	.tabcontent {
+		text-align : left;
+	}
+	#tbl hr {
+		width : 920px;
+	}
+	.fa-thumbs-up {
+		cursor : pointer;
 	}
 </style>
 <%-- <head>
@@ -165,10 +175,22 @@
 			<h3>리뷰</h3>
 			<div id="re">
 <!-- 				여기 작업중 -->
-				<table id="tbl"></table>
+				<div id="tbl"></div>
 				<script id="temp" type="text/x-handlebars-template">
 					{{#each .}}
-						<span>({{review}}){{rid}}</span><br>
+						<p style="margin-bottom : 0px;">{{uid}}</p>
+					<div class="rate" style="display:inline;" data-rate="{{star}}">
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i> 
+					</div>
+					<span style="font-size: 12px; color: #555;">{{rdate}}</span> </br>
+				<p>{{review}}</p>
+ 				<span style="font-size: 13px;">{{helpcount}}명에게 도움 됨</span>
+				<span><i rid="{{rid}}" id="help" class="fa-solid fa-thumbs-up"></i></span>
+				<hr>
 					{{/each}}
 				</script>
 
@@ -493,8 +515,46 @@ console.log(pprice);
 			success:function(data){
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
+				
+				var rate = $('#tbl .rate');
+				 var rating2 = $('#tbl .rating2');
+					rate.each(function(){
+						var tagetscore = $(this).attr("data-rate");
+						var row= $(this).parent();
+						row.find("#makeStar").val(tagetscore);
+						$(this).find('.fa-solid').css({color:'#D3D3D3'});
+						$(this).find('.fa-solid:nth-child(-n+' + tagetscore + ')').css({color:'#F08d28'});
+					});
 			}
 		});
 	}
+	$(document).ready(function(){ //댓글 추천
+		$("#tbl").on("click", ".fa-thumbs-up", function(){
+			var rid=$(this).attr("rid");
+			var uid="${id}";
+			alert(rid + "\n" + uid);
+			$.ajax({
+				type: "post",
+				url: "/help/updateHelp",
+				data: {rid:rid, uid:uid},
+				success:function(helpCheck){
+					alert("helpCheck= " + helpCheck);
+					$("#helpCheck").html("helpCheck");
+					if(helpCheck == 0){ //중복체크
+						alert("추천성공!");
+						getList();
+						
+					}
+					else if(helpCheck == 1){
+						alert("추천취소!");
+						getList();
+						
+					}
+					
+				}
+				
+			});
+		});
+	});
 </script>
 </html>
