@@ -129,7 +129,7 @@
 				console.log(result);
 		         
 		        if(result){
-		        	location.href = "/user/login";
+		        	location.href = "/user/login"; 
 		        }
 		        
 			})
