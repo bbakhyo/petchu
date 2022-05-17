@@ -99,6 +99,7 @@
 		if (id == "") {
 		
 			swal({
+				icon:"warning",
 				title:"로그인후 이용가능합니다",
 				button:"로그인하기"
 				  
