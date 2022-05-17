@@ -277,6 +277,8 @@ public class UserController {
 					session.setAttribute("id", id);
 					session.setAttribute("nick", vo.getNick());
 					session.setAttribute("type", vo.getType());
+					session.setAttribute("point", vo.getPoint());
+					System.out.println("point : " + vo.getPoint());
 				}
 
 			} else {

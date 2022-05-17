@@ -27,6 +27,10 @@
    		select count(*) from cleaningrequest where uid=#{uid} and isDelete = 0;
    	</select>
    	
+   	<select id="cleaningTotalCount" resultType="int">
+   		select count(*) from cleaningrequest where isDelete = 0;
+   	</select>
+   	
    	<update id="cisDeleteUpdate">
    		update cleaningrequest set isDelete = 1 where crno=#{crno};
    	</update>

@@ -30,6 +30,10 @@
    		select count(*) from beautyrequest where uid=#{uid} and isDelete = 0;
    	</select>
    	
+   	<select id="beautyTotalCount" resultType="int">
+   		select count(*) from beautyrequest where isDelete = 0;
+   	</select>
+   	
    	<update id="bisDeleteUpdate">
    		update beautyrequest set isDelete = 1 where brno=#{brno};
    	</update>

@@ -127,6 +127,19 @@ public class RequestController {
 		return "/home";
 	}
 	
+	//요청서 수
+	@ResponseBody
+	@RequestMapping(value="/servicecount", method=RequestMethod.POST)
+	public int serviceTotalCount(Model model, HttpSession session){
+		int count1 = bdao.beautyTotalCount();
+		int count2 = cdao.cleaningTotalCount();
+		int count3 = ldao.lessongTotalCount();
+		
+		int totalCount = count1 + count2 + count3;
+		
+		return totalCount;
+	}
+	
 	@RequestMapping(value="/read")
 	public String receRequest(Model model, int rno, HttpSession session){
 		model.addAttribute("hospital", ddao.selectDno(session.getAttribute("id").toString()));

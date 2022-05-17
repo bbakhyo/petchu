@@ -11,6 +11,7 @@ public interface CleaningDAO {
 	public CleaningRequestVO myCleanRead(String uid);
 	public List<CleaningRequestVO> cleanDeadlineList(String uid);
 	public int cleaningCount(String uid);
+	public int cleaningTotalCount();
 	public void cisDeleteUpdate(int crno);
 	public int crno(String uid);
 }

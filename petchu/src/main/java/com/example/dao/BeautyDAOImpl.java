@@ -58,5 +58,21 @@ public class BeautyDAOImpl implements BeautyDAO{
 		return session.selectOne(namespace + ".brno", uid);
 	}
 
+	@Override
+	public List<BeautyRequestVO> beautyChooseList(String uid) {
+		return session.selectList(namespace + ".beautyChooseList", uid);
+	}
+
+	@Override
+	public void beautyChooseUpdate(int brno) {
+		session.update(namespace + ".bChooseUpdate", brno);
+		
+	}
+
+	@Override
+	public int beautyTotalCount() {
+		return session.selectOne(namespace + ".beautyTotalCount");
+	}
+
 	
 }

@@ -1,11 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <title>PET-CHU</title>
 <link href="/resources/css/home.css" rel="stylesheet">
-
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -21,6 +21,7 @@
 
 </head>
 <body>
+<fmt:formatNumber type="number" maxFractionDigits="3" value="${point}" var="commaPoint"/>
 	<div id="home_body">
 	<header id="header">
 		<a href="/"> <img id="logotxt" src="/resources/logo.png"> <img
@@ -37,6 +38,7 @@
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
 				<c:if test="${type=='일반'}">
+					<span id="pointarea">포인트 : ${commaPoint}</span>
 					<a href="/request/result">받은 견적서</a>
 					<a href="/shopproduct/cart_read">장바구니</a> <!-- 아이콘으로 -->
 					<a href="#" id="chat">채팅</a>
@@ -52,6 +54,7 @@
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
 				<c:if test="${type=='의사'}">
+					<span id="pointarea">포인트 : ${commaPoint}</span>
 					<a href="/request/list">견적서</a>
 					<a href="#">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
@@ -67,7 +70,14 @@
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
 				<c:if test="${type=='업체'}">
+					<span id="pointarea">포인트 : ${commaPoint}</span>
 					<a href="/request/servicelist">서비스 견적서</a>
+					<span>
+						<span id="bell2">
+							<small id="count2">0</small>
+							<span id="requestCount"></span>
+						</span>
+					</span>
 					<a href="#">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
 					<span><a href="/user/mypage?id=${id}">${nick}님</a></span>
@@ -120,6 +130,19 @@
 				}
 				var template = Handlebars.compile($("#countdata").html());
 				$("#count").html(data);
+			}
+		})
+	}
+	getRC();
+	function getRC(){
+		$.ajax({
+			type: "post",
+			url: "/request/servicecount",
+			success:function(totalCount){
+				if(totalCount==0){
+					$("#bell2").hide();
+				}
+				$("#count2").html(totalCount);
 			}
 		})
 	}

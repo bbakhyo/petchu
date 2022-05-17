@@ -11,6 +11,7 @@ public interface BeautyDAO {
 	public BeautyRequestVO myBeautyRead(String uid);
 	public List<BeautyRequestVO>  beautyDeadlineList(String uid);
 	public int beautyCount(String uid);
+	public int beautyTotalCount();
 	public void bisDeleteUpdate(int brno);
 	public int brno(String uid);
 }

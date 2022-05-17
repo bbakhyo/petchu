@@ -85,6 +85,7 @@ a:visited {
 	</div>
 <div class="contentss">
     <div class="content-dis">
+    	<h2 id="text1">유저가 작성한 요청서가 없습니다</h2>
 		<c:forEach items="${beautyList}" var="vo">
 			<div class="menu_box1" brno="${vo.brno}" uid="${vo.uid}">
 				<p class="dname" style="overflow: hidden; text-overflow: ellipsis; white-space : nowrap;">${vo.nick}님의 요청서</p>
@@ -97,6 +98,7 @@ a:visited {
 		</c:forEach>
 	</div>
     <div class="content-dis">
+    	<h2 id="text2">유저가 작성한 요청서가 없습니다</h2>
     	<c:forEach items="${cleanList}" var="vo">
 			<div class="menu_box2" crno="${vo.crno}" uid="${vo.uid}">
 				<p class="dname" style="overflow: hidden; text-overflow: ellipsis; white-space : nowrap;">${vo.nick}님의 요청서</p>
@@ -109,6 +111,7 @@ a:visited {
 		</c:forEach>
 	</div>
     <div class="content-dis">
+    	<h2 id="text3">유저가 작성한 요청서가 없습니다</h2>
     	<c:forEach items="${lessonList}" var="vo">
 			<div class="menu_box3" lrno="${vo.lrno}" uid="${vo.uid}">
 				<p class="dname" style="overflow: hidden; text-overflow: ellipsis; white-space : nowrap;">${vo.nick}님의 요청서</p>
@@ -123,6 +126,22 @@ a:visited {
 </div>
 </div>
 <script>
+	var check1 = $(".menu_box1").attr("brno");
+	var check2 = $(".menu_box2").attr("crno");
+	var check3 = $(".menu_box3").attr("lrno");
+
+	if(check1 != null){
+		$("#text1").css({display : "none"});
+	}
+	
+	if(check2 != null){
+		$("#text2").css({display : "none"});
+	}
+	
+	if(check3 != null){
+		$("#text3").css({display : "none"});
+	}
+	
 	$(".menu_box1").on("click", function(){
 		var brno = $(this).attr("brno");
 		location.href="/service/bread?brno=" + brno;
