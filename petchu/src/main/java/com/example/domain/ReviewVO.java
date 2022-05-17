@@ -13,12 +13,19 @@ public class ReviewVO extends OrderlistVO{
 	private Date rdate; //리뷰작성시간
 	private String rimage1; 
 	private String rimage2; //상품이미지
+	private String rimage3;
 	private int helpcount; // 도움되면 증가
 	private int pno; //상품번호
 	private String uid; //유저아이디
 	private int bno;
 	public int getRid() {
 		return rid;
+	}
+	public String getRimage3() {
+		return rimage3;
+	}
+	public void setRimage3(String rimage3) {
+		this.rimage3 = rimage3;
 	}
 	public void setRid(int rid) {
 		this.rid = rid;

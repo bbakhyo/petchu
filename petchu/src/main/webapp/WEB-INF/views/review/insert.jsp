@@ -28,7 +28,7 @@
 	          </div><!--r_q--> 
 	         <div class="p_info">
 	            <div class="bno" style="display:none;">
-	            	<select id="makeStar" name="uid">
+	            <select id="makeStar" name="uid">
 						<option value="${vo.uid}" selected>${vo.uid}</option>
 					</select>
 	         		<div id="bno">${vo.bno}</div>
@@ -301,7 +301,9 @@
 		
 		if(!confirm("리뷰를 등록하실래요?")) return;
 		alert(file);
-
+		var uid="${id}"
+		alert(uid)
+		$(frm.uid).val(uid);
 		frm.submit();
 
 	});

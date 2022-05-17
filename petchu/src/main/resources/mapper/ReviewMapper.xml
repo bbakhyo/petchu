@@ -12,8 +12,8 @@
         order by rid desc
     </select>
     <insert id="insert">
-    	insert into review(rtitle, star, review, uid, pno, bno)
-    	values(#{rtitle}, #{star}, #{review}, #{uid}, #{pno}, #{bno})
+    	insert into review(rtitle, star, review, rimage1, rimage2, uid, pno, bno)
+    	values(#{rtitle}, #{star}, #{review}, #{rimage1}, #{rimage2}, #{uid}, #{pno}, #{bno})
     </insert>
     <update id="update">
     	update review
