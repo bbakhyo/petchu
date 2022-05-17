@@ -201,4 +201,14 @@ public class shopcartDAOImpl implements shopcartDAO{
 	public int order_sum(String orno) {
 		return session.selectOne(namespace+".order_sum", orno);
 	}
+
+	@Override
+	public int read_state(String orno) {
+		return session.selectOne(namespace+".read_state", orno);
+	}
+
+	@Override
+	public int read_rcount(int bno) {
+		return session.selectOne(namespace+".read_rcount", bno);
+	}
 }

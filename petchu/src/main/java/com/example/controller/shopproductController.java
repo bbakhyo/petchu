@@ -274,7 +274,8 @@ public class shopproductController {
 		model.addAttribute("uvo", cartdao.order_read_user(orno));
 		model.addAttribute("ovo", cartdao.read_user_order(orno));
 		model.addAttribute("del", cartdao.is_del(orno));
-		model.addAttribute(	"pageName", "shopproduct/order_read.jsp");
+		model.addAttribute("state", cartdao.state_read(orno));
+		model.addAttribute("pageName", "shopproduct/order_read.jsp");
 		return "/home";
 	}
 
@@ -339,4 +340,13 @@ public class shopproductController {
 		List<shopcartVO> list=cartdao.shop_review_list(pno);
 		return list;
 	}
+	
+//	//주문상황 출력
+	@RequestMapping(value="read_rcount", method=RequestMethod.POST)
+	@ResponseBody
+	public int read_rcount(int bno){
+		int result = cartdao.read_rcount(bno);
+		return result;
+	}
+
 }
