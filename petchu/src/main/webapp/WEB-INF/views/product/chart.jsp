@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<style>
+#btnUser{
+	height: 35px;
+	background-color: #A7CA37;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+#btnDate{
+	height: 35px;
+	background-color: #A7CA37;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+</style>
 <div id="page">
 	<div id="menu">
 		<jsp:include page="${submenu}"/>
