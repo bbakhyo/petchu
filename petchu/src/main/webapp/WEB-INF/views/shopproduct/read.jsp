@@ -189,6 +189,7 @@
 				<div id="tbl"></div>
 				<script id="temp" type="text/x-handlebars-template">
 					{{#each .}}
+					<div class="check">
 						<p style="margin-bottom : 0px;">{{uid}}</p>
 
 						<select name="" class="makeStar">
@@ -212,7 +213,7 @@
 						<button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
 					</div> 			
 					<div>
-						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}"> <br/><br/>
+						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}" disabled="disabled"> <br/><br/>
  					</div>
 					<span style="font-size: 13px;">{{helpcount}}명에게 도움 됨</span>
 
@@ -221,6 +222,7 @@
 						<i rid="{{rid}}" id="goodBlue" class="fa-solid fa-thumbs-up" style="color:skyblue; display : none;"></i>
 
 					<hr>
+					</div>
 					{{/each}}
 				</script>
 
@@ -574,7 +576,11 @@ console.log(pprice);
 							btnDelete[i].style.visibility = "visible";
 							
 							btnUpdate[i].addEventListener('click', function(){
-
+								var ccc = $(this).parent().parent();
+								var ccc2 = ccc.find('.reviewText');
+								ccc2.prop('disabled', false);
+							/*  text1[i].removeAttribute("disabled");
+ 								alert("sdflkjsdflkdsjf");  */
 							});
 						}
 					}	
