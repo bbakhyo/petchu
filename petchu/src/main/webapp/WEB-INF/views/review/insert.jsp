@@ -28,6 +28,9 @@
 	          </div><!--r_q--> 
 	         <div class="p_info">
 	            <div class="bno" style="display:none;">
+	            <select id="uid" name="uid">
+						<option value="${vo.uid}" selected>${vo.uid}</option>
+					</select>
 	         		<div id="bno">${vo.bno}</div>
 	         		<div id="pno">${vo.pno}</div>
 	         	</div>
@@ -40,7 +43,7 @@
 	             </div>
 	             <div  class="make_star">
 	              <div class="star">
-	               	<select id="makeStar" name="star">
+	               	<select id="makeStar" name="star" style="display:none;">
 						<option  value="0">0</option>
 						<option  value="1">1</option>				
 						<option  value="2">2</option>
@@ -142,7 +145,7 @@
 		$('.make_star .fa-solid').css({color:'#D3D3D3'})
 		$('.make_star .fa-solid:nth-child(-n+' + userScoreNum + ')').css({color:'#F08d28'});
 	});
-	
+	/*
 	var userScore = $('#makeStar');
 	userScore.change(function(){
 		var userScoreNum = $(this).val();
@@ -165,11 +168,12 @@
 	}
 		$('.make_star .fa-solid').css({color:'#D3D3D3'})
 		$('.make_star .fa-solid:nth-child(-n+' + userScoreNum + ')').css({color:'#F08d28'});
-	});
+	});*/
 	
 	$('.make_star .fa-solid').click(function(){
 		var targetNum = $(this).index()+1;
-		$('#makeStar').val(targetNum);
+		//$('#makeStar').val(targetNum);
+		var check = $(frm.star).val(targetNum);
 		switch(targetNum){
 		case 1:
 			$("#evaluation").html("별로에요");
@@ -283,11 +287,8 @@
 		var rtitle=$(frm.rtitle).val();
 		var star=$(frm.star).val();
 		var file = $(frm.uploadFile).val();
-		alert(file);
-
-
-		
-		
+		var uid="${id}";
+		alert(file+"\n"+uid);		
 		if(review==""){
 			alert("리뷰를 입력해주세요");
 			$(frm.review).focus();
@@ -301,7 +302,9 @@
 		
 		if(!confirm("리뷰를 등록하실래요?")) return;
 		alert(file);
-
+		var uid="${id}"
+		alert(uid)
+		$(frm.uid).val(uid);
 		frm.submit();
 
 	});

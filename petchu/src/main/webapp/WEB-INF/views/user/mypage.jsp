@@ -1,19 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link href="/resources/css/mypage.css" rel="stylesheet" > 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-	h1{
-		margin-left: 250px;
-	}
-	table {
-		margin-left: 350px;
-	}
-	button{
-		text-align: center;
-	}
+
+.swal-button, .confirm {
+  padding: 7px 19px;
+  border-radius: 2px;
+  width:100px;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  background-color: #A7CA37;
+}
+.sa-button-container{
+	text-align: center;
+}
+h1{
+	margin-left: 250px;
+}
+table {
+	margin-left: 350px;
+}
+button{
+	text-align: center;
+}
 </style>
 
 <div id="page">
@@ -83,7 +99,7 @@
 				</td>
 			</tr>
 		</table>
-		<div style="text-align: right; margin-top: 20px;">
+		<div style="text-align: center; margin-top: 20px; margin-left: 280px;">
 			<button type="submit">정보수정</button>
 			<button type="reset">수정취소</button>
 		</div>
@@ -116,17 +132,45 @@
 	//섭밋될때
 	$(frm).on("submit", function(e){
 		e.preventDefault();
-		if(!confirm("회원정보를 수정하실래요?")) return;
+		swal({
+			title : "",
+			text : "회원정보를 수정하시겠습니까?",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			confirmButtonColor: "#A7CA37",
+			closeOnConfirm : false,
+			closeOnCancel : false
+		}, function(isConfirm) {
+			if (isConfirm) {
+				//3개의 전화번호 텍스트박스를 병합하여 섭밋
+				var strTel1= $(frm.tel1).val();
+				var strTel2= $(frm.tel2).val();
+				var strTel3= $(frm.tel3).val();
+				
+				var strTel=strTel1+strTel2+strTel3;
+				
+				$(frm.tel).val(strTel);
+				frm.submit();
+				swal({
+					title : '',
+					text : '수정이 완료되었습니다.',
+					type: 'success',
+					confirmButtonColor: "#A7CA37",	
+				});
+			}else{
+				swal({
+					title : '',
+					text : '수정이 취소되었습니다.',
+					type: 'error',
+					confirmButtonColor: "#A7CA37",	
+				});
+			}
+
+		});
 		
-		//3개의 전화번호 텍스트박스를 병합하여 섭밋
-		var strTel1= $(frm.tel1).val();
-		var strTel2= $(frm.tel2).val();
-		var strTel3= $(frm.tel3).val();
-		
-		var strTel=strTel1+strTel2+strTel3;
-		
-		$(frm.tel).val(strTel);
-		frm.submit();
 	});
 	//이미지 미리보기
 	$(frm.file).on("change", function(e){
@@ -136,5 +180,5 @@
 	//이미지 클릭시 파일열기
 	$("#image").on("click", function(){
 		$(frm.file).click();
-	});
+	})
 </script>

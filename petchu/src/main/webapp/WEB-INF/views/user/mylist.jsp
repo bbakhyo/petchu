@@ -209,7 +209,11 @@ $(".delete").on("click",function(e){
 		url:"/hoschool/servicedelete",
 		data:{scno:scno},
 		success:function(){
+			swal({
+				  icon: "success",
+				});
 			alert("삭제완료 ");
+			
 			location.reload(true);
 		}
 		

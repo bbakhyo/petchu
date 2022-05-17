@@ -1,15 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="/resources/css/mypage.css" rel="stylesheet" > 
 <style>
-	h1{
-		margin-left: 250px;
-	}
-	table {
-		margin-left: 350px;
-	}
-	button{
-		text-align: center;
-	}
+h1{
+	margin-left: 250px;
+}
+table {
+	margin-left: 350px;
+}
+button{
+	text-align: center;
+}
+.hov-anim-box .animated {
+  display: none
+}
+
+.hov-anim-box:hover .animated {
+  display: inline
+}
+
+.hov-anim-box:hover .static {
+  display: none
+}
 </style>
 <div id="page">
 	<h1>마이펫 등록하기</h1>
@@ -77,12 +88,16 @@
 				<tr>
 					<td width=100 >사진</td>
 					<td width=500>
-						<input type="file" name="file" style="display:none" accept="image/*">
-						<img id="image" src="/resources/petAdd.jpg" width=200>				
+						<span class="hov-anim-box">
+							<input type="file" name="file" style="display:none" accept="image/*">
+							<img id="image1" src="/resources/icon/icons8.jpg" width=100  alt="" class="static">
+							<img id="image" src="/resources/icon/icons8.gif" width=100 alt="" class="animated">	
+						</span>
+											
 					</td>
 				</tr>
 			</table>
-			<div style="margin: 0px auto; text-align: center; margin: 20px;">
+			<div style="margin: 0px auto; text-align: center; margin: 20px; margin-left: 153px">
 				<button type="submit">등록하기</button>
 			</div>
 		</div>

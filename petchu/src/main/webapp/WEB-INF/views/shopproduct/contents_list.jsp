@@ -1,22 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<head>
-<title>Content list</title>
 <link href="/resources/temp_page.css" rel="stylesheet">
 <link href="/resources/css/content_list.css" rel="stylesheet">
-<style>
-</style>
-</head>
-<body>
-	<div id="content_page">
-		<!-- <div class="contents_box">
-			<span><button class="goAll">전체</button></span> <select
+
+<div id="content_page">
+	<!-- <div class="contents_box">
+			<span><button class="goAll">전체</button></span> 
+			<select
 				name="animal_type" class="animal_type">
 				<option>전체</option>
 				<option>강아지</option>
 				<option>고양이</option>
-			</select> <select name="item_type" class="item_type">
+			</select> 
+			<select name="item_type" class="item_type" >
 				<option>전체</option>
 				<option>사료</option>
 				<option>간식</option>
@@ -25,66 +21,66 @@
 				type="button" value="검색" class="btn_search">
 		</div> -->
 
-		<div class="top_nav_bar">
-			<div class="btn_all_container">
-				<a href="#" class="btn_show_all">전체보기</a>
-			</div>
-
-			<div class="menu_container_main">
-				<div class="menu_container1">
-
-					<div>펫타입:</div>
-					<div class="menu-options">
-						<div>
-							<input type="radio" name="main_category" id="menu_dog" checked>
-							<label for="menu_dog"> 강아지 </label>
-						</div>
-						<div>
-							<input type="radio" name="main_category" id="menu_cat"> <label
-								for="menu_cat"> 고양이 </label>
-						</div>
-					</div>
-				</div>
-				<div class="menu_container2">
-					<div class="menu_title">선택:</div>
-					<div class="select_wrapper">
-						<div class="select_container">
-							<select name="animal_type" class="animal_type">
-								<option>전체</option>
-								<option>강아지</option>
-								<option>고양이</option>
-							</select> <select name="item_type" class="item_type">
-								<option>전체</option>
-								<option>사료</option>
-								<option>간식</option>
-								<option>용품</option>
-							</select>
-						</div>
-					</div>
-				</div>
-
-				<div class="menu_container3">
-					<div class="menu_item1"></div>
-					<div class="menu_item2">
-						<div class="searchfield">
-							<input type="text" name="keyword" id="search_text">
-							<div class="btn_search">
-								<img src="/resources/icon_menu/icon_navbar_loupe.png"
-									alt='search icon' width=30>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-			</div>
-
+	<div class="top_nav_bar">
+		<div class="btn_all_container">
+			<a href="#" class="btn_show_all">전체보기</a>
 		</div>
 
-		<div class="content_container">
-			<div class="content_item_container_row"></div>
 
-			<script id="temp" type="text/x-handlebars-template">
+		<div class="menu_container_main">
+			<div class="menu_container1">
+
+				<div>펫타입:</div>
+				<div class="menu-options">
+					<div>
+						<input type="radio" name="main_category" id="menu_dog" value="강아지"
+							class="main_category"> <label for="menu_dog"> 강아지
+						</label>
+					</div>
+					<div>
+						<input type="radio" name="main_category" id="menu_cat" value="고양이"
+							class="main_category"> <label for="menu_cat"> 고양이
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="menu_container2">
+				<div class="menu_title">선택:</div>
+				<div class="select_wrapper">
+					<div class="select_container">
+						<select name="item_type" class="item_type"
+							style="width: 100px; height: 30px; border-radius: 5px;">
+							<option value="">전체</option>
+							<option value="사료">사료</option>
+							<option value="간식">간식</option>
+							<option value="용품">용품</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="menu_container3">
+				<div class="menu_item1"></div>
+				<div class="menu_item2">
+					<div class="searchfield">
+						<input type="text" name="keyword" id="search_text">
+						<div class="btn_search">
+							<img src="/resources/icon_menu/icon_navbar_loupe.png"
+								alt='search icon' width=40>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!--   <div class="menu_option_icon"><img src="/resources/icon_menu/navbar_list.png" width=40></div> -->
+	</div>
+
+	<div class="content_container">
+		<div class="content_item_container_row"></div>
+
+		<script id="temp" type="text/x-handlebars-template">
 
 	{{#each list}}
       <div class="content_item_box_container">
@@ -111,10 +107,9 @@
 		</div>
 	{{/each}}
         </script>
-		</div>
 	</div>
-	<div class="pagination"></div>
-</body>
+</div>
+<div class="pagination"></div>
 <script>
 	$("#pagination a").click(function(e) {
 		e.preventDefault();
@@ -138,12 +133,27 @@
 </script>
 
 <script>
-	var page = 1;
 	var keyword = "";
-	var selectCate = "${cate}";
-	var selectCate2 = "${cate2}";
-	var selectCate3 = "${cate3}";
+	var type = "";
+	var page = 1;
+	var selectCate = "";
+	var selectCate2 = "";
+	var selectCate3 = "";
+
 	getContentsList();
+
+	//펫메뉴 라디오박스 체크시
+	$(".main_category").on("change", function() {
+		selectCate3 = $(this).val();
+		getContentsList();
+	});
+
+	//선택 셀렉트박스 선택시
+	$(".item_type").on("change", function() {
+		type = $(this).val();
+		selectCate2 = type;
+		getContentsList();
+	});
 
 	//상품 클릭시 리드페이지로 이동
 	function getLocation(e) {
@@ -154,10 +164,10 @@
 
 	/* 장바구니 버턴 - 바구니에 추가 (update/insert) */
 	$(".content_item_container_row").on("click", ".cart_add1", function() {
-		var item = $(this).parent().parent();
-		var pno = item.data("pno");
-		var price = item.data("price");
-		alert("Hello" + " pno: " + pno + "!" + price);
+		var pno = $(this).closest(".content_item_box_container").attr("pno");
+		//장바구니 버튼을 클릭한 경우 session에 저장된 id를 읽어서 장바구니DB에 등록
+		var uid = "${id}";
+		var amount = 1;
 
 		$.ajax({
 			type : "post",
@@ -170,8 +180,8 @@
 			success : function() {
 				alert('success');
 			}
-		})
-	})
+		});
+	});
 
 	function getContentsList() {
 		$.ajax({
@@ -193,6 +203,15 @@
 					left : 0,
 					behavior : "smooth"
 				})
+				//상품 재고가 소진되었을 경우 soldOUt 표기
+				$(".img_container").each(
+						function() {
+							if ($(this).attr("quantity") != 0) {
+
+								$(this).find(".soldout").attr("style",
+										"display:none;");
+							}
+						});
 			}
 		});
 	}
@@ -206,15 +225,7 @@
 	//검색버튼을 클릭했을 경우
 	$(".btn_search").on("click", function() {
 		keyword = $("#search_text").val();
-		selectCate = "";
-		selectCate2 = $(".item_type").val();
-		selectCate3 = $(".animal_type").val();
-		if (selectCate2 == "전체") {
-			selectCate2 = "";
-		}
-		if (selectCate3 == "전체") {
-			selectCate3 = "";
-		}
+
 		getContentsList();
 	});
 
@@ -225,7 +236,8 @@
 		}
 	});
 
-	$(".goAll").on("click", function() {
+	//전체 버튼 클릭시 
+	$(".btn_show_all").on("click", function() {
 		location.href = "/shopproduct/contents_list";
 	});
 </script>

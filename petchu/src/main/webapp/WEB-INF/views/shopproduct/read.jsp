@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://kit.fontawesome.com/21038295a9.js" crossorigin="anonymous"></script>
 <link href="/resources/css/shopproduct_read.css" rel="stylesheet">
 <script data-require="jquery@3.1.1" data-semver="3.1.1"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -119,6 +120,120 @@
 						</div>
 					</div>
 				</div>
+			
+		</div>
+	</div>
+	<div class="shoproduct_read_terms_page">
+		<button class="tablink" onclick="openPage('Info',this, '#535562')"
+			id="defaultOpen">상세정보</button>
+		<button class="tablink" onclick="openPage('Review',this,'#535562')">리뷰</button>
+		<button class="tablink"
+			onclick="openPage('Questions', this, '#535562')">Q&A</button>
+		<button class="tablink" onclick="openPage('Returns', this, '#535562')">반품/교환</button>
+		
+		<div id="Info" class="tabcontent">
+			
+			<!--세세정보 TAB  -->
+			<div class="info_tab">
+				<div id="itemBrief" class="product-essential-info">
+					<div class="product-item__table">
+						<p class="table-title">필수 표기정보</p>
+						<table class="prod-delivery-return-policy-table">
+							<colgroup>
+								<col width="150px">
+								<col width="340px">
+								<col width="150px">
+								<col width="*">
+							</colgroup>
+							<tbody class="return_policy_tbl">
+								<tr>
+									<th>품명 및 모델명</th>
+									<td>90NB</td>
+									<th>KC 인증 필 유무</th>
+									<td>본품: R-R-LVK-IC3-90NB / 컴퓨터용전원장치: SU04126-10001</td>
+								</tr>
+								<tr>
+									<th>정격전압, 소비전력</th>
+									<td>200-240V/ 260W</td>
+									<th>에너지소비효율등급</th>
+									<td>해당없음</td>
+								</tr>
+								<tr>
+									<th>출시년월</th>
+									<td>2020.06</td>
+									<th>제조자(수입자)</th>
+									<td>Lenovo Information Products (Shen Zhen) Co., Ltd/ 알 수
+										없음(업체미제공)</td>
+								</tr>
+								<tr>
+									<th>제조국</th>
+									<td>중국</td>
+									<th>크기</th>
+									<td>컨텐츠 참조</td>
+								</tr>
+								<tr>
+									<th>무게</th>
+									<td>컨텐츠 참조</td>
+									<th>주요 사양</th>
+									<td>컨텐츠 참조</td>
+								</tr>
+								<tr>
+									<th>품질보증기준</th>
+									<td>제품 이상 시 공정거래위원회 고시 소비자분쟁해결기준에 의거 보상합니다.</td>
+									<th>A/S 책임자와 전화번호</th>
+									<td>쿠팡고객센터 1577-7011</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--Review TAB  -->
+		<div id="Review" class="tabcontent">
+			<h3>리뷰</h3>
+			<div id="re">
+<!-- 				여기 작업중 -->
+				<div id="tbl"></div>
+				<script id="temp" type="text/x-handlebars-template">
+					{{#each .}}
+					<div class="check">
+						<p style="margin-bottom : 0px;">{{uid}}</p>
+
+						<select name="" class="makeStar">
+							<option value="0">0</option>
+							<option value="1">1</option>				
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+
+					<div class="rate" style="display:inline;" data-rate="{{star}}" uid={{uid}}>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i>
+						<i class="fa-solid fa-star fa-sm"></i> 
+					</div>
+					<span style="font-size: 12px; color: #555;">{{rdate}}</span> </br>
+					<div style=" display : inline; float : right; position : relative; bottom : 40;">
+						<button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
+					</div> 			
+					<div>
+						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}" disabled="disabled"> <br/><br/>
+ 					</div>
+					<span style="font-size: 13px;">{{helpcount}}명에게 도움 됨</span>
+
+
+						<i rid="{{rid}}" id="goodBlack" class="fa-solid fa-thumbs-up" ></i>
+						<i rid="{{rid}}" id="goodBlue" class="fa-solid fa-thumbs-up" style="color:skyblue; display : none;"></i>
+
+					<hr>
+					</div>
+					{{/each}}
+				</script>
 
 			</div>
 		</div>
@@ -373,6 +488,7 @@ console.log(pprice);
 	var cate1 = "${cate}";
 	var cate2 = "${cate2}";
 	var cate3 = "${cate3}";
+
 	
 	$(".backcontents").on(
 			"click",
@@ -514,6 +630,35 @@ console.log(pprice);
 		function btn_close(){
 		$(".share_options").hide();
 	}
+	$(document).ready(function(){ //댓글 추천
+		$("#tbl").on("click", ".fa-thumbs-up", function(){
+			var rid=$(this).attr("rid");
+			var uid="${id}";
+			alert(rid + "\n" + uid);
+			$.ajax({
+				type: "post",
+				url: "/help/updateHelp",
+				data: {rid:rid, uid:uid},
+				success:function(helpCheck){
+					alert("helpCheck= " + helpCheck);
+					$("#helpCheck").html("helpCheck");
+					if(helpCheck == 0){ //중복체크
+						alert("추천성공!");
+						getList();
+					}
+					else if(helpCheck == 1){
+						alert("추천취소!");
+						getList();
+						
+					}
+					
+				}
+				
+			});
+		});
+	});
+	
+	
 </script>
 <script type="text/javascript">
 Kakao.init('7c5327ca759881dfb2041b2386d02623')

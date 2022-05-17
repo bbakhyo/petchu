@@ -326,6 +326,8 @@ fieldset {
   border-radius: 10px;
   background: linear-gradient(to bottom, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%);
   font-size: 1rem;
+  margin-left: -50px;
+
 }
 .menu_container2 {
   margin: 10px;
@@ -336,6 +338,20 @@ fieldset {
   justify-content: space-around;
   align-items: center;
   border-radius: 10px;
+  margin-left: -20px;
+  margin-top: 10px;
+}
+.menu_container3 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  /* border: 1px solid black;  */
+  width: 300px;
+  height: 60px;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%);
+  margin-right: -50px;
+
 }
 .menu_container3 {
   display: flex;
@@ -406,3 +422,6 @@ input[type="text"] {
 .menu_option_icon{
   
 }
+
+	
+

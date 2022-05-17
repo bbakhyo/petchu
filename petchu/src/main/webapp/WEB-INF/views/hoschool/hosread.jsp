@@ -2,9 +2,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="/resources/css/star.css" rel="stylesheet"/>
 <link href="/resources/css/hosread.css" rel="stylesheet"/>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
-
+<style>
+.swal-button, .confirm {
+  padding: 7px 19px;
+  border-radius: 2px;
+  width:100px;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  background-color: #A7CA37;
+}
+:disabled{
+	background-color: #e9ecef;
+	cursor:inherit; }
+	
+#userCheck{
+	width: 20px;
+	height: 20px;
+	border: 2px solid #A7CA37;
+	border-radius: 10px;
+	position: absolute;
+}
+</style>
 <div id="page">
 
    <form name="frm">
@@ -172,8 +194,9 @@
 			</tr>
 		</table>
 		<hr>
-		<div id="user">
-			본인정보와 동일<input type="checkbox" id="userCheck" checked>
+		<div id="user" style="width: 400px; height: 270px;">
+			<span>본인정보와 동일</span><input type="checkbox" id="userCheck" checked>
+			<hr style="margin-left: -10px; margin-top: 15px;">
 			<p>예약자 성함</p>
 			<input type="text" id="userName" size=4 value="${uvo.name}">
 			<p>예약자 연락처</p>
@@ -192,7 +215,7 @@
 			 <button id="btnpay"onclick="payAPI()">결제하기</button>
 		</div>
 		<div id="btnClose">
-			<button class="close">종료</button>
+			<button class="close" style="margin-top: 20px;">종료</button>
 		</div>
 	</div>
 
@@ -251,25 +274,36 @@
 				var lastPage=Math.ceil(total/perPageNum);
 				$("#curpage").html(page+"/"+lastPage);
 				if(page==1){
-		               $("#prev").attr("disabled",true);
-		            }else{
-		               $("#prev").attr("disabled",false);
-		            }
-		            if(page==lastPage){
-		               $("#next").attr("disabled",true);
-		            }else{
-		               $("#next").attr("disabled",false);
-		            }
-		            //별점 부여
-		            $(".rate1").html("⭐");
-		            $(".rate2").html("⭐⭐");
-		            $(".rate3").html("⭐⭐⭐");
-		            $(".rate4").html("⭐⭐⭐⭐");
-		            $(".rate5").html("⭐⭐⭐⭐⭐"); 
-
-
-
-
+	               $("#prev").attr("disabled",true);
+	            }else{
+	               $("#prev").attr("disabled",false);
+	            }
+	            if(page==lastPage){
+	               $("#next").attr("disabled",true);
+	            }else{
+	               $("#next").attr("disabled",false);
+	            }
+	            //별점 부여
+	            $(".rate1").html("⭐");
+	            $(".rate2").html("⭐⭐");
+	            $(".rate3").html("⭐⭐⭐");
+	            $(".rate4").html("⭐⭐⭐⭐");
+	            $(".rate5").html("⭐⭐⭐⭐⭐"); 
+		        
+	            var id = "${id}";
+	            var scno = "${vo.scno}";
+	            $.ajax({
+	            	type:"post",
+	            	url: "/hoschool/reviewAllCount",
+	            	data:{id:id, scno:scno},
+	            	success: function(data){
+	            		if(data == 0){
+	            			$("#reviewContents").attr("disabled",true);
+	            			$("#reviewContents").attr("placeholder", "리뷰는 예약 후 작성이 가능합니다");
+	            		}
+	            	}
+	            });
+	            
 			}
 		});
 	}
@@ -294,12 +328,40 @@
 		e.preventDefault();
 		
 		var target = $(myform.comments).val();
+		 var id = "${id}";
+         var scno = "${vo.scno}";
+         $.ajax({
+         	type:"post",
+         	url: "/hoschool/reviewAllCount",
+         	data:{id:id, scno:scno},
+         	success: function(data){
+         		if(data == 0){
+         			swal({
+         				 title: "",
+         				 text: "리뷰는 예약 후 작성이 가능합니다.",
+         				 type: "warning"
+         				});
+         		}else{
+         			if(target.length > 500){
+         				swal({
+         					 title:"",
+           				 	 text: "500자 이내로 작성 가능합니다.",
+           				 	 type: "warning"
+           				});
+         			}else if(target.length == 0){
+         				swal({
+         					 title:"",
+            				 text: "내용을 입력해주세요.",
+            				 type: "warning"
+            				});
+         			}
+         			if(!confirm("댓글을 등록하실래요?")) return;
+         			myform.submit();
+         		}
+         	}
+         });
 		
-		if(target.length > 500){
-			swal("500자 이내로 작성 가능합니다.")
-		}
-		if(!confirm("댓글을 등록하실래요?")) return;
-		myform.submit();
+		
 	});
 	//PG사 결제API
 	function payAPI(){
@@ -366,17 +428,57 @@
 		
 		var userTel = $("#userTel").val();
 		
-		if(!confirm("예약 하시겠습니까? ")) return;
-		$.ajax({
-			type: "get",
-			url: "/reserve/reserveInsert",
-			data: {id:id, scno:scno, checkin:checkin, checkout:checkout, request:request, userName:userName, userTel:userTel},
-			success:function(){
-				if(!confirm("예약이 완료되었습니다. 예약내역 확인으로 이동하시겠습니까? ")) return;
+		swal({
+			title : "",
+			text : "예약하시겠습니까?",
+			type : "info",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			confirmButtonColor: "#A7CA37",
+			closeOnConfirm : false,
+			closeOnCancel : false
+		}, function(isConfirm) {
+			if (isConfirm) {
+				$.ajax({
+					type: "get",
+					url: "/reserve/reserveInsert",
+					data: {id:id, scno:scno, checkin:checkin, checkout:checkout, request:request, userName:userName, userTel:userTel},
+					success:function(){
+						swal({
+							title : '예약완료',
+							text : '예약내역으로 이동하시겠습니까?',
+							type : "success",
+							showCancelButton : true,
+							confirmButtonClass : "btn-danger",
+							confirmButtonText : "예",
+							confirmButtonColor: '#A7CA37',
+							cancelButtonText : "아니오",
+							
+							closeOnConfirm : false,
+							closeOnCancel : true
+						}, function(isConfirm) {
+							if (isConfirm) {
+								location.href="/reserve/myreserveList?id="+id;
+							}else{
+								return;
+							}
+						});
+					}
+				});
+			}else{
+				swal({
+					title : '',
+					text : '예약이 취소되었습니다.',
+					type: 'error',
+					confirmButtonColor: "#A7CA37",	
+				});
 				
-				location.href="/reserve/myreserveList?id="+id;
 			}
+
 		});
+		
 		
 	});
 	
@@ -390,6 +492,8 @@
         formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
     }else if(num.indexOf('02')==0){
         formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+    }else if(num.length==12){
+        formatNum = num.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
     }else{
         formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
     }
@@ -492,5 +596,46 @@
 		});    
 	});
 	
+	//swal Alert
+	var alert = function(msg, type) {
+		swal({
+			title : '',
+			text : '',
+			type : type,
+			timer : 1500,
+			customClass : 'sweet-size',
+			showConfirmButton : false
+		});
+	}
+	//swal Confirm
+	var confirm = function(msg, title, resvNum) {
+		swal({
+			title : '',
+			text : '',
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			confirmButtonColor: '#A7CA37',
+			cancelButtonText : "아니오",
+			
+			closeOnConfirm : false,
+			closeOnCancel : true
+		}, function(isConfirm) {
+			if (isConfirm) {
+				swal('', '예약이 승인되었습니다.', "success");
+			}else{
+				swal('', '예약이 거부되었습니다.', "failed");
+			}
+
+		});
+	}
+
+	function Alert() {
+		alert('gg', 'success');
+	}
+	function Confirm() {
+		confirm('', '승인할까요?');
+	}
       
 </script>

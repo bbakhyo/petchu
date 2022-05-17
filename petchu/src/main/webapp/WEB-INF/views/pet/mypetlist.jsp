@@ -12,12 +12,25 @@
 	#slider-div{
 		margin-left: 200px;
 	}
+	.naming{
+		text-align: center;
+	}
+	#petcontent{
+		margin-left: 305px;
+	}
+	#btnCombi{
+		margin-left: 627px;
+	}
+	#nameBox{
+	margin: 23px;
+	margin-top: 35px;
+	}
 </style>
 
 <div id="page">
 	<h1>마이펫 리스트</h1>
 	<div id="sidemenu">
-		<jsp:include page="${sideMenu}" />
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
 	</div>
 	<div id="box">
 		<form name="frm">
@@ -53,7 +66,7 @@
 		<tr>
 			<td width=100>이름</td>
 			<td width=500 class="pname">
-				<p class="trans">{{pname}}</p>
+				<p class="trans centerName">{{pname}}</p>
 				<input type="text" class="change" id="pname" value="{{pname}}" style="display:none">
 			</td>
 		</tr>

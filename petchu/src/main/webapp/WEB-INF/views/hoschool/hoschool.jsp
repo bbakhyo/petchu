@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<link href="/resources/css/hoschool.css" rel="stylesheet" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link href="https://www.cssscript.com/demo/segmented-control-toggle-radio/toggle-radios.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/e44146d80b.js" crossorigin="anonymous"></script>
 <div class="page_hoschool">
@@ -148,18 +149,20 @@
 		console.log("체크인이 첸지된 경우" + "\n 체크인" + checkin + "\n 체크아웃" + checkout)
 		
 		if(checkin < date){
-			alert("당일보다 이전날짜는 선택할 수 없습니다.")
+			swal("체크인","당일보다 이전날짜는 선택할 수 없습니다.",'warning')
 		}
 		getList();
 		
 	});
 	//체크아웃이 체인지 된 경우
-	$("#tag").on("change", "#checkout",function(){
-		checkin=$(this).closest("#tag").find("#checkin").val();
+	$(".date_box").on("change", "#checkout",function(e){
+		e.preventDefault();
+		checkin=$(this).closest(".date_box").find("#checkin").val();
 		checkout=$(this).val();
 		console.log("체크아웃이 첸지된 경우" + checkin +"/n" + checkout);
 		if(checkout<checkin){
-			alert("체크아웃은 체크인 이후로 입력가능합니다.");
+			swal("체크아웃","체크아웃은 체크인 이후로 입력가능합니다.",'warning')
+			$(this).val(checkin);
 		}
 		getList();
 		

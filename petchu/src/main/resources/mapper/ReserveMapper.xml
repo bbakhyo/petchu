@@ -3,15 +3,17 @@
 
 <mapper namespace="com.example.mapper.ReserveMapper">
     <select id="list" resultType="com.example.domain.ReserveVO">
-        select r.* , s.scname, s.sctel
-		from serviceco s , reserve r
-		where s.scno=r.scno and r.id=#{id} and checkin > now() and isDel != 2
+		select r.*, s.scname, s.sctel 
+		from reserve r join serviceco s
+		on r.scno=s.scno 
+		where r.id=#{id} and checkin > now() and isDel!=2
 		order by rno desc
     </select>
     <select id="oldlist" resultType="com.example.domain.ReserveVO">
-        select r.* , s.scname, s.sctel
-		from serviceco s , reserve r
-		where (s.scno=r.scno and r.id=#{id} and checkin &lt; now()) or isDel = 2
+       select r.*, s.scname, s.sctel 
+		from reserve r join serviceco s
+		on r.scno=s.scno 
+		where (r.id=#{id} and checkin &lt; now()) or (r.id=#{id} and isDel=2)
 		order by rno desc
     </select>
     <insert id="insert">

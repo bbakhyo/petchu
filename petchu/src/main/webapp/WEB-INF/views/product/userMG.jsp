@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <style>
 	.list{
@@ -18,10 +19,26 @@
 		width: 300px;
 		height: 50px;
 		margin-bottom: 40px;
+		border-radius: 10px;
+		border: 5px solid #A7CA37;
 	}
 	#search{
 		width: 80px;
 		height: 50px;
+		background-color: #A7CA37;
+		color: white;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	.getOut{
+		width: 80px;
+		height: 35px;
+		background-color: #A7CA37;
+		color: white;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
 	}
 </style>
 <div id="page">
@@ -43,7 +60,7 @@
 					<td width=50 class="info id">{{id}}</td>
 				
 					<td width=50 class="title">생년월일</td>
-					<td width=300 class="info">{{birthday}}</td>
+					<td width=300 class="info birthday">{{birthday}}</td>
 
 					<td width=70 class="title">타입</td>
 					<td width=70 class="info type">{{type}}</td>
@@ -77,11 +94,15 @@
 	<div class="pagination"></div>
 </div>
 
+
+
 <script>
 	var page = "${param.page==null ? 1: param.page}";
 	var keyword = "${param.keyword == null ? '': param.keyword}"
 	
 	getList();
+	
+	
 
 	//강제탈퇴 버튼 클릭시 
 	$("#tbl").on("click", ".getOut", function(){
@@ -125,7 +146,12 @@
 					}else{
 						target.find(".isDel").html("정상")
 					}
-				})
+					
+					//생년월일 섭스트링
+					target = target.find(".birthday");
+					var birth = target.html().substring(0,11);
+					target.html(birth);
+				});
 			}
 		});
 	}
@@ -147,4 +173,6 @@
 	         $("#search").click();
 	      }
 	   });
+	
+	
 </script>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link href="/resources/css/request.css" rel="stylesheet">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .smallBox {
@@ -74,11 +75,27 @@
 .modal_wrap p{
 	font-size : 15px;
 }
+
+textarea {
+	margin-left : 0px;
+}
+
+.smallBox {
+	margin-left : 30px;
+	min-height : 256px;
+}
+
+.drprice {
+	text-align : left;
+} 
+#sidemenu{
+	margin-left: -100px;
+}
 </style>
 
 <h1>미용 견적서 목록</h1>
 <div id="sidemenu">
-		<jsp:include page="${sideMenu}" />
+	<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
 </div>
 	<h2 id="text" style="display:none;">작성된 견적서가 없습니다</h2>
 <div>
@@ -86,12 +103,14 @@
 	<script id="temp" type="text/x-handlebars-template">
 	      {{#each .}}
 			<div class="smallBox" brno={{brno}} scno={{scno}}>
-		       <p style="text-align : center;">{{nick}}님의 요청서</p>
+		       <p style="text-align : center;" class="dname">{{nick}}님의 요청서</p>
 		       <p>{{beauty_classification}}</p>
 		       <span>{{wish_local1}}</span> <span>{{wish_local2}}</span> </br>
-			   <p>가격 : {{printPrice price}}</p>
 			   <p>견적설명 : {{description}}</p>
-			   <p>{{isDelete}} : {{secheck}}</p>
+			   <p class="drprice">가격 : {{printPrice price}}</p>
+			   <p class="isDelete" isDelete="{{isDelete}}">{{isDelete}}</p>
+			   <p class="secheck" secheck="{{secheck}}" >{{secheck}}</p>
+			   <p class="choose_check" choose_check="{{choose_check}}">채택</p>
 			</div>
 	      {{/each}}
 	</script>
@@ -107,7 +126,7 @@
             <p>진행 장소 : {{service_place}}</p> <p>희망 서비스일  : {{wish_date}}</p>
 			<p>문의사항 : {{detailed_matters}}</p>
 			<h4 style="margin-bottom : 3px;">견적 설명</h4>
-			<textarea cols="72.5" rows="13" readonly>{{description}}</textarea>
+			<textarea cols="66.5" rows="13" readonly>{{description}}</textarea>
 		</script>
 </div>
 <script>
@@ -116,11 +135,14 @@ Handlebars.registerHelper("printPrice", function(price){
  });
  
  
-var target = document.getElementById("text");
+var target = document.getElementsByClassName("isDelete");
+var target1 = document.getElementsByClassName("secheck");
+var target2 = document.getElementsByClassName("choose_check");
+var text = document.getElementById("text");
 
 getList();
 	function getList(){
-		target.setAttribute('data-value', 'gg');
+
 		var i = 1;
 		$.ajax({
 			type : "get",
@@ -130,10 +152,23 @@ getList();
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
 				
+				for(i=0; i <target.length; i++){
+					var isDelete = target[i].getAttribute("isDelete");
+					var secheck = target1[i].getAttribute("secheck");
+					if(isDelete == 1 && secheck == 0){
+						target[i].style.display = 'block';
+					}
+				}
+				for(i=0; i <target1.length; i++){
+					var secheck = target1[i].getAttribute("secheck");
+					if(secheck == 1){
+						target1[i].style.display = 'block';
+					}
+				}
 			},
 			error : function(xhr, ajaxSettings, thrownError) 
 			   {
-				target.style.display = 'block';
+				text.style.display = 'block';
 			   }
 
 		});
@@ -141,7 +176,7 @@ getList();
 	$("#tbl").on("click", ".smallBox", function(){
 		var brno = $(this).attr('brno');
 		var scno = $(this).attr('scno');
-		alert(brno + scno);
+
 		document.querySelector('.black_bg').style.display ='block';
     	document.querySelector('#modal_wrap1').style.display ='block';
     		$.ajax({

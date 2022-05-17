@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Criteria;
+import com.example.domain.ReviewVO;
 import com.example.domain.shopcartVO;
 
 @Repository
@@ -51,7 +52,6 @@ public class shopcartDAOImpl implements shopcartDAO{
 	@Override
 	public List<shopcartVO> cart_buy(String uid) {
 		return session.selectList(namespace+".cart_buy", uid);
-		
 	}
 
 	@Override
@@ -64,13 +64,10 @@ public class shopcartDAOImpl implements shopcartDAO{
 		session.delete(namespace+".chk_delete", vo);
 	}
 
-	@Override
-	public List<shopcartVO> order_list(String uid, Criteria cri) {
-		HashMap<String,Object> omap = new HashMap<String,Object>();
-		omap.put("uid",uid);
-		omap.put("cri", cri);
-		return session.selectList(namespace+".order_list", omap);
-	}
+//	@Override
+//	public List<shopcartVO> order_list(String uid) {
+//		return session.selectList(namespace+".order_list", uid);
+//	}
 
 	@Override
 	public List<shopcartVO> order_read(String orno) {
@@ -88,7 +85,7 @@ public class shopcartDAOImpl implements shopcartDAO{
 
 	@Override
 	public void sell_update(int amount, int pno) {
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//¼ö·®Áõ°¡
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("amount", amount);
 		map.put("pno", pno);
@@ -172,7 +169,46 @@ public class shopcartDAOImpl implements shopcartDAO{
 	}
 
 	@Override
+	public List<shopcartVO> order_list(String uid, Criteria cri) {
+		HashMap<String,Object> omap = new HashMap<String,Object>();
+		omap.put("uid",uid);
+		omap.put("cri", cri);
+		return session.selectList(namespace+".order_list", omap);
+
+	}
+
+	@Override
 	public int order_count(String uid) {
 		return session.selectOne(namespace+".order_count", uid);
+	}
+
+	@Override
+	public shopcartVO state_read(String orno) {
+		return session.selectOne(namespace+".state_read", orno);
+	}
+	
+	@Override
+	public List<shopcartVO> shop_review_list(int pno) {
+		return session.selectList(namespace+".shop_review_list", pno);
+	}
+
+	@Override
+	public int order_item_qnt(String orno) {
+		return session.selectOne(namespace+".order_item_qnt", orno);
+	}
+
+	@Override
+	public int order_sum(String orno) {
+		return session.selectOne(namespace+".order_sum", orno);
+	}
+
+	@Override
+	public int read_state(String orno) {
+		return session.selectOne(namespace+".read_state", orno);
+	}
+
+	@Override
+	public int read_rcount(int bno) {
+		return session.selectOne(namespace+".read_rcount", bno);
 	}
 }
