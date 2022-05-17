@@ -50,7 +50,7 @@
             </div>
            </div>
   </div>
-  <div class="menu_container2">
+<div class="menu_container2">
   <div class="menu_title">선택: </div>
     <div class="select_wrapper">
 	    <div class="select_container">
@@ -75,13 +75,14 @@
   <div class="menu_item2">
       <div class="searchfield">
         <input type="text" name="keyword" id="search_text">
-        <div class="btn_search"><img src="/resources/icon_menu/icon_navbar_loupe.png" alt='search icon' width=30></div>     
-    	</div>
- 	 </div>
+        <div class="btn_search"><img src="/resources/icon_menu/icon_navbar_loupe.png" alt='search icon' width=40></div>
+        
+    </div>
+  </div>
   
   </div>
     </div>
-  <!-- <div class="menu_option_icon"><img src="/resources/icon_menu/navbar_list.png" width=40></div> -->
+  <div class="menu_option_icon"><img src="/resources/icon_menu/navbar_list.png" width=40></div>
 </div>
 
 		<div class="content_container">
