@@ -26,6 +26,7 @@
 		<div id="btn">
 			<button class="bigbtn" onClick="location.href='result'">목록이동</button>
 			<button id="bigChoose">채택하기</button>
+			<button class="bigbtn">채팅</button>
 		</div>
 	</div>
 	<div id="hosinfo">
@@ -76,7 +77,6 @@ $("#bigChoose").on("click", function(){
 			data : {crno : crno, seno : seno},
 			success : function() {
 				swal(scname + " 업체의 견적서가 채택 되었습니다!");
-				location.href = "/request/result";
 			}
 		});
 	});

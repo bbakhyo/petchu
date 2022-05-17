@@ -68,6 +68,12 @@
 				</c:if>
 				<c:if test="${type=='업체'}">
 					<a href="/request/servicelist">서비스 견적서</a>
+					<span>
+						<span id="bell2">
+							<small id="count2">0</small>
+							<span id="requestCount"></span>
+						</span>
+					</span>
 					<a href="#">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
 					<span><a href="/user/mypage?id=${id}">${nick}님</a></span>
@@ -120,6 +126,19 @@
 				}
 				var template = Handlebars.compile($("#countdata").html());
 				$("#count").html(data);
+			}
+		})
+	}
+	getRC();
+	function getRC(){
+		$.ajax({
+			type: "post",
+			url: "/request/servicecount",
+			success:function(totalCount){
+				if(totalCount==0){
+					$("#bell2").hide();
+				}
+				$("#count2").html(totalCount);
 			}
 		})
 	}

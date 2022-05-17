@@ -69,5 +69,10 @@ public class BeautyDAOImpl implements BeautyDAO{
 		
 	}
 
+	@Override
+	public int beautyTotalCount() {
+		return session.selectOne(namespace + ".beautyTotalCount");
+	}
+
 	
 }

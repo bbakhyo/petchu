@@ -26,6 +26,7 @@
 		<div id="btn">
 			<button id="bigbtn" onClick="location.href='result'">목록이동</button>
 			<button id="bigChoose">채택하기</button>
+			<button class="bigbtn">채팅</button>
 		</div>
 	</div>
 	<div id="hosinfo">
@@ -67,10 +68,18 @@
 <script>
 var scname = "${lvo.scname}";
 var seno="${lvo.seno}";
-var crno="${lvo.lrno}"; 
+var lrno="${lvo.lrno}"; 
 
 $("#bigChoose").on("click", function(){
-	 swal("채택!");
+	if(!confirm("해당 견적서를 채택하시겠습니까?")) return;
+	$.ajax({
+			type : "post",
+			url : "/request/lchoose",
+			data : {lrno : lrno, seno : seno},
+			success : function() {
+				swal(scname + " 업체의 견적서가 채택 되었습니다!");
+			}
+	});
 });
  
 var address="${lvo.scaddress1}";
