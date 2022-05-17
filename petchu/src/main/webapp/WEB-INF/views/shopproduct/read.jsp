@@ -27,6 +27,17 @@
 	.fa-thumbs-up {
 		cursor : pointer;
 	}
+	.fa-stack-2x, .fa-stack-1x{
+		position: static;
+    	text-align: start;
+    	width: 0%;
+	}
+	.btnUpdate {
+		visibility:hidden; 
+	}
+	.btnDelete {
+		visibility:hidden;
+	}
 </style>
 <%-- <head>
 <meta charset="UTF-8">
@@ -179,7 +190,17 @@
 				<script id="temp" type="text/x-handlebars-template">
 					{{#each .}}
 						<p style="margin-bottom : 0px;">{{uid}}</p>
-					<div class="rate" style="display:inline;" data-rate="{{star}}">
+
+						<select name="" class="makeStar">
+							<option value="0">0</option>
+							<option value="1">1</option>				
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+
+					<div class="rate" style="display:inline;" data-rate="{{star}}" uid={{uid}}>
 						<i class="fa-solid fa-star fa-sm"></i>
 						<i class="fa-solid fa-star fa-sm"></i>
 						<i class="fa-solid fa-star fa-sm"></i>
@@ -187,10 +208,19 @@
 						<i class="fa-solid fa-star fa-sm"></i> 
 					</div>
 					<span style="font-size: 12px; color: #555;">{{rdate}}</span> </br>
-				<p>{{review}}</p>
- 				<span style="font-size: 13px;">{{helpcount}}명에게 도움 됨</span>
-				<span><i rid="{{rid}}" id="help" class="fa-solid fa-thumbs-up"></i></span>
-				<hr>
+					<div style=" display : inline; float : right; position : relative; bottom : 40;">
+						<button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
+					</div> 			
+					<div>
+						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}"> <br/><br/>
+ 					</div>
+					<span style="font-size: 13px;">{{helpcount}}명에게 도움 됨</span>
+
+
+						<i rid="{{rid}}" id="goodBlack" class="fa-solid fa-thumbs-up" ></i>
+						<i rid="{{rid}}" id="goodBlue" class="fa-solid fa-thumbs-up" style="color:skyblue; display : none;"></i>
+
+					<hr>
 					{{/each}}
 				</script>
 
@@ -362,6 +392,7 @@ console.log(pprice);
 	var cate1 = "${cate}";
 	var cate2 = "${cate2}";
 	var cate3 = "${cate3}";
+
 	
 	$(".backcontents").on(
 			"click",
@@ -516,8 +547,15 @@ console.log(pprice);
 				var template = Handlebars.compile($("#temp").html());
 				$("#tbl").html(template(data));
 				
+				var ratingClick = document.getElementsByClassName("rate");
+				var starClick = document.getElementsByClassName("fa-star");
+				var makeStar = document.getElementsByClassName("makeStar");
+				var btnUpdate = document.getElementsByClassName("btnUpdate");
+				var btnDelete = document.getElementsByClassName("btnDelete");
+				var text1 = document.getElementsByClassName("reviewText");
+				
 				var rate = $('#tbl .rate');
-				 var rating2 = $('#tbl .rating2');
+				var rating2 = $('#tbl .rating2');
 					rate.each(function(){
 						var tagetscore = $(this).attr("data-rate");
 						var row= $(this).parent();
@@ -525,6 +563,21 @@ console.log(pprice);
 						$(this).find('.fa-solid').css({color:'#D3D3D3'});
 						$(this).find('.fa-solid:nth-child(-n+' + tagetscore + ')').css({color:'#F08d28'});
 					});
+					
+					for(i=0; i < ratingClick.length; i++){
+						var uidCheck = ratingClick[i].getAttribute("uid");
+						var uid="${id}";
+						
+						if(uidCheck == uid){
+							ratingClick[i].style.cursor= "pointer";
+							btnUpdate[i].style.visibility = "visible";
+							btnDelete[i].style.visibility = "visible";
+							
+							btnUpdate[i].addEventListener('click', function(){
+
+							});
+						}
+					}	
 			}
 		});
 	}
@@ -543,7 +596,6 @@ console.log(pprice);
 					if(helpCheck == 0){ //중복체크
 						alert("추천성공!");
 						getList();
-						
 					}
 					else if(helpCheck == 1){
 						alert("추천취소!");
@@ -556,5 +608,7 @@ console.log(pprice);
 			});
 		});
 	});
+	
+	
 </script>
 </html>

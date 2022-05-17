@@ -79,5 +79,15 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return session.selectOne(namespace+".user_review_count", map);
 	}
 
+	@Override
+	public List<ReviewVO> idReview(String uid) {
+		return session.selectList(namespace + ".idReview", uid);
+	}
+
+	@Override
+	public int idReviewCount(String uid) {
+		return session.selectOne(namespace + ".idReviewCount", uid);
+	}
+
 
 }
