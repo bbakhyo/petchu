@@ -327,7 +327,7 @@ fieldset {
   background: linear-gradient(to bottom, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%);
   font-size: 1rem;
   margin-left: -50px;
-  margin-top: 15px;
+
 }
 .menu_container2 {
   margin: 10px;
@@ -338,8 +338,8 @@ fieldset {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  margin-left: -74px;
-  margin-top: 25px;
+  margin-left: -20px;
+  margin-top: 10px;
 }
 .menu_container3 {
   display: flex;
@@ -350,8 +350,8 @@ fieldset {
   height: 60px;
   border-radius: 10px;
   background: linear-gradient(to bottom, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%);
-  margin-right: 60px;
-  margin-top: 15px;
+  margin-right: -50px;
+
 }
 .menu_item1 {
   width: 150px;
