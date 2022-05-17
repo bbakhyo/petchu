@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <style>
 	.list{
@@ -43,7 +44,7 @@
 					<td width=50 class="info id">{{id}}</td>
 				
 					<td width=50 class="title">생년월일</td>
-					<td width=300 class="info">{{birthday}}</td>
+					<td width=300 class="info birthday">{{birthday}}</td>
 
 					<td width=70 class="title">타입</td>
 					<td width=70 class="info type">{{type}}</td>
@@ -76,12 +77,49 @@
 	</script>
 	<div class="pagination"></div>
 </div>
+<hr>
+<div>
+	<p>회원별 구매금액</p>
+	<div id="chart" style="width: 900px; height: 500px;"></div>
+</div>
 
 <script>
 	var page = "${param.page==null ? 1: param.page}";
 	var keyword = "${param.keyword == null ? '': param.keyword}"
 	
 	getList();
+	
+	//차트 출력
+	var title="사용자별 결제금액"
+		$.ajax({
+			type: "get",
+			url: "/user/chartPrice.json",
+			success: function(data){
+				barChart(title,data);
+			}
+		});
+	//차트 펑션
+	function barChart(chartTitle,chartData) {
+		google.charts.load('current', {
+			'packages' : [ 'bar' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable(chartData);
+					
+			var options = {
+				chart : {
+					title : chartTitle,
+				},
+				bars : 'horizontal' // Required for Material Bar Charts.
+			};
+
+			var chart = new google.charts.Bar(document.getElementById('chart'));
+
+			chart.draw(data, google.charts.Bar.convertOptions(options));
+		}
+	}
 
 	//강제탈퇴 버튼 클릭시 
 	$("#tbl").on("click", ".getOut", function(){
@@ -125,7 +163,12 @@
 					}else{
 						target.find(".isDel").html("정상")
 					}
-				})
+					
+					//생년월일 섭스트링
+					target = target.find(".birthday");
+					var birth = target.html().substring(0,11);
+					target.html(birth);
+				});
 			}
 		});
 	}
@@ -147,4 +190,6 @@
 	         $("#search").click();
 	      }
 	   });
+	
+	
 </script>

@@ -18,6 +18,7 @@ import com.example.dao.shopcartDAO;
 import com.example.dao.shopproductDAO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
+import com.example.domain.ReviewVO;
 import com.example.domain.shopcartVO;
 import com.example.domain.shopproductVO;
 
@@ -222,13 +223,26 @@ public class shopproductController {
 		cartdao.product_count_update(vo);
 	}
 	
-	//장바구니 목록 JSON
+	/////
+	//주문목록 JSON
 	@RequestMapping("/order_list.json")
 	@ResponseBody
-	public List<shopcartVO> order_list(String uid){
-		List<shopcartVO> olist=cartdao.order_list(uid);
-		return olist;
+	public HashMap<String,Object> order_list(String uid, Criteria cri){
+		HashMap<String,Object> omap =new HashMap<String,Object>();
+		cri.setPerPageNum(20);
+//	pagination
+		PageMaker opm= new PageMaker();
+		opm.setCri(cri);
+		opm.setTotalCount(cartdao.order_count(uid));
+		opm.setDisplayPageNum(5);  //pagination에서 페이지 버턴 몇개식 보이는
+		omap.put("pm", opm);
+		omap.put("olist", cartdao.order_list(uid,cri));
+
+		return omap;
 	}
+	
+	
+	
 	
 	//구매목록 - 상세 구매 페이지 이동기능 달아야 함
 	@RequestMapping("/order_list")
@@ -304,5 +318,22 @@ public class shopproductController {
 	public void order_delete(String bno){
 		System.out.println("asdfdasfasdfdasf2342234324324\n"+bno);
 		cartdao.user_order_delete(bno);
+	}
+	
+//	//주문상황 출력
+	@RequestMapping(value="state_read", method=RequestMethod.POST)
+	@ResponseBody
+	public shopcartVO state_read(String orno){
+		shopcartVO resutlState = cartdao.state_read(orno);
+		return resutlState;
+	}
+	
+	//상품 리뷰목록 json
+	@RequestMapping("/shop_review_list.json")
+	@ResponseBody
+	public List<shopcartVO> shop_review_list(int pno){
+		//shopcartVO vo=cartdao.order_read(pno, orno);
+		List<shopcartVO> list=cartdao.shop_review_list(pno);
+		return list;
 	}
 }

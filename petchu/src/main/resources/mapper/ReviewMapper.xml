@@ -12,8 +12,8 @@
         order by rid desc
     </select>
     <insert id="insert">
-    	insert into review(rtitle,star,review,rdate,rimage1,rimage2,uid,pno)
-    	values(#{rtitle}, #{star}, #{review}, #{rdate}, #{rimage1}, #{rimage2}, #{uid}, #{pno})
+    	insert into review(rtitle, star, review, uid, pno, bno)
+    	values(#{rtitle}, #{star}, #{review}, #{uid}, #{pno}, #{bno})
     </insert>
     <update id="update">
     	update review
@@ -36,5 +36,8 @@
 	<select id="updateread" resultType="com.example.domain.ReviewVO">
 		select r.*, p.pname, p.pimage from review r, shopproduct p
 		where r.pno=p.pno and r.rid=#{rid};
+	</select>
+	<select id="user_review_count" resultType="int">
+		 select count(*) from review where uid=#{uid} and bno=#{bno};
 	</select>
 </mapper>

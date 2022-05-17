@@ -42,18 +42,25 @@
 	}
 	.order_read{
 		color:blue;
-		
+	}
+	.delState{	/* 	이놈 어떻게 해도 가운데정렬 안됨ㅅㅂ */
+		font-size: 20;
+ 	  	margin-left: 30%;
 	}
 </style>
 <div id="page">
 	<h1>구매목록</h1>
+	<div id="sidemenu">
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
+	</div>
 	<table id="tbl"></table>
 	<script id="temp" type="text/x-handlebars-template">
-		{{#each .}}	
+		{{#each olist}}	
 		<tbody class="tbody" orno="{{orno}}" pno="{{pno}}">
 		<tr class="date_tr" style="text-align:right;">
-			<td colspan="3"><span class="date_td" style="margin-right:78%;">{{odate}}</span>
-				<span class="order_read date_td" orno="{{orno}}" >주문 상세보기</span>
+			<td colspan="3"><span class="date_td">{{odate}}</span>
+				<span class="delState"></span>
+				<span class="order_read date_td" orno="{{orno}}" style="float: right;">주문 상세보기</span>
 			</td>
 			
 		</tr>
@@ -65,11 +72,14 @@
 		</tbody>
 		{{/each}}
 	</script>
+	  <div class="footer">
+	    <div class = "pagination"></div>
+	  </div>
 </div>
-
     
 <script>	
 var uid = "${id}";
+var page = 1;
 
 // $(".date_box_righgt").on("click", "span", function(){
 // 	alert("리드이동");
@@ -89,6 +99,7 @@ function getList() {
 		type : "get",
 		dataType : "json",
 		data : {
+			page : page,
 			uid : uid
 		},
 		url : "/shopproduct/order_list.json",
@@ -96,7 +107,7 @@ function getList() {
 // 			console.log(data);
 			var template = Handlebars.compile($("#temp").html());
 			$("#tbl").html(template(data));
-			
+			$(".pagination").html(getPagination(data));
 			
 			//가격 계산
 			$(".price").each(function(){
@@ -112,14 +123,17 @@ function getList() {
 			var i = 0
 			$(".tbody").each(function(){
 				orno = $(this).attr("orno");
+				console.log(orno);
 				var test = document.getElementsByClassName('tbody')[i];
+				console.log(test);
 				i++;
 				if(tno==""||tno!=orno){
-					//alert("tno=" + tno + "\norno=" + orno);
+// 					alert("tno=" + tno + "\norno=" + orno);
 					test.classList.add('border');
 					$(this).find(".date_tr").find(".date_td").attr("date_only", "date_only");
 				}
 				tno=orno;
+				console.log(tno);
 			});	
 			$(".date_td").each(function(){
 				if(!$(this).attr("date_only")){
@@ -146,12 +160,7 @@ function getList() {
 				strDate = strDate.replace("-", ".");
 				$(this).html(strDate);
 			});
-			
-			
-// 			//같이 구매한 상품 가격포맷
-// 			getFormatPrice();
-
-			
+			getState();
 		}
 	});
 }
@@ -173,4 +182,44 @@ function getGrayLine(){
 	});
 }
 
+//메뉴바 css 정렬
+$(".sideMenu").css("margin-left", "0px");
+
+//페이지네이션 클릭시 페이지 이동
+$(".pagination").on("click", "a", function(e){
+	e.preventDefault();
+	page=$(this).attr("href");
+	getList();
+});
+
+//상품 배송정보 불러오기 
+function getState(){
+// 	alert("tq");
+	var state=0;
+	$(".delState").each(function(){
+		var onthis = $(this);
+		var orno = $(this).closest(".tbody").attr("orno");
+	//		alert(orno);
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			data : {
+				orno:orno
+			},
+			url : "/shopproduct/state_read",
+			success : function(data){//success를 무시하고 넘어간 이후에 한 번에 success 처리되기 때문인 듯
+				state = data.state;
+				if(state==0){
+					state='배송 준비중';
+					onthis.css("color", "");
+				}else if(state==1){
+					state='배송중';
+				}else{
+					state='배송완료';
+				}
+				onthis.html(state);
+				}
+			});
+	});
+}
 </script>

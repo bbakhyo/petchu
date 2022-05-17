@@ -154,6 +154,7 @@ public class RequestController {
 	public void beutyChoose(int seno, int brno){
 		sedao.secheckUpdate(seno);
 		bdao.bisDeleteUpdate(brno);
+		bdao.beautyChooseUpdate(brno);
 		sedao.bfailCheckUpdate(brno);
 	}
 	
@@ -162,6 +163,7 @@ public class RequestController {
 	public void celanChoose(int seno, int crno){
 		sedao.secheckUpdate(seno);
 		cdao.cisDeleteUpdate(crno);
+		cdao.cleanChooseUpdate(crno);
 		sedao.cfailCheckUpdate(crno);
 	}
 	
@@ -170,6 +172,7 @@ public class RequestController {
 	public void lessonChoose(int seno, int lrno){
 		sedao.secheckUpdate(seno);
 		ldao.lisDeleteUpdate(lrno);
+		ldao.lChooseUpdate(lrno);
 		sedao.lfailCheckUpdate(lrno);
 	}
 	

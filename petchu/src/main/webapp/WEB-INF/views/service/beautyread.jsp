@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<style>
+.requestInfo {
+	text-align : left;
+	padding : 0px 100px;
+}
+.requestInfo hr {
+	width : 800px;
+}
+</style>
 <div class="requestInfo">
 	<h1>[${bvo.nick}]님의 요청서</h1>
 	<h3>1. 반려동물 분류</h3>

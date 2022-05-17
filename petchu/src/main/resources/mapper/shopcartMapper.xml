@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.mapper.shopcartMapper">
 	<select id="cart_read" resultType="com.example.domain.shopcartVO">
-		select c.uid, c.pno, p.pimage, p.pname, p.pprice, c.amount, cno, c.amount * pprice sum, chk
+		select c.uid, c.pno, p.pimage, p.pname, p.pprice, c.amount, cno, c.amount * pprice sum, chk, pqantity
 		from shopproduct p, shopcart c
 		where c.uid=#{uid} and c.pno = p.pno
 		order by cno desc
@@ -36,10 +36,12 @@
 		where uid=#{uid} and chk=1
 	</delete>
 	<select id="order_list" resultType="com.example.domain.shopcartVO">
-		select orno, pimage, p.pno, pname, pprice, o.amount, odate from 
-		orderlist o, shopproduct p 
-		where o.pno=p.pno and uid=#{uid}and isDelete = 0
+		select o.orno, pimage, p.pno, pname, pprice, o.amount, odate, state from 
+		orderlist o, shopproduct p, user_order u
+		where o.pno=p.pno and o.uid=#{uid} and isDelete = 0
+        group by orno
 		order by odate desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="order_read" resultType="com.example.domain.shopcartVO">
 		select o.*, p.pimage, p.pname, p.pprice 
@@ -122,6 +124,15 @@
 	</select>
 	<update id="product_count_update">
 		update shopproduct set pqantity = pqantity-#{amount}
-		where pno=#{pno};
+		where pno=#{pno}
 	</update>
+   <select id="order_count" resultType="int">
+   		select count(*) from orderlist where uid=#{uid}
+   </select>
+	<select id="state_read" resultType="com.example.domain.shopcartVO">
+		select state from user_order where orno = #{orno};
+	</select>
+	<select id="shop_review_list" resultType="com.example.domain.shopcartVO">
+		select * from review where pno=#{pno} order by rid desc;
+	</select>
 </mapper>

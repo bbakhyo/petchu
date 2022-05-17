@@ -48,6 +48,7 @@
 		<div id="requestside" style="display: none;">
 			<p><a href="/user/myRequest"> · 내가 작성한 요청서</a></p>
 			<p><a href="/user/myDeadlineList"> · 마감처리한 요청서</a></p>
+			<p><a href="/user/myChooseList"> · 채택한 요청서</a></p>
 		</div>
 	</c:if>
 	<p><a href="#">구매내역</a></p>

@@ -11,5 +11,6 @@
 	<a href="/product/insert">상품등록</a>
 	<a href="/product/list">상품목록</a>
 	<a href="/product/userList">회원정보</a>
-	<a href="#">주문내역</a>
+	<a href="/product/order_list">주문내역</a>
+	
 </div>

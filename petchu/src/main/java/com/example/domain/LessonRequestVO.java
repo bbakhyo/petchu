@@ -16,6 +16,14 @@ public class LessonRequestVO extends ServiceCoVO{
 	public String wish_local2;
 	public String lesson_place;
 	public String detailed_matters;
+	public int choose_check;
+	
+	public int getChoose_check() {
+		return choose_check;
+	}
+	public void setChoose_check(int choose_check) {
+		this.choose_check = choose_check;
+	}
 	public int getLrno() {
 		return lrno;
 	}
