@@ -57,11 +57,14 @@
 		e.preventDefault();
 		var id = "${id}"
 		if (id == "") {
-			swal("로그인후 이용가능합니다.");
+			swal('','로그인후 이용가능합니다.','warning')
 			location.href = "/user/login";
 		}
 	});
-
+		
+	
+		
+			
 	$(function() {
 		$('#slider-div')
 				.slick(
