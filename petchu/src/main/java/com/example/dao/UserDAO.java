@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.example.domain.Criteria;
@@ -29,4 +30,8 @@ public interface UserDAO {
 	public void updateCash(int amount, String id);
 	
 	public int userCount();
+	
+	public List<HashMap<String, Object>> chartPrice();
+	
+	public List<HashMap<String, Object>> chartDate();
 }

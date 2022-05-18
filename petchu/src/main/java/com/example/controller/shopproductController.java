@@ -18,9 +18,9 @@ import com.example.dao.shopcartDAO;
 import com.example.dao.shopproductDAO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
+import com.example.domain.ReviewVO;
 import com.example.domain.shopcartVO;
 import com.example.domain.shopproductVO;
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
 
 @Controller
 @RequestMapping("/shopproduct")
@@ -43,22 +43,22 @@ public class shopproductController {
 	@ResponseBody
 	public int insert(shopcartVO vo){
 		//System.out.println("...................."+vo);
-		//System.out.println("\n\nê²°ê³¼ : " + resutlCart);
+		//System.out.println("\n\n°á°ú : " + resutlCart);
 		
-		//voì— uidì™€ pnoë¥¼ ë‹´ì•„ì„œ check	
+		//vo¿¡ uid¿Í pno¸¦ ´ã¾Æ¼­ check	
 		shopcartVO resutlCart = cartdao.cart_check(vo);
-		//if resultê°€ nullì´ë¼ë©´ ë“±ë¡
+		//if result°¡ nullÀÌ¶ó¸é µî·Ï
 		if(resutlCart==null){
-			//ì¤‘ë³µê°’ì´ ì—†ì„ ê²½ìš°ì—ë§Œ ë“±ë¡ insert ì‘ì—… ì‹¤í–‰
+			//Áßº¹°ªÀÌ ¾øÀ» °æ¿ì¿¡¸¸ µî·Ï insert ÀÛ¾÷ ½ÇÇà
 			cartdao.cart_insert(vo);	
 			return 1;
 		}else{
-			//ì´ë¯¸ ë“±ë¡ëœ ìƒí’ˆì´ ìˆì„ ê²½ìš° 0
+			//ÀÌ¹Ì µî·ÏµÈ »óÇ°ÀÌ ÀÖÀ» °æ¿ì 0
 			return 0;
 		}
 	}
 	
-	//ì¥ë°”êµ¬ë‹ˆ ëª©ë¡ JSON
+	//Àå¹Ù±¸´Ï ¸ñ·Ï JSON
 	@RequestMapping("/cart_read.json")
 	@ResponseBody
 	public List<shopcartVO> cart(String uid){
@@ -66,25 +66,25 @@ public class shopproductController {
 		return clist;
 	}
 	
-	//ì¥ë°”êµ¬ë‹ˆ ëª©ë¡ - ì¥ë°”êµ¬ë‹ˆ í˜ì´ì§€ë¡œ ì´ë™í•˜ëŠ” í™”ë©´ì„ ë§Œë“¤ì–´ì•¼ í•¨.
+	//Àå¹Ù±¸´Ï ¸ñ·Ï - Àå¹Ù±¸´Ï ÆäÀÌÁö·Î ÀÌµ¿ÇÏ´Â È­¸éÀ» ¸¸µé¾î¾ß ÇÔ.
 	@RequestMapping("/cart_read")
 	public String cart_list(Model model){
 		model.addAttribute("pageName", "shopproduct/cart_read.jsp");
 		return "/home";
 	}
 	
-	//ì—¬ëŸ¬ìƒí’ˆ êµ¬ë§¤ì‹œ í˜ì´ì§€
+	//¿©·¯»óÇ° ±¸¸Å½Ã ÆäÀÌÁö
 	@RequestMapping("/multi_buy")
 	public String multi_buy(Model model, String uid){
-		//user ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
+		//user Á¤º¸ ºÒ·¯¿À±â
 		model.addAttribute("vo", userdao.read(uid));
-		//ì—¬ê¸°ì— point ì¶œë ¥
+		//¿©±â¿¡ point Ãâ·Â
 		model.addAttribute("uvo", cartdao.user_point(uid));
 		model.addAttribute("pageName", "shopproduct/multi_buy.jsp");
 		return "/home";
 	}
 	
-	//ì‹¤í—˜ìš© list JSON
+	//½ÇÇè¿ë list JSON
 	@RequestMapping("/multi_buy.json")
 	@ResponseBody
 	public List<shopcartVO> buy_list(String uid){
@@ -92,7 +92,7 @@ public class shopproductController {
 		return list;
 	}
 	
-	//ì‹¤í—˜ìš© list JSON
+	//½ÇÇè¿ë list JSON
 	@RequestMapping("/list.json")
 	@ResponseBody
 	public List<shopproductVO> list(){
@@ -101,7 +101,7 @@ public class shopproductController {
 	}
 	
 	
-	//ì‹¤í—˜ìš© list
+	//½ÇÇè¿ë list
 	@RequestMapping("/list")
 	public String list(Model model){
 		model.addAttribute("pageName", "shopproduct/list.jsp");
@@ -121,7 +121,7 @@ public class shopproductController {
 		model.addAttribute("pageName", "shopproduct/main.jsp");
 		return "/home";
 	}
-	//Shopproduct mainì—ì„œ ë² ìŠ¤íŠ¸/ì˜¤ëŠ˜ì˜ ìƒí’ˆ ëª©ë¡ ì¶œë ¥
+	//Shopproduct main¿¡¼­ º£½ºÆ®/¿À´ÃÀÇ »óÇ° ¸ñ·Ï Ãâ·Â
 	@RequestMapping("/main.json")
 	@ResponseBody
 	public HashMap<String,Object> main_best(){
@@ -133,7 +133,7 @@ public class shopproductController {
 	return map;	
 	}
 	
-//	//ì½˜í…ì¸  ë¦¬ìŠ¤íŠ¸ JSON
+//	//ÄÜÅÙÃ÷ ¸®½ºÆ® JSON
 //	@RequestMapping("/contents_list.json")
 //	@ResponseBody
 //	public List<shopproductVO> contents_list(String selectCate, String selectCate2, String selectCate3){
@@ -141,7 +141,7 @@ public class shopproductController {
 //		return list;
 //	}
 	
-	//ì½˜í…ì¸  ë¦¬ìŠ¤íŠ¸ JSON test
+	//ÄÜÅÙÃ÷ ¸®½ºÆ® JSON test
 	@RequestMapping("/contents_list.json")
 	@ResponseBody
 	public Map<String,Object> contents_list(String selectCate, String selectCate2, String selectCate3, Criteria cri){
@@ -157,7 +157,7 @@ public class shopproductController {
 		return map;
 	}
 
-	//í•„í„°ë§ëœ ìƒí’ˆëª©ë¡
+	//ÇÊÅÍ¸µµÈ »óÇ°¸ñ·Ï
 	@RequestMapping("/contents_list")
 	public String contents_list(Model model, String selectCate, String selectCate2, String selectCate3, HttpSession session){
 		session.setAttribute("cate", selectCate);
@@ -169,10 +169,10 @@ public class shopproductController {
 		return "/home";
 	}
 	
-	//ìƒí’ˆ êµ¬ë§¤ í˜ì´ì§€
+	//»óÇ° ±¸¸Å ÆäÀÌÁö
 	@RequestMapping("/buy")
 	public String buy(Model model, int pno, int amount, HttpSession session, String uid){
-		//user ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
+		//user Á¤º¸ ºÒ·¯¿À±â
 		model.addAttribute("uvo", userdao.read(uid));	
 		System.out.println("test............"+userdao.read(uid));
 		//
@@ -184,7 +184,7 @@ public class shopproductController {
 	}
 
 	
-	//ìƒí’ˆ ì •ë³´ ì¶œë ¥ (ìƒì„¸ í˜ì´ì§€)
+	//»óÇ° Á¤º¸ Ãâ·Â (»ó¼¼ ÆäÀÌÁö)
 	@RequestMapping("/read")
 	public String read(Model model, int pno, String selectCate, String selectCate2, String selectCate3, HttpSession session){
 		session.setAttribute("cate", selectCate);
@@ -195,53 +195,55 @@ public class shopproductController {
 		return "/home";
 	}
 	
-	//ì¹´íŠ¸ëª©ë¡ ì—…ë°ì´íŠ¸
+	//Ä«Æ®¸ñ·Ï ¾÷µ¥ÀÌÆ®
 	@RequestMapping(value="/cart_update", method=RequestMethod.POST)
 	@ResponseBody
 	public void cart_update(int amount, int cno){
 		cartdao.cart_update(amount, cno);	
 	}
 	
-	//ì¹´íŠ¸chk ì—…ë°ì´íŠ¸
+	//Ä«Æ®chk ¾÷µ¥ÀÌÆ®
 		@RequestMapping(value="/cart_chk_update", method=RequestMethod.POST)
 		@ResponseBody
 		public void cart_chk_update(int chk, int cno){
 			cartdao.cart_chk_update(chk, cno);	
 		}
 		
-	//ìƒí’ˆ êµ¬ë§¤
+	//»óÇ° ±¸¸Å
 	@RequestMapping(value="/order_insert", method=RequestMethod.POST)
 	@ResponseBody
 	public void order_insert(shopcartVO vo){
-		//ë“±ë¡
+		//µî·Ï
 		cartdao.order_insert(vo);
-		//ì¥ë°”êµ¬ë‹ˆchk ëª©ë¡ ì‚­ì œ
+		//Àå¹Ù±¸´Ïchk ¸ñ·Ï »èÁ¦
 		cartdao.chk_delete(vo);
-		//shopproduct êµ¬ë§¤ìˆ˜ëŸ‰ ì¶”ê°€
+		//shopproduct ±¸¸Å¼ö·® Ãß°¡
 		cartdao.sell_update(vo.getAmount(), vo.getPno());
-		//shopproduct ë‚¨ì€ìˆ˜ëŸ‰ ì—…ë°ì´íŠ¸
+		//shopproduct ³²Àº¼ö·® ¾÷µ¥ÀÌÆ®
 		cartdao.product_count_update(vo);
 	}
 	
-	//ì¥ë°”êµ¬ë‹ˆ ëª©ë¡ JSON
+	/////
+	//ÁÖ¹®¸ñ·Ï JSON
 	@RequestMapping("/order_list.json")
 	@ResponseBody
 	public HashMap<String,Object> order_list(String uid, Criteria cri){
 		HashMap<String,Object> omap =new HashMap<String,Object>();
 		cri.setPerPageNum(20);
-		
-		
 //	pagination
 		PageMaker opm= new PageMaker();
 		opm.setCri(cri);
 		opm.setTotalCount(cartdao.order_count(uid));
-		opm.setDisplayPageNum(5);  //paginationì—ì„œ í˜ì´ì§€ ë²„í„´ ëª‡ê°œì‹ ë³´ì´ëŠ”
+		opm.setDisplayPageNum(5);  //pagination¿¡¼­ ÆäÀÌÁö ¹öÅÏ ¸î°³½Ä º¸ÀÌ´Â
 		omap.put("pm", opm);
 		omap.put("olist", cartdao.order_list(uid,cri));
 		return omap;
 	}
-
-	//êµ¬ë§¤ëª©ë¡ - ìƒì„¸ êµ¬ë§¤ í˜ì´ì§€ ì´ë™ê¸°ëŠ¥ ë‹¬ì•„ì•¼ í•¨
+	
+	
+	
+	
+	//±¸¸Å¸ñ·Ï - »ó¼¼ ±¸¸Å ÆäÀÌÁö ÀÌµ¿±â´É ´Ş¾Æ¾ß ÇÔ
 	@RequestMapping("/order_list")
 	public String order_list(Model model){
 		model.addAttribute(	"pageName", "shopproduct/order_list.jsp");
@@ -265,7 +267,7 @@ public class shopproductController {
 		return list;
 	}
 	
-	//ì£¼ë¬¸ëª©ë¡ - readí˜ì´ì§€
+	//ÁÖ¹®¸ñ·Ï - readÆäÀÌÁö
 	@RequestMapping("/order_read")
 	public String order_read(Model model, String orno){
 		model.addAttribute("orno", orno);
@@ -277,40 +279,40 @@ public class shopproductController {
 		return "/home";
 	}
 
-	//ìƒí’ˆ ë‹¨ì¼ êµ¬ë§¤
+	//»óÇ° ´ÜÀÏ ±¸¸Å
 	@RequestMapping(value="/order_single_insert", method=RequestMethod.POST)
 	@ResponseBody
 	public void order_single_insert(shopcartVO vo){
-		//ë“±ë¡
+		//µî·Ï
 		cartdao.order_insert(vo);
-		//shopproduct êµ¬ë§¤ìˆ˜ëŸ‰ ì¶”ê°€
+		//shopproduct ±¸¸Å¼ö·® Ãß°¡
 		cartdao.sell_update(vo.getAmount(), vo.getPno());
-		//shopproduct ìƒí’ˆìˆ˜ëŸ‰ ê°ì†Œ
+		//shopproduct »óÇ°¼ö·® °¨¼Ò
 		cartdao.product_count_update(vo);
 	}
 	
-	//ìƒí’ˆ êµ¬ë§¤ì‹œ point ì´ë™
+	//»óÇ° ±¸¸Å½Ã point ÀÌµ¿
 	@RequestMapping(value="user_order_insert", method=RequestMethod.POST)
 	@ResponseBody
 	public void order_insert(shopcartVO vo, int btnPoint){
 //		System.out.println(".................."+vo.getOrno()+"\n"+vo.getUid()+"\n"+vo.getPoint()+"\n"+vo.getSum()+"\n"+btnPoint);
 		if(btnPoint==1){
-			//í¬ì¸íŠ¸ ì‚¬ìš©ìë¼ë©´ user í…Œì´ë¸”ì—ì„œ í¬ì¸íŠ¸ ê°ì†Œ
+			//Æ÷ÀÎÆ® »ç¿ëÀÚ¶ó¸é user Å×ÀÌºí¿¡¼­ Æ÷ÀÎÆ® °¨¼Ò
 			cartdao.user_point_minus(vo);
-			//ê°ì†Œí•œ ë‚´ì—­ historyì— ê¸°ë¡
+			//°¨¼ÒÇÑ ³»¿ª history¿¡ ±â·Ï
 			cartdao.user_point_history(vo);
 		}
-		//êµ¬ë§¤ë‚´ì—­ ì…ë ¥
+		//±¸¸Å³»¿ª ÀÔ·Â
 		cartdao.user_order_insert(vo);
-		//í¬ì¸íŠ¸ ì ë¦½
+		//Æ÷ÀÎÆ® Àû¸³
 		int price = vo.getSum();
 		int pricePoint = price/10;
 		cartdao.user_point_plus(pricePoint, vo.getUid());
-		//ì ë¦½ë‚´ì—­ historyì— ê¸°ë¡
+		//Àû¸³³»¿ª history¿¡ ±â·Ï
 		cartdao.user_point_history_plus(vo.getUid(), pricePoint);
 	}
 	
-	//ìƒí’ˆ êµ¬ë§¤ì‹œ point ì´ë™
+	//»óÇ° ±¸¸Å½Ã point ÀÌµ¿
 	@RequestMapping(value="user_order_delete", method=RequestMethod.POST)
 	@ResponseBody
 	public void order_delete(String bno){
@@ -318,7 +320,7 @@ public class shopproductController {
 		cartdao.user_order_delete(bno);
 	}
 	
-//	//ï¿½Ö¹ï¿½ï¿½ï¿½È² ï¿½ï¿½ï¿½
+//	//ÁÖ¹®»óÈ² Ãâ·Â
 	@RequestMapping(value="state_read", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> state_read(String orno){
@@ -330,7 +332,7 @@ public class shopproductController {
 		return map;
 	}
 	
-	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ json
+	//»óÇ° ¸®ºä¸ñ·Ï json
 	@RequestMapping("/shop_review_list.json")
 	@ResponseBody
 	public List<shopcartVO> shop_review_list(int pno){
@@ -339,7 +341,7 @@ public class shopproductController {
 		return list;
 	}
 	
-//	//ï¿½Ö¹ï¿½ï¿½ï¿½È² ï¿½ï¿½ï¿½
+//	//ÁÖ¹®»óÈ² Ãâ·Â
 	@RequestMapping(value="read_rcount", method=RequestMethod.POST)
 	@ResponseBody
 	public int read_rcount(int bno){

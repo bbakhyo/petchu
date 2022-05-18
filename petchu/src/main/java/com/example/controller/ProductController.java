@@ -29,7 +29,6 @@ import com.example.domain.Criteria;
 import com.example.domain.NaverAPI;
 import com.example.domain.PageMaker;
 import com.example.domain.ProductVO;
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 
 @Controller
@@ -39,6 +38,7 @@ public class ProductController {
 	@Autowired
 	ProductDAO dao;
 	
+
 	@Autowired
 	UserDAO udao;
 
@@ -130,7 +130,7 @@ public class ProductController {
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	public void insert(ProductVO vo){
-		//Ïù¥ÎØ∏ÏßÄ ÎÇ¥ pcÎ°ú Ïπ¥Ìîº
+		//¿ÃπÃ¡ˆ ≥ª pc∑Œ ƒ´««
 		/*
 		String str = vo.getPimage();
 		String fileName = str.substring(str.lastIndexOf("/")+1);
@@ -143,7 +143,7 @@ public class ProductController {
 			vo.setPimage("product/" + fileName);
 			dao.insert(vo);
 		} catch (Exception e) {
-			System.out.println("Ïò§Î•ò: " + e.toString());
+			System.out.println("ø¿∑˘: " + e.toString());
 		}
 		*/
 		dao.insert(vo);
@@ -161,5 +161,35 @@ public class ProductController {
 		*/
 		dao.adminUpdate(vo);
 		return "redirect:/product/list";
+	}
+	
+	
+	@RequestMapping("/order_list.json")
+	@ResponseBody
+	public Map<String,Object> order_list(Criteria cri){
+		Map<String,Object> map = new HashMap<>();
+		cri.setPerPageNum(10);
+		
+		PageMaker pm = new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(dao.order_count());
+		
+		map.put("pm", pm);
+		map.put("list", dao.order_list(cri));
+		
+		return map;
+	}
+	
+	@RequestMapping("/order_list")
+	public String order_list(Model model) {
+		model.addAttribute("submenu", "submenu.jsp");
+		model.addAttribute("pageName", "product/order_list.jsp");
+		return "/home";
+	}
+	
+	@RequestMapping(value="order_state_update", method=RequestMethod.POST)
+	@ResponseBody
+	public void order_state_update(ProductVO vo){
+		dao.order_state_update(vo);
 	}
 }

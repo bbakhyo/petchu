@@ -1,15 +1,372 @@
 @CHARSET "UTF-8";
-#page{
-  /*border:1px solid black;*/
+/* 리뷰작성 페이지 */
+.insert_page {
+	width: 800px;
+	display: column;
+}
+
+.pname {
+	display: flex;
+	justify-content: flex-start;
+	align-content: flex-start;
+}
+
+#page_review {
+	/*border:1px solid black;*/
+	width: 1000px;
+	height: auto;
+	font-style: "nanum gothic";
+}
+
+.page_title {
+	/*   border: 1px solid #f5f5dc; */
+	/*   background-color: #f5f5dc; */
+	text-align: center;
+	width: 800px;
+}
+
+.make_star {
+	
+}
+/* page outline */
+.page_info {
+	display: flex;
+	flex-direction: column;
+	/*   border: 1px solid red; */
+	width: 800px;
+	justify-content: space-around;
+	align-item: space-around;
+}
+
+.inin_page {
+	/*border:2px solid orange;*/
+	margin: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.page_heading {
+	/*border:2px solid yellow;*/
+	padding: 10px;
+	border-top: 2px solid black;
+	border-bottom: 1px solid lightgrey;
+}
+
+.page_heading, .review_h2, .review_h3 {
+	text-align: left;
+}
+
+.page_heading h5 {
+	font-size: 14px;
+}
+
+.p_info {
+	/*border:2px solid green;*/
+	display: flex;
+	justify-content: flex-start;
+	object-fit: scale-down;
+}
+
+#p_img {
+	justify-content: center;
+	align-item: center;
+	object-fit: scale-down;
+}
+
+/* image and product name container(TOP ROW) */
+.product_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 230px;
+	width: 800px;
+	/*   border: 1px solid pink; */
+}
+
+.product_name {
+	/*   border:2px solid blue; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+	width: 480px;
+	height: 80px;
+	/* border: 1px solid blue; */
+}
+
+.review_details {
+	/*border:3px solid skyblue;*/
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.d_review {
+	/*border:3px solid navy;*/
+	margin: 10px;
+	border-top: 1px solid lightgrey;
+}
+
+.review_overlay_row {
+	position: relative;
+	left: 55px;
+	bottom: 50px;
+	font-size: 12px;
+	font-style: "dotum";
+	color: green;
+	/*   border: 1px solid green; */
+	width: 600px;
+}
+
+.review_overlay {
+	margin: 0px auto; color : green;
+	text-align: left;
+	color: green; text-align : left;
+	/* border: 1px solid red; */
+	width: 530px;
+}
+
+.textarea_review {
+	display: flex;
+	justify-content: center;
+	/*   border: 3px solid blue; */
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+.word_count {
+	font-size: 16px;
+	color: black;
+	position: relative;
+	top: 8px;
+}
+
+.textarea_review_row_bottom {
+	/*   border:  1px solid blue; */
+	height: 30px;
+	width: 690px;
+	position: relative;
+}
+
+.word_count {
+	float: right;
+}
+
+.review_textarea {
+	margin: 0px 30px 20px 30px;
+	/*border:3px solid violet;*/
+	width: 300px;
+}
+
+textarea[name=rtitle], textarea[name=review] {
+	resize: none;
+}
+
+.r_photo {
+	display: flex;
+	flex-direction: row;
+	height: 300px;
+	width: 100%;
+	/*   border:3px solid pink; */
+	justify-content: flex-start;
+	align-items: center;
+	border-bottom: 1px solid lightgrey;
+	border-top: 1px solid lightgrey;
+}
+.preview{
+max-width: 100%;
+max-height: 100%;
+/* object-fit: contain; */
+/* position: absolute;
+left: 45%; */
+
+}
+.file_wrapper{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+/* 	border: 1px solid purple; */
+	height: 100%;
+	width: 220px;
+}
+.file>*{
+	color: lightgrey;
+ 	position: absolute; 
+	
+}
+.file{
+	display: flex;
+justify-content: center;
+align-items: center;
+border: 3px dotted lightgrey;
+width: 205px;
+height: 205px;
+/* position: absolute;
+left: 45%; */
+
+}
+#preview_name{
+	text-align: left;
+	width: 210px;
+	margin-top: 10px;
+}
+
+.rtitle, .summary_container {
+	display: flex;
+	flex-direction: column;
+	/*   justify-content: space-around; */
+	/*   border: 3px solid lightcyan; */
+	height: 200px;
+	width: 100%;
+	border-bottom: 1px solid lightgrey;
+}
+
+.h_info {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	/*border:3px solid lightsalmon;*/
+}
+/* review submit button container  */
+#review_btn {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	/*   margin: 10px; */
+	width: 100%;
+	/*  border:1px solid lightsalmon; */
+}
+/* textarea1 */
+.word_count1 {
+	color: black;
+	font-size: 16px;
+	text-align: right;
+	position: relative;
+	top: 10px;
+	right: 10px;
+}
+
+/* counter2 base */
+.review_overlay_row2 {
+	/*   border: 1px solid purple; */
+	text-align: right;
+}
+/* pushes counter below 20px down textarea2-bottom */
+.word_count2_container {
+	text-align: right;
+	position: relative;
+	bottom: 20px;
+	right: 40px;
+}
+/* small box, right side */
+.word_count2_container {
+	display: inline-block;
+	/*   border: 1px solid red; */
+	width: 50px;
+	height: 30px;
+}
+
+.box {
+	margin: 10px;
+}
+
+.box1 {
+	margin: 45px;
+}
+
+.satisfaction {
+	/*border:3px solid lightcyan;*/
+	margin-left: 60px;
+	margin-right: 100px;
+}
+
+.fa-solid {
+	cursor: pointer;
+	color: #d3d3d3;
+}
+
+/* 버턴 */
+/* 등록버턴 */
+.review_submit {
+	background-color: #44c767;
+	border: 1px solid #18ab29;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 17px;
+	padding: 12px 30px;
+	text-decoration: none;
+}
+
+.review_submit:hover {
+	background-color: #5cbf2a;
+}
+
+.review_submit:active {
+	position: relative;
+	top: 1px;
+}
+
+/* 취소버턴 */
+.review_cancel {
+	background-color: #ffffff;
+	border: 1px solid #c2c2c2;
+	display: inline-block;
+	cursor: pointer;
+	color: #080808;
+	font-family: Arial;
+	font-size: 16px;
+	padding: 12px 30px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #2f6627;
+}
+
+.review_cancel:hover {
+	background-color: #23b85e;
+	color: white;
+}
+
+.review_cancel:active {
+	position: relative;
+	top: 1px;
+}
+
+/*  upload picture button    */
+.btn_upload {
+	background-color: #ffffff;
+	border: 1px solid #c2c2c2;
+	display: inline-block;
+	cursor: pointer;
+	color: #0ca341;
+	font-family: Arial;
+	font-size: 13px;
+	padding: 8px 12px;
+	text-decoration: none;
+}
+
+.btn_upload:hover {
+	background-color: #23b85e;
+}
+
+.btn_upload:active {
+	position: relative;
+	top: 1px;
+}
+
+/* #page{
+  border:1px solid black;
   width:1000px;
   height:1000px;
   margin:0px auto;
  
 }
 .insert_page{
-  /*border:3px solid gray;*/
+  border:3px solid gray;
   width:800px;
-  /*background-color:lightgray;*/
+  background-color:lightgray;
   margin:50px;
   margin-bottom: 20px;
  
@@ -23,7 +380,7 @@
 .page_info{
   display:flex;
   flex-direction: column;
-  /*border:1px solid red;*/
+  border:1px solid red;
   width:800px;
   justify-content: space-around;
   align-item: space-around;
@@ -31,7 +388,7 @@
   
 }
 .inin_page{
-  /*border:2px solid orange;*/
+  border:2px solid orange;
   margin:30px;
   display:flex;
   flex-direction:column;
@@ -39,70 +396,70 @@
   
 }
 .r_q{
-  /*border:2px solid yellow;*/
+  border:2px solid yellow;
   padding:10px;
 }
 .p_info{
-  /*border:2px solid green;*/
+  border:2px solid green;
   display:flex;
   justify-content: flex-start
   object-fit: scale-down;
 }
 #p_img{
-  /*border:2px solid lightgreen;*/
+  border:2px solid lightgreen;
   justify-content: center;
   align-item: center;
   margin:40px;
   object-fit: scale-down;
 }
 .p_ns{
-  /*border:2px solid blue;*/
+  border:2px solid blue;
   display:flex;
   flex-direction:column;
   justify-content:space-around;
 }
 .review_e{
-  /*border:3px solid skyblue;*/
+  border:3px solid skyblue;
   display:flex;
   flex-direction:row;
   justify-content: space-around;
   
 }
 .d_review{
-  /*border:3px solid navy;*/
+  border:3px solid navy;
   margin:10px;
 }
 .textarea{
   margin:5px;
-  /*border:3px solid violet;*/
+  border:3px solid violet;
 }
 .r_photo{
   display:flex;
   flex-direction:row;
-  /*border:3px solid pink;*/
+  border:3px solid pink;
   justify-content:flex-start
 }
 .photo_a{
-  /*border:3px solid lightcyan;*/
+  border:3px solid lightcyan;
   margin-left:35px;
 }
 .rtitle{
   display:flex;
   justify-content: space-around;
-  /*border:3px solid lightcyan;*/
+  border:3px solid lightcyan;
 }
 .h_info{
   display:flex;
   flex-direction:row;
   justify-content:flex-start;
-  /*border:3px solid lightsalmon;*/
+  border:3px solid lightsalmon;
 }
 #button{
   display:flex;
   flex-direction:row;
   justify-content:center;
   margin:10px;
-  /*border:3px solid lightsalmon;*/
+  border:3px solid lightsalmon;
   
   }
 .box{
@@ -112,11 +469,11 @@
   margin:45px;
 }
 .satisfaction{
-  /*border:3px solid lightcyan;*/
+  border:3px solid lightcyan;
   margin-left:60px;
   margin-right:100px;
 }
 .fa-solid{
 	cursor:pointer;
 	color : #D3D3D3;
-	}
+	} */

@@ -52,7 +52,7 @@ public class RecruitController {
 	
 	
 	
-	//ëª©ë¡í˜ì´ì§€
+	//¸ñ·ÏÆäÀÌÁö
 		@RequestMapping("/list")
 		public String list(Model model, Criteria cri){
 			cri.setPerPageNum(5);

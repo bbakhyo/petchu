@@ -7,7 +7,7 @@ import com.example.domain.ReviewVO;
 
 public interface ReviewDAO {
 
-	public List<ReviewVO> list(int bno);//ë¦¬ìŠ¤íŠ¸
+	public List<ReviewVO> list(int bno);//¸®½ºÆ®
 	public void insert(ReviewVO vo);//insert
 	public ReviewVO read(int rid, int pno); //read
 	public List<ReviewVO> idReview(String uid);
@@ -17,6 +17,6 @@ public interface ReviewDAO {
 	public List<ReviewVO> join(Criteria cri);//reviewjoin
 	public int count();
 	public ReviewVO updateread(int rid);
-	
+	public int user_review_count(String uid, int bno);
 }
 

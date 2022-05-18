@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-<link href="/resources/css/order_list.css" rel="stylesheet">
 <style>
-/* #page {
+#page {
 	margin: 0px auto;
 }
 	.order_read{
@@ -16,7 +15,6 @@
 		margin: 10px;
 		text-align: center;
 		margin:0px auto;
-		border-radius: 20px;
 	}
 	tr, td{
 		border:none;
@@ -44,33 +42,26 @@
 	}
 	.order_read{
 		color:blue;
-		
-	} */
+	}
+	.delState{	/* 	이놈 어떻게 해도 가운데정렬 안됨ㅅㅂ */
+		font-size: 20;
+ 	  	margin-left: 30%;
+	}
 </style>
-
-
-    <div id="page_orderlist">
-  <div id="page_heading">주문목록</div>
-  <div class="order_wrapper">
-	  <div id="tbl"></div>
-  			<script id="temp" type="text/x-handlebars-template">
-  		{{#each olist}}	
-      <div class="order_list_card" orno="{{orno}}" pno="{{pno}}">
-	      <div class="order_header tbody" tno="{{orno}}" pno="{{pno}}">
-		      <div class="order_date date_tr">{{odate}} 주문</div>
-		      <div class="order_read" orno="{{orno}}"><a href="#">주문 상세보기</a></div>
-		  </div>
-	      <div class="order_content_wrapper">
-	        	<div class="content_col1_imgbox"><img class="image order_img" src="{{pimage}}" width=100></div>
-	        <div class="content_col2_title">
-	          <div class="title ellipsis"><div class="pname_title">{{pname}}</div></div>
-	          <div class="qnt">{{amount}}개</div>
-	            <div class="price" pprice="{{pprice}}" amount="{{amount}}">{{pprice}}</div>
-	        </div>
-	        <div class="content_col3_options">  
-				<a href="#" class="orderlist">배송조회</a>  
-				<a href="#" class="orderlist">교환, 반품 신청</a>  
-				<a href="#" class="orderlist">리뷰 작성하기</a></div>
+<div id="page">
+	<h1>구매목록</h1>
+	<div id="sidemenu">
+		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
+	</div>
+	<table id="tbl"></table>
+	<script id="temp" type="text/x-handlebars-template">
+		{{#each olist}}	
+		<tbody class="tbody" orno="{{orno}}" pno="{{pno}}">
+		<tr class="date_tr" style="text-align:right;">
+			<td colspan="3"><span class="date_td">{{odate}}</span>
+				<span class="delState"></span>
+				<span class="order_read date_td" orno="{{orno}}" style="float: right;">주문 상세보기</span>
+			</td>
 			
 		</tr>
 		<tr>
@@ -80,26 +71,15 @@
 		</tr>
 		</tbody>
 		{{/each}}
-      </script>
-    
- </div>
-  
-  <div class="footer">
-    <div class = "pagination"></div>
-  </div>
- </div>
+	</script>
+	  <div class="footer">
+	    <div class = "pagination"></div>
+	  </div>
+</div>
     
 <script>	
 var uid = "${id}";
 var page = 1;
-getList();
-$(".pagination").on("click", "a", function(e){
-	e.preventDefault();
-	page=$(this).attr("href");
-	getList();
-});
-
-
 
 // $(".date_box_righgt").on("click", "span", function(){
 // 	alert("리드이동");
@@ -113,6 +93,7 @@ $("#tbl").on("click", ".order_read", function(){
 });
 
 //order list 불러오기
+getList();
 function getList() {
 	$.ajax({
 		type : "get",
@@ -137,7 +118,7 @@ function getList() {
 // 			});
 			
 			//orno별 구분선 등록
-/* 			var tno = "";
+			var tno = "";
 			var orno = "";
 			var i = 0
 			$(".tbody").each(function(){
@@ -147,7 +128,7 @@ function getList() {
 // 				console.log(test);
 				i++;
 				if(tno==""||tno!=orno){
-					//alert("tno=" + tno + "\norno=" + orno);
+// 					alert("tno=" + tno + "\norno=" + orno);
 					test.classList.add('border');
 					$(this).find(".date_tr").find(".date_td").attr("date_only", "date_only");
 				}
@@ -158,7 +139,7 @@ function getList() {
 				if(!$(this).attr("date_only")){
 					$(this).html("");
 				}else{
-					$(this).parent().attr("style", "background:none;");
+					$(this).parent().attr("style", "background:#A7CA37;");
 				}
 			});
 			

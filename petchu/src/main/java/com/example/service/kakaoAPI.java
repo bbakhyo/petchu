@@ -47,7 +47,7 @@ public class kakaoAPI {
 	
 	public HashMap<String, Object> getUserInfo (String access_Token) {
 	    
-	    //    ìš”ì²­í•˜ëŠ” í´ë¼ì´ì–¸íŠ¸ë§ˆë‹¤ ê°€ì§„ ì •ë³´ê°€ ë‹¤ë¥¼ ìˆ˜ ìˆê¸°ì— HashMapíƒ€ì…ìœ¼ë¡œ ì„ ì–¸
+	    //    ¿äÃ»ÇÏ´Â Å¬¶óÀÌ¾ğÆ®¸¶´Ù °¡Áø Á¤º¸°¡ ´Ù¸¦ ¼ö ÀÖ±â¿¡ HashMapÅ¸ÀÔÀ¸·Î ¼±¾ğ
 	    HashMap<String, Object> userInfo = new HashMap<>();
 	    String reqURL = "https://kapi.kakao.com/v2/user/me";
 	    try {
@@ -55,7 +55,7 @@ public class kakaoAPI {
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("POST");
 	        
-	        //    ìš”ì²­ì— í•„ìš”í•œ Headerì— í¬í•¨ë  ë‚´ìš©
+	        //    ¿äÃ»¿¡ ÇÊ¿äÇÑ Header¿¡ Æ÷ÇÔµÉ ³»¿ë
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 	        
 	        int responseCode = conn.getResponseCode();
@@ -100,11 +100,11 @@ public class kakaoAPI {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             
-            //    POST ìš”ì²­ì„ ìœ„í•´ ê¸°ë³¸ê°’ì´ falseì¸ setDoOutputì„ trueë¡œ
+            //    POST ¿äÃ»À» À§ÇØ ±âº»°ªÀÌ falseÀÎ setDoOutputÀ» true·Î
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
             
-            //    POST ìš”ì²­ì— í•„ìš”ë¡œ ìš”êµ¬í•˜ëŠ” íŒŒë¼ë¯¸í„° ìŠ¤íŠ¸ë¦¼ì„ í†µí•´ ì „ì†¡
+            //    POST ¿äÃ»¿¡ ÇÊ¿ä·Î ¿ä±¸ÇÏ´Â ÆÄ¶ó¹ÌÅÍ ½ºÆ®¸²À» ÅëÇØ Àü¼Û
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
@@ -114,11 +114,11 @@ public class kakaoAPI {
             bw.write(sb.toString());
             bw.flush();
             
-            //    ê²°ê³¼ ì½”ë“œê°€ 200ì´ë¼ë©´ ì„±ê³µ
+            //    °á°ú ÄÚµå°¡ 200ÀÌ¶ó¸é ¼º°ø
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
  
-            //    ìš”ì²­ì„ í†µí•´ ì–»ì€ JSONíƒ€ì…ì˜ Response ë©”ì„¸ì§€ ì½ì–´ì˜¤ê¸°
+            //    ¿äÃ»À» ÅëÇØ ¾òÀº JSONÅ¸ÀÔÀÇ Response ¸Ş¼¼Áö ÀĞ¾î¿À±â
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
             String result = "";
@@ -128,7 +128,7 @@ public class kakaoAPI {
             }
             System.out.println("response body : " + result);
             
-            //    Gson ë¼ì´ë¸ŒëŸ¬ë¦¬ì— í¬í•¨ëœ í´ë˜ìŠ¤ë¡œ JSONíŒŒì‹± ê°ì²´ ìƒì„±
+            //    Gson ¶óÀÌºê·¯¸®¿¡ Æ÷ÇÔµÈ Å¬·¡½º·Î JSONÆÄ½Ì °´Ã¼ »ı¼º
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             

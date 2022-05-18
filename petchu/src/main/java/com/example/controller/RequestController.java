@@ -46,7 +46,7 @@ public class RequestController {
 	@Autowired
 	DoctorDAO ddao;
 
-	//í¬ì¸íŠ¸ ì¶”ê°€
+	//Æ÷ÀÎÆ® Ãß°¡
 	@Autowired
 	PointhistoryDAO phdao;
 	
@@ -78,7 +78,7 @@ public class RequestController {
 				
 				mf.transferTo(new File(path + image));
 				i++;
-				System.out.println("ê°¸ì•„ì•„ì•„ì•„ì•„ì•„ì•…" + image + ":" + i + "ë²ˆì§¸");
+				System.out.println("°¼¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ¾Ç" + image + ":" + i + "¹øÂ°");
 				if(i==1){
 					vo.setDimg1(image);
 				}
@@ -96,11 +96,11 @@ public class RequestController {
 		
 		dao.sendRequest(vo);
 		
-		//í¬ì¸íŠ¸ì¶”ê°€
+		//Æ÷ÀÎÆ®Ãß°¡
 		PointhistoryVO phvo = new PointhistoryVO();
 		phvo.setId(session.getAttribute("id").toString());
 		phvo.setAmount(500);
-		phvo.setContent("ê²¬ì ì„œì‘ì„±");
+		phvo.setContent("°ßÀû¼­ÀÛ¼º");
 		
 		udao.updatePoint(500, session.getAttribute("id").toString());
 		phdao.insertPH(phvo);
@@ -117,7 +117,7 @@ public class RequestController {
 		return "/home";
 	}
 	
-	//ì„œë¹„ìŠ¤ ìš”ì²­ì„œ ë¦¬ìŠ¤íŠ¸
+	//¼­ºñ½º ¿äÃ»¼­ ¸®½ºÆ®
 	@RequestMapping(value="/servicelist")
 	public String serviceRequestList(Model model, HttpSession session){
 		model.addAttribute("beautyList", bdao.beautyList());
@@ -161,12 +161,13 @@ public class RequestController {
 		return "/home";
 	}
 	
-	//ì±„íƒ
+	//Ã¤ÅÃ
 	@ResponseBody
 	@RequestMapping("/bchoose")
 	public void beutyChoose(int seno, int brno){
 		sedao.secheckUpdate(seno);
 		bdao.bisDeleteUpdate(brno);
+		bdao.beautyChooseUpdate(brno);
 		sedao.bfailCheckUpdate(brno);
 	}
 	
@@ -175,6 +176,7 @@ public class RequestController {
 	public void celanChoose(int seno, int crno){
 		sedao.secheckUpdate(seno);
 		cdao.cisDeleteUpdate(crno);
+		cdao.cleanChooseUpdate(crno);
 		sedao.cfailCheckUpdate(crno);
 	}
 	
@@ -183,10 +185,11 @@ public class RequestController {
 	public void lessonChoose(int seno, int lrno){
 		sedao.secheckUpdate(seno);
 		ldao.lisDeleteUpdate(lrno);
+		ldao.lChooseUpdate(lrno);
 		sedao.lfailCheckUpdate(lrno);
 	}
 	
-	// ë¯¸ìš© ê²¬ì ì„œ ë¦¬ìŠ¤íŠ¸
+	// ¹Ì¿ë °ßÀû¼­ ¸®½ºÆ®
 	@RequestMapping("/belist.json")
 	@ResponseBody
 	public List<ServiceEstimateVO> belistJson(int brno){
@@ -194,7 +197,7 @@ public class RequestController {
 		return list;
 	}
 	
-	// ë¯¸ìš© ê²¬ì ì„œë³„ ì—…ì²´ ì •ë³´
+	// ¹Ì¿ë °ßÀû¼­º° ¾÷Ã¼ Á¤º¸
 	@RequestMapping("/beread")
 	public String beautyEstimateRead(int brno, int scno, Model model, HttpSession session){
 		model.addAttribute("bvo", sedao.beautyEstimateRead(brno, scno));
@@ -202,7 +205,7 @@ public class RequestController {
 		return "/home";
 	}
 	
-	// í™ˆí´ë¦¬ë‹ ê²¬ì ì„œ ë¦¬ìŠ¤íŠ¸
+	// È¨Å¬¸®´× °ßÀû¼­ ¸®½ºÆ®
 	@RequestMapping("/celist.json")
 	@ResponseBody
 	public List<ServiceEstimateVO> celistJson(int crno){
@@ -210,7 +213,7 @@ public class RequestController {
 		return list;
 	}
 	
-	// í™ˆí´ë¦¬ë‹ ê²¬ì ì„œë³„ ì—…ì²´ ì •ë³´
+	// È¨Å¬¸®´× °ßÀû¼­º° ¾÷Ã¼ Á¤º¸
 	@RequestMapping("/ceread")
 	public String cleanEstimateRead(int crno, int scno, Model model, HttpSession session){
 		model.addAttribute("cvo", sedao.cleanEstimateRead(crno, scno));
@@ -219,7 +222,7 @@ public class RequestController {
 	}
 	
 	
-	// ë ˆìŠ¨ ê²¬ì ì„œ ë¦¬ìŠ¤íŠ¸
+	// ·¹½¼ °ßÀû¼­ ¸®½ºÆ®
 	@RequestMapping("/lelist.json")
 	@ResponseBody
 	public List<ServiceEstimateVO> lelistJson(int lrno){
@@ -227,7 +230,7 @@ public class RequestController {
 		return list;
 	}
 	
-	//ë ˆìŠ¨ ê²¬ì ì„œë³„ ì—…ì²´ ì •ë³´
+	//·¹½¼ °ßÀû¼­º° ¾÷Ã¼ Á¤º¸
 	@RequestMapping("/leread")
 	public String lessonEstimateRead(int lrno, int scno, Model model, HttpSession session){
 		model.addAttribute("lvo", sedao.lessonEstimateRead(lrno, scno));

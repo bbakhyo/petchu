@@ -17,7 +17,7 @@ public class OrderlistDAOImpl implements OrderlistDAO {
 	SqlSession session;
 	String namespace="com.example.mapper.OrderlistMapper";
 	
-	@Override //ì¬ì •ì˜  
+	@Override //ÀçÁ¤ÀÇ  
 	public List<OrderlistVO> list(Criteria cri) {
 		return session.selectList(namespace + ".list", cri);
 	}

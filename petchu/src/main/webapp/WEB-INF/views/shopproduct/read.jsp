@@ -754,8 +754,8 @@ Kakao.init('7c5327ca759881dfb2041b2386d02623');
       imageUrl: 
         kimage,
       link: {
-        mobileWebUrl: 'shopproduct/read?pno='+pno+'1148&selectCate=&selectCate2=&selectCate3=',
-        webUrl: 'https://developers.kakao.com',
+        mobileWebUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+        webUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
       },
     },
     social: {
@@ -767,15 +767,15 @@ Kakao.init('7c5327ca759881dfb2041b2386d02623');
       {
         title: '웹으로 보기',
         link: {
-          mobileWebUrl: 'shopproduct/read?pno='+pno+'1148&selectCate=&selectCate2=&selectCate3=',
-          webUrl: 'https://developers.kakao.com',
+          mobileWebUrl:  'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+          webUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
         },
       },
       {
         title: '앱으로 보기',
         link: {
-          mobileWebUrl: 'https://developers.kakao.com',
-          webUrl: 'https://developers.kakao.com',
+          mobileWebUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+          webUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
         },
       },
     ],
