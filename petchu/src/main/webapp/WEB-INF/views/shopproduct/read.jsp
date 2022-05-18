@@ -768,45 +768,6 @@ console.log(pprice);
 		function btn_close(){
 		$(".share_options").hide();
 	}
-	$(document).ready(function(){ //댓글 추천
-		$("#tbl").on("click", ".fa-thumbs-up", function(){
-			var rid=$(this).attr("rid");
-			var uid="${id}";
-			$.ajax({
-				type: "post",
-				url: "/help/updateHelp",
-				data: {rid:rid, uid:uid},
-				success:function(helpCheck){
-// 					alert("helpCheck= " + helpCheck);
-					$("#helpCheck").html("helpCheck");
-					if(helpCheck == 0){ //중복체크
-						swal({
-						  	 title:"",
-						 	 text: "추천성공!",
-						 	 type: "success"
-				 		});
-						setTimeout(function() {
-							getList();
-						}, 1000);
-					}
-					else if(helpCheck == 1){
-						swal({
-						  	 title:"",
-						 	 text: "추천취소!",
-						 	 type: "success"
-				 		});
-						setTimeout(function() {
-							getList();
-						}, 1000);
-						
-					}
-					
-				}
-				
-			});
-		});
-	});
-	
 	
 </script>
 <script type="text/javascript">
