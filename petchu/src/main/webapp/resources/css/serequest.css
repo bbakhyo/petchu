@@ -81,26 +81,56 @@
    cursor: pointer;
    padding: 10px 0px 10px 0px;
     width: 80px;
-    border: 1px solid #A7CA37;
+    /*border: 1px solid #A7CA37;*/
     line-height: 24px;
     text-align: center;
     font-weight:bold;
     font-size:13px;
     border-radius: 10px;
-    background-color: white;
+    /*background-color: white;*/
     color: #A7CA37;
     width: 275px;
     font-size: 25px;
     font-weight: 550;
     height: 234px;
-    background-image: url(/resources/icon/icon_normal.png);
     margin: 50px 5px 50px 5px;
+    box-shadow: 1px 1px 8px #c6cfab;
 }
-
-#regi [type="radio"]:checked+label{
-    background-color: #A7CA37;
+#modal_btn1+label{
+	background-image: url(/resources/icon/icon_beauty.png);
+}
+#modal_btn1:hover+label{
+	background-image: url(/resources/icon/icon_beauty2.png);
+	background-color: #e0ff82;
+}
+#modal_btn1:checked+label{
+ 	background-color: #A7CA37;
     color: white;
-    background-image: url(/resources/icon/icon_normal.png);
+    background-image: url(/resources/icon/icon_beauty2.png);
+}
+#modal_btn2+label{
+	background-image: url(/resources/icon/icon_cleaning.png);
+}
+#modal_btn2:hover+label{
+	background-image: url(/resources/icon/icon_cleaning2.png);
+	background-color: #e0ff82;
+}
+#modal_btn2:checked+label{
+ 	background-color: #A7CA37;
+    color: white;
+	background-image: url(/resources/icon/icon_cleaning2.png);
+}
+#modal_btn3+label{
+	background-image: url(/resources/icon/icon_lesson.png);
+}
+#modal_btn3:hover+label{
+	background-image: url(/resources/icon/icon_lesson2.png);
+	background-color: #e0ff82;
+}
+#modal_btn3:checked+label{
+ 	background-color: #A7CA37;
+    color: white;
+	background-image: url(/resources/icon/icon_lesson2.png);
 }
 .page1, .page2, .page3{
 	display:none;
