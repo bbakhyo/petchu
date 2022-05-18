@@ -7,12 +7,24 @@
 	justify-content: center;
 	align-items: center;
 	width: 1000px;
-	height: auto;
-	 background-color: #eeeeee; 
+	height: 65vw;
+	 background-color: #EFF3E4; 
 	font-family: "nanum gothic", "Apply SD Gothic", "Malgun Gothic";
 	border-radius: 20px;
 }
-
+button.cart_paynow {
+    border: none;
+    padding: 8px 12px 8px 12px;
+    background-color: A7CA37;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 900px;
+    color: white;
+    cursor: pointer;
+}
+button.cart_paynow:hover{
+	background-color: 7F9730;
+}
 .cart_shipping_general {
 	font-family: "nanum gothic";
 	font-size: 20px;
@@ -78,7 +90,7 @@
 .bigCheckbox_item {
 	width: 20px;
 	height: 20px;
-	accent-color: green;
+	accent-color: #7f9730;
 }
 
 .cart_container_sub {
@@ -444,7 +456,7 @@ button.cart_update {
 }
 
 .payment_submit_now {
-	background-color: #44c767;
+	background-color: #a7ca37;
 	border-radius: 5px;
 	display: inline-block;
 	cursor: pointer;
@@ -454,11 +466,11 @@ button.cart_update {
 	font-weight: bold;
 	padding: 17px 200px;
 	text-decoration: none;
-	text-shadow: 0px 1px 0px #2f6627;
+	/* text-shadow: 0px 1px 0px #2f6627; */
 }
 
 .payment_submit_now:hover {
-	background-color: #5cbf2a;
+	background-color: #7F9730;
 }
 
 .payment_submit_now:active {

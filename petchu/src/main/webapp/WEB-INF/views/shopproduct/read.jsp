@@ -262,7 +262,7 @@
 					</div>
 					<span style="font-size: 12px; color: #555;">{{rdate}}</span> </br>
 					<div style=" display : inline; float : right; position : relative; bottom : 40;">
-						<button rid="{{rid}}" class="btnUpdateF" >수정완료</button> &nbsp; <button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
+						<button rid="{{rid}}" class="btnUpdateF" onclick='showAndhide(this)'>수정완료</button> &nbsp; <button class="btnUpdate" onclick='showAndhide(this)'>수정</button> &nbsp; <button class="btnDelete">삭제</button>
 					</div> 			
 					<div>
 						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}" disabled="disabled"> <br/><br/>
@@ -483,7 +483,11 @@ console.log(pprice);
 						return;
 					location.href = "/shopproduct/cart_read?uid=" + uid;
 				} else {
-					alert('이미 장바구니에 등록된 상품입니다.');
+					swal({
+					  	 title:"",
+					 	 text: "이미 장바구니에 등록된 상품입니다!",
+					 	 type: "warning"
+			 		});
 				}
 			}
 		});
@@ -494,7 +498,11 @@ console.log(pprice);
 			function() {
 				quantity = "${vo.pqantity}";
 				if(quantity<=0){
-					alert("상품이 매진되어 구매하실 수 없습니다!");
+					swal({
+					  	 title:"",
+					 	 text: "상품이 매진되어 구매하실 수 없습니다!",
+					 	 type: "warning"
+			 		});
 					return;
 				}
 				var buynow = document.querySelector(".buy_now");
@@ -524,10 +532,18 @@ console.log(pprice);
 		var compareCount = Number(fcount)+1;
 		if(compareCount>quantity){
 			if(quantity==0){
-				alert("상품이 매진되었습니다!");
+				swal({
+				  	 title:"",
+				 	 text: "상품이 매진되었습니다!",
+				 	 type: "warning"
+		 		});
 				return;
 			}
-			alert("최대수량입니다.");
+			swal({
+			  	 title:"",
+			 	 text: "최대수량입니다!",
+			 	 type: "warning"
+	 		});
 			return;
 		}
 		fcount++;
@@ -662,7 +678,11 @@ console.log(pprice);
 									url : '/review/reviewUpdate',
 									data : {rid:rid, star:star, review:review},
 									success:function(){
-										alert("수정완료");
+										swal({
+										  	 title:"",
+										 	 text: "수정완료!",
+										 	 type: "success"
+								 		});
 										getList();
 									}
 								});
@@ -677,21 +697,31 @@ console.log(pprice);
 		$("#tbl").on("click", ".fa-thumbs-up", function(){
 			var rid=$(this).attr("rid");
 			var uid="${id}";
-			alert(rid + "\n" + uid);
 			$.ajax({
 				type: "post",
 				url: "/help/updateHelp",
 				data: {rid:rid, uid:uid},
 				success:function(helpCheck){
-					alert("helpCheck= " + helpCheck);
 					$("#helpCheck").html("helpCheck");
 					if(helpCheck == 0){ //중복체크
-						alert("추천성공!");
-						getList();
+						swal({
+						  	 title:"",
+						 	 text: "추천성공!",
+						 	 type: "success"
+				 		});
+						setTimeout(function() {
+							getList();
+						}, 1000);
 					}
 					else if(helpCheck == 1){
-						alert("추천취소!");
-						getList();
+						swal({
+						  	 title:"",
+						 	 text: "추천취소!",
+						 	 type: "success"
+				 		});
+						setTimeout(function() {
+								getList();
+							}, 1000);
 						
 					}
 					
@@ -738,38 +768,10 @@ console.log(pprice);
 		function btn_close(){
 		$(".share_options").hide();
 	}
-	$(document).ready(function(){ //댓글 추천
-		$("#tbl").on("click", ".fa-thumbs-up", function(){
-			var rid=$(this).attr("rid");
-			var uid="${id}";
-			alert(rid + "\n" + uid);
-			$.ajax({
-				type: "post",
-				url: "/help/updateHelp",
-				data: {rid:rid, uid:uid},
-				success:function(helpCheck){
-					alert("helpCheck= " + helpCheck);
-					$("#helpCheck").html("helpCheck");
-					if(helpCheck == 0){ //중복체크
-						alert("추천성공!");
-						getList();
-					}
-					else if(helpCheck == 1){
-						alert("추천취소!");
-						getList();
-						
-					}
-					
-				}
-				
-			});
-		});
-	});
-	
 	
 </script>
 <script type="text/javascript">
-Kakao.init('325fe0d339f0f5d9c9ca10b121f4ae5b');
+Kakao.init('5c9e09df993f534bf4a2916f4cf43cdd');
   Kakao.Link.createDefaultButton({
 
 	  container: '#create-kakao-link-btn',
@@ -780,8 +782,8 @@ Kakao.init('325fe0d339f0f5d9c9ca10b121f4ae5b');
       imageUrl: 
         kimage,
       link: {
-        mobileWebUrl: 'shopproduct/read?pno='+pno+'1148&selectCate=&selectCate2=&selectCate3=',
-        webUrl: 'https://developers.kakao.com',
+        mobileWebUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+        webUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
       },
     },
     social: {
@@ -793,19 +795,26 @@ Kakao.init('325fe0d339f0f5d9c9ca10b121f4ae5b');
       {
         title: '웹으로 보기',
         link: {
-          mobileWebUrl: 'shopproduct/read?pno='+pno+'1148&selectCate=&selectCate2=&selectCate3=',
-          webUrl: 'https://developers.kakao.com',
+          mobileWebUrl:  'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+          webUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
         },
       },
       {
         title: '앱으로 보기',
         link: {
-          mobileWebUrl: 'https://developers.kakao.com',
-          webUrl: 'https://developers.kakao.com',
+          mobileWebUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+          webUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
         },
       },
-    ],
-  })
+    ]
+  });
+  
+  //클릭시 사라지는 펑션
+ 	function showAndhide(e){
+ 		if($(e).attr("class")=="btnUpdate"){
+ 			$(e).css("display", "none");
+ 		}
+ 	}
 </script>
 
 </html>

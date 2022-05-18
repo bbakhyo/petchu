@@ -48,7 +48,29 @@
 .active {
 	display: block;
 }
-
+.goAll{
+	    height: 50px;
+    	width: 100px;
+    	cursor: pointer;
+    	height: 120px;
+	    width: 120px;
+	    cursor: pointer;
+	    border: none;
+	    background-color: #a7ca37;
+	    color: white;
+	    font-size: large;
+	    letter-spacing: 5px;
+	    border-radius: 10px;
+	    /* text-align: center; */
+	    padding-left: 10px;
+	    margin-top: 10px;
+	    margin-right: 10px;
+}
+.goAll:hover{
+	position: relative;
+	top: 12px;
+	transition: 0.4s;
+}
 .category_select {
 	display: flex;
 	justify-content: center;

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!--  <link href="/resources/css/request.css" rel="stylesheet">-->
+<link href="/resources/css/request.css" rel="styleSheet">
 <style>
 .main input[type=radio] {
 	display: none;
@@ -63,29 +63,6 @@
 	font-size: 17px;
 }
 
-.beauty_box1{
-	display : inline-block;
-	background : lightgreen;
-	width : 150px;
-	margin: 35px;
-	cursor : pointer;
-}
-
-.beauty_box2{
-	display : inline-block;
-	background : lightgreen;
-	width : 150px;
-	margin: 35px;
-	cursor : pointer;
-}
-
-.beauty_box3{
-	display : inline-block;
-	background : lightgreen;
-	width : 150px;
-	margin: 35px;
-	cursor : pointer;
-}
 
 .content-dis {
 	text-align : left;
@@ -110,35 +87,38 @@
 <div class="contentss">
     <div class="content-dis">
 		<c:forEach items="${bvo}" var="vo">
-			<div class="beauty_box1" brno="${vo.brno}" uid="${vo.uid}">
+			<div class="menu_box1" brno="${vo.brno}" uid="${vo.uid}">
 				<p>${vo.pcate}</p>
 				<p>${vo.beauty_classification}<p>
 				<p>${vo.wish_date}</p>
 				<span>${vo.wish_local1}</span> <span>${vo.wish_local2}</span> 
-				<br/><br/>
+				<br/>
+				<p class="drprice">${vo.bdate}</p>
 			</div>
 		</c:forEach>
 	</div>
     <div class="content-dis">
     	<c:forEach items="${cvo}" var="vo">
-			<div class="beauty_box2" crno="${vo.crno}" uid="${vo.uid}">
+			<div class="menu_box2" crno="${vo.crno}" uid="${vo.uid}">
 				<p>${vo.building_classification}</p>
 				<p>${vo.house_size}<p>
 				<p>${vo.wish_date}</p>
 				<span>${vo.wish_local1}</span> <span>${vo.wish_local2}</span> 
-				<br/><br/>
+				<br/>
+				<p class="drprice">${vo.cdate}</p>
 			</div>
 		</c:forEach>
 	</div>
 	
     <div class="content-dis">
     	<c:forEach items="${lvo}" var="vo">
-			<div class="beauty_box3" lrno="${vo.lrno}" uid="${vo.uid}">
+			<div class="menu_box3" lrno="${vo.lrno}" uid="${vo.uid}">
 				<p>${vo.lesson_classification}</p>
 				<p>${vo.lesson_goal}<p>
 				<p>${vo.lesson_method}</p>
 				<span>${vo.wish_local1}</span> <span>${vo.wish_local2}</span> 
-				<br/><br/>
+				<br/>
+				<p class="drprice">${vo.ldate}</p>
 			</div>
 		</c:forEach>
     </div>
@@ -148,17 +128,17 @@
 
 <script>
 
-	$(".beauty_box1").on("click", function(){
+	$(".menu_box1").on("click", function(){
 		var brno = $(this).attr("brno");
 		location.href="/user/bread?brno=" + brno;
 	});
 	
-	$(".beauty_box2").on("click", function(){
+	$(".menu_box2").on("click", function(){
 		var crno = $(this).attr("crno");
 		location.href="/user/cread?crno=" + crno;
 	});
 	
-	$(".beauty_box3").on("click", function(){
+	$(".menu_box3").on("click", function(){
 		var lrno = $(this).attr("lrno");
 		location.href="/user/lread?lrno=" + lrno;
 	});

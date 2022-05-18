@@ -229,19 +229,48 @@
 	//장바구니 삭제 버튼을 클릭할 경우
 	$("#tbl").on("click", "#cart_delete", function(){
 		//checked 되어있는 chk의 "{{cno}}"값을 불러와서 delete. 
-		if(!confirm("체크한 상품을 장바구니에서 삭제하시겠습니까?")) return;
-		$(".bigCheckbox_item:checked").each(function(){
-// 			alert("이치 체크드");
-			var cno = $(this).parent().parent().parent().parent().attr("cno");
-			$.ajax({
-				type: "post",
-				url: "/shopproduct/delete",
-				data: {cno:cno},
-				success: function(){
-					getList();
+		swal({
+			title : "",
+			text : "체크한 상품을 장바구니에서 삭제하시겠습니까?",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			confirmButtonColor: "#A7CA37",
+			closeOnConfirm : false,
+			closeOnCancel : false
+			}, function(isConfirm) {
+				if (isConfirm) {
+					swal({
+						title : '',
+						text : '삭제가 완료되었습니다.',
+						type: 'success',
+						confirmButtonColor: "#A7CA37",	
+					});
+					
+					setTimeout(function() {
+						$(".bigCheckbox_item:checked").each(function(){
+							var cno = $(this).parent().parent().parent().parent().attr("cno");
+							$.ajax({
+								type: "post",
+								url: "/shopproduct/delete",
+								data: {cno:cno},
+								success: function(){
+									getList();
+								}
+							});
+						});
+					}, 1000);
+				}else{
+					swal({
+							title : '',
+							text : '삭제를 취소하였습니다.',
+							type: 'error',
+							confirmButtonColor: "#A7CA37",	
+						});
 				}
 			});
-		});
 	});
 
 	
@@ -301,7 +330,10 @@
 				//.chk가 모두 체크되어있을 경우 chkAll 체크 (.chk length와 .chk:checked length가 동일한 경우)
 				if($('input[class=bigCheckbox_item]:checked').length==$('.bigCheckbox_item').length){
 					if($('.bigCheckbox_item').length==0){
-						alert("장바구니에 등록된 상품이 없습니다.");
+						 swal({
+						  	 title:"",
+						 	 text: "장바구니에 등록된 상품이 없습니다!"
+				 		});
 						location.href="/shopproduct/main";
 					}else{
 						$("#chk_all").attr("checked", "checked");
@@ -338,7 +370,12 @@
 		////////////////수정중 
 		var item_qnt = $(this).attr("quantity");	//해당 상품의 남은 수량을 불러온다.
 		if(Number(selected)>Number(item_qnt)){
-			alert("상품의 남은 수량보다 많이 선택하셨습니다!\n해당 상품의 잔존수량: "+item_qnt+"개");
+// 			alert("상품의 남은 수량보다 많이 선택하셨습니다!\n해당 상품의 잔존수량: "+item_qnt+"개");
+			 swal({
+			  	 title:"",
+			 	 text: "상품의 남은 수량보다 많이 선택하셨습니다!\n\n해당 상품의 남은수량: "+item_qnt+"개",
+			 	 type: "warning"
+	 		});
 			
 			
 			//추가해야할 것이 있다 -> 만약 재고소진이 아니라 애매하게 1개 정도 남은 상품일 경우도 생각해야 함
@@ -412,7 +449,11 @@
 			}
 		});
 		if(qntTest==1) {
-			alert("재고가 소진된 상품이 존재합니다!");
+			swal({
+			  	 title:"",
+			 	 text: "재고가 소진된 상품이 존재합니다!",
+			 	 type: "warning"
+	 		});
 			getList();
 			return;
 		}
@@ -440,7 +481,10 @@
 			$(e).parent().find(".quantity-text").val(item_qnt);
 // 			var test11 = $(e).parent().find(".quantity-text").val();
 // 			alert(test11);
-			alert("상품의 남은 수량을 초과하여 최대수량으로 조정합니다!");
+		 	swal({
+			  	 title:"",
+			 	 text: "상품의 남은 수량을 초과하여 최대수량으로 조정합니다!"
+	 		});
 			getSelect(e);
 			return;
 		}
