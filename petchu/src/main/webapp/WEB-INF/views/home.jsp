@@ -38,7 +38,7 @@
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
 				</c:if>
 				<c:if test="${type=='일반'}">
-					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
+					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png" width=15> ${commaPoint}</span></a>
 					<a href="/request/result">받은 견적서</a>
 					<a href="/shopproduct/cart_read">장바구니</a> <!-- 아이콘으로 -->
 					<a href="#" id="chat">채팅</a>

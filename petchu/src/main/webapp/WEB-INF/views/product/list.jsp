@@ -46,7 +46,7 @@
 		<tr class="row">
 			<td class="pno">{{pno}}</td>
 			<td><img src="{{pimage}}" width=70></td>
-			<td><p class="pname">{{pname}}<p></td>
+			<td class="pname"><p class="pname">{{pname}}<p></td>
 			<td>{{display pprice}}원</td>
 			<td>{{pbrand}}</td>
 			<td><input type="number" class="qnt" value="{{pqantity}}"></td>
