@@ -96,14 +96,14 @@ public class RequestController {
 		
 		dao.sendRequest(vo);
 		
-		//포인트추가
+/*		//포인트추가
 		PointhistoryVO phvo = new PointhistoryVO();
 		phvo.setId(session.getAttribute("id").toString());
 		phvo.setAmount(500);
 		phvo.setContent("견적서작성");
 		
 		udao.updatePoint(500, session.getAttribute("id").toString());
-		phdao.insertPH(phvo);
+		phdao.insertPH(phvo);*/
 		
 		return "redirect:/";
 	}

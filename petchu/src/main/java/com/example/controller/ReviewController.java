@@ -218,5 +218,11 @@ public class ReviewController {
 	public String idReview(Model model,Criteria cri){
 		return "/home";
 	}
+	
+	@RequestMapping("/reviewUpdate")
+	@ResponseBody
+	public void reviewUpdate(ReviewVO vo){
+		dao.reviewUpdate(vo);
+	}
 
 }

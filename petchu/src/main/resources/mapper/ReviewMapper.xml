@@ -29,6 +29,9 @@
     	set rtitle=#{rtitle}, star=#{star}, review=#{review}, rimage1=#{rimage1}, rimage2=#{rimage2},rdate=now()
     	where rid=#{rid}
     </update>
+    <update id="reviewUpdate">
+    	update review set star=#{star}, review=#{review} where rid=#{rid}
+    </update>
     <delete id="delete">
     	delete from review
     	where rid=#{rid}

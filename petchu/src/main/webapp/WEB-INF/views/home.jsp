@@ -40,6 +40,7 @@
 				<c:if test="${type=='일반'}">
 					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png" width=15> ${commaPoint}</span></a>
 					<a href="/request/result">받은 견적서</a>
+
 					<a href="/shopproduct/cart_read">장바구니</a> <!-- 아이콘으로 -->
 					<a href="#" id="chat">채팅</a>
 						<span>
@@ -55,7 +56,7 @@
 				</c:if>
 				<c:if test="${type=='의사'}">
 					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
-					<a href="/request/list">견적서</a>
+					<a href="/request/list">요청서</a>
 					<a href="#">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
 							<span>
@@ -71,7 +72,7 @@
 				</c:if>
 				<c:if test="${type=='업체'}">
 					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
-					<a href="/request/servicelist">서비스 견적서</a>
+					<a href="/request/servicelist">서비스 요청서</a>
 					<span>
 						<span id="bell2">
 							<small id="count2">0</small>
@@ -96,12 +97,13 @@
 		<div id="footer">
 
 			<div class="bottom">
-				상호명 및 호스팅 서비스 제공 : PETCHU<br> 팀장 : 박효진<br> 팀원 : 조현식 | 김보하 | 지하영 | 김준엽 | 최웅비 | 김선광 | 오소희<br> 사업자 등록번호 : 120-88-00767<br> 통신판매업신고 :
-				2017-서울송파-0680<br> 사업자정보 확인 >
+				상호명 및 호스팅 서비스 제공 : PETCHU<br> 팀장 : 박효진<br> 팀원 : 조현식 | 김보하 | 지하영 | 김준엽 | 최웅비 | 김선광 | 오소희<br> 진짜팀장은조현식<br> 다들수고하셨습니다
 			</div>
 			<div class="bottom">
-				365고객센터 | 전자금융거래분쟁처리담당<br> 1577-7011 (유료)<br> 서울시 송파구 송파대로
-				570<br> email : help@coupang.com
+				365고객센터담당 | 귀염둥이마스코트보하<br>
+				선생님 감사드립니다❤
+				 <br> 인천광역시 미추홀구 매소홀로
+				488<br> email : help@petchu.com
 			</div>
 			<div class="bottom" id="bottom3">
 				<span>자주묻는질문(FAQ)</span><br>

@@ -1,7 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+  
 <style>
+.swal-button, .confirm {
+  padding: 7px 19px;
+  border-radius: 2px;
+  width:100px;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  background-color: #A7CA37;
+}
+.sa-button-container{
+	text-align:center;
+}
 #page {
 	margin: 0px auto;
 }
@@ -67,7 +82,7 @@
 		<tr>
 			<td rowspan="2"><img class="image" src="{{pimage}}" width=100></td>
 			<td>{{pname}} · <span class="oamount">{{amount}}개</span></td>
-			<td>총 <span class="price" pprice="{{pprice}}" amount="{{amount}}"></span>원</td>
+			<td width=150 style="text-align:right;">총 <span class="price" pprice="{{pprice}}" amount="{{amount}}"></span>원</td>
 		</tr>
 		</tbody>
 		{{/each}}
@@ -222,8 +237,12 @@ function getState(){
 // 				+"\n"+data.sum+"\n"+data.qnt
 				var tbody = onthis.parent().parent().parent();
 				tbody.find(".price").html(data.sum);
-				tbody.find(".oamount").html("외 " + data.qnt + "개");
-				tbody.find(".oamount").css("font-weight", "bold");
+// 				var qnt = dadta.qnt;
+// 				qnt = Number(qnt)-1;
+				if(data.qnt!=1){
+					tbody.find(".oamount").html("외 " + data.qnt + "개");
+					tbody.find(".oamount").css("font-weight", "bold");
+				}
 				
 				//가격포맷
 				$(".price").each(function(){
@@ -234,8 +253,38 @@ function getState(){
 				});
 			}
 			});//ajax 끝
-		
-		
 	});
 }
+	//스왈 컨펌창
+// 	showSwal();
+	function showSwal(){
+		swal({
+			title : "111",
+			text : "test",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			confirmButtonColor: "#A7CA37",
+			closeOnConfirm : false,
+			closeOnCancel : false
+			}, function(isConfirm) {
+				if (isConfirm) {
+					swal({
+						title : '',
+						text : '수정이 완료되었습니다.',
+						type: 'success',
+						confirmButtonColor: "#A7CA37",	
+					});
+				}else{
+					swal({
+							title : '',
+							text : '수정이 취소되었습니다.',
+							type: 'error',
+							confirmButtonColor: "#A7CA37",	
+						});
+				}
+			});
+	}
 </script>

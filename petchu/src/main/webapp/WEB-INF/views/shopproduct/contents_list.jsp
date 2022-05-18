@@ -50,10 +50,10 @@
 					<div class="select_container">
 						<select name="item_type" class="item_type"
 							style="width: 100px; height: 30px; border-radius: 5px;">
-							<option value="">전체</option>
-							<option value="사료">사료</option>
-							<option value="간식">간식</option>
-							<option value="용품">용품</option>
+							<option class="none_type" value="">전체</option>
+							<option class="i_type" value="사료">사료</option>
+							<option class="i_type" value="간식">간식</option>
+							<option class="i_type" value="용품">용품</option>
 						</select>
 					</div>
 				</div>
@@ -133,14 +133,34 @@
 </script>
 
 <script>
+	var selectCate = "${cate}";	//건식
+	var selectCate2 = "${cate2}";	//사료
+	var selectCate3 = "${cate3}";	//고양이
+// 	alert(selectCate+"\n"+selectCate2+"\n"+selectCate3);
+	
 	var keyword = "";
-	var type = "";
 	var page = 1;
-	var selectCate = "";
-	var selectCate2 = "";
-	var selectCate3 = "";
-
+	var type = "";
 	getContentsList();
+
+	//카테고리가 ""이 아닐 경우 펫타임 radi 선택되어 있도록
+	if(selectCate3!=""){
+		$(".main_category").each(function(){
+			if($(this).val()==selectCate3){
+				$(this).attr("checked", true);
+			}
+		});
+	}
+	
+	//하위 카테고리가 ""이 아닐 경우 아이템타임 select 선택되어 있도록
+	if(selectCate2!=""){
+		$(".i_type").each(function(){
+			if($(this).val()==selectCate2){
+				$(this).attr("selected", true);
+			}
+		});
+	}
+	
 
 	//펫메뉴 라디오박스 체크시
 	$(".main_category").on("change", function() {

@@ -94,7 +94,6 @@
 	margin-left: -100px;
 }
 </style>
-<h2>Deadline</h2>
 <div id="sidemenu">
 		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
 </div>
