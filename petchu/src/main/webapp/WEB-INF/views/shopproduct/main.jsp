@@ -18,8 +18,8 @@
 
 <body>
 	<div class="page">
-		<div class="banner" style="display: flex; justify-content:center; width:700px; height:300px; overflow: hidden; margin-left: 143px;">
-			<img src="/resources/petchu_dog_banner.png">
+		<div class="banner" style="display: flex; justify-content:center; width: 100%; height:300px; overflow: hidden; /* margin-left: 143px; */">
+			<img src="/resources/shoppingmall.png">
 		</div>
 
 			<!-- 주 카타고리 -->

@@ -2,6 +2,8 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <link href="/resources/css/request.css" rel="stylesheet">
 <div id="page">
 	<p class="title"><b>${vo.nick}</b>님 견적서를 작성하세요</p>
@@ -177,13 +179,40 @@
 			return;
 		}
 		
-		if(!confirm("견적서를 보내시겠습니까?")) 
-			return;
+		swal({
+				title : '',
+				text : '요청서를 보내시겠습니까?',
+				type : "info",
+				showCancelButton : true,
+				confirmButtonClass : "btn-danger",
+				confirmButtonText : "예",
+				cancelButtonText : "아니오",
+				confirmButtonColor: "#A7CA37",
+				closeOnConfirm : false,
+				closeOnCancel : true
+			}, function(isConfirm) {
+				if (isConfirm) {
+					swal({
+						title : '',
+						text : '',
+						type: 'success',
+						confirmButtonColor: "#A7CA37",	
+					});
+					frm.submit();
+				}else{
+					swal({
+							title : '',
+							text : '취소되었습니다.',
+							type: 'error',
+							confirmButtonColor: "#A7CA37",	
+						});
+				}
+			});
 		
 
 
 		
-		frm.submit();
+		
 	})
 	
 	//첨부하기 버튼 클릭
