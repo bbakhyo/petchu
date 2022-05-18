@@ -229,10 +229,10 @@ share::after{
 
 .cart_add {
 	background-color: #ffffff;
-	border: 1px solid #0c9c29;
+	border: 1px solid #a7ca37;
 	display: inline-block;
 	cursor: pointer;
-	color: #008a1e;
+	color: #a7ca37;
 	font-family: Arial;
 	font-size: 16px;
 	font-weight: bold;
@@ -244,27 +244,27 @@ share::after{
 }
 
 .cart_add:hover {
-	background-color: #38ee5d;
+	background-color: #a7ca37;
 	color: white;
 	transition: all 0.2s;
 }
 
 .buy_now {
-	background-color: #40d05d;
-	border: 1px solid #40d05d;
+	background-color: #a7ca37;
+	border: 1px solid #a7ca37;
 	display: inline-block;
 	cursor: pointer;
 	color: #ffffff;
 	font-family: Arial;
 	font-size: 16px;
 	font-weight: bold;
-	padding: 12px 55px;
+	padding: 12px 35px;
 	text-decoration: none;
 	transition: all 0.2s;
 }
 
 .buy_now:hover {
-	background-color: #2fa447;
+	background-color: 7F9730;
 	transition: all 0.2s;
 }
 

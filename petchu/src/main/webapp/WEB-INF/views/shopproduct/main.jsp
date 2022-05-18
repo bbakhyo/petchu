@@ -15,13 +15,6 @@
 <link href="/resources/css/shopproduct_main.css" rel="stylesheet">
 
 </head>
-<style>
-	.goAll{
-	    height: 50px;
-    	width: 100px;
-    	cursor: pointer;
-	}
-</style>
 
 <body>
 	<div class="page">
@@ -33,6 +26,13 @@
 		<div class="categoryBody">
 			<div class="category_select">
 				<div><button class="goAll">전체</button></div>
+				<!--메뉴 간격(space)-->
+				<div>
+					<span><img
+						src="/resources/icon_menu/content_select_middle_icon.png"
+						style="width: 37px; height: 97px; position: relative; top: 15px"></span>
+				</div>
+				
 				<!-- 1. 공양이 -->
 				<div class="category_cat select">
 					<input type="radio" name="animal" value="고양이" id="cat"><label
@@ -52,8 +52,8 @@
 				<div class="category_dog select">
 					<input type="radio" name="animal" value="강아지" id="dog"><label
 						for="dog"><img
-						src="/resources/icon_menu/content_select_dog.png"
-						style="margin-left: 20px;" id="dog_img"></label>
+						src="/resources/icon_dog_food2.png"
+						style="margin-left: 20px;" id="dog_img" width=150></label>
 				</div>
 			</div>
 			<hr style="width: 960px; margin-top: 20px; margin-bottom: 20px;" />

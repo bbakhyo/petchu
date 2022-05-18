@@ -1,30 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <head>
-<style>
-	.cart_item_img img {width:90px; height:90px;}
-	.checkout_delivery_address, .terms_wrapper{text-align:left;}
-	.none{display:none;}
-	.left{text-align:left;}
-	#delivery_message{
-		padding: 5px;
- 		text-align: center;
- 		margin: 0px;
- 		width:400px;
- 		line-height:50px;
- 		font-size:15px;
-        height: 100px;
-	}
-	.point_apply{
-		margin-right:5px;
-	}
-	.card_cart_grandtotal_row_right{
-		font-weight:600;
-	}
-	.card_cart_point_right{
-		color:#A7CA37;
-	}
-</style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="/resources/checkout_page.css" rel="stylesheet">
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

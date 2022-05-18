@@ -30,22 +30,19 @@
 		<div class="menu_container_main">
 			<div class="menu_container1">
 
-				<div>펫타입:</div>
 				<div class="menu-options">
-					<div>
-						<input type="radio" name="main_category" id="menu_dog" value="강아지"
-							class="main_category"> <label for="menu_dog"> 강아지
-						</label>
-					</div>
-					<div>
-						<input type="radio" name="main_category" id="menu_cat" value="고양이"
-							class="main_category"> <label for="menu_cat"> 고양이
-						</label>
-					</div>
+					<input type="radio" name="main_category" id="menu_dog" value="강아지"
+						class="main_category"> <label for="menu_dog"> 강아지
+					</label>
+				
+					<input type="radio" name="main_category" id="menu_cat" value="고양이"
+						class="main_category"> <label for="menu_cat"> 고양이
+					</label>
+				
 				</div>
 			</div>
 			<div class="menu_container2">
-				<div class="menu_title">선택:</div>
+				<div class="menu_title" style="color:white">구분 </div>
 				<div class="select_wrapper">
 					<div class="select_container">
 						<select name="item_type" class="item_type"
@@ -65,7 +62,7 @@
 						<input type="text" name="keyword" id="search_text">
 						<div class="btn_search">
 							<img src="/resources/icon_menu/icon_navbar_loupe.png"
-								alt='search icon' width=40>
+								alt='search icon' width=20>
 						</div>
 
 					</div>

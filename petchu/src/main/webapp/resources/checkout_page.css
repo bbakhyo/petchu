@@ -2,7 +2,7 @@
 
 /* 페이지 레이아웃  */
 .checkout_page {
-  background-color: #fbfbfb;
+  /* background-color: #fbfbfb; */
   width: 900px;
   border-radius: 20px;
 
@@ -28,8 +28,10 @@
   justify-content: center;
   align-content: space-between;
   gap: 40px;
-  background-color: #fbfbfb;
-  height: 100vh;
+  background-color: #EFF3E4;
+  height: 80vh;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .checkout_heading {
   font-size: 1.2rem;
@@ -41,15 +43,15 @@
   flex-direction: column;
   flex-basis: 50%;
   overflow: auto;
-  background-color: #fbfbfb;
-  gap: 10px;
+  /* background-color: #fbfbfb; */
+  gap: 17px;
 }
 .checkout_right_section {
   display: flex;
   flex-direction: column;
   flex-basis: 40%;
   height: 100vh;
-  gap: 10px;
+  gap: 17px;
 }
 .checkout_cartinfo_card {
   background-color: white;
@@ -100,7 +102,7 @@
   flex-direction: column;
   background-color: white;
   padding: 10px;
-}
+text-align: left;line-height: 30px;}
 .buyer_userid {
   background-color: white;
   font-size: 1.05rem;
@@ -263,8 +265,11 @@ input[name=same_address]{
   height: 25px;
   text-align: center;
   padding: 6px 0px 10px 6px;
-  background-color: black;
+  background-color: #a7ca37;
   
+}
+.btn_shape:hover{
+	background-color: 7F9730;
 }
 
 a.pay_btn:link {
@@ -300,4 +305,44 @@ input[name=delivery_address1]::focus, input[name=delivery_address2]::focus  {
 
 input#delivery_message{
 	width: 100%;
+}
+input[type=text] {
+    /* width: 250px; */
+    border-radius: 15px;
+    border: #BFC1B9 1px solid;
+    outline-color: #A7CA37;
+    padding: 13px 10px 13px 10px;
+    margin-bottom: 10px;
+}
+button {
+    border: none;
+    padding: 8px 12px 8px 12px;
+    background-color: A7CA37;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 900px;
+    color: white;
+    cursor: pointer;
+}
+.cart_item_img img {width:90px; height:90px;}
+.checkout_delivery_address, .terms_wrapper{text-align:left;}
+.none{display:none;}
+.left{text-align:left;}
+#delivery_message{
+	border-radius: 10px;
+    border: #BFC1B9 1px solid;
+    outline-color: #A7CA37;
+    padding: 10px;
+ 		resize: none;
+		width:400px;
+       height: 100px;
+}
+.point_apply{
+	margin-right:5px;
+}
+.card_cart_grandtotal_row_right{
+	font-weight:600;
+}
+.card_cart_point_right{
+	color:#A7CA37;
 }
