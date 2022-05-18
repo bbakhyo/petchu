@@ -356,7 +356,36 @@
             				});
          			}
          			if(!confirm("댓글을 등록하실래요?")) return;
-         			myform.submit();
+         			swal({
+         				title : '',
+         				text : '댓글을 등록하실래요?',
+         				type : "info",
+         				showCancelButton : true,
+         				confirmButtonClass : "btn-danger",
+         				confirmButtonText : "예",
+         				cancelButtonText : "아니오",
+         				confirmButtonColor: "#A7CA37",
+         				closeOnConfirm : false,
+         				closeOnCancel : true
+         			}, function(isConfirm) {
+         				if (isConfirm) {
+         					swal({
+         						title : '',
+         						text : '',
+         						type: 'success',
+         						confirmButtonColor: "#A7CA37",	
+         					});
+         					myform.submit();
+         				}else{
+         					swal({
+         							title : '',
+         							text : '취소되었습니다.',
+         							type: 'error',
+         							confirmButtonColor: "#A7CA37",	
+         						});
+         				}
+         			});
+         			
          		}
          	}
          });
@@ -596,46 +625,5 @@
 		});    
 	});
 	
-	//swal Alert
-	var alert = function(msg, type) {
-		swal({
-			title : '',
-			text : '',
-			type : type,
-			timer : 1500,
-			customClass : 'sweet-size',
-			showConfirmButton : false
-		});
-	}
-	//swal Confirm
-	var confirm = function(msg, title, resvNum) {
-		swal({
-			title : '',
-			text : '',
-			type : "warning",
-			showCancelButton : true,
-			confirmButtonClass : "btn-danger",
-			confirmButtonText : "예",
-			confirmButtonColor: '#A7CA37',
-			cancelButtonText : "아니오",
-			
-			closeOnConfirm : false,
-			closeOnCancel : true
-		}, function(isConfirm) {
-			if (isConfirm) {
-				swal('', '예약이 승인되었습니다.', "success");
-			}else{
-				swal('', '예약이 거부되었습니다.', "failed");
-			}
 
-		});
-	}
-
-	function Alert() {
-		alert('gg', 'success');
-	}
-	function Confirm() {
-		confirm('', '승인할까요?');
-	}
-      
 </script>
