@@ -241,8 +241,12 @@ function getState(){
 // 				+"\n"+data.sum+"\n"+data.qnt
 				var tbody = onthis.parent().parent().parent();
 				tbody.find(".price").html(data.sum);
-				tbody.find(".oamount").html("외 " + data.qnt + "개");
-				tbody.find(".oamount").css("font-weight", "bold");
+// 				var qnt = dadta.qnt;
+// 				qnt = Number(qnt)-1;
+				if(data.qnt!=1){
+					tbody.find(".oamount").html("외 " + data.qnt + "개");
+					tbody.find(".oamount").css("font-weight", "bold");
+				}
 				
 				//가격포맷
 				$(".price").each(function(){

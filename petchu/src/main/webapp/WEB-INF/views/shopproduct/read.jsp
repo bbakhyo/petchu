@@ -227,6 +227,11 @@
 					</div>
 				</div>
 			</div>
+			
+			<div>
+				<img src="${vo.pcontents}">
+			</div>
+			
 		</div>
 		
 		<!--Review TAB  -->
