@@ -717,7 +717,7 @@ console.log(pprice);
 						swal({
 						  	 title:"",
 						 	 text: "추천취소!",
-						 	 type: "success"
+						 	 type: "warning"
 				 		});
 						setTimeout(function() {
 								getList();

@@ -30,6 +30,15 @@
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
   background-color: #A7CA37;
 }
+#header{
+    position: sticky;
+    top: 0;
+    background: white;
+    height: 50;
+    border-bottom: 2px solid #e6e6e6;
+    width: 1200;
+    z-index: 2;
+}
 </style>
 </head>
 <body>
@@ -69,7 +78,7 @@
 				<c:if test="${type=='의사'}">
 					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
 					<a href="/request/list">요청서</a>
-					<a href="#">쇼핑몰</a>
+					<a href="/shopproduct/main">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
 							<span>
 							<span id="bell">
@@ -91,7 +100,7 @@
 							<span id="requestCount"></span>
 						</span>
 					</span>
-					<a href="#">쇼핑몰</a>
+					<a href="/shopproduct/main">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
 					<span><a href="/user/mypage?id=${id}">${nick}님</a></span>
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
