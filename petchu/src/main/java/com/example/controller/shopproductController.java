@@ -307,9 +307,11 @@ public class shopproductController {
 		//포인트 적립
 		int price = vo.getSum();
 		int pricePoint = price/10;
-		cartdao.user_point_plus(pricePoint, vo.getUid());
-		//적립내역 history에 기록
-		cartdao.user_point_history_plus(vo.getUid(), pricePoint);
+		if(pricePoint>0){
+			cartdao.user_point_plus(pricePoint, vo.getUid());
+			//적립내역 history에 기록
+			cartdao.user_point_history_plus(vo.getUid(), pricePoint);
+		}
 	}
 	
 	//상품 구매시 point 이동
