@@ -353,7 +353,11 @@ Handlebars.registerHelper("display", function(sum){
 	
 		//결제수단 가저오기
 		if ($('input[class="pay"]:checked').length === 0){
-		alert("결제 수단을 선택 하세요!"); 
+			swal({
+			  	 title:"",
+			 	 text: "결제 수단을 선택 하세요!",
+			 	 type: "warning"
+	 		});
 		return;
 		}else{
 			var select_pay_type = document.getElementsByName('pay_type');
@@ -366,20 +370,35 @@ Handlebars.registerHelper("display", function(sum){
 		} //for
 			
 		} //else
-// 		alert(paytype);
 		//유효성 체크
 		if(receiver==''||null){
-		alert("수령자 이름을 입력 하세요!");
+			swal({
+			  	 title:"",
+			 	 text: "수령자 이름을 입력 하세요!",
+			 	 type: "warning"
+			});
 		$("#order_receiver").val();	
 		}else if(contact==''||null){
 		
-		alert("연락처를 입력하세요!")
+			swal({
+			  	 title:"",
+			 	 text: "연락처를 입력하세요!",
+			 	 type: "warning"
+	 		});
 		$("#delivery_contact").val();	
 		}else if(address1==''||null){
-			alert("배송지를 선택하세요!");
+			swal({
+			  	 title:"",
+			 	 text: "배송지를 입력하세요!",
+			 	 type: "warning"
+	 		});
 			
 		}else if(address2==''||null){
-			 alert("배송지 상세주소를 정확히 입력해주세요!");
+			 swal({
+			  	 title:"",
+			 	 text: "배송지 상세주소를 정확히 입력해주세요!",
+			 	 type: "warning"
+	 		});
 			 $('input[name=delivery_address2]').focus();
 		}else{
 			var pamount = $("#tbl .cartitem_info_card").length;
@@ -400,7 +419,6 @@ Handlebars.registerHelper("display", function(sum){
 			var delivery_contact = $("#delivery_contact").val();
 			var buyer = "${vo.name}";
 			var final_price = $(".card_cart_grandtotal_row_right").attr("final_price");
-// 			alert(final_price);
 
 			//포인트를 사용했을 경우
 			if(btnPoint==1){
@@ -442,13 +460,24 @@ Handlebars.registerHelper("display", function(sum){
 							url: "/shopproduct/user_order_insert",	
 							data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint, omessage:omessage},
 							success: function(){
-								location.href="/shopproduct/order_list";
+								swal({
+								  	 title:"",
+								 	 text: "결제완료!",
+								 	 type: "success"
+						 		});
+								setTimeout(function() {
+									location.href="/shopproduct/order_list";
+								}, 2500);
 							}
 						});
 						return;
 					}
 				}else{//아니라면 (비정상적인 접근이라면)
-					alert("포인트가 부족합니다.");
+					swal({
+					  	 title:"",
+					 	 text: "포인트가 부족합니다!",
+					 	 type: "error"
+			 		});
 					return;
 				}
 			}
@@ -475,7 +504,6 @@ Handlebars.registerHelper("display", function(sum){
 				buyer_name: '${vo.name}',
 				buyer_postcode: '123-456',
 				}, function (rsp) {
-					//alert("클릭");
 					console.log(rsp);
 				if (rsp.success) {
 					var msg = '결제가 완료되었습니다.';
@@ -507,7 +535,14 @@ Handlebars.registerHelper("display", function(sum){
 						url: "/shopproduct/user_order_insert",	
 						data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint, omessage:omessage},
 						success: function(){
-							location.href="/shopproduct/order_list";
+							swal({
+							  	 title:"",
+							 	 text: "결제완료!",
+							 	 type: "success"
+					 		});
+							setTimeout(function() {
+								location.href="/shopproduct/order_list";
+							}, 2500);
 						}
 					});
 					
@@ -517,8 +552,6 @@ Handlebars.registerHelper("display", function(sum){
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
 				}
-				alert(msg);
-				//위에서 담은 msg 내용을 출력
 			});
 		}
 	});
@@ -550,19 +583,31 @@ Handlebars.registerHelper("display", function(sum){
     	var myPoint = $(".my_point").attr("point");
     	//숫자가 아니거나 0일 경우, 혹은 0보다 작을 경우 작동 안되게 해야함
     	if(isNaN(point)==true){
-    		alert("숫자를 입력하십시오.");
+    		swal({
+			  	 title:"",
+			 	 text: "숫자를 입력하세요!",
+			 	 type: "warning"
+	 		});
     		$(".point").val("");
     		$(".point").focus();
     		return;
     	}
     	if(Number(point)>Number(myPoint)){
-    		alert("포인트가 부족합니다.");
+    		swal({
+			  	 title:"",
+			 	 text: "포인트가 부족합니다!",
+			 	 type: "warning"
+	 		});
     		$(".point").val("");
     		$(".point").focus();
     		return;
     	}
     	if(Number(point)<=0){
-    		alert("정확한 숫자를 입력하십시오.");
+    		swal({
+			  	 title:"",
+			 	 text: "정확한 숫자를 입력하세요!",
+			 	 type: "warning"
+	 		});
     		$(".point").val("");
     		$(".point").focus();
     		return;
@@ -604,7 +649,11 @@ Handlebars.registerHelper("display", function(sum){
 		$(".point_apply_all").attr("style", "display:none;");
     	$(".point_disapply").attr("style", "");
     	$(".point").attr("readonly", "readonly")
-		alert("포인트 적용 완료");
+		swal({
+			  	 title:"",
+			 	 text: "포인트 적용완료!",
+			 	 type: "success"
+	 		});
     	btnPoint = 1;
     	
     	var pointP = $(".card_cart_point_right").html();
@@ -630,7 +679,11 @@ Handlebars.registerHelper("display", function(sum){
     	$(".point").attr("style", "");
     	$(".point_apply").attr("style", "");
     	$(".point_apply_all").attr("style", "");
-    	alert("취소완료");
+    	swal({
+		  	 title:"",
+		 	 text: "취소완료!",
+		 	 type: "warning"
+		});
     	$(".point").val("");
     	//사용 취소시 사용중인 포인트 값도 0으로 변경
     	$(".use_point").html("0");
