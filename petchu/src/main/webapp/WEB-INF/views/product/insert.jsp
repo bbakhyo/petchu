@@ -139,6 +139,7 @@ input[type=checkbox]{
 				url: "/product/insert",
 				data: {pname:title, pimage:image, pprice:intPrice, pcate2:animal, pcate3:category3, pcate4:category4, pbrand:brand, pmaker:maker},
 				success: function(){
+					alert("에이작 넘어감")
 					chk.prop("checked", false);
 				}
 				 ,error:function(request,status,error){

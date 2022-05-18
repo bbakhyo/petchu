@@ -1,60 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
 <style>
-	#tbl{
-		border: none;
-		width: 800px;
-		margin-top: 20px;
-	}
-	#tbl2{
-		border: none;
-		width: 800px;
-		display: none;
-	}
-	.title{
-		font-weight: bold;
-		font-size: 13px;
-	}
-	.row, .row2{
-		font-size: 12px;
-	}
-	.hiddenArea{
-		display: none;
-		text-align: center;
-		border-left: hidden;
-		border-right: hidden;
-	}
-	.row {
-		cursor: pointer;
-	}
-	#company .scname{
-		cursor: pointer;
-		font-size: 12px;
-	 	text-overflow: ellipsis;
-		overflow: hidden;
-		white-space: nowrap;
-		width: 60px;
-	}
-	
-	#company .scname:hover{
-		cursor: pointer;
-		color:A7CA37;
-		font-weight: bold;
-		font-size: 12px;
-		text-overflow: ellipsis;
-		overflow: hidden;
-		white-space: nowrap;
-		width: 60px;
-	}
-	#oldList{
-		cursor: pointer;
-		font-weight: bold;
-		position: relative;
-		margin-left: 427px;
-	}
-	   #sidemenu{
-   		margin-left: -100px;
-   }
+.sa-button-container{
+	text-align: center;
+}
+.swal-button, .confirm {
+  padding: 7px 19px;
+  border-radius: 2px;
+  width:100px;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  background-color: #A7CA37;
+}
+#tbl{
+	border: none;
+	width: 800px;
+	margin-top: 20px;
+}
+#tbl2{
+	border: none;
+	width: 800px;
+	display: none;
+}
+.title{
+	font-weight: bold;
+	font-size: 13px;
+}
+.row, .row2{
+	font-size: 12px;
+}
+.hiddenArea{
+	display: none;
+	text-align: center;
+	border-left: hidden;
+	border-right: hidden;
+}
+.row {
+	cursor: pointer;
+}
+#company .scname{
+	cursor: pointer;
+	font-size: 12px;
+ 	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 60px;
+}
+
+#company .scname:hover{
+	cursor: pointer;
+	color:A7CA37;
+	font-weight: bold;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 60px;
+}
+#oldList{
+	cursor: pointer;
+	font-weight: bold;
+	position: relative;
+	margin-left: 427px;
+}
+   #sidemenu{
+  	margin-left: -100px;
+  }
+  .btnYes, .btnNo{
+  	text-align:center;
+  	width: 40px;
+  	height: 35px;
+	background-color: #A7CA37;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+  } 
+  .btnYes:hover, .btnNo:hover{
+  	text-align:center;
+  	width: 40px;
+  	height: 35px;
+	background-color: 7F9730;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+  }    
+  .btnYes:disabled, .btnNo:disabled{
+  	text-align:center;
+  	width: 40px;
+  	height: 35px;
+	background-color: #d1dcac;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+  }
 </style>
 <div id="page">
 	<p style="text-align: center; font-weight: bold">업체를 선택하세요</p>
@@ -165,22 +210,51 @@
 		var rno= $(this).closest(".clicker").find(".rno").html();
 
 		if(isEdit == 1){
-			if(!confirm("예약 변경요청을 거절하시겠습니까? "))return;
-			isEdit = 2;
+			swal({
+				title : '변경거절',
+				text : '예약변경요청을 거절하시겠습니까?',
+				type : "warning",
+				showCancelButton : true,
+				confirmButtonClass : "btn-danger",
+				confirmButtonText : "예",
+				cancelButtonText : "아니오",
+				confirmButtonColor: "#A7CA37",
+				closeOnConfirm : false,
+				closeOnCancel : true
+			}, function(isConfirm) {
+				if (isConfirm) {
+					isEdit = 2;
 
-			$.ajax({
-				type: "post",
-				url: "/reserve/ReserveEdit",
-				data: {isEdit:isEdit, isDel:isDel, rno:rno},
-				success: function(){
-					alert("거절되었습니다.");
-					getList();
+					$.ajax({
+						type: "post",
+						url: "/reserve/ReserveEdit",
+						data: {isEdit:isEdit, isDel:isDel, rno:rno},
+						success: function(){
+							swal({
+								title : '',
+								text : '',
+								type: 'success',
+								confirmButtonColor: "#A7CA37",
+								
+							});
+							getList();
+						}
+					});
+					
+				}
+
+			});
+				}else{
+					swal({
+							title : '',
+							text : '취소되었습니다.',
+							type: 'error',
+							confirmButtonColor: "#A7CA37",	
+							showConfirmButton : false,
+						});
 				}
 			});
 			
-		}
-
-	});
 	//승인버튼을 클릭한 경우
 	$("#tbl").on("click",".btnYes",function(){
 		var isEdit= $(this).closest(".clicker").find(".isEdit").html();
@@ -189,31 +263,93 @@
 
 		
 		if(isEdit == 1){
-			if(!confirm("예약 변경을 승인하시겠습니까? "))return;
-			isEdit = 0;
 
-			$.ajax({
-				type: "post",
-				url: "/reserve/ReserveEdit",
-				data: {isEdit:isEdit, isDel:isDel, rno:rno},
-				success: function(){
-					alert("승인되었습니다.");
-					getList();
+			swal({
+				title : '예약변경',
+				text : '예약변경을 승인하시겠습니까?',
+				type : "warning",
+				showCancelButton : true,
+				confirmButtonClass : "btn-danger",
+				confirmButtonText : "예",
+				cancelButtonText : "아니오",
+				confirmButtonColor: "#A7CA37",
+				closeOnConfirm : false,
+				closeOnCancel : true
+			}, function(isConfirm) {
+				if (isConfirm) {
+					isEdit = 0;
+
+					$.ajax({
+						type: "post",
+						url: "/reserve/ReserveEdit",
+						data: {isEdit:isEdit, isDel:isDel, rno:rno},
+						success: function(){
+							swal({
+								title : '',
+								text : '',
+								type: 'success',
+								confirmButtonColor: "#A7CA37",	
+								
+								
+							});
+							getList();
+						}
+					});
+					
+				}else{
+					swal({
+							title : '',
+							text : '취소되었습니다.',
+							type: 'error',
+							confirmButtonColor: "#A7CA37",	
+							showConfirmButton : false,
+						});
 				}
 			});
 			
+			
 		}else if(isDel == 1){
 			isDel = 2;
-			if(!confirm("예약 취소를 승인하시겠습니까? "))return;
-			$.ajax({
-				type: "post",
-				url: "/reserve/ReserveEdit",
-				data: {isEdit:isEdit, isDel:isDel, rno:rno},
-				success: function(){
-					alert("승인되었습니다.");
-					getList();
+
+			swal({
+				title : '예약취소',
+				text : '예약취소를 승인하시겠습니까?',
+				type : "warning",
+				showCancelButton : true,
+				confirmButtonClass : "btn-danger",
+				confirmButtonText : "예",
+				cancelButtonText : "아니오",
+				confirmButtonColor: "#A7CA37",
+				closeOnConfirm : false,
+				closeOnCancel : true
+			}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: "post",
+						url: "/reserve/ReserveEdit",
+						data: {isEdit:isEdit, isDel:isDel, rno:rno},
+						success: function(){
+							swal({
+								title : '',
+								text : '',
+								type: 'success',
+								confirmButtonColor: "#A7CA37",	
+							});
+							getList();
+						}
+					});
+					
+				}else{
+					swal({
+							title : '',
+							text : '취소되었습니다.',
+							type: 'error',
+							confirmButtonColor: "#A7CA37",	
+							showConfirmButton : false,
+						});
 				}
 			});
+		
 		}
 
 	});
@@ -224,7 +360,14 @@
 			url: "/reserve/updateReserve",
 			data: {isEdit:isEdit, isDel:isDel},
 			success: function(){
-				alert("승인되었습니다.");
+				swal({
+					title : '',
+					text : '',
+					type : success,
+					timer : 1500,
+					customClass : 'sweet-size',
+					showConfirmButton : false
+				});
 			}
 		});
 	}
