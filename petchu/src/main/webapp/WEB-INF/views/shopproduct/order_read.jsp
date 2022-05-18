@@ -476,7 +476,11 @@ td {
 		var state = $(e).attr("state");
 // 		alert(state);
 		if(state!=2){
-			alert("배송완료 이후 작성할 수 있습니다.")
+			swal({
+			  	 title:"",
+			 	 text: "배송완료 이후 작성할 수 있습니다!",
+			 	 type: "warning"
+	 		});
 			return;
 		}
 		//이미 등록한 리뷰가 있는지 확인
@@ -490,7 +494,11 @@ td {
 			success: function(data){
 				result = data;
 				if(Number(result)>0){
-					alert("기존 리뷰가 존재합니다!");
+					swal({
+					  	 title:"",
+					 	 text: "기존 리뷰가 존재합니다!",
+					 	 type: "warning"
+			 		});
 					if (!confirm("해당 상품 페이지로 이동하시겠습니까?")) return;
 					location.href="/shopproduct/read?pno="+pno;
 				}else if(result == 0){	//리뷰가 0이라면 값을 가지고 이동

@@ -200,10 +200,19 @@
 			success : function(data) {
 				if (data == 1) {
 					//장바구니 등록 완료
-					alert('장바구니 등록완료!');
+				 	swal({
+					  	 title:"",
+					 	 text: "장바구니 등록완료!",
+					 	 type: "success"
+			 		});
 					return;
 				} else {
-					alert('이미 장바구니에 등록된 상품입니다.');
+					//장바구니 등록 실패
+				 	swal({
+					  	 title:"",
+					 	 text: "이미 장바구니에 등록된 상품입니다.",
+					 	 type: "error"
+			 		});
 				}
 			}
 		});
