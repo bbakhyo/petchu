@@ -58,7 +58,7 @@ button{
 				<tr>
 					<td width=100>나이</td>
 					<td width=500 class="page">
-						<input type="number" class="change" style="width:70px"  name="petage"> &nbsp;살
+						<input type="number" class="change" style="width:70px"  name="page"> &nbsp;살
 					</td>
 				</tr>
 				<tr>
@@ -132,6 +132,7 @@ $("#image").on("click", function(){
 $(frm.file).on("change", function(e){
 	var file=$(frm.file)[0].files[0];
 	$("#image").attr("src", URL.createObjectURL(file));
+	$("#image1").attr("src", URL.createObjectURL(file));
 });
 </script>
 

@@ -113,7 +113,7 @@
 			<td width=500 class="pspaying">
 				<p class="trans">{{pspaying}}</p>
 				<span class="change" style="display:none" pspaying={{pspaying}}>
-					<select >
+					<select class=pspaying1>
 						<option value="Y" class="spaying">함</option>
 						<option value="N" class="spaying">안함</option>
 					</select>
@@ -124,7 +124,8 @@
 			<td width=100 >사진</td>
 			<td width=500>
 				<input type="file" id="file" style="display:none" accept="image/*">
-				<img id="image" class="change" src="/display?fileName={{pimage}}" width=300 style="display: none">			
+				<img id="image" class="change" src="/display?fileName={{pimage}}" width=300 style="display: none">	
+				<input type="hidden" id="strImage" value="{{pimage}}">
 			</td>
 		</tr>
 	
@@ -148,6 +149,7 @@
 	 
 	//저장하기 버튼을 클릭한 경우
 	$("#btnInsert").on("click", function(){
+
 		var pno=$("#pno").val();
 		var pname=$("#pname").val();
 		var pcate=$("#pcate").val();
@@ -155,10 +157,16 @@
 		var page=$("#petage").val();
 		var pgender=$("#pgender").val();
 		var pweight=$("#pweight").val();
-		var pspaying=$("#pspaying").val();
+		var pspaying=$(".pspaying1").val();
 		var file = $("#file")[0].files[0];
+		alert(pspaying)
+		alert(file)
+		if(file == null) {
+			file=$("#strImage").val();
+			alert(file)
+		}
+		alert(page)
 		
-		if(file == null) return;
 		 var formData = new FormData();
 		 
 		 formData.append("pno", pno);
@@ -205,6 +213,7 @@
 					$(this).attr("checked","checked");
 				}
 			});
+			
 			$(".spaying").each(function(){
 				var spaying= $(this).parent().parent().attr("pspaying");
 				if(spaying == $(this).val()){
