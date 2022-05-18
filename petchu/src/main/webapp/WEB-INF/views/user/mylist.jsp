@@ -34,6 +34,29 @@
 #cke_editor46{
 	width: 740px;
 }
+input[type=text]{
+
+}
+input[type=checkbox]{
+	width: 20px;
+	height: 20px;
+}
+.button, button, input[type=button], input[type=submit], input[type=reset]{
+	border: none;
+    padding: 8px 12px 8px 12px;
+    background-color: A7CA37;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 900px;
+    color: white;
+    cursor: pointer;
+}
+input[type=text],input[type=number],select{
+	height: 35px;
+	margin: 5px;
+	border-radius:5px;
+	border: 0.5px solid gray;
+}
 </style>
 
 
@@ -55,7 +78,7 @@
 					<div class="smallPrame" >	
 						<table style="width: 740px;">
 							
-							<tr>
+							<tr style="display:none;">
 								<td width=150>scno</td>
 								<td width=600>
 									<input name = "scno" type="text" value="${vo.scno}"readonly>
@@ -78,7 +101,7 @@
 								<tr>
 								<td width=100>업체 연락처</td>
 								<td width=600>
-									<input type="text" id="sctel${vo.scno}" class="sctel" name="sctel" value="${vo.sctel}">
+									<input type="hidden" id="sctel${vo.scno}" class="sctel" name="sctel" value="${vo.sctel}">
 									<input type="number" class="sctel1" name="tel1"  style="width: 50px;"> -
 									<input type="number" class="sctel2" name="tel2" style="width: 80px;"> -
 									<input type="number" class="sctel3" name="tel3" style="width: 80px;">
@@ -122,15 +145,17 @@
 							<tr>
 								<td width=100 >업체이미지</td>
 								<td width=500>
-									<input type="file" name="file"  accept="image/*">
-									<img id="image" width=100 style="display:none">				
+									<input type="file" name="file" id="file"  accept="image/*" style="display:none" value="${vo.scimage }">
+									<img id="image" width=100 style="display:none">			
+									<input type="button" id="btnFile" value="사진등록">		
 								</td>
 							</tr>
 							<tr>
 								<td width=100 >백그라운드</td>
 								<td width=500>
-									<input type="file" name="backfile"  accept="image/*">
-									<img id="backimage" width=640 height="200" style="display:none">				
+									<input type="file" name="backfile" id="backfile"  accept="image/*" style="display:none" value="${vo.bgimage }">
+									<img id="backimage" width=640 height="200" style="display:none">
+									<input type="button" id="btnBackFile" value="사진등록">						
 								</td>
 							</tr>
 							<tr>
@@ -156,14 +181,14 @@
 								<input type="checkbox" class="tag" name="tag" value="#중형 ">#중형 
 								<input type="checkbox" class="tag" name="tag" value="#소형 ">#소형 
 								<input type="checkbox" class="tag" name="tag" value="#수의사 ">#수의사 
-								<input type="checkbox" class="tag" name="tag" value="#cctv ">#cctv &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+								<input type="checkbox" class="tag" name="tag" value="#cctv ">#cctv 
 								<input type="checkbox" class="tag" name="tag" value="#애견훈련 ">#애견훈련 
 								<input type="checkbox" class="tag" name="tag" value="#애견카페 ">#애견카페 
 								<input type="checkbox" class="tag" name="tag" value="#픽업 ">#픽업 
 								<input type="checkbox" class="tag" name="tag" value="#당일 입실">#당일 입실
 								<input type="checkbox"class="tag"  name="tag" value="#위생관리 ">#위생관리 
 								<input type="checkbox" class="tag" name="tag" value="#목욕 ">#목욕 
-								 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+								 
 								<input type="checkbox" class="tag" name="tag" value="#서울특별시 ">#서울특별시 
 								<input type="checkbox" class="tag" name="tag" value="#인천광역시 ">#인천광역시 
 								<input type="checkbox" class="tag" name="tag" value="#경기도">#경기도
@@ -222,9 +247,16 @@ $(".delete").on("click",function(e){
 		}
 		
 	});
-	
-	
 })
+
+//버튼클릭시 파일열기
+$("#btnFile").on("click", function(){
+	$("#file").click();
+});
+$("#btnBackFile").on("click", function(){
+	$("#backfile").click();
+});
+
 //image file select
 $(frm.file).on("change",function(e){
 	var file=$(frm.file)[0].files[0];
@@ -232,6 +264,7 @@ $(frm.file).on("change",function(e){
 	if($("#image").css("display")=="none"){
 		$("#image").show();
 		$(frm.file).hide();
+		$("#btnFile").hide();
 	}
 });
 //back image select
@@ -241,6 +274,7 @@ $(frm.backfile).on("change",function(e){
 	if($("#backimage").css("display")=="none"){
 		$("#backimage").show();
 		$(frm.backfile).hide();
+		$("#btnBackFile").hide();
 	}
 });
 
@@ -289,6 +323,9 @@ $(".search").on("click", function() {
 	      }else {
 	         target.hide();
 	      }
+	      
+	    
+	     
 	      
 	      
 	      var strTag=$(this).closest(".bigprame").find(".smallPrame").find(".strTag").val();   //DB의 저장된 tag값을 찾음(얘가 가지고있는 시설물,체크박스에 체크할 대상)
