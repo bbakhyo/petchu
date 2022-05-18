@@ -492,15 +492,42 @@ td {
 			url: "/shopproduct/read_rcount",	
 			data: {bno:bno},
 			success: function(data){
+				
 				result = data;
 				if(Number(result)>0){
+					
+					
 					swal({
-					  	 title:"",
-					 	 text: "기존 리뷰가 존재합니다!",
-					 	 type: "warning"
-			 		});
-					if (!confirm("해당 상품 페이지로 이동하시겠습니까?")) return;
-					location.href="/shopproduct/read?pno="+pno;
+						title : "기존 리뷰가 존재합니다!",
+						text : "해당 페이지로 이동하시겠습니까?.",
+						type : "warning",
+						showCancelButton : true,
+						confirmButtonClass : "btn-danger",
+						confirmButtonText : "예",
+						cancelButtonText : "아니오",
+						confirmButtonColor: "#A7CA37",
+						closeOnConfirm : false,
+						closeOnCancel : false
+						}, function(isConfirm) {
+							if (isConfirm) {
+								swal({
+									title : '',
+									text : '해당 페이지로 이동합니다.',
+									type: 'success',
+									confirmButtonColor: "#A7CA37",	
+								});
+								setTimeout(function() {
+									location.href="/shopproduct/read?pno="+pno;
+									}, 1200);
+							}else{
+								swal({
+										title : '',
+										text : '취소되었습니다.',
+										type: 'warning',
+										confirmButtonColor: "#A7CA37",	
+									});
+							}
+						});
 				}else if(result == 0){	//리뷰가 0이라면 값을 가지고 이동
 					location.href="/review/insert?pno="+pno+"&bno="+bno;
 				}
@@ -567,7 +594,6 @@ td {
 							type: 'error',
 							confirmButtonColor: "#A7CA37",	
 						});
-					test1=2;
 				}
 			});
 	}

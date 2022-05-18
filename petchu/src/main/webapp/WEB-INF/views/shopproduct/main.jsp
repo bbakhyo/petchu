@@ -99,13 +99,7 @@
 							<div class="category_box">습식</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 카테고리3</div>
-						</li>
-						<li class="category_item">
-							<div class="category_box">테스트 카테고리4</div>
-						</li>
-						<li class="category_item">
-							<div class="category_box">테스트 카테고리5</div>
+							<div class="category_box">수제</div>
 						</li>
 						<!-- <li class="category_item">
 							<div class="category_box">테스트 카테고리6</div>
@@ -147,16 +141,13 @@
 						<div class="category_box">동결건조</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">수제간식</div>
+							<div class="category_box">수제</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 간식 카테고리3</div>
+							<div class="category_box">캔</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 간식 카테고리4</div>
-						</li>
-						<li class="category_item">
-							<div class="category_box">테스트 간식 카테고리5</div>
+							<div class="category_box">스낵</div>
 						</li>
 						<%-- <!-- 	<li class="category_item">
 							<div class="category_box">테스트 간식 카테고리6</div>
@@ -197,16 +188,13 @@
 						<li class="category_item">
 							<div class="category_box">모래</div>
 						</li>
-						<li class="category_item">				<div class="category_box">배변패드</div>
+						<li class="category_item">				<div class="category_box">이동장</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 용품 카테고리3</div>
+							<div class="category_box">장난감</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 용품 카테고리4</div>
-						</li>
-						<li class="category_item">
-							<div class="category_box">테스트 용품 카테고리5</div>
+							<div class="category_box">목걸이</div>
 						</li>
 						<!-- <li class="category_item">
 							<div class="category_box">테스트 용품 카테고리6</div>

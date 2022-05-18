@@ -139,6 +139,8 @@
 	var page = 1;
 	var type = "";
 	getContentsList();
+	//한 번 로딩된 이후로는 최하위 카테고리 제외
+	selectCate="";
 
 	//카테고리가 ""이 아닐 경우 펫타임 radi 선택되어 있도록
 	if(selectCate3!=""){

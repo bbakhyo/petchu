@@ -69,7 +69,7 @@
 				<c:if test="${type=='의사'}">
 					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
 					<a href="/request/list">요청서</a>
-					<a href="#">쇼핑몰</a>
+					<a href="/shopproduct/main">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
 							<span>
 							<span id="bell">
@@ -91,7 +91,7 @@
 							<span id="requestCount"></span>
 						</span>
 					</span>
-					<a href="#">쇼핑몰</a>
+					<a href="/shopproduct/main">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
 					<span><a href="/user/mypage?id=${id}">${nick}님</a></span>
 					<a href="/user/logout"><button id="login">로그아웃</button></a>
