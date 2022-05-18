@@ -56,6 +56,21 @@
 		</div>
 		<p class="title d_etc">상세 증상</p>
 		<p id="d_etc">${vo.d_etc}</p>
+		<p class="title">첨부사진</p>
+		<div id="dimgbox">
+			<c:if test="${vo.dimg1!=null}">
+				<img src="/display?fileName=${vo.dimg1}"/>
+			</c:if>
+			<c:if test="${vo.dimg2!=null}">
+				<img src="/display?fileName=${vo.dimg2}"/>
+			</c:if>
+			<c:if test="${vo.dimg3!=null}">
+				<img src="/display?fileName=${vo.dimg3}"/>
+			</c:if>
+			<c:if test="${vo.dimg4!=null}">
+				<img src="/display?fileName=${vo.dimg4}"/>
+			</c:if>
+		</div>
 	</div>
 	<hr>
 	<form name="frm" action="/doctor/replyRequest" method="post" enctype="multipart/form-data">

@@ -39,7 +39,7 @@
 				</c:if>
 				<c:if test="${type=='일반'}">
 					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
-					<a href="/request/result">받은 견적서</a>
+					<a href="/request/result">받은 요청서</a>
 					<a href="/shopproduct/cart_read">장바구니</a> <!-- 아이콘으로 -->
 					<a href="#" id="chat">채팅</a>
 						<span>
@@ -55,7 +55,7 @@
 				</c:if>
 				<c:if test="${type=='의사'}">
 					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
-					<a href="/request/list">견적서</a>
+					<a href="/request/list">요청서</a>
 					<a href="#">쇼핑몰</a>
 					<a href="#" id="chat">채팅</a>
 							<span>
@@ -71,7 +71,7 @@
 				</c:if>
 				<c:if test="${type=='업체'}">
 					<a href="/user/pointRead"><span id="pointarea"><img src="/resources/coin.png"> ${commaPoint}</span></a>
-					<a href="/request/servicelist">서비스 견적서</a>
+					<a href="/request/servicelist">서비스 요청서</a>
 					<span>
 						<span id="bell2">
 							<small id="count2">0</small>

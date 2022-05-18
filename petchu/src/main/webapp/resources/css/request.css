@@ -450,8 +450,22 @@ a:visited {
 	margin-bottom: 20px;
 	width: 100%;
 }
+#dimgbox{
+	margin-left: 20px;
+	padding: 20px;
+	background-color: #EFF3E4;
+	border-radius:10px;
+}
+#dimgbox img{
+	width: 150px;
+	height: 150px;
+	margin-right: 10px;
+}
 /*-----------receRequestList.jsp------------*/
 #recepage{
 	width: 900px;
 	margin: 0px auto;
+    margin-bottom: 127px;
+    min-height: 500px;
+
 }
