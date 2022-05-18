@@ -428,7 +428,9 @@
 								 	 text: "결제완료!",
 								 	 type: "success"
 						 		});
-								location.href="/shopproduct/order_list";
+								setTimeout(function() {
+									location.href="/shopproduct/order_list";
+								}, 2500);
 							}
 						});
 						return;

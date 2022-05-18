@@ -460,7 +460,14 @@ Handlebars.registerHelper("display", function(sum){
 							url: "/shopproduct/user_order_insert",	
 							data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint, omessage:omessage},
 							success: function(){
-								location.href="/shopproduct/order_list";
+								swal({
+								  	 title:"",
+								 	 text: "결제완료!",
+								 	 type: "success"
+						 		});
+								setTimeout(function() {
+									location.href="/shopproduct/order_list";
+								}, 2500);
 							}
 						});
 						return;
@@ -528,7 +535,14 @@ Handlebars.registerHelper("display", function(sum){
 						url: "/shopproduct/user_order_insert",	
 						data: {uid:uid, orno:orno, point:usePoint, sum:final_price, btnPoint:btnPoint, omessage:omessage},
 						success: function(){
-							location.href="/shopproduct/order_list";
+							swal({
+							  	 title:"",
+							 	 text: "결제완료!",
+							 	 type: "success"
+					 		});
+							setTimeout(function() {
+								location.href="/shopproduct/order_list";
+							}, 2500);
 						}
 					});
 					
