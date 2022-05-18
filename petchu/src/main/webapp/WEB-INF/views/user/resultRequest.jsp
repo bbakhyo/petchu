@@ -12,7 +12,7 @@
 		</p>
 		<table id="petinfo">
 			<tr>
-				<td width=100 class="title">이름</td>
+				<td width=150 class="title">이름</td>
 				<td>${vo.pname}</td>
 			</tr>
 			<tr>
@@ -26,6 +26,9 @@
 			<tr>
 				<td class="title">예상청구금액</td>
 				<td>${vo.drprice}</td>
+			</tr>
+			<tr>
+				<td><img src="/display?fileName=${vo.drfile}"></td>
 			</tr>
 		</table>
 		<div id="btn">

@@ -47,31 +47,79 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head> --%>
 <body id="shopproduct_read_body">
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<div id="shopproduct_read_page">
 		<div class="shopproduct_read_container_wrapper">
-			
-			<div class="shopproduct_img_container">
-				<img id="image" src="${vo.pimage}" width=445
-					alt="product_img">
+
+			<div class="shopproduct_img_container" data-pimg="${vo.pimage}">
+				<img id="image" src="${vo.pimage}" width=445 alt="product_img">
 			</div>
-			
+
 			<div class="shopproduct_info_container">
 				<div class="info_container_brandrow1">
-						<div class="info_container_product_brand">
-							<div class="pbrand">${vo.pbrand}</div>
-						</div>
-						
-						<div class="info_container_product_name">
-							<div class="pname">${vo.pname}</div>
-						</div>
+					<div class="info_container_product_brand" data-pbrand="${vo.pbrand}">
+						<div class="pbrand">${vo.pbrand}</div>
+					</div>
+
+					<div class="info_container_product_name">
+						<div class="pname" data-pname="${vo.pname}">${vo.pname}</div>
+					</div>
 				</div>
 				<!-- 상품금액(RED font) -->
 				<div class="info_price_container">
-					<div class="price_container_price_value">
-						<span id="product_price" data-pprice="${vo.pprice}"> 상품가격: </span><fmt:formatNumber value="${vo.pprice}" pattern="#,###원" />
+					<div class="info_price_row">
+						<div class="price_container_price_value">
+							<span id="product_price" data-pprice="${vo.pprice}"> 상품가격:
+							</span>
+							<fmt:formatNumber value="${vo.pprice}" pattern="#,###원" />
+						</div>
+						<div class="shopproduct_read_buttons">
+							<div class="favorite" onclick='favorite()'>
+								<img src="/resources/icon_menu/share_before.png" alt='share'
+									width=45>
+							</div>
+							<div class="favorite_active none" onclick='un_favorite()'>
+								<img src="/resources/icon_menu/share_after.png" alt='share'
+									width=45>
+							</div>
+
+							<div class="share_button" onclick='btn_share()'>
+								<img src="/resources/icon_menu/shopproduct_share.png"
+									alt='share' width=47 onclick=btn_share()>
+							</div>
+							<!--*기본 설정 : 숨김(HIDE)  -->
+							<div class="share_options">
+								<div class="share_container">
+									<div class="share_left">
+										<div>
+											<a id="create-kakao-link-btn" href="javascript:;"> <img
+												src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"
+												alt="Kakao Link button" />
+											</a>
+										</div>
+										<div style="display: relative; top: 5px;">
+											<img alt="facebook_like"
+												src="/resources/icon_menu/facebook_like.jpeg" width=70 />
+										</div>
+									</div>
+
+									<div class="share_right">
+										<div class="close_btn" onclick="btn_close()">
+											<img alt="close_btn" src="/resources/icon_menu/cancel.png"
+												width=20 />
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
+
+						</div>
 					</div>
 				</div>
-				
+
 				<!--중간 : 배송 정보 -->
 				<div class="info_shippingInfo_container">
 					<div class="shipping_date_line">
@@ -83,28 +131,26 @@
 				</div>
 				<div class="extra_info_wrapper">
 					<div class="info_extra_info_container1">
-					
+
 						<!-- 금액 -->
 						<div class="info_container_row1">
-							<span class="remQnt">
-								남은 수량: ${vo.pqantity} 개
-							</span>
 							최종가격: &nbsp;<span class="final_price">${vo.pprice}</span>원
 						</div>
 						<!-- 결제 버턴 -->
 						<div class="info_payment_container3">
 							<div class="info_payment_container_row1">
 								<div class="quantity buttons_added">
-									<input type="button" value="-" class="minus"> <span id="qnt-value"
-										title="Qty" class="input-text qty text">1</span> <input
-										type="button" value="+" class="plus">
+									<input type="button" value="-" class="minus"> <span
+										id="qnt-value" title="Qty" class="input-text qty text">1</span>
+									<input type="button" value="+" class="plus">
 								</div>
 								<div class="payment_buttons">
 									<div>
 										<a href="#" class="cart_add" data-pno="${vo.pno}">장바구니 담기</a>
 									</div>
 									<div>
-										<a href="#" class="buy_now" onclick=buynow() data-pno="${vo.pno}">바로구매 〉</a>
+										<a href="#" class="buy_now" onclick=buynow()
+											data-pno="${vo.pno}">바로구매 〉</a>
 									</div>
 								</div>
 							</div>
@@ -114,6 +160,8 @@
 			
 		</div>
 	</div>
+	
+	
 	<div class="shoproduct_read_terms_page">
 		<button class="tablink" onclick="openPage('Info',this, '#535562')"
 			id="defaultOpen">상세정보</button>
@@ -388,6 +436,13 @@
 
 
 <script>
+
+/* kakao전역 변수 */
+var kdescription = $(".pname").data("pname");
+var kimage = $(".shopproduct_img_container").data("pimg");
+var ktitle = $(".info_container_product_brand").data("pbrand");
+var pno = $(".buy_now").data("pno");
+
 var price = document.querySelector("#product_price");
 pprice = price.dataset.pprice;
 console.log(pprice);
@@ -616,5 +671,110 @@ console.log(pprice);
 	});
 	
 	
+	
 </script>
+<script>
+
+	/* 찜버턴 활성화 */
+	function favorite(){
+		var item = $(".payment_buttons").find(".cart_add");
+		var pno = item.data("pno")
+		$(".favorite").css("display", "none");
+		$(".favorite_active").css("display", "block");
+		/* alert('hello, my pno is:'+pno); */
+		
+	}
+	/* 찜버턴 비활성화 */
+	function un_favorite(){
+		$(".favorite_active").hide();
+		$(".favorite").show();
+	}
+	/* 공유 버턴 - 창 뛰우기 */
+	function btn_share(){
+		var item = $(".payment_buttons").find(".cart_add");
+		var pno = item.data("pno");
+		$(".share_options").show();
+		
+	}
+	/* 공유 창 닫기 */
+	$(document).mouseup(function(e){
+		var container = $(".share_options")
+		if(!container.is(e.target) && container.has(e.target).length === 0){
+			container.hide();
+		}
+		
+	})
+		function btn_close(){
+		$(".share_options").hide();
+	}
+	$(document).ready(function(){ //댓글 추천
+		$("#tbl").on("click", ".fa-thumbs-up", function(){
+			var rid=$(this).attr("rid");
+			var uid="${id}";
+			alert(rid + "\n" + uid);
+			$.ajax({
+				type: "post",
+				url: "/help/updateHelp",
+				data: {rid:rid, uid:uid},
+				success:function(helpCheck){
+					alert("helpCheck= " + helpCheck);
+					$("#helpCheck").html("helpCheck");
+					if(helpCheck == 0){ //중복체크
+						alert("추천성공!");
+						getList();
+					}
+					else if(helpCheck == 1){
+						alert("추천취소!");
+						getList();
+						
+					}
+					
+				}
+				
+			});
+		});
+	});
+	
+	
+</script>
+<script type="text/javascript">
+Kakao.init('325fe0d339f0f5d9c9ca10b121f4ae5b');
+  Kakao.Link.createDefaultButton({
+
+	  container: '#create-kakao-link-btn',
+    objectType: 'feed',
+    content: {
+      title: ktitle,
+      description: kdescription+" 가격: "+pprice,
+      imageUrl: 
+        kimage,
+      link: {
+        mobileWebUrl: 'shopproduct/read?pno='+pno+'1148&selectCate=&selectCate2=&selectCate3=',
+        webUrl: 'https://developers.kakao.com',
+      },
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845,
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'shopproduct/read?pno='+pno+'1148&selectCate=&selectCate2=&selectCate3=',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+      {
+        title: '앱으로 보기',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+    ],
+  })
+</script>
+
 </html>
