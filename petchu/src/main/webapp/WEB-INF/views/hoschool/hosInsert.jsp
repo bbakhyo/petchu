@@ -15,7 +15,7 @@ input[type=checkbox]{
 	margin: 30px;
 	margin-left: 460px;
 }
-.button, button, input[type=file]{
+.button, button, input[type=button]{
 	border: none;
     padding: 8px 12px 8px 12px;
     background-color: A7CA37;
@@ -28,6 +28,8 @@ input[type=checkbox]{
 input[type=text],input[type=number],select{
 	height: 35px;
 	margin: 5px;
+	border-radius:5px;
+	border: 0.5px solid gray;
 }
 #page{
 	text-align: center;
@@ -111,15 +113,17 @@ input[type=text],input[type=number],select{
 			<tr>
 				<td width=100 >업체이미지</td>
 				<td width=500>
-					<input type="file" name="file"  accept="image/*">
-					<img id="image" width=100 style="display:none">				
+					<input type="file" name="file"  accept="image/*" style="display:none">
+					<img id="image" width=100 style="display:none">			
+					<input type="button" id="btnFile" value="사진등록">	
 				</td>
 			</tr>
 			<tr>
 				<td width=100 >백그라운드</td>
 				<td width=500>
-					<input type="file" name="backfile"  accept="image/*">
-					<img id="backimage" width=640 height="200" style="display:none">				
+					<input type="file" name="backfile"  accept="image/*" style="display:none">
+					<img id="backimage" width=640 height="200" style="display:none">		
+					<input type="button" id="btnBackFile" value="사진등록">		
 				</td>
 			</tr>
 			<tr>
@@ -233,6 +237,7 @@ input[type=text],input[type=number],select{
 		if($("#image").css("display") == "none"){
 			$("#image").show();
 			$(frm.file).hide();
+			$("#btnFile").hide();
 		}
 	});
 	//백그라운드이미지 파일 선택시
@@ -242,7 +247,15 @@ input[type=text],input[type=number],select{
 		if($("#backimage").css("display") == "none"){
 			$("#backimage").show();
 			$(frm.backfile).hide();
+			$("#btnBackFile").hide();
 		}
+	});
+	//버튼클릭시 파일열기
+	$("#btnFile").on("click", function(){
+		$(frm.file).click();
+	});
+	$("#btnBackFile").on("click", function(){
+		$(frm.backfile).click();
 	});
 	//이미지 클릭시 파일열기
 	$("#image").on("click", function(){

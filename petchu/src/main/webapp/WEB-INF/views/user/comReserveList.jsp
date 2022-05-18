@@ -25,6 +25,7 @@
 	border: none;
 	width: 800px;
 	display: none;
+	margin-left: 175px;
 }
 .title{
 	font-weight: bold;

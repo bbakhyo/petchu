@@ -355,7 +355,7 @@
             				 type: "warning"
             				});
          			}
-         			bl,
+         			
          			swal({
          				title : '',
          				text : '댓글을 등록하실래요?',
