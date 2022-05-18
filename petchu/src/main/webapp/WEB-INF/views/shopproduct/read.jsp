@@ -32,11 +32,11 @@
     	text-align: start;
     	width: 0%;
 	}
-	.btnUpdate {
+	.btnUpdate, .btnDelete, .btnUpdateF {
 		visibility:hidden; 
 	}
-	.btnDelete {
-		visibility:hidden;
+	.makeStar {
+		display : none;
 	}
 </style>
 <%-- <head>
@@ -236,7 +236,6 @@
 		
 		<!--Review TAB  -->
 		<div id="Review" class="tabcontent">
-			<h3>리뷰</h3>
 			<div id="re">
 <!-- 				여기 작업중 -->
 				<div id="tbl"></div>
@@ -263,17 +262,13 @@
 					</div>
 					<span style="font-size: 12px; color: #555;">{{rdate}}</span> </br>
 					<div style=" display : inline; float : right; position : relative; bottom : 40;">
-						<button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
+						<button rid="{{rid}}" class="btnUpdateF" >수정완료</button> &nbsp; <button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
 					</div> 			
 					<div>
 						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}" disabled="disabled"> <br/><br/>
  					</div>
 					<span style="font-size: 13px;">{{helpcount}}명에게 도움 됨</span>
-
-
-						<i rid="{{rid}}" id="goodBlack" class="fa-solid fa-thumbs-up" ></i>
-						<i rid="{{rid}}" id="goodBlue" class="fa-solid fa-thumbs-up" style="color:skyblue; display : none;"></i>
-
+						<i rid="{{rid}}" id="goodBlack" class="fa-solid fa-thumbs-up"></i>
 					<hr>
 					</div>
 					{{/each}}
@@ -614,6 +609,7 @@ console.log(pprice);
 				var makeStar = document.getElementsByClassName("makeStar");
 				var btnUpdate = document.getElementsByClassName("btnUpdate");
 				var btnDelete = document.getElementsByClassName("btnDelete");
+				var btnUpdateF = document.getElementsByClassName("btnUpdateF");
 				var text1 = document.getElementsByClassName("reviewText");
 				
 				var rate = $('#tbl .rate');
@@ -638,10 +634,40 @@ console.log(pprice);
 							btnUpdate[i].addEventListener('click', function(){
 								var ccc = $(this).parent().parent();
 								var ccc2 = ccc.find('.reviewText');
-								ccc2.prop('disabled', false);
-							/*  text1[i].removeAttribute("disabled");
- 								alert("sdflkjsdflkdsjf");  */
+								var ccc3 = ccc.find('.rate .fa-star');
+								var ccc4 = ccc.find('.makeStar');
+								ccc.find('.btnUpdateF').css({visibility : 'visible'});
+
+								ccc2.prop('disabled', false);		
+								
+								ccc3.click(function(){
+									var targetNum = $(this).index()+1;
+									ccc.find('.makeStar').val(targetNum);
+									
+									ccc.find('.rate .fa-solid').css({color:'#D3D3D3'})
+									ccc.find('.fa-solid:nth-child(-n+' + targetNum + ')').css({color:'#F08d28'});								
+								});
 							});
+							
+							btnUpdateF[i].addEventListener('click', function(){
+								var ccc = $(this).parent().parent();
+								
+								if(!confirm("수정하시겠습니까?")) return;
+								var rid = $(this).attr('rid');
+								var star = ccc.find('.makeStar').val();
+								var review = ccc.find('.reviewText').val();
+								
+								$.ajax({
+									type : 'post',
+									url : '/review/reviewUpdate',
+									data : {rid:rid, star:star, review:review},
+									success:function(){
+										alert("수정완료");
+										getList();
+									}
+								});
+							});	
+							
 						}
 					}	
 			}

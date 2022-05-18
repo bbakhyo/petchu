@@ -13,10 +13,12 @@ public interface ReviewDAO {
 	public List<ReviewVO> idReview(String uid);
 	public int idReviewCount(String uid);
 	public void update(ReviewVO vo); //update
+	public void reviewUpdate(ReviewVO vo);
 	public void delete(int rid);//delete
 	public List<ReviewVO> join(Criteria cri);//reviewjoin
 	public int count();
 	public ReviewVO updateread(int rid);
 	public int user_review_count(String uid, int bno);
+	
 }
 

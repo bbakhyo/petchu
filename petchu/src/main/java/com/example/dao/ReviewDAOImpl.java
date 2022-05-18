@@ -92,5 +92,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return session.selectOne(namespace + ".idReviewCount", uid);
 	}
 
+	@Override
+	public void reviewUpdate(ReviewVO vo) {
+		session.update(namespace + ".reviewUpdate", vo);
+		
+	}
+
 
 }
