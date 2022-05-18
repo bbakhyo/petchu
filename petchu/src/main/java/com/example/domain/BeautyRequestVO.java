@@ -1,5 +1,11 @@
 package com.example.domain;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class BeautyRequestVO extends ServiceCoVO {
 	public int brno;
 	public String uid;
@@ -15,7 +21,16 @@ public class BeautyRequestVO extends ServiceCoVO {
     public String wish_local1;
     public String wish_local2;
     public String detailed_matters;
-    public int choose_check;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public String bdate;
+   
+	public String getBdate() {
+		return bdate;
+	}
+	public void setBdate(String bdate) {
+		this.bdate = bdate;
+	}
+	public int choose_check;
     
 	public int getChoose_check() {
 		return choose_check;

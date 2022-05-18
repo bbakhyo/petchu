@@ -1,5 +1,11 @@
 package com.example.domain;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class CleaningRequestVO extends ServiceCoVO{
 	public int crno;
 	public String uid;
@@ -13,6 +19,16 @@ public class CleaningRequestVO extends ServiceCoVO{
 	public String hope_matters;
 	public int choose_check;
 	
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	public String cdate;
+	
+	
+	public String getCdate() {
+		return cdate;
+	}
+	public void setCdate(String cdate) {
+		this.cdate = cdate;
+	}
 	public int getChoose_check() {
 		return choose_check;
 	}

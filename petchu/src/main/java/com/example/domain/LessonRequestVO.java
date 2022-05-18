@@ -1,5 +1,11 @@
 package com.example.domain;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class LessonRequestVO extends ServiceCoVO{
 	public int lrno;
 	public String uid;
@@ -18,6 +24,16 @@ public class LessonRequestVO extends ServiceCoVO{
 	public String detailed_matters;
 	public int choose_check;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	public String ldate;
+	
+	
+	public String getLdate() {
+		return ldate;
+	}
+	public void setLdate(String ldate) {
+		this.ldate = ldate;
+	}
 	public int getChoose_check() {
 		return choose_check;
 	}
