@@ -148,6 +148,8 @@
 	<select id="read_rcount" resultType="int">
 		select count(*) from review where bno=#{bno};
 	</select>
-	
-	
+	<update id="order_decision">
+		update user_order set state=2 
+		where orno=#{orno} and uono>1;
+	</update>
 </mapper>

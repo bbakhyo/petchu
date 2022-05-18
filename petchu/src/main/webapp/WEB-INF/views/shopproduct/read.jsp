@@ -262,7 +262,7 @@
 					</div>
 					<span style="font-size: 12px; color: #555;">{{rdate}}</span> </br>
 					<div style=" display : inline; float : right; position : relative; bottom : 40;">
-						<button rid="{{rid}}" class="btnUpdateF" >수정완료</button> &nbsp; <button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
+						<button rid="{{rid}}" class="btnUpdateF" onclick='showAndhide(this)'>수정완료</button> &nbsp; <button class="btnUpdate" onclick='showAndhide(this)'>수정</button> &nbsp; <button class="btnDelete">삭제</button>
 					</div> 			
 					<div>
 						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}" disabled="disabled"> <br/><br/>
@@ -805,7 +805,14 @@ Kakao.init('5c9e09df993f534bf4a2916f4cf43cdd');
         },
       },
     ]
-  })
+  });
+  
+  //클릭시 사라지는 펑션
+ 	function showAndhide(e){
+ 		if($(e).attr("class")=="btnUpdate"){
+ 			$(e).css("display", "none");
+ 		}
+ 	}
 </script>
 
 </html>

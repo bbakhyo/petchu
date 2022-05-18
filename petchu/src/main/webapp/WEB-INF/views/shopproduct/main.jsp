@@ -342,8 +342,14 @@
 </body>
 
 <script>
-/* 오늘의 상품 출력 */
-	
+
+// 	swal({
+//  	 title:"",
+// 	 text: "내용을 입력해주세요.",
+// 	 type: "warning"
+// 	});
+
+	/* 오늘의 상품 출력 */
 	getToday();
 	function getToday() {
 		$.ajax({

@@ -3,6 +3,7 @@ package com.example.dao;
 import java.util.List;
 
 import com.example.domain.Criteria;
+import com.example.domain.ProductVO;
 import com.example.domain.ReviewVO;
 import com.example.domain.shopcartVO;
 
@@ -43,5 +44,5 @@ public interface shopcartDAO {
 	public int order_sum(String orno);
 	public int read_state(String orno);
 	public int read_rcount(int bno);
-	
+	public void order_decision(String orno);
 }

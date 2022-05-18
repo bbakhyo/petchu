@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+  
 <style>
 .image {
 	width: 90px;
@@ -277,7 +280,8 @@ td {
 		</tr>
 	</table>
 	<div>
-		<button class="goBack btn_item_read" style="margin-top:100px;" onclick='goBack()'>목록으로 돌아가기</button>
+		<button class="goBack btn_item_read" style="margin-top:40px;" onclick='goBack()'>목록으로 돌아가기</button>
+		<button class="btn_item_read decision" style="margin-left:20px;" onclick='decision(this)'>구매확정</button>
 		<button class="btn_FAQ btn_item_read" style="margin-left:20px;">상품 문의하기</button>
 	</div>
 
@@ -370,12 +374,22 @@ td {
 				if(state==0){ //배송준비중
 					$(".state").html("배송현황: 배송 준비중");
 					$(".btn_review").attr("state", 0);
+					
+					//btn_review 버튼 display none 처리					
+					$(".btn_review").css('display', 'none');
 				}else if(state==1){ //배송준비중
 					$(".state").html("배송현황: 배송중");
+					
+					//btn_review 버튼 display none 처리
+					$(".btn_review").css('display', 'none');
 				}else if(state==2){
 					$(".state").html("배송현황: 배송완료");
 					$(".btn_review").attr("state", 2);
+					
+					//배송이 완료되었다면 구매확정 display none
+					$(".decision").css("display", "none");
 				}
+				
 			}
 		});
 	}
@@ -507,6 +521,80 @@ td {
 			}
 		});
 	}
-	
+	function decision(e){
+		swal({
+			title : "구매를 확정하시겠습니까?",
+			text : "구매확정시 배송을 취소할 수 없습니다.",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			confirmButtonColor: "#A7CA37",
+			closeOnConfirm : false,
+			closeOnCancel : false
+			}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: "post",
+						url: "/shopproduct/order/decision",	
+						data: {orno:orno},
+						success: function(data){
+						}
+					});
+					
+					swal({
+						title : '',
+						text : '구매가 확정되었습니다.',
+						type: 'success',
+						confirmButtonColor: "#A7CA37",	
+					});
+					setTimeout(function() {
+						  window.location.reload();
+						}, 1200);
+				}else{
+					swal({
+							title : '',
+							text : '취소되었습니다.',
+							type: 'error',
+							confirmButtonColor: "#A7CA37",	
+						});
+					test1=2;
+				}
+			});
+	}
 
+	
+	
+	//스왈 컨펌창
+	function showSwal(){
+		swal({
+			title : "111",
+			text : "test",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			confirmButtonColor: "#A7CA37",
+			closeOnConfirm : false,
+			closeOnCancel : false
+			}, function(isConfirm) {
+				if (isConfirm) {
+					swal({
+						title : '',
+						text : '수정이 완료되었습니다.',
+						type: 'success',
+						confirmButtonColor: "#A7CA37",	
+					});
+				}else{
+					swal({
+							title : '',
+							text : '수정이 취소되었습니다.',
+							type: 'error',
+							confirmButtonColor: "#A7CA37",	
+						});
+				}
+			});
+	}
 </script>

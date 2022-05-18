@@ -348,5 +348,12 @@ public class shopproductController {
 		int result = cartdao.read_rcount(bno);
 		return result;
 	}
+	
+	//구매확정
+	@RequestMapping(value="order/decision", method=RequestMethod.POST)
+	@ResponseBody
+	public void order_decision(String orno){
+		cartdao.order_decision(orno);
+	}
 
 }

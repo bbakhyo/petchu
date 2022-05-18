@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <html>
 <head>
 <title>PET-CHU</title>
@@ -18,7 +20,17 @@
 	<!-- PG사 결제API -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
+<style>
+.swal-button, .confirm {
+  padding: 7px 19px;
+  border-radius: 2px;
+  width:100px;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  background-color: #A7CA37;
+}
+</style>
 </head>
 <body>
 <fmt:formatNumber type="number" maxFractionDigits="3" value="${point}" var="commaPoint"/>
