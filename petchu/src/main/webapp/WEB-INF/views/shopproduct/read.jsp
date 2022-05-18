@@ -228,7 +228,7 @@
 				</div>
 			</div>
 			
-			<div>
+			<div style="text-align:center;">
 				<img src="${vo.pcontents}">
 			</div>
 			

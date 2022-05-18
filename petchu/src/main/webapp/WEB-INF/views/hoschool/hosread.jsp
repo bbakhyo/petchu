@@ -355,7 +355,7 @@
             				 type: "warning"
             				});
          			}
-         			if(!confirm("댓글을 등록하실래요?")) return;
+         			bl,
          			swal({
          				title : '',
          				text : '댓글을 등록하실래요?',
