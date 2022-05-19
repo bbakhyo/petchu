@@ -28,7 +28,7 @@
 				<div class="inin_page">
 					<!--한줄요약까지-->
 					<div class="page_heading">
-						<h3 class="review_h3">상품 품질 리뷰</h3>
+						<h3 class="review_h3"><span id="img_heading" style="position: relative; top: 3px;"><img src="/resources/icon_menu/icon_loyalty.png" width=20 alt="product_image"></span>상품 품질 리뷰</h3>
 						<h5>상품에 대해서 얼마나 만족하시나요?</h5>
 					</div>
 					<!--r_q-->
