@@ -70,6 +70,11 @@
 #sidemenu{
 	margin-left: -100px;
 }
+
+.menu_box1, .menu_box2, .menu_box3 {
+	margin-left : 43px;
+}
+
 </style>
 <div id="sidemenu">
 		<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
