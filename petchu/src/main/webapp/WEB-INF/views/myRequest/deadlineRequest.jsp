@@ -71,6 +71,10 @@
 #sidemenu{
 	margin-left: -100px;
 }
+
+.menu_box1, .menu_box2, .menu_box3 {
+	margin-left : 43px;
+}
 </style>
 <div id="sidemenu">
 	<jsp:include page="/WEB-INF/views/user/mypageSidemenu.jsp"/>
@@ -119,7 +123,7 @@
 				<p>${vo.lesson_method}</p>
 				<span>${vo.wish_local1}</span> <span>${vo.wish_local2}</span> 
 				<br/>
-				<p class="drprice">${vo.ldate}</p>
+				<p class="drprice">${vo.ddate}</p>
 			</div>
 		</c:forEach>
     </div>
