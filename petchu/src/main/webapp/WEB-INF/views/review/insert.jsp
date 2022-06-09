@@ -403,7 +403,7 @@ function getList() {
 		var star = $(frm.star).val();
 		var file = $(frm.uploadFile).val();
 		var uid = "${id}";
-		alert(file + "\n" + uid);
+		/* alert(file + "\n" + uid); */
 		if (review == "") {
 			alert("리뷰를 입력해주세요");
 			$(frm.review).focus();
@@ -416,9 +416,9 @@ function getList() {
 
 		if (!confirm("리뷰를 등록하실래요?"))
 			return;
-		alert(file);
+		/* alert(file); */
 		var uid = "${id}"
-		alert(uid)
+		/* alert(uid */)
 		$(frm.uid).val(uid);
 		frm.submit();
 

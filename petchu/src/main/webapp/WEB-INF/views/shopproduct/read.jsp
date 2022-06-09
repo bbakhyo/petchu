@@ -32,11 +32,11 @@
     	text-align: start;
     	width: 0%;
 	}
-	.btnUpdate {
+	.btnUpdate, .btnDelete, .btnUpdateF {
 		visibility:hidden; 
 	}
-	.btnDelete {
-		visibility:hidden;
+	.makeStar {
+		display : none;
 	}
 </style>
 <%-- <head>
@@ -228,15 +228,14 @@
 				</div>
 			</div>
 			
-			<div>
-				<img src="${vo.pcontents}">
+			<div style="text-align:center;">
+				<img src="http://image1.coupangcdn.com/image/vendor_inventory/c8c9/cdcf69bbe1c0f91712a35a5c36a073a7e0b0eb730c800bfe69d86efd242c.jpeg" width=780 height=3860>
 			</div>
 			
 		</div>
 		
 		<!--Review TAB  -->
 		<div id="Review" class="tabcontent">
-			<h3>리뷰</h3>
 			<div id="re">
 <!-- 				여기 작업중 -->
 				<div id="tbl"></div>
@@ -263,17 +262,13 @@
 					</div>
 					<span style="font-size: 12px; color: #555;">{{rdate}}</span> </br>
 					<div style=" display : inline; float : right; position : relative; bottom : 40;">
-						<button class="btnUpdate" >수정</button> &nbsp; <button class="btnDelete">삭제</button>
+						<button rid="{{rid}}" class="btnUpdateF" onclick='showAndhide(this)'>수정완료</button> &nbsp; <button class="btnUpdate" onclick='showAndhide(this)'>수정</button> &nbsp; <button class="btnDelete">삭제</button>
 					</div> 			
 					<div>
 						<input type="text" class="reviewText" style="margin-top : 15px; border : none;" value="{{review}}" disabled="disabled"> <br/><br/>
  					</div>
 					<span style="font-size: 13px;">{{helpcount}}명에게 도움 됨</span>
-
-
-						<i rid="{{rid}}" id="goodBlack" class="fa-solid fa-thumbs-up" ></i>
-						<i rid="{{rid}}" id="goodBlue" class="fa-solid fa-thumbs-up" style="color:skyblue; display : none;"></i>
-
+						<i rid="{{rid}}" id="goodBlack" class="fa-solid fa-thumbs-up"></i>
 					<hr>
 					</div>
 					{{/each}}
@@ -488,7 +483,11 @@ console.log(pprice);
 						return;
 					location.href = "/shopproduct/cart_read?uid=" + uid;
 				} else {
-					alert('이미 장바구니에 등록된 상품입니다.');
+					swal({
+					  	 title:"",
+					 	 text: "이미 장바구니에 등록된 상품입니다!",
+					 	 type: "warning"
+			 		});
 				}
 			}
 		});
@@ -499,7 +498,11 @@ console.log(pprice);
 			function() {
 				quantity = "${vo.pqantity}";
 				if(quantity<=0){
-					alert("상품이 매진되어 구매하실 수 없습니다!");
+					swal({
+					  	 title:"",
+					 	 text: "상품이 매진되어 구매하실 수 없습니다!",
+					 	 type: "warning"
+			 		});
 					return;
 				}
 				var buynow = document.querySelector(".buy_now");
@@ -529,10 +532,18 @@ console.log(pprice);
 		var compareCount = Number(fcount)+1;
 		if(compareCount>quantity){
 			if(quantity==0){
-				alert("상품이 매진되었습니다!");
+				swal({
+				  	 title:"",
+				 	 text: "상품이 매진되었습니다!",
+				 	 type: "warning"
+		 		});
 				return;
 			}
-			alert("최대수량입니다.");
+			swal({
+			  	 title:"",
+			 	 text: "최대수량입니다!",
+			 	 type: "warning"
+	 		});
 			return;
 		}
 		fcount++;
@@ -614,6 +625,7 @@ console.log(pprice);
 				var makeStar = document.getElementsByClassName("makeStar");
 				var btnUpdate = document.getElementsByClassName("btnUpdate");
 				var btnDelete = document.getElementsByClassName("btnDelete");
+				var btnUpdateF = document.getElementsByClassName("btnUpdateF");
 				var text1 = document.getElementsByClassName("reviewText");
 				
 				var rate = $('#tbl .rate');
@@ -638,10 +650,44 @@ console.log(pprice);
 							btnUpdate[i].addEventListener('click', function(){
 								var ccc = $(this).parent().parent();
 								var ccc2 = ccc.find('.reviewText');
-								ccc2.prop('disabled', false);
-							/*  text1[i].removeAttribute("disabled");
- 								alert("sdflkjsdflkdsjf");  */
+								var ccc3 = ccc.find('.rate .fa-star');
+								var ccc4 = ccc.find('.makeStar');
+								ccc.find('.btnUpdateF').css({visibility : 'visible'});
+
+								ccc2.prop('disabled', false);		
+								
+								ccc3.click(function(){
+									var targetNum = $(this).index()+1;
+									ccc.find('.makeStar').val(targetNum);
+									
+									ccc.find('.rate .fa-solid').css({color:'#D3D3D3'})
+									ccc.find('.fa-solid:nth-child(-n+' + targetNum + ')').css({color:'#F08d28'});								
+								});
 							});
+							
+							btnUpdateF[i].addEventListener('click', function(){
+								var ccc = $(this).parent().parent();
+								
+								if(!confirm("수정하시겠습니까?")) return;
+								var rid = $(this).attr('rid');
+								var star = ccc.find('.makeStar').val();
+								var review = ccc.find('.reviewText').val();
+								
+								$.ajax({
+									type : 'post',
+									url : '/review/reviewUpdate',
+									data : {rid:rid, star:star, review:review},
+									success:function(){
+										swal({
+										  	 title:"",
+										 	 text: "수정완료!",
+										 	 type: "success"
+								 		});
+										getList();
+									}
+								});
+							});	
+							
 						}
 					}	
 			}
@@ -651,21 +697,31 @@ console.log(pprice);
 		$("#tbl").on("click", ".fa-thumbs-up", function(){
 			var rid=$(this).attr("rid");
 			var uid="${id}";
-			alert(rid + "\n" + uid);
 			$.ajax({
 				type: "post",
 				url: "/help/updateHelp",
 				data: {rid:rid, uid:uid},
 				success:function(helpCheck){
-					alert("helpCheck= " + helpCheck);
 					$("#helpCheck").html("helpCheck");
 					if(helpCheck == 0){ //중복체크
-						alert("추천성공!");
-						getList();
+						swal({
+						  	 title:"",
+						 	 text: "추천성공!",
+						 	 type: "success"
+				 		});
+						setTimeout(function() {
+							getList();
+						}, 1000);
 					}
 					else if(helpCheck == 1){
-						alert("추천취소!");
-						getList();
+						swal({
+						  	 title:"",
+						 	 text: "추천취소!",
+						 	 type: "warning"
+				 		});
+						setTimeout(function() {
+								getList();
+							}, 1000);
 						
 					}
 					
@@ -712,38 +768,10 @@ console.log(pprice);
 		function btn_close(){
 		$(".share_options").hide();
 	}
-	$(document).ready(function(){ //댓글 추천
-		$("#tbl").on("click", ".fa-thumbs-up", function(){
-			var rid=$(this).attr("rid");
-			var uid="${id}";
-			alert(rid + "\n" + uid);
-			$.ajax({
-				type: "post",
-				url: "/help/updateHelp",
-				data: {rid:rid, uid:uid},
-				success:function(helpCheck){
-					alert("helpCheck= " + helpCheck);
-					$("#helpCheck").html("helpCheck");
-					if(helpCheck == 0){ //중복체크
-						alert("추천성공!");
-						getList();
-					}
-					else if(helpCheck == 1){
-						alert("추천취소!");
-						getList();
-						
-					}
-					
-				}
-				
-			});
-		});
-	});
-	
 	
 </script>
 <script type="text/javascript">
-Kakao.init('7c5327ca759881dfb2041b2386d02623');
+Kakao.init('5c9e09df993f534bf4a2916f4cf43cdd');
   Kakao.Link.createDefaultButton({
 
 	  container: '#create-kakao-link-btn',
@@ -754,8 +782,8 @@ Kakao.init('7c5327ca759881dfb2041b2386d02623');
       imageUrl: 
         kimage,
       link: {
-        mobileWebUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
-        webUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+        mobileWebUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+        webUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
       },
     },
     social: {
@@ -767,19 +795,26 @@ Kakao.init('7c5327ca759881dfb2041b2386d02623');
       {
         title: '웹으로 보기',
         link: {
-          mobileWebUrl:  'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
-          webUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+          mobileWebUrl:  'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+          webUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
         },
       },
       {
         title: '앱으로 보기',
         link: {
-          mobileWebUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
-          webUrl: 'http://localhost:8080/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+          mobileWebUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
+          webUrl: 'http://localhost:8088/shopproduct/read?pno='+pno+'&selectCate=&selectCate2=&selectCate3=',
         },
       },
-    ],
-  })
+    ]
+  });
+  
+  //클릭시 사라지는 펑션
+ 	function showAndhide(e){
+ 		if($(e).attr("class")=="btnUpdate"){
+ 			$(e).css("display", "none");
+ 		}
+ 	}
 </script>
 
 </html>

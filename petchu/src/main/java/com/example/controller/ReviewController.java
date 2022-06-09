@@ -112,6 +112,8 @@ public class ReviewController {
 	
 		return "/home";
 	}
+	
+	
 	@RequestMapping("/list.json")
 	@ResponseBody
 	public HashMap<String,Object> readJOSN(Criteria cri){

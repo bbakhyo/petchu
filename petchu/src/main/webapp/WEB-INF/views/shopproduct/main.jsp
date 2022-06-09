@@ -15,24 +15,24 @@
 <link href="/resources/css/shopproduct_main.css" rel="stylesheet">
 
 </head>
-<style>
-	.goAll{
-	    height: 50px;
-    	width: 100px;
-    	cursor: pointer;
-	}
-</style>
 
 <body>
 	<div class="page">
-		<div class="banner" style="display: flex; justify-content:center; width:700px; height:300px; overflow: hidden; margin-left: 143px;">
-			<img src="/resources/petchu_dog_banner.png">
+		<div class="banner" style="display: flex; justify-content:center; width: 100%; height:300px; overflow: hidden; /* margin-left: 143px; */">
+			<img src="/resources/shoppingmall.png">
 		</div>
 
 			<!-- 주 카타고리 -->
 		<div class="categoryBody">
 			<div class="category_select">
 				<div><button class="goAll">전체</button></div>
+				<!--메뉴 간격(space)-->
+				<div>
+					<span><img
+						src="/resources/icon_menu/content_select_middle_icon.png"
+						style="width: 37px; height: 97px; position: relative; top: 15px"></span>
+				</div>
+				
 				<!-- 1. 공양이 -->
 				<div class="category_cat select">
 					<input type="radio" name="animal" value="고양이" id="cat"><label
@@ -52,8 +52,8 @@
 				<div class="category_dog select">
 					<input type="radio" name="animal" value="강아지" id="dog"><label
 						for="dog"><img
-						src="/resources/icon_menu/content_select_dog.png"
-						style="margin-left: 20px;" id="dog_img"></label>
+						src="/resources/icon_dog_food2.png"
+						style="margin-left: 20px;" id="dog_img" width=150></label>
 				</div>
 			</div>
 			<hr style="width: 960px; margin-top: 20px; margin-bottom: 20px;" />
@@ -99,13 +99,7 @@
 							<div class="category_box">습식</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 카테고리3</div>
-						</li>
-						<li class="category_item">
-							<div class="category_box">테스트 카테고리4</div>
-						</li>
-						<li class="category_item">
-							<div class="category_box">테스트 카테고리5</div>
+							<div class="category_box">수제</div>
 						</li>
 						<!-- <li class="category_item">
 							<div class="category_box">테스트 카테고리6</div>
@@ -147,16 +141,13 @@
 						<div class="category_box">동결건조</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">수제간식</div>
+							<div class="category_box">수제</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 간식 카테고리3</div>
+							<div class="category_box">캔</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 간식 카테고리4</div>
-						</li>
-						<li class="category_item">
-							<div class="category_box">테스트 간식 카테고리5</div>
+							<div class="category_box">스낵</div>
 						</li>
 						<%-- <!-- 	<li class="category_item">
 							<div class="category_box">테스트 간식 카테고리6</div>
@@ -197,16 +188,13 @@
 						<li class="category_item">
 							<div class="category_box">모래</div>
 						</li>
-						<li class="category_item">				<div class="category_box">배변패드</div>
+						<li class="category_item">				<div class="category_box">이동장</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 용품 카테고리3</div>
+							<div class="category_box">장난감</div>
 						</li>
 						<li class="category_item">
-							<div class="category_box">테스트 용품 카테고리4</div>
-						</li>
-						<li class="category_item">
-							<div class="category_box">테스트 용품 카테고리5</div>
+							<div class="category_box">목걸이</div>
 						</li>
 						<!-- <li class="category_item">
 							<div class="category_box">테스트 용품 카테고리6</div>
@@ -342,8 +330,14 @@
 </body>
 
 <script>
-/* 오늘의 상품 출력 */
-	
+
+// 	swal({
+//  	 title:"",
+// 	 text: "내용을 입력해주세요.",
+// 	 type: "warning"
+// 	});
+
+	/* 오늘의 상품 출력 */
 	getToday();
 	function getToday() {
 		$.ajax({

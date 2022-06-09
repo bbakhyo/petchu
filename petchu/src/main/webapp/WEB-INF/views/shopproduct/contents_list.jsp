@@ -30,22 +30,19 @@
 		<div class="menu_container_main">
 			<div class="menu_container1">
 
-				<div>펫타입:</div>
 				<div class="menu-options">
-					<div>
-						<input type="radio" name="main_category" id="menu_dog" value="강아지"
-							class="main_category"> <label for="menu_dog"> 강아지
-						</label>
-					</div>
-					<div>
-						<input type="radio" name="main_category" id="menu_cat" value="고양이"
-							class="main_category"> <label for="menu_cat"> 고양이
-						</label>
-					</div>
+					<input type="radio" name="main_category" id="menu_dog" value="강아지"
+						class="main_category"> <label for="menu_dog"> 강아지
+					</label>
+				
+					<input type="radio" name="main_category" id="menu_cat" value="고양이"
+						class="main_category"> <label for="menu_cat"> 고양이
+					</label>
+				
 				</div>
 			</div>
 			<div class="menu_container2">
-				<div class="menu_title">선택:</div>
+				<div class="menu_title" style="color:white">구분 </div>
 				<div class="select_wrapper">
 					<div class="select_container">
 						<select name="item_type" class="item_type"
@@ -65,7 +62,7 @@
 						<input type="text" name="keyword" id="search_text">
 						<div class="btn_search">
 							<img src="/resources/icon_menu/icon_navbar_loupe.png"
-								alt='search icon' width=25 style="filter=grayscale(100%)">
+								alt='search icon' width=20>
 						</div>
 
 					</div>
@@ -83,8 +80,8 @@
 		<script id="temp" type="text/x-handlebars-template">
 
 	{{#each list}}
-      <div class="content_item_box_container">
-		<div class="img_container" style="position:relative;" onclick='getLocation(this)' pno="{{pno}}">
+      <div class="content_item_box_container" pno="{{pno}}">
+		<div class="img_container" style="position:relative;" onclick='getLocation(this)' pno="{{pno}}" quantity="{{pqantity}}">
         	<img src="{{pimage}}" class="content_img" alt="https://via.placeholder.com/200x200/d3d3d3">
 			<img class="soldout" src="/resources/soldout.png" width=170>
 		</div>
@@ -142,6 +139,8 @@
 	var page = 1;
 	var type = "";
 	getContentsList();
+	//한 번 로딩된 이후로는 최하위 카테고리 제외
+	selectCate="";
 
 	//카테고리가 ""이 아닐 경우 펫타임 radi 선택되어 있도록
 	if(selectCate3!=""){
@@ -191,14 +190,29 @@
 
 		$.ajax({
 			type : "post",
-			url : "/shopproduct/update",
+			url : "/shopproduct/insert",
 			data : {
-				uid : uid,
 				pno : pno,
-				qnt : qnt
+				uid : uid,
+				amount : amount
 			},
-			success : function() {
-				alert('success');
+			success : function(data) {
+				if (data == 1) {
+					//장바구니 등록 완료
+				 	swal({
+					  	 title:"",
+					 	 text: "장바구니 등록완료!",
+					 	 type: "success"
+			 		});
+					return;
+				} else {
+					//장바구니 등록 실패
+				 	swal({
+					  	 title:"",
+					 	 text: "이미 장바구니에 등록된 상품입니다.",
+					 	 type: "error"
+			 		});
+				}
 			}
 		});
 	});
