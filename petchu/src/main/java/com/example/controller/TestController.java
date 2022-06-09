@@ -46,4 +46,9 @@ public class TestController {
 		model.addAttribute("pageName", "temp/checkout.jsp");
 		return "/home";
 	}
+	@RequestMapping("/news")
+	public String news(Model model) {
+		model.addAttribute("pageName", "temp/news.jsp");
+		return "/home";
+	}
 }

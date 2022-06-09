@@ -28,6 +28,7 @@ import com.example.dao.OrderlistDAO;
 import com.example.dao.ProductDAO;
 import com.example.dao.ReviewDAO;
 import com.example.dao.UserDAO;
+import com.example.dao.shopcartDAO;
 import com.example.domain.Criteria;
 import com.example.domain.OrderlistVO;
 import com.example.domain.PageMaker;
@@ -51,11 +52,12 @@ public class ReviewController {
 	
 	@Autowired
 	ProductDAO pdao;
-	
+	@Autowired
+	shopcartDAO cartdao;
 	@Resource(name="uploadPath")
 	String path;
 	
-	//¸®ºä ÀÔ·ÂÆäÀÌÁö(Ãâ·Â)
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)
 			@RequestMapping("/update")
 			public String update(Model model,int rid){
 				model.addAttribute("vo",dao.updateread(rid));
@@ -69,16 +71,16 @@ public class ReviewController {
 		System.out.println(".................file: "+vo.getRimage1());
 		List<MultipartFile> fileList = multi.getFiles("uploadFile");
 		int i = 0;
-		System.out.println(".................if¹® Á÷Àü: "+vo.getRimage1());
+		System.out.println(".................ifï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: "+vo.getRimage1());
 		if(fileList.size() != 0){
 			
 				if(fileList.isEmpty()){
-					System.out.println(".................if¹® µé¾î¿È: "+vo.getRimage1());
+					System.out.println(".................ifï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: "+vo.getRimage1());
 					for(MultipartFile mf : fileList){
 						String image = System.currentTimeMillis() + "_" + mf.getOriginalFilename();
 							mf.transferTo(new File(path + image ));
 							i++;
-							System.out.println("..." + image + ":" + i + "¹øÂ°" );
+							System.out.println("..." + image + ":" + i + "ï¿½ï¿½Â°" );
 							
 							if(i==1){
 								vo.setRimage1(image);
@@ -97,13 +99,13 @@ public class ReviewController {
 		return "redirect:/review/list";
 	
 	}
-	//¸®ºä delete
+	//ï¿½ï¿½ï¿½ï¿½ delete
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public void delete(int rid){
 		dao.delete(rid);
 	}
-	//¸®ºä ¸®µåÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/list")
 	public String list(Model model){
 		model.addAttribute("pageName", "review/list.jsp");
@@ -126,7 +128,7 @@ public class ReviewController {
 		return map;
 		
 	}
-	//¸®ºä ÀÔ·ÂÆäÀÌÁö(Ãâ·Â)
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)
 		@RequestMapping("/insert")
 		public String insert(Model model,int pno, int bno,ReviewVO vo){
 			model.addAttribute("vo",odao.read(pno,bno));
@@ -138,13 +140,13 @@ public class ReviewController {
 		
 		@RequestMapping(value="/insert", method=RequestMethod.POST)
 		public String insert(ReviewVO vo,MultipartHttpServletRequest multi, String uid)throws Exception{
-			System.out.println(vo.getUid()+"¤µ¤²ÁøÂ¥ ÀÌ°Ô ¸»ÀÌ µÇ³Ä°í");
+			System.out.println(vo.getUid()+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ä°ï¿½");
 			vo.setUid(uid);
 			int result = dao.user_review_count(uid, vo.getBno());
 			System.out.println(vo.toString()+"\n"+result+"<<<<<<<<<<<<");
 			if(result>0){
-				System.out.println("1°³ ÀÌ»ó Á¸Àç");
-				return  "redirect:insert";	//°ªÀÌ 1°³ ÀÌ»óÀÏ ¶§
+				System.out.println("1ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½");
+				return  "redirect:insert";	//ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½
 			}
 //			System.out.println(vo.toString()+"\ntttttttttttteeeeeeeeeest======="+vo.getUid());
 			
@@ -156,7 +158,7 @@ public class ReviewController {
 					
 					mf.transferTo(new File(path + image));
 					i++;
-					System.out.println("°¼¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ¾Ç" + image + ":" + i + "¹øÂ°");
+					System.out.println("ï¿½ï¿½ï¿½Æ¾Æ¾Æ¾Æ¾Æ¾Æ¾ï¿½" + image + ":" + i + "ï¿½ï¿½Â°");
 					if(i==1){
 						vo.setRimage1(image);
 					}
@@ -171,13 +173,13 @@ public class ReviewController {
 			
 			dao.insert(vo);
 			System.out.println(vo.toString());
-//			return "0°³";
+//			return "0ï¿½ï¿½";
 			return "redirect:/review/list";
 			
 		}
-	//orderlist/review ¸ñ·Ï json µ¥ÀÌÅÍ »ý¼º
+	//orderlist/review ï¿½ï¿½ï¿½ json ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/reviewable.json")
-	@ResponseBody //µ¥ÀÌÅÍ¸¦ ¸®ÅÏ
+	@ResponseBody //ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public HashMap<String,Object> reviewableJSON(Criteria cri, int bno){
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		
@@ -193,12 +195,12 @@ public class ReviewController {
 		return map;
 
 	}
-	//¸®ºä ÆäÀÌÁö
-	//orderlistÀÇ °ª°ú userÀÇ nameÀ» °¡Á®¿À°í ½ÍÀ½
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//orderlistï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ userï¿½ï¿½ nameï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/reviewable")
-	public String reviewable(Model model,Criteria cri){ //model¿¡ Ãâ·ÂÇÏ°íÀÚÇÏ´Â ÆäÀÌÁö¸¦ ´ã¾ÆÁÜ
+	public String reviewable(Model model,Criteria cri){ //modelï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 		//model.addAttribute("name",udao.read(session.getAttribute("id").toString()));
-		//session.setAttribute("username", "red"); //·Î±×ÀÎÇÁ·Î±×·¥Çß´Ù°í °¡Á¤Çß´Ù »ý°¢ÇÏ°í
+		//session.setAttribute("username", "red"); //ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ß´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
 		cri.setPerPageNum(5);
 		//cri.setPage(1);
 		PageMaker pm=new PageMaker();

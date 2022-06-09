@@ -176,7 +176,8 @@
 
 .rating a, .rating label {
 	float: right;
-	color: #aaa;
+	/* color: #aaa; */
+	color: orange;
 	text-decoration: none;
 	-webkit-transition: color .4s;
 	-moz-transition: color .4s;

@@ -65,7 +65,7 @@
 						<input type="text" name="keyword" id="search_text">
 						<div class="btn_search">
 							<img src="/resources/icon_menu/icon_navbar_loupe.png"
-								alt='search icon' width=40>
+								alt='search icon' width=25 style="filter=grayscale(100%)">
 						</div>
 
 					</div>

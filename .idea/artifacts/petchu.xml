@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jpackage" name="petchu">
+    <output-path>$PROJECT_DIR$/out/artifacts/petchu</output-path>
+    <root id="root">
+      <element id="archive" name="petchu.jar">
+        <element id="module-output" name="petchu" />
+      </element>
+    </root>
+  </artifact>
+</component>

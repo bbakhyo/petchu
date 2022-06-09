@@ -44,7 +44,7 @@
 
 						<div class="product_container">
 							<div id="p_img">
-								<img src="${vo.pimage}" width=200 height=200 />
+								<img src=${vo.pimage} width=200 height=200 />
 							</div>
 
 							<div class="product_name">
@@ -181,6 +181,26 @@
 		var textarea_2 = $("#textarea_2").val()
 		$(".word_count2").html(textarea_2.length);
 	})
+</script>
+
+<script>
+getList();
+
+function getList() {
+	var orno = "${orno}";
+	$.ajax({
+		type : "get",
+		dataType : "json",
+		data : {
+			orno : orno
+		},
+		url : "/shopproduct/list.json",
+		success : function(data) {
+			var template = Handlebars.compile($("#temp").html());
+			$("#tbl").html(template(data));
+		}
+	})
+}
 </script>
 <script>
 	//별점
