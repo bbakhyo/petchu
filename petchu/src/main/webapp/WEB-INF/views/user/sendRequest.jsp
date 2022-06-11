@@ -189,7 +189,7 @@
 				cancelButtonText : "¾Æ´Ï¿À",
 				confirmButtonColor: "#A7CA37",
 				closeOnConfirm : false,
-				closeOnCancel : true
+				closeOnCancel : false
 			}, function(isConfirm) {
 				if (isConfirm) {
 					swal({
@@ -197,6 +197,7 @@
 						text : '',
 						type: 'success',
 						confirmButtonColor: "#A7CA37",	
+						timer:3000
 					});
 					frm.submit();
 				}else{

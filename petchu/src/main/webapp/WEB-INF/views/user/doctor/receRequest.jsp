@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="/resources/css/request.css" rel="stylesheet" > 
-<div id="page" class="receRequest">
+<div id="pagee" class="receRequest">
 	<div id="request">
 		<input style="display:none" value="${hospital}" id="dno"></input>
 		<p class="title"><b>${vo.nick}</b>님이 보내주신 견적서</p>

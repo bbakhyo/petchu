@@ -30,22 +30,22 @@
 				<div>
 					<span><img
 						src="/resources/icon_menu/content_select_middle_icon.png"
-						style="width: 37px; height: 97px; position: relative; top: 15px"></span>
+						style="width: 37px; height: 97px; position: relative;"></span>
 				</div>
 				
 				<!-- 1. 공양이 -->
 				<div class="category_cat select">
 					<input type="radio" name="animal" value="고양이" id="cat"><label
 						for="cat"><img
-						src="/resources/icon_menu/content_select_cat.png"
-						style="margin-right: 20px; "id="cat_img"></label>
+						src="/resources/icon/icon_cat_food.png"
+						style="margin-right: 20px; width:150"id="cat_img" ></label>
 				</div>
 
 				<!--메뉴 간격(space)-->
 				<div>
 					<span><img
 						src="/resources/icon_menu/content_select_middle_icon.png"
-						style="width: 37px; height: 97px; position: relative; top: 15px"></span>
+						style="width: 37px; height: 97px; position: relative;"></span>
 				</div>
 
 				<!-- 2. 강아지 -->
